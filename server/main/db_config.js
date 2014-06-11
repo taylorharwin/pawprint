@@ -59,12 +59,11 @@ db.knex.schema.hasTable('pet').then(function(exists) {
     db.knex.schema.createTable('pet', function (pet) {
       pet.increments('id').primary();
       pet.string('name', 255);
-      pet.string('birthdate', 255);       // maybe store as int?
+      pet.date('birthdate');
       pet.string('gender', 255);
       pet.string('breed', 255);
       pet.string('color', 255); 
       pet.integer('weight');
-      pet.string('contactMethod', 255);
       pet.boolean('neuter');              // to confirm
       pet.string('microchip', 255);       // confirm string
       pet.string('profilePic', 255);
@@ -80,7 +79,7 @@ db.knex.schema.hasTable('vaccine').then(function(exists) {
     db.knex.schema.createTable('vaccine', function (vaccine) {
       vaccine.increments('id').primary();
       vaccine.string('name', 255);
-      vaccine.string('expiration', 255);    // sting?
+      vaccine.date('expiration');
       vaccine.timestamp();
     }).then(function (table) {
       console.log('Created Table', table);
@@ -93,9 +92,9 @@ db.knex.schema.hasTable('pet_vaccine').then(function(exists) {
     db.knex.schema.createTable('pet_vaccine', function (join) {
       join.increments('id').primary();
       join.integer('pet_id');
-      join.integer('join_id');
-      join.string('dateAdministered', 255);
-      join.string('dateExpired', 255);
+      join.integer('vaccine_id');
+      join.date('dateAdministered');
+      join.date('dateExpired');
       join.integer('request_id');
       join.timestamp();
     }).then(function (table) {
@@ -139,7 +138,7 @@ db.knex.schema.hasTable('contactHistory').then(function(exists) {
       history.string('type', 255);
       history.string('notes', 255);
       history.integer('request_id');
-      history.string('vetContact', 255);
+      history.string('vetContact_id', 255);
       history.timestamp();
     }).then(function (table) {
       console.log('Created Table', table);
