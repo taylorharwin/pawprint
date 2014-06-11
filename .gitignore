@@ -5,6 +5,7 @@ _.DS_Store
 
 client/bower_components
 client/**/*.css
+client/lib
 
 node_modules/
 
