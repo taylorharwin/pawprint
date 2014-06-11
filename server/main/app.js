@@ -11,5 +11,4 @@ require('./db_config.js')(app);
 
 require('../extra/extra_routes.js')(ExtraRouter);
 
-
 module.exports = exports = app;
