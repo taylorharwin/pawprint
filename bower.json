@@ -8,7 +8,7 @@
     "ng-Fx": "*",
     "angular-ui-router": "*",
     "font-awesome-css": "~4.0.3",
-    "angular-ui-bootstrap": "~0.11.0",
-    "bootstrap-css-only": "~3.1.1"
+    "bootstrap-css-only": "~3.1.1",
+    "angular-bootstrap": "~0.11.0"
   }
 }
