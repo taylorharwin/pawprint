@@ -1,5 +1,6 @@
-"user strict";
+'use strict';
 var gulp    = require('gulp'),
+    path    = require('path'),
     bower   = require('gulp-bower'),
     jshint  = require('gulp-jshint'),
     refresh = require('gulp-livereload'),
@@ -10,25 +11,18 @@ var gulp    = require('gulp'),
     nodemon = require('gulp-nodemon'),
     lr_port = 35729,
     less   = require('gulp-less');
-    // stripDebug  = require('gulp-strip-debug'),
-    // uglify      = require('gulp-uglify'),
-    // ngmin       = require('gulp-ngmin'),
-    // gulpconcat  = require('gulp-concat'),
-    // clean       = require('gulp-clean'),
-    // nodePath    = require('path'),
-    // minifycss   = require('gulp-minify-css');
-
+   
 
 var paths = {
-  scripts: ['!client/lib/**/*.js', 'client/**/*.js'],
-  views: ['!client/lib/*.html', 'client/**/*.html', 'client/index.html'],
+  scripts: ['!client/bower_components/**/*.js', 'client/**/*.js'],
+  views: ['!client/bower_components/*.html', 'client/**/*.tpl.html', 'client/index.html'],
   styles: {
-    css: ['!client/lib/**/*.css', 'client/styles/css/*.css', 'client/**/*.css'],
-    less: ['client/styles/less/*.less', 'client/**/*.less'],
-    dest: 'client/styles/css'
+    css: ['!client/assets/styles/*.css', 'client/styles/css/*.css', 'client/**/*.css'],
+    less: ['client/assets/styles/less/*.less'],
+    dest: 'client/assets/styles'
   }
 };
-var build = ['less', 'css', 'lint'];
+var build = ['less', 'lint'];
 
 
 // var paths = {
@@ -46,16 +40,14 @@ var build = ['less', 'css', 'lint'];
 // };
 
 gulp.task('less', function () {
-  return gulp.src(paths.styles.less)
-    .pipe(plumber())
+  gulp.src(paths.styles.less)
     .pipe(less({
-      paths: [paths.styles.less]
+      paths: [ path.join(__dirname, 'less', 'includes') ]
     }))
-    .pipe(gulp.dest(paths.styles.dest))
+    .pipe(gulp.dest('client/assets/styles'))
     .pipe(refresh(client))
     .pipe(notify({message: 'Less done'}));
 });
-
 
 gulp.task('bowerInstall', function  () {
   bower()
@@ -69,12 +61,12 @@ gulp.task('html', function () {
     .pipe(notify({message: 'Views refreshed'}));
 });
 
-gulp.task('css', function () {
-  return gulp.src(paths.styles.css)
-    .pipe(plumber())
-    .pipe(refresh(client))
-    .pipe(notify({message: 'CSS refreshed'}));
-});
+// gulp.task('css', function () {
+//   return gulp.src(paths.styles.css)
+//     .pipe(plumber())
+//     .pipe(refresh(client))
+//     .pipe(notify({message: 'CSS refreshed'}));
+// });
 
 // gulp.task('scripts', ['lint'] , function() {
 //   return gulp.src(paths.appjsminify.src)
@@ -111,7 +103,7 @@ gulp.task('lint', function () {
 });
 
 gulp.task('serve', function () {
-  nodemon({script: 'server.js', ignore: ['node_modules/**/*.js']})
+  nodemon({script: 'server/server.js', ignore: ['node_modules/**/*.js']})
     .on('restart', function () {
       refresh(client);
     });
