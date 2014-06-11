@@ -34,7 +34,7 @@ db.knex.schema.hasTable('user').then(function(exists) {
       user.string('phone', 11);           // string/int
       user.string('signature', 255);      // what is this?
       user.integer('vet_id')
-      user.timestamp();
+      user.timestamps();
     }).then(function (table) {
       console.log('Created Table', table);
     });
@@ -47,7 +47,7 @@ db.knex.schema.hasTable('user_pet').then(function(exists) {
       join.increments('id').primary();
       join.integer('user_id');
       join.integer('pet_id');
-      join.timestamp();
+      join.timestamps();
     }).then(function (table) {
       console.log('Created Table', table);
     });
@@ -67,7 +67,7 @@ db.knex.schema.hasTable('pet').then(function(exists) {
       pet.boolean('neuter');              // to confirm
       pet.string('microchip', 255);       // confirm string
       pet.string('profilePic', 255);
-      pet.timestamp();
+      pet.timestamps();
     }).then(function (table) {
       console.log('Created Table', table);
     });
@@ -80,7 +80,7 @@ db.knex.schema.hasTable('vaccine').then(function(exists) {
       vaccine.increments('id').primary();
       vaccine.string('name', 255);
       vaccine.date('expiration');
-      vaccine.timestamp();
+      vaccine.timestamps();
     }).then(function (table) {
       console.log('Created Table', table);
     });
@@ -96,7 +96,7 @@ db.knex.schema.hasTable('pet_vaccine').then(function(exists) {
       join.date('dateAdministered');
       join.date('dateExpired');
       join.integer('request_id');
-      join.timestamp();
+      join.timestamps();
     }).then(function (table) {
       console.log('Created Table', table);
     });
@@ -110,7 +110,7 @@ db.knex.schema.hasTable('requests').then(function(exists) {
       requests.integer('user_id');
       requests.integer('pet_id');
       requests.integer('vet_id');
-      requests.timestamp();
+      requests.timestamps();
     }).then(function (table) {
       console.log('Created Table', table);
     });
@@ -123,7 +123,7 @@ db.knex.schema.hasTable('pdfRecords').then(function(exists) {
       pdf.increments('id').primary();
       pdf.string('link', 255);
       pdf.integer('request_id');
-      pdf.timestamp();
+      pdf.timestamps();
     }).then(function (table) {
       console.log('Created Table', table);
     });
@@ -139,7 +139,7 @@ db.knex.schema.hasTable('contactHistory').then(function(exists) {
       history.string('notes', 255);
       history.integer('request_id');
       history.string('vetContact_id', 255);
-      history.timestamp();
+      history.timestamps();
     }).then(function (table) {
       console.log('Created Table', table);
     });
@@ -153,7 +153,7 @@ db.knex.schema.hasTable('admin').then(function(exists) {
       admin.string('email', 255);
       admin.string('password', 255);
       admin.string('salt', 255);
-      admin.timestamp();
+      admin.timestamps();
     }).then(function (table) {
       console.log('Created Table', table);
     });
@@ -172,7 +172,7 @@ db.knex.schema.hasTable('vet').then(function(exists) {
       vet.string('zip', 10);                // string/int
       vet.string('phone', 11);              // string/int
       vet.string('contactMethod', 255);    // integer instead?
-      vet.timestamp();
+      vet.timestamps();
     }).then(function (table) {
       console.log('Created Table', table);
     });
@@ -188,7 +188,7 @@ db.knex.schema.hasTable('vetContact').then(function(exists) {
       vetContact.string('email', 255);
       vetContact.string('phone', 11);
       vetContact.integer('vet_id');
-      vetContact.timestamp();
+      vetContact.timestamps();
     }).then(function (table) {
       console.log('Created Table', table);
     });
