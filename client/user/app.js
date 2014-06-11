@@ -1,15 +1,20 @@
-(function (angular) {
-  "use strict";
-  angular.module('<%= name %>.main', ['ui.router', '<%= name %>.main.note'])
-  .config(function (<%= providers %>) {
-    $stateProvider
-      .state('<%= name %>.main', {
-        url: '/main',
-        templateUrl: 'main/main.tpl.html',
-        controller: 'MainController'
-      });
+'use strict'
+
+angular.module('user', [
+  'user.common',
+  'user.pages'
+]);
+
+angular.module('user')
+  .config(function ($locationProvider, $urlRouterProvider) {
+    
+    $urlRouterProvider.otherwise('/');
+
+    // enable the HTML5 push/pop history API  
+    $locationProvider.html5Mode(true);
   })
-  .controller('MainController', function ($state) {
-    $state.transitionTo('<%= name %>.main.note');
+  
+  .run(function ($rootScope, $state, $stateParams) {
+    $rootScope.$state = $state;
+    $rootScope.$stateParams = $stateParams;
   });
-}(angular));
