@@ -1,0 +1,11 @@
+DS_Store
+.DS_Store
+_.DS_Store
+._.DS_Store
+
+client/lib
+client/**/*.css
+
+node_modules/
+
+azure.err
