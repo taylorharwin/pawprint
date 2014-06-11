@@ -24,6 +24,6 @@
     "gulp-task-listing": "*",
     "jshint-stylish": "*",
     "gulp-concat": "*",
-    "gulp-less": "*"
+    "gulp-less": "1.2.2"
   }
 }
