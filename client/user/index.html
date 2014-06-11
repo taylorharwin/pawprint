@@ -1,48 +1,49 @@
 <!doctype html>
+<html>
 
   <head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     
     <title>PawPrint</title>
-    <meta name='description' content=''>
-    <meta name='viewport' content='width=device-width'>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
 
-    <link rel='stylesheet' href='../bower_components/font-awesome-css/css/font-awesome.min.css'>
-    <link rel='stylesheet' href='../bower_components/bootstrap-css-only/css/bootstrap.min.css'>
-    <link rel='stylesheet' href='styles/main.css'>
+    <link rel="stylesheet" href="bower_components/font-awesome-css/css/font-awesome.min.css">
+    <link rel="stylesheet" href="bower_components/bootstrap-css-only/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/styles/main.css">
 
   </head>
 
-  <body ng-app='user'>
+  <body ng-app="user">
     
     <!-- template loaded here -->
     <div ui-view></div>
 
-    <!-- build script -->
-    <script src='app.js'></script>
-
     <!-- bower scripts ../bower_components -->
-    <script src="../bower_components/angular/angular.js"></script>
-    <script src="../bower_components/angular-cookies/angular-cookies.js"></script>
-    <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-    <script src="../bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-    <script src="../bower_components/ng-FX/dist/ng-Fx.min.js"></script>
-    <script src="../bower_components/lodash/dist/lodash.compat.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <!-- <script src="bower_components/ng-FX/dist/ng-Fx.min.js"></script> -->
+    <script src="bower_components/lodash/dist/lodash.compat.js"></script>
+
+    <!-- build script -->
+    <script src="app/app.js"></script>
 
     <!-- common scripts ../common -->
-    <script src="common/module.js"></script>
+    <script src="app/common/module.js"></script>
 
-    <script src="common/services/utils.srv.js"></script>
+    <script src="app/common/services/utils.srv.js"></script>
 
     <!-- pages scripts modules -->
-    <script src="pages/module.js"></script>
+    <script src="app/pages/module.js"></script>
 
-    <script src="pages/controllers/home.ctrl.js"></script>
-    <script src="pages/controllers/login.ctrl.js"></script>
-    <script src="pages/controllers/main.ctrl.js"></script>
-    <script src="pages/controllers/profile.ctrl.js"></script>
-    <script src="pages/controllers/signup.ctrl.js"></script>
+    <script src="app/pages/controllers/home.ctrl.js"></script>
+    <script src="app/pages/controllers/login.ctrl.js"></script>
+    <script src="app/pages/controllers/main.ctrl.js"></script>
+    <script src="app/pages/controllers/profile.ctrl.js"></script>
+    <script src="app/pages/controllers/signup.ctrl.js"></script>
 
   </body>
 
