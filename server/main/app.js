@@ -8,6 +8,6 @@ routers.ExtraRouter = ExtraRouter;
 
 require('./config.js')(app, express, routers);
 
-require('../note/extra_routes.js')(ExtraRouter);
+require('../extra/extra_routes.js')(ExtraRouter);
 
 module.exports = exports = app;
