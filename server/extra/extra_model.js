@@ -2,8 +2,7 @@
 
 "use strict";
 
-var bookshelf = require('bookshelf');
+// var bookshelf = require('bookshelf');
 
 
-
-module.exports = exports = bookshelf.model('extra', extraModel);
+// module.exports = exports = bookshelf.model('extra', extraModel);
