@@ -3,7 +3,7 @@ DS_Store
 _.DS_Store
 ._.DS_Store
 
-client/lib
+client/bower_components
 client/**/*.css
 
 node_modules/
