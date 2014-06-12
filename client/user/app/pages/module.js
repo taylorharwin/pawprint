@@ -11,6 +11,7 @@ angular.module('user.pages', [
 angular.module('user.pages')
   .config(function ($stateProvider) {
 
+  // routing states, setting templates and controllers to use
   $stateProvider
     .state('home', {
       url: '/',
