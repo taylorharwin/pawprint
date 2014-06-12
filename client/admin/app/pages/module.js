@@ -24,12 +24,6 @@ angular.module('admin.pages')
       controller: 'LoginCtrl'
     })
 
-    .state('signup', {
-      url: '/signup',
-      templateUrl: 'app/pages/templates/signup.tpl.html',
-      controller: 'SignupCtrl'
-    })
-
     .state('main', {
       url: '/main',
       templateUrl: 'app/pages/templates/main.tpl.html',
