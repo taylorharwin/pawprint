@@ -1,8 +1,13 @@
-//This is where a Bookshelf model is defined. TODO: add dummy model
-
 "use strict";
 
-// var bookshelf = require('bookshelf');
+var db = require('../main/app.js').get('db');
 
+var User = db.Model.extend({
+  tableName: 'users',
+  hasTimestamps: true,
+  // link: function() {
+  //   return this.belongsTo(Link, 'link_id');
+  // }
+});
 
-// module.exports = exports = bookshelf.model('extra', extraModel);
+module.exports = User;
