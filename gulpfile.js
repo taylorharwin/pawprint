@@ -49,10 +49,10 @@ gulp.task('less', function () {
     .pipe(notify({message: 'Less done'}));
 });
 
-gulp.task('bowerInstall', function  () {
-  bower()
-  .pipe();
-});
+// gulp.task('bowerInstall', function  () {
+//   bower()
+//   .pipe();
+// });
 
 gulp.task('html', function () {
   return gulp.src(paths.views)
