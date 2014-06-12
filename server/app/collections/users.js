@@ -1,5 +1,6 @@
-var db = require('../main/app.js').get('db');
-var user = require('./extra_collection.js')
+var db = require('../db_config.js');
+
+var User = require('../models/user.js')
 
 var Users = new db.Collection();
 

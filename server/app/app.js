@@ -8,7 +8,6 @@ routers.AdminRouter = AdminRouter;
 routers.UserRouter = UserRouter;
 
 require('./config.js')(app, express, routers);
-require('./db_config.js')(app);
 
 require('../admin/routes.js')(AdminRouter);
 require('../user/routes.js')(UserRouter);
