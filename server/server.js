@@ -1,5 +1,3 @@
-"use strict";
-
 /*
  *
  * Entry file into the server
@@ -8,7 +6,7 @@
  *
 */
 
-var app           = require('./main/app.js'),
+var app           = require('./app/app.js'),
     port          = app.get('port'),
     log           = 'Listening on ' + app.get('base url') + ':' + port;
 
