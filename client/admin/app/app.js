@@ -1,13 +1,13 @@
 'use strict';
 
-angular.module('user', [
+angular.module('admin', [
   'ui.router',
 
-  'user.common',
-  'user.pages'
+  'admin.common',
+  'admin.pages'
 ]);
 
-angular.module('user')
+angular.module('admin')
   .config(function ($locationProvider, $urlRouterProvider) {
     
     $urlRouterProvider.otherwise('/');
@@ -19,7 +19,4 @@ angular.module('user')
   .run(function ($rootScope, $state, $stateParams) {
     $rootScope.$state = $state;
     $rootScope.$stateParams = $stateParams;
-    console.log($rootScope, 'rootScope');
-    console.log($state, 'state');
-    console.log('cheese');
   });

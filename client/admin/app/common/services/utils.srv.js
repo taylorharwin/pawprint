@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('user.common.services')
+angular.module('admin.common.services')
   
   //inject lowdash
   .factory('_', function () {

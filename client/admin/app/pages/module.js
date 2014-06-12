@@ -1,14 +1,14 @@
 'use strict';
 
-angular.module('user.pages', [
+angular.module('admin.pages', [
   'ui.router',
 
-  'user.pages.controllers',
-  'user.pages.directives',
-  'user.pages.services'
+  'admin.pages.controllers',
+  'admin.pages.directives',
+  'admin.pages.services'
 ]);
 
-angular.module('user.pages')
+angular.module('admin.pages')
   .config(function ($stateProvider) {
 
   $stateProvider
@@ -44,6 +44,6 @@ angular.module('user.pages')
 
   });
 
-angular.module('user.pages.controllers', []);
-angular.module('user.pages.directives', []);
-angular.module('user.pages.services', []);
+angular.module('admin.pages.controllers', []);
+angular.module('admin.pages.directives', []);
+angular.module('admin.pages.services', []);

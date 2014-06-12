@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('user.pages.controllers')
+angular.module('admin.pages.controllers')
   .controller('LoginCtrl', function ($scope) {
     console.log($scope);
   });
