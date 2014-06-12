@@ -19,7 +19,4 @@ angular.module('user')
   .run(function ($rootScope, $state, $stateParams) {
     $rootScope.$state = $state;
     $rootScope.$stateParams = $stateParams;
-    console.log($rootScope, 'rootScope');
-    console.log($state, 'state');
-    console.log('cheese');
   });
