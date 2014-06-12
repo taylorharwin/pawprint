@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('admin', [
   'ui.router',
 

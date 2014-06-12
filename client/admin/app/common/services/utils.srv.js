@@ -1,5 +1,3 @@
-'use strict'
-
 angular.module('admin.common.services')
   
   //inject lowdash
