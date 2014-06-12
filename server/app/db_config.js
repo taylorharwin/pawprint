@@ -1,5 +1,3 @@
-"use strict";
-
 var knex        = require('knex'),
     bookshelf   = require('bookshelf'),
     morgan      = require('morgan'),

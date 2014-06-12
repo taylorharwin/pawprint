@@ -1,6 +1,4 @@
-"use strict";
-
-var controller = require('./extra_controllers.js');
+var controller = require('./controllers.js');
 
 module.exports = exports = function (router) {
   router.route('/')
