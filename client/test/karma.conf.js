@@ -5,23 +5,29 @@ module.exports = function(config) {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
-    basePath: '',
+    basePath: '../',
 
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['mocha'],
+    frameworks: ['jasmine'],
 
 
     // list of files / patterns to load in the browser
     files: [
-      'user/app/*.js',
-      'user/app/**/*.js',
-      'user/app/**/**/*.js',
-      'admin/*.js',
-      'admin/app/*.js',
-      'admin/app/**/*.js',
-      'admin/app/**/**/*.js'
+      'user/bower_components/angular/angular.js',
+      'user/bower_components/angular-mocks/angular-mocks.js',
+      'user/bower_components/angular-ui-router/release/angular-ui-router.js',
+      'user/bower_components/lodash/dist/lodash.js',
+      'user/app/app.js',
+      'user/app/common/directives/*.dir.js',
+      //This one causes an unknown error 'user/app/common/services/*.srv.js',
+      'user/app/common/module.js',
+      'user/app/pages/module.js',
+      'user/app/pages/directives/*.dir.js',
+      'user/app/pages/controllers/*.ctrl.js',
+      'user/app/pages/services/*.srv.js',
+      'test/test-user.js',
     ],
 
 
@@ -58,13 +64,19 @@ module.exports = function(config) {
 
 
     // enable / disable watching file and executing tests whenever any file changes
-    autoWatch: false,
+    autoWatch: true,
+
 
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: [],
+    browsers: ['Chrome'],
 
+    plugins: ['karma-jasmine',
+              'karma-chrome-launcher'
+              ],
+
+   
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
