@@ -1,5 +1,3 @@
-'use strict';
-
 // top level app module generation, injecting .common and .pages dependencies
 angular.module('user', [
   'ui.router',

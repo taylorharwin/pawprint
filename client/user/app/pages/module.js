@@ -13,32 +13,44 @@ angular.module('user.pages')
 
   // routing states, setting templates and controllers to use
   $stateProvider
-    .state('home', {
+    .state('public', {
+      abstract: true,
       url: '/',
+      template: '<div ui-view class="realm"></div>'
+    })
+
+    .state('public.home', {
+      url: '',
       templateUrl: 'app/pages/templates/home.tpl.html',
       controller: 'HomeCtrl'
     })
 
-    .state('login', {
-      url: '/login',
+    .state('public.login', {
+      url: 'login',
       templateUrl: 'app/pages/templates/login.tpl.html',
       controller: 'LoginCtrl'
     })
 
-    .state('signup', {
-      url: '/signup',
+    .state('public.signup', {
+      url: 'signup',
       templateUrl: 'app/pages/templates/signup.tpl.html',
       controller: 'SignupCtrl'
     })
 
-    .state('main', {
-      url: '/main',
+    .state('app', {
+      abstract: true,
+      url: '/app',
+      template: '<div ui-view class="realm"></div>'
+    })
+
+    .state('app.main', {
+      url: '',
       templateUrl: 'app/pages/templates/main.tpl.html',
       controller: 'MainCtrl'
     })
 
-    .state('profile', {
-      url: '/profile',
+    .state('app.profile', {
+      url: '^/profile',
       templateUrl: 'app/pages/templates/profile.tpl.html',
       controller: 'ProfileCtrl'
     });
