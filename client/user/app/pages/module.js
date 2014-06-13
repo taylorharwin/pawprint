@@ -40,7 +40,7 @@ angular.module('user.pages')
     .state('app', {
       abstract: true,
       url: '/app',
-      template: '<div ui-view class="realm"></div>'
+      template: '<div ui-view class="container"></div>'
     })
 
     .state('app.main', {
