@@ -1,14 +1,34 @@
-<button ui-sref='^.profile' type="login" class="btn btn-default">PROFILE</button>
+<div ng-controller='MainCtrl'>
+  <button ui-sref='^.profile' type="login" class="btn btn-default">PROFILE</button>
 
-<center>
-  <img src="assets/logo.png"/>
-</center>
+  <center>
+    <img src="assets/logo.png"/>
+  </center>
 
-<div class="Aligner">
-  <div class="Aligner-item">
-    <ul>
-      <li><div>Pet Numero One</div></li>
-      <li><div>Pet Numero Deux</div></li>
-    </ul>
+  <div class="Aligner">
+    <div class="Aligner-item">
+      <ul>
+        <!-- @TODO make a directive for pets properly -->
+        <li ng-repeat='pet in pets'>
+          <div><img class='petImg' ng-src='{{pet.imgUrl}}'/></div>
+          <div>
+            <p>Name: {{pet.name}}</p>
+            <p>Age: {{pet.age}}</p>
+            <p>Vetenarian: {{pet.vet}}</p>
+            <p ng-switch='pet.vaccineStatus'>
+              Vaccine:
+              <span ng-switch-when='active' class="label label-success">Active</span>
+              <span ng-switch-when='expiring' class="label label-warning">Expiring</span>
+              <span ng-switch-when='expired' class="label label-danger">Expired</span>
+            </p>
+            <p ng-switch='pet.updateStatus'>
+              Updates:
+              <span ng-switch-when='normal' class="label label-success">Normal</span>
+              <span ng-switch-when='pending' class="label label-warning">Pending</span>
+            </p>
+          </div>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
