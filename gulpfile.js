@@ -14,8 +14,21 @@ var gulp    = require('gulp'),
    
 
 var paths = {
-  scripts: ['!client/bower_components/**/*.js', 'client/**/*.js'],
-  views: ['!client/bower_components/*.html', 'client/**/*.tpl.html', 'client/index.html'],
+  scripts: ['!client/user/bower_components',
+            '!client/test',
+            'client/user/app/*.js',
+            'client/user/app/**/*.js',
+            'client/user/app/**/**/*.js',
+            'client/admin/app/*.js',
+            'client/admin/app/**/*.js',
+            'client/admin/app/**/**/*.js'
+            ],
+  views: ['!client/bower_components/',
+          'client/user/*.html',
+          'client/user/app/pages/templates/*.tpl.html',
+          'client/admin/*.html',
+          'client/admin/app/pages/templates/*.tpl.html'
+          ],
   styles: {
     css: ['!client/assets/styles/*.css', 'client/styles/css/*.css', 'client/**/*.css'],
     less: ['client/assets/styles/less/*.less'],
@@ -24,20 +37,6 @@ var paths = {
 };
 var build = ['less', 'lint'];
 
-
-// var paths = {
-//   scripts: ['client/about/**/*.js', 'client/blog/**/*.js', 'client/common/**/*.js', 'client/graph/**/*.js', 'client/home/**/*.js', 
-//             'client/main/**/*.js', 'client/sidebar/**/*.js', 'client/styles/**/*.js', 'client/upload/**/*.js', 'client/app.js'],
-//   // scripts: ['!client/lib/**/*.js', '!client/*.min.js', 'client/**/*.js'],
-//   appjsminify: { src: ['!client/lib/**/*.js', 'client/**/*.js'], dest: 'client', filename: 'ngscripts.min.js' },
-//   mincss: {dest: 'client/styles/css.min'},
-//   views: ['!client/lib/*.html', 'client/**/*.html', 'client/index.html'],
-//   styles: {
-//     css: ['!client/lib/**/*.css', 'client/styles/css/*.css'],
-//     less: ['client/styles/less/*.less', 'client/**/*.less'],
-//     dest: 'client/styles/css'
-//   }
-// };
 
 gulp.task('less', function () {
   gulp.src(paths.styles.less)
