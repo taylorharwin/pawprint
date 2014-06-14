@@ -4,9 +4,9 @@ angular.module('user.pages', [
   'ui.router',
   'ui.bootstrap',
 
-  'user.pages.controllers',
+  'user.pages.services',
   'user.pages.directives',
-  'user.pages.services'
+  'user.pages.controllers'
 ]);
 
 angular.module('user.pages')

@@ -1,5 +1,5 @@
 angular.module('user.pages.controllers')
-  .controller('MainCtrl', function ($scope, UserFactory, VetFactory) {
+  .controller('MainCtrl', function ($scope) {
     console.log($scope);
 
     // @TODO retrieve properly though GET request
@@ -55,7 +55,7 @@ angular.module('user.pages.controllers')
           }
         ],
         status: {
-          vaccine: 'active',
+          vaccine: 'expiring',
           update: 'normal'
         },
       },
@@ -89,8 +89,8 @@ angular.module('user.pages.controllers')
           }
         ],
         status: {
-          vaccine: 'active',
-          update: 'normal'
+          vaccine: 'expired',
+          update: 'pending'
         },
       },
     ];
