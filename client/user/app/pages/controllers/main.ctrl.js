@@ -95,10 +95,24 @@ angular.module('user.pages.controllers')
       },
     ];
 
-    $scope.expand = function(pet) {
-      pet.show = !pet.show;
-    };
+    $scope.checkExpiry = function (vaccine) {
+      var now = Date.now();
+      var onemonth = now + 2592000000;
+      // @TODO parse date to milliseconds
+      // var expiryDate = vaccine.dateExpired;
+      // @NOTE purely for testing function 
+      var expiryDate = now - 2692000000;
 
-    
+      if (expiryDate > now) {
+        console.log('active');
+        return 'active';
+      } else if (expiryDate < onemonth) {
+        console.log('expiring');
+        return 'expiring';
+      } else {
+        console.log('expired');
+        return 'expired';
+      }
+    };
 
   });
