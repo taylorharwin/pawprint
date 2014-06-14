@@ -1,5 +1,5 @@
 angular.module('user.pages.controllers')
-  .controller('MainCtrl', function ($scope) {
+  .controller('MainCtrl', function ($scope, UserFactory, VetFactory) {
     console.log($scope);
 
     // @TODO retrieve properly though GET request
@@ -150,5 +150,7 @@ angular.module('user.pages.controllers')
     $scope.expand = function(pet) {
       pet.show = !pet.show;
     };
+
+    
 
   });
