@@ -31,7 +31,42 @@
           </tr>
         </table>
       </accordion-heading>
-      EXPANDABLE CONTENT
+      <table class="" style="width:100%">
+        <tr>
+          <td>
+            <p>Gender: {{pet.pet.gender}}</p>
+            <p>Color: {{pet.pet.color}}</p>
+            <p>Weight: {{pet.pet.weight}}</p>
+            <p>Neuter: {{pet.pet.neuter}}</p>
+            <p>Microchip #: {{pet.pet.microchip}}</p>
+          </td>
+          <td>
+            <button class="btn btn-default">EDIT</button>
+          </td>
+          <td>
+            <button class="btn btn-default">SEND</button>
+          </td>
+          <td>
+            <button class="btn btn-default">UPDATE</button>
+          </td>
+        </tr>
+      </table>
+      <table class="" style="width:100%">
+        <tr>
+          <td>Vaccine</td>
+          <td>Expiration</td>
+          <td>Status</td>
+        </tr>
+        <tr ng-repeat='vaccine in pet.vaccine'>
+          <td>{{vaccine.name}}</td>
+          <td>{{vaccine.dateExpired}}</td>
+          <td>
+            <span ng-if='checkExpiry(vaccine) === "active"' class="label label-success">Active</span>
+            <span ng-if='checkExpiry(vaccine) === "expiring"' class="label label-warning">Expiring</span>
+            <span ng-if='checkExpiry(vaccine) === "expired"' class="label label-danger">Expired</span>
+          </td>
+        </tr>
+      </table>
     </accordion-group>
   </accordion>
   <!-- End pet profile instance -->
