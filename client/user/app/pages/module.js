@@ -2,6 +2,7 @@
 
 angular.module('user.pages', [
   'ui.router',
+  'ui.bootstrap',
 
   'user.pages.controllers',
   'user.pages.directives',
