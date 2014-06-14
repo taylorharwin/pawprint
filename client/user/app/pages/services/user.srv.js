@@ -9,6 +9,7 @@ angular.module('user.pages.services')
       }
     };
 
+    //@TODO test all the functions in this factory
     function newUser (data) {
       var url = baseUrl + 'user';
       return $http.post(url, data, config);

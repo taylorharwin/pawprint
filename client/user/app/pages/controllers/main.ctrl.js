@@ -3,11 +3,13 @@ angular.module('user.pages.controllers')
     console.log($scope);
 
     // @TODO retrieve properly though GET request
+    // only showing expected outcome here!!
     $scope.pets = [
       {
         pet: {
+          id: '123',
           name: 'Apple',
-          dob: '2010-03-19',
+          birthdate: '2010-03-19',
           gender: 'F',
           breed: 'maltese-poodle',
           color: 'cream',
@@ -16,45 +18,25 @@ angular.module('user.pages.controllers')
           microchip: '1CWR4465HS424342EQ',
           profileUrl: 'http://cl.jroo.me/z3/Q/8/F/e/a.baa-Puppy-or-teddy-bear.jpg'
         },
-        vet: {
-          practice: 'Charlie loves Dogs',
-          address: {
-            line1: '123 Road',
-            line2: 'Area',
-            city: 'City',
-            state: 'State',
-            country: 'Country',
-          },
-          phone: '12345678910',
-          email: 'vet@email.com',
-          website: 'www.vet.com'
-        },
+        vaccine: [
+          {
+            id: '456',
+            name: 'bordetella',
+            expiration: '3years',
+            dateAdministered: '2013-10-09',
+            dateExpired: '2014-10-09'
+          }
+        ],
         status: {
           vaccine: 'active',
           update: 'normal'
         },
-        vaccine: [
-          {
-            name: 'vaccine1',
-            date_administered: '2014-06-04',
-            date_expired: '2016-10-09'
-          },
-          {
-            name: 'vaccine2',
-            date_administered: '2014-06-04',
-            date_expired: '2016-10-09'
-          },
-          {
-            name: 'vaccine3',
-            date_administered: '2014-06-04',
-            date_expired: '2016-10-09'
-          }
-        ]
       },
       {
-        pet: {
-          name: 'Bowser',
-          dob: '2010-03-19',
+         pet: {
+          id: '123',
+          name: 'Apple',
+          birthdate: '2010-03-19',
           gender: 'F',
           breed: 'maltese-poodle',
           color: 'cream',
@@ -63,45 +45,25 @@ angular.module('user.pages.controllers')
           microchip: '1CWR4465HS424342EQ',
           profileUrl: 'http://cl.jroo.me/z3/Q/8/F/e/a.baa-Puppy-or-teddy-bear.jpg'
         },
-        vet: {
-          practice: 'Charlie loves Dogs',
-          address: {
-            line1: '123 Road',
-            line2: 'Area',
-            city: 'City',
-            state: 'State',
-            country: 'Country',
-          },
-          phone: '12345678910',
-          email: 'vet@email.com',
-          website: 'www.vet.com'
-        },
+        vaccine: [
+          {
+            id: '456',
+            name: 'bordetella',
+            expiration: '3years',
+            dateAdministered: '2013-10-09',
+            dateExpired: '2014-10-09'
+          }
+        ],
         status: {
           vaccine: 'active',
           update: 'normal'
         },
-        vaccine: [
-          {
-            name: 'vaccine1',
-            date_administered: '2014-06-04',
-            date_expired: '2016-10-09'
-          },
-          {
-            name: 'vaccine2',
-            date_administered: '2014-06-04',
-            date_expired: '2016-10-09'
-          },
-          {
-            name: 'vaccine3',
-            date_administered: '2014-06-04',
-            date_expired: '2016-10-09'
-          }
-        ]
       },
       {
-        pet: {
-          name: 'Baci',
-          dob: '2010-03-19',
+         pet: {
+          id: '123',
+          name: 'Apple',
+          birthdate: '2010-03-19',
           gender: 'F',
           breed: 'maltese-poodle',
           color: 'cream',
@@ -110,40 +72,26 @@ angular.module('user.pages.controllers')
           microchip: '1CWR4465HS424342EQ',
           profileUrl: 'http://cl.jroo.me/z3/Q/8/F/e/a.baa-Puppy-or-teddy-bear.jpg'
         },
-        vet: {
-          practice: 'Charlie loves Dogs',
-          address: {
-            line1: '123 Road',
-            line2: 'Area',
-            city: 'City',
-            state: 'State',
-            country: 'Country',
+        vaccine: [
+          {
+            id: '456',
+            name: 'bordetella',
+            expiration: '3years',
+            dateAdministered: '2013-10-09',
+            dateExpired: '2014-10-09'
           },
-          phone: '12345678910',
-          email: 'vet@email.com',
-          website: 'www.vet.com'
-        },
+          {
+            id: '456',
+            name: 'rabies',
+            expiration: '3years',
+            dateAdministered: '2013-10-09',
+            dateExpired: '2014-10-09'
+          }
+        ],
         status: {
           vaccine: 'active',
           update: 'normal'
         },
-        vaccine: [
-          {
-            name: 'vaccine1',
-            date_administered: '2014-06-04',
-            date_expired: '2016-10-09'
-          },
-          {
-            name: 'vaccine2',
-            date_administered: '2014-06-04',
-            date_expired: '2016-10-09'
-          },
-          {
-            name: 'vaccine3',
-            date_administered: '2014-06-04',
-            date_expired: '2016-10-09'
-          }
-        ]
       },
     ];
 
