@@ -1,3 +1,31 @@
-<div>
-  <h1> Hi, I'm the main page </h1>
+<div class="jumbotron">
+	<div class='row'>
+	 	<div class="col-md-6"><h1>All Requests Summary</h1></div>
+  		<div class="col-md-6"><h1>Your Requests Summary</h1></div>
+  	</div>	
+</div>
+
+<div class="container">
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>Request ID</th>
+				<th>User</th>
+				<th>Pet</th>
+				<th>Date Created</th>
+				<th>Date Last Modified</th>
+				<th>Status</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><a ui-sref='^.request'>48127</a></td>
+				<td>Taylor S. Harwin</td>
+				<td>Wednesday</td>
+				<td>12/10/2007</td>
+				<td>2/4/2013</td>
+				<td><div class="label label-primary">Open</div></td>
+			</tr>
+		</tbody>
+	</table>
 </div>

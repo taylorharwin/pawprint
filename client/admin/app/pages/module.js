@@ -1,6 +1,5 @@
 angular.module('admin.pages', [
   'ui.router',
-
   'admin.pages.controllers',
   'admin.pages.directives',
   'admin.pages.services'
@@ -10,28 +9,33 @@ angular.module('admin.pages')
   .config(function ($stateProvider) {
 
   $stateProvider
-    .state('home', {
+    .state('public', {
+      abstract: true,
       url: '/',
-      templateUrl: 'app/pages/templates/home.tpl.html',
-      controller: 'HomeCtrl'
+      template: '<div ui-view class="realm"></div>'
     })
-
-    .state('login', {
-      url: '/login',
+     .state('public.login', {
+      url: '',
       templateUrl: 'app/pages/templates/login.tpl.html',
       controller: 'LoginCtrl'
     })
 
-    .state('main', {
-      url: '/main',
+    .state('app', {
+      abstract: true,
+      url: '/app',
+      template: '<div ui-view class="realm"></div>'
+    })
+
+    .state('app.main', {
+      url: '',
       templateUrl: 'app/pages/templates/main.tpl.html',
       controller: 'MainCtrl'
     })
 
-    .state('profile', {
-      url: '/profile',
-      templateUrl: 'app/pages/templates/profile.tpl.html',
-      controller: 'ProfileCtrl'
+    .state('app.request', {
+      url: '^/request',
+      templateUrl: 'app/pages/templates/request.tpl.html',
+      controller: 'RequestCtrl'
     });
 
   });
