@@ -33,9 +33,9 @@ angular.module('admin.pages')
     })
 
     .state('app.record', {
-      url: '^/record',
-      templateUrl: 'app/pages/templates/record.tpl.html',
-      controller: 'RecordCtrl'
+      url: '^/request',
+      templateUrl: 'app/pages/templates/request.tpl.html',
+      controller: 'RequestCtrl'
     });
 
   });
