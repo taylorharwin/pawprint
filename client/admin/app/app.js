@@ -1,6 +1,5 @@
 angular.module('admin', [
   'ui.router',
-
   'admin.common',
   'admin.pages'
 ]);
