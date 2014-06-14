@@ -2,6 +2,7 @@
 
 angular.module('user.pages', [
   'ui.router',
+  'ui.bootstrap',
 
   'user.pages.controllers',
   'user.pages.directives',
@@ -57,6 +58,6 @@ angular.module('user.pages')
 
   });
 
-angular.module('user.pages.controllers', ['ui.bootstrap']);
+angular.module('user.pages.controllers', []);
 angular.module('user.pages.directives', []);
 angular.module('user.pages.services', []);
