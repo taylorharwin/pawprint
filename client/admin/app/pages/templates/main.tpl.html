@@ -18,13 +18,13 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat ="request in requests">
-				<td><a ui-sref='^.request' ng-click='setReq(request.RequestID)'>{{request.RequestID}}</a></td>
-				<td>{{request.User}}</td>
-				<td>{{request.Pet}}</td>
-				<td>{{request.DateCreated}}</td>
-				<td>{{request.DateLastModified}}</td>
-				<td><div class="label label-primary">{{request.Status}}</div></td>
+			<tr ng-repeat="request in requests" ng-click='setReqAndTransition(request.requestID)'>
+					<td>{{request.requestID}}</td>
+					<td>{{request.user}}</td>
+					<td>{{request.pet}}</td>
+					<td>{{request.dateCreated}}</td>
+					<td>{{request.dateLastModified}}</td>
+					<td><div class="label label-primary">Open</div></td>
 			</tr>
 		</tbody>
 	</table>

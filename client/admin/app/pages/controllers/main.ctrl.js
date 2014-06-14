@@ -1,20 +1,20 @@
 'use strict';
 
 angular.module('admin.pages.controllers')
-  .controller('MainCtrl', function ($scope, ReqID) {
+  .controller('MainCtrl', function ($scope, reqIDFactory, $state) {
 
     $scope.requests = [{
-      RequestID: 1234,
-      User: 'Taylor Harwin',
-      Pet: 'Wednesday',
-      DateCreated: '11/7/1985',
-      DateLastModified: '11/7/2014',
-      Status: 'Open'
+      requestID: 1234,
+      user: 'Taylor Harwin',
+      pet: 'Wednesday',
+      dateCreated: '11/7/1985',
+      dateLastModified: '11/7/2014',
+      status: 'Open'
     }];
 
-    $scope.setReq = function (id) {
-      console.log(id);
-      ReqID.setRequestID(id)
+    $scope.setReqAndTransition = function (id) {
+      reqIDFactory.setRequestID(id);
+      $state.go('^.request');
     };
 
   });

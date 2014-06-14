@@ -1,18 +1,16 @@
 'use strict';
 
 angular.module('admin.common.services')
-  .factory('ReqID', function () {
+  .factory('reqIDFactory', function () {
 
-    var data = { RequestID: '' };
+    var data = { requestID: '' };
 
     return {
       getRequestID: function () {
-        return data.RequestID;
+        return data.requestID;
       },
       setRequestID: function (requestID) {
-        data.RequestID = requestID;
-        console.log(data.RequestID);
+        data.requestID = requestID;
       }
     };
   });
-
