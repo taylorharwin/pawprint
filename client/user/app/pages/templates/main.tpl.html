@@ -1,5 +1,5 @@
-<div ng-controller='MainCtrl'>
-  <button ui-sref='^.profile' type="login" class="btn btn-default">PROFILE</button>
+<div ng-controller="MainCtrl">
+  <button ui-sref="^.profile" type="login" class="btn btn-default">PROFILE</button>
 
   <center>
     <img src="assets/logo.png"/>
@@ -22,15 +22,15 @@
               <span ng-switch-when='expiring' class="label label-warning">Expiring</span>
               <span ng-switch-when='expired' class="label label-danger">Expired</span>
             </td>
+            <td ng-switch='pet.updateStatus'>
+              Updates:
+              <span ng-switch-when='normal' class="label label-success">Normal</span>
+              <span ng-switch-when='pending' class="label label-warning">Pending</span>
+            </td>
           </tr>
         </table>
       </accordion-heading>
-      <p ng-switch='pet.updateStatus'>
-        Updates:
-        <span ng-switch-when='normal' class="label label-success">Normal</span>
-        <span ng-switch-when='pending' class="label label-warning">Pending</span>
-      </p>
-      MORE CONTENT
+      EXPANDABLE CONTENT
     </accordion-group>
   </accordion>
   <!-- End pet profile instance -->
