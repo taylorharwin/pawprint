@@ -1,6 +1,6 @@
-angular.module('admin.common.services')
+// angular.module('admin.common.services')
   
-  //inject lowdash
-  .factory('_', function () {
-    return window._;
-  });
+//   //inject lowdash
+//   .factory('_', function () {
+//     return window._;
+//   });

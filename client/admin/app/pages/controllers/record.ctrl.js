@@ -1,6 +1,6 @@
 'use strict';
 
 angular.module('admin.pages.controllers')
-  .controller('ProfileCtrl', function ($scope) {
+  .controller('RecordCtrl', function ($scope) {
     console.log($scope);
   });
