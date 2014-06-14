@@ -32,7 +32,7 @@ angular.module('admin.pages')
       controller: 'MainCtrl'
     })
 
-    .state('app.record', {
+    .state('app.request', {
       url: '^/request',
       templateUrl: 'app/pages/templates/request.tpl.html',
       controller: 'RequestCtrl'
