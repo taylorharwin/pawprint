@@ -18,13 +18,13 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr>
-				<td><a ui-sref='^.request'>48127</a></td>
-				<td>Taylor S. Harwin</td>
-				<td>Wednesday</td>
-				<td>12/10/2007</td>
-				<td>2/4/2013</td>
-				<td><div class="label label-primary">Open</div></td>
+			<tr ng-repeat="request in requests" ng-click='setReqAndTransition(request.requestID)'>
+					<td>{{request.requestID}}</td>
+					<td>{{request.user}}</td>
+					<td>{{request.pet}}</td>
+					<td>{{request.dateCreated}}</td>
+					<td>{{request.dateLastModified}}</td>
+					<td><div class="label label-primary">Open</div></td>
 			</tr>
 		</tbody>
 	</table>

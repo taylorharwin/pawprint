@@ -1,6 +1,16 @@
-// angular.module('admin.common.services')
-  
-//   //inject lowdash
-//   .factory('_', function () {
-//     return window._;
-//   });
+'use strict';
+
+angular.module('admin.common.services')
+  .factory('reqIDFactory', function () {
+
+    var data = { requestID: '' };
+
+    return {
+      getRequestID: function () {
+        return data.requestID;
+      },
+      setRequestID: function (requestID) {
+        data.requestID = requestID;
+      }
+    };
+  });
