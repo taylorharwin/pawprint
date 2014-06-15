@@ -101,23 +101,23 @@ db.knex.schema.hasTable('pet_vaccine').then(function(exists) {
   }
 });
 
-db.knex.schema.hasTable('requests').then(function(exists) {
+db.knex.schema.hasTable('request').then(function(exists) {
   if (!exists) {
-    db.knex.schema.createTable('requests', function (requests) {
-      requests.increments('id').primary();
-      requests.integer('user_id');
-      requests.integer('pet_id');
-      requests.integer('vet_id');
-      requests.timestamps();
+    db.knex.schema.createTable('request', function (request) {
+      request.increments('id').primary();
+      request.integer('user_id');
+      request.integer('pet_id');
+      request.integer('vet_id');
+      request.timestamps();
     }).then(function (table) {
       console.log('Created Table', table);
     });
   }
 });
 
-db.knex.schema.hasTable('pdfRecords').then(function(exists) {
+db.knex.schema.hasTable('pdfRecord').then(function(exists) {
   if (!exists) {
-    db.knex.schema.createTable('pdfRecords', function (pdf) {
+    db.knex.schema.createTable('pdfRecord', function (pdf) {
       pdf.increments('id').primary();
       pdf.string('link', 255);
       pdf.integer('request_id');
@@ -195,7 +195,3 @@ db.knex.schema.hasTable('vetContact').then(function(exists) {
 
 // revisit whether this is the best way to export 
 module.exports = exports = db;
-
-// module.exports = exports = function (app) {
-//   app.set('db', db);
-// };

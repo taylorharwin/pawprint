@@ -28,45 +28,40 @@ var testCallback = function(res, expect){
 
 describe('User /user', function() {
   describe('/:id', function() {
-    beforeEach(function(done) {
-      // create database entries
-      var userid = '12345';
-      var userdata = {
-        id : '12345',
-        email : 'apple@hackreactor.com',
-      };
-      done();
-    });
+    // beforeEach(function(done) {
+    //   // create database entries
+    //   var userid = '12345';
+    //   var userdata = {
+    //     id : '12345',
+    //     email : 'apple@hackreactor.com',
+    //   };
+    //   done();
+    // });
 
-    it('get on /user/:id', function(done){
-      var reqPath = '/user/' + userid;
-      testPath(reqPath, 'get', 200, done, userdata);
-    });
+    // it('get on /user/:id', function(done){
+    //   var reqPath = '/user/' + userid;
+    //   testPath(reqPath, 'get', 200, done, userdata);
+    // });
 
-    it('delete on /user/:id deletes', function(done){
+    it('post on /user', function(done){
       request(app)
-        .get('/song')
-        .expect(function(res) {
-          Song.findOne({'filename' : 'testing.mp3'})
-            .exec(function(err,song){
-              if(err) console.log(err);
-              expect(song.echoData.status).to.equal('complete');
-            });
+        .post('/user')
+        .send({
+          email: 'yolo@yolo.com',
+          firstName: 'apple'
         })
+        .expect(200)
         .end(done);
     });
 
-    it('patch on /user/:id updates', function(done){
-      request(app)
-        .get('/song')
-        .expect(function(res) {
-          Song.findOne({'filename' : 'testing.mp3'})
-            .exec(function(err,song){
-              if(err) console.log(err);
-              expect(song.echoData.status).to.equal('complete');
-            });            
-        })
-        .end(done);
+    it('post on /user/:id/pet', function(done){
+    request(app)
+      .post('/user/1/pets')
+      .send({
+        name: 'apple',
+      })
+      .expect(200)
+      .end(done);
     });
 
   }); 

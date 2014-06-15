@@ -3,7 +3,7 @@ var Pet = require('./pet.js');
 var User = require('./user.js');
 
 var Request = db.Model.extend({
-  tableName: 'requests',
+  tableName: 'request',
   hasTimestamps: true,
   pet: function() {
     return this.belongsTo(Pet);
