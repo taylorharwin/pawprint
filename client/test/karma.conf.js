@@ -34,8 +34,11 @@ module.exports = function(config) {
       'admin/app/pages/directives/*.dir.js',
       'admin/app/pages/controllers/*.ctrl.js',
       'admin/app/pages/services/*.srv.js',
+      'admin/app/common/services/*.srv.js',
       'test/test-user.js',
-      'test/test-admin.js'
+      'test/test-admin-mainctrl.js',
+      'test/test-admin-reqctrl.js',
+      
     ],
 
 

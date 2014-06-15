@@ -16,5 +16,4 @@ angular.module('admin.pages.controllers')
       reqIDFactory.setRequestID(id);
       $state.go('^.request');
     };
-
   });
