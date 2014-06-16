@@ -5,6 +5,8 @@ angular.module('admin.pages.controllers')
 
     $scope.reqID = reqIDFactory.getRequestID();
     $scope.reqStatus = reqIDFactory.getRequestStatus();
+    $scope.statusCodes = statusCodeConst;
+    $scope.setClassOnRequest = reqIDFactory.setClassforStatus;
 
     $scope.vaccines = [
       'Rabies',
@@ -12,8 +14,6 @@ angular.module('admin.pages.controllers')
       'Parvovirus',
       'Rabbit anti-depressant'
     ];
-
-    $scope.statusCodes = statusCodeConst;
 
     $scope.status = {
       isopen: false

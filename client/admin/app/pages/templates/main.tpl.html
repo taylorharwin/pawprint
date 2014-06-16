@@ -24,7 +24,7 @@
 					<td>{{request.pet}}</td>
 					<td>{{request.dateCreated}}</td>
 					<td>{{request.dateLastModified}}</td>
-					<td><div class="label label-primary">{{request.statusCode}}</div></td>
+					<td><div ng-class="setClassOnRequest('{{request.statusCode}}')">{{request.statusCode}}</div></td>
 			</tr>
 		</tbody>
 	</table>

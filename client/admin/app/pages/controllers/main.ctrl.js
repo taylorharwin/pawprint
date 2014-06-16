@@ -1,9 +1,10 @@
 'use strict';
 
 angular.module('admin.pages.controllers')
-  .controller('MainCtrl', function ($scope, reqIDFactory, statusCodeConst, $state) {
+  .controller('MainCtrl', function ($scope, reqIDFactory, $state) {
 
-    $scope.statusCodes = statusCodeConst;
+    $scope.setClassOnRequest = reqIDFactory.setClassforStatus;
+
 
     $scope.requests = [{
       requestID: 1234,
@@ -24,7 +25,7 @@ angular.module('admin.pages.controllers')
 
     $scope.setReqAndTransition = function (id, status) {
       reqIDFactory.setRequestID(id);
-      reqIDFactory.setRequestStatus(status)
+      reqIDFactory.setRequestStatus(status);
       $state.go('^.request');
     };
   });

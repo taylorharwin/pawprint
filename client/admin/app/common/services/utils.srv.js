@@ -17,16 +17,27 @@ angular.module('admin.common.services')
       },
       setRequestStatus: function (requestStatus) {
         data.requestStatus = requestStatus;
+      },
+      setClassforStatus: function (requestStatus) {
+        if (requestStatus === 'New') {
+          return 'label label-primary';
+        }
+        if (requestStatus === 'Pending') {
+          return 'label label-info';
+        }
+        if (requestStatus === 'Closed') {
+          return 'label label-default';
+        }
+        if (requestStatus === 'Cancelled') {
+          return 'label label-warning';
+        }
       }
-
     };
   })
 
-.constant('statusCodeConst', [
-  'New',
-  'Pending',
-  'Closed',
-  'Cancelled'
-]);
+.constant('statusCodeConst', ['New', 'Pending', 'Closed', 'Cancelled']);
+
+    
+
 
 

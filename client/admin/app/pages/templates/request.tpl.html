@@ -2,7 +2,7 @@
 	<div class="col-md-6">
 		<div class="panel panel-default">
 			<h2>Viewing Request: {{reqID}}</h2>
-  		<h2 ng-class="label label-primary">Status: {{reqStatus}}</h2>
+  		<h2>Status: <span ng-class="setClassOnRequest('{{reqStatus}}')">{{reqStatus}}</span></h2>
 		</div>
 	</div>
 
@@ -55,7 +55,7 @@
 				<div class="col-md-3">
 					<div class="btn-group" dropdown is-open="status.isopen">
   				 <span class="dropdown">
-      				<button  class="btn btn-large btn-default dropdown-toggle">Update Status<span class="caret"></span></button>
+      				<button  class="btn btn-large btn-default dropdown-toggle">View all vaccines<span class="caret"></span></button>
 						    <ul class="dropdown-menu">
 						      <li ng-repeat="vaccine in vaccines">{{vaccine}}</li>
 						      <li class="divider"></li>
