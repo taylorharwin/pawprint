@@ -1,11 +1,62 @@
 angular.module('user.pages.controllers')
-  .controller('MainCtrl', function ($scope) {
+
+  .controller('MainCtrl', function ($scope, UserFactory, VaccineFactory) {
     console.log($scope);
 
-    // @TODO retrieve properly though GET request
-    // only showing expected outcome here!!
-    $scope.pets = [
-      {
+    $scope.checkExpiry = VaccineFactory.checkExpiry;
+
+    //@NOTE actual functions
+    // $scope.user = UserFactory.getUser(userId);
+    // $scope.pets = UserFactory.getUserPets($scope.user.id, $scope.pet);
+
+    //@NOTE dummy functions
+    $scope.user = UserFactory.getUser();
+    $scope.pets = UserFactory.getUserPets();
+    
+    $scope.setUserPetUpdate = function (petId) {
+      UserFactory.setUserPetUpdate(petId, $scope.user.user.id);
+      for (var i=0; i<$scope.pets.length ; i++) {
+        if ($scope.pets[i].pet.id === petId) {
+          $scope.pets[i].status.update = 'pending';
+        }
+      }
+    };
+
+    $scope.cancelUserPetUpdate = function(petId) {
+      UserFactory.cancelUserPetUpdate(petId, $scope.user.user.id);
+      for (var i=0; i<$scope.pets.length ; i++) {
+        if ($scope.pets[i].pet.id === petId) {
+          $scope.pets[i].status.update = 'normal';
+        }
+      }
+    };
+
+    $scope.setUserPetEdit = function (petId) {
+      UserFactory.setUserPetEdit(petId, $scope.user.user.id);
+      for (var i=0; i<$scope.pets.length ; i++) {
+        if ($scope.pets[i].pet.id === petId) {
+          $scope.pets[i].status.update = 'pending';
+          $scope.pets[i].edit = false;
+        }
+      }
+      //@NOTE will this be too fast and the db wont update in time?
+      $scope.pets = UserFactory.getUserPets();
+    };
+
+    $scope.startUserPetEdit = function (petId) {
+      for (var i=0; i<$scope.pets.length ; i++) {
+        if ($scope.pets[i].pet.id === petId) {
+          $scope.pets[i].edit = true;
+        }
+      }
+    };
+
+    $scope.addPetEntry = function () {
+      // @TODO make this in editing mode immediately
+      // then send to server only when save is clicked
+      // (maybe with .save() in restangular)
+      // then refresh all pets => db remain source of truth
+      var newPet = {
         pet: {
           id: '123',
           name: 'Apple',
@@ -31,88 +82,9 @@ angular.module('user.pages.controllers')
           vaccine: 'active',
           update: 'normal'
         },
-      },
-      {
-         pet: {
-          id: '123',
-          name: 'Apple',
-          birthdate: '2010-03-19',
-          gender: 'F',
-          breed: 'maltese-poodle',
-          color: 'cream',
-          weight: '5lb',
-          neuter: true,
-          microchip: '1CWR4465HS424342EQ',
-          profileUrl: 'http://cl.jroo.me/z3/Q/8/F/e/a.baa-Puppy-or-teddy-bear.jpg'
-        },
-        vaccine: [
-          {
-            id: '456',
-            name: 'bordetella',
-            expiration: '3years',
-            dateAdministered: '2013-10-09',
-            dateExpired: '2014-10-09'
-          }
-        ],
-        status: {
-          vaccine: 'expiring',
-          update: 'normal'
-        },
-      },
-      {
-         pet: {
-          id: '123',
-          name: 'Apple',
-          birthdate: '2010-03-19',
-          gender: 'F',
-          breed: 'maltese-poodle',
-          color: 'cream',
-          weight: '5lb',
-          neuter: true,
-          microchip: '1CWR4465HS424342EQ',
-          profileUrl: 'http://cl.jroo.me/z3/Q/8/F/e/a.baa-Puppy-or-teddy-bear.jpg'
-        },
-        vaccine: [
-          {
-            id: '456',
-            name: 'bordetella',
-            expiration: '3years',
-            dateAdministered: '2013-10-09',
-            dateExpired: '2014-10-09'
-          },
-          {
-            id: '456',
-            name: 'rabies',
-            expiration: '3years',
-            dateAdministered: '2013-10-09',
-            dateExpired: '2014-10-09'
-          }
-        ],
-        status: {
-          vaccine: 'expired',
-          update: 'pending'
-        },
-      },
-    ];
-
-    $scope.checkExpiry = function (vaccine) {
-      var now = Date.now();
-      var onemonth = now + 2592000000;
-      // @TODO parse date to milliseconds
-      // var expiryDate = vaccine.dateExpired;
-      // @NOTE purely for testing function 
-      var expiryDate = now - 2692000000;
-
-      if (expiryDate > now) {
-        console.log('active');
-        return 'active';
-      } else if (expiryDate < onemonth) {
-        console.log('expiring');
-        return 'expiring';
-      } else {
-        console.log('expired');
-        return 'expired';
-      }
+        edit: false
+      };
+      $scope.pets.push(newPet);
     };
 
   });
