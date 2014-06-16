@@ -3,10 +3,11 @@
 angular.module('user.pages', [
   'ui.router',
   'ui.bootstrap',
+  'restangular',
 
-  'user.pages.services',
+  'user.pages.controllers',
   'user.pages.directives',
-  'user.pages.controllers'
+  'user.pages.services'
 ]);
 
 angular.module('user.pages')
