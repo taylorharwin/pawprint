@@ -1,7 +1,7 @@
-var controller = require('./controllers.js');
+var controllerCreate = require('./controller.create.js');
 
 module.exports = exports = function (router) {
-  router.route('/')
-    .get(controller.get)
-    .post(controller.post);
+  // create admin route
+  router.route('/:adminid/request/:requestid/vaccine')
+        .post(controllerCreate.createVaccine);
 };
