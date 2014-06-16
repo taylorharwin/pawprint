@@ -2,7 +2,8 @@ angular.module('admin.pages', [
   'ui.router',
   'admin.pages.controllers',
   'admin.pages.directives',
-  'admin.pages.services'
+  'admin.pages.services',
+  'ui.bootstrap'
 ]);
 
 angular.module('admin.pages')

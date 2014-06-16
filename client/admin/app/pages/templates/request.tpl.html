@@ -1,26 +1,91 @@
 <div class="row">
-	<div class="col-md-6"><h1>{{reqID}}</h1></div>
-  	<div class="col-md-6">Status</div>
-</div>
-
-<div class="row">
-	<div class="col-md-12">Veterinarian Profile</div>
-</div>
-
-<div class="row">
-	<div class="col-md-3">
-		<select>
-	  		<option value="vaccines">All Vaccines listed</option>
-		</select>
+	<div class="col-md-6">
+		<div class="panel panel-default">
+			<h2>Viewing Request: {{reqID}}</h2>
+  		<h2>Status: <span ng-class="setClassOnRequest('{{reqStatus}}')">{{reqStatus}}</span></h2>
+		</div>
 	</div>
-	<div class="col-md-9">
-		<div>Individual Vaccine Record</div>
-	</div>
+
+  <div class="col-md-6">
+  		<div class="btn-group" dropdown is-open="status.isopen">
+  				 <span class="dropdown">
+      				<button  class="btn btn-large btn-default dropdown-toggle">Update Status<span class="caret"></span></button>
+						    <ul class="dropdown-menu">
+						      <li ng-repeat="statusCode in statusCodes">{{statusCode}}</li>
+						    </ul>
+  				 </span>
+			    </div>
+  		<button class="btn btn-large btn-info">Download PDF</button>
+  		<button ui-sref="app.main" class="btn btn-large btn-default">Back to All Requests</button>
+  </div>
+</div>
+
+<div class='row'>
+	<div class="col-md-6">
+     <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title">Veterinarian Information</h2>
+            </div>
+
+            <div class="panel-body">
+                Vet Info Directive Goes Here
+            </div>
+     </div>
+  </div>
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title">User Information</h2>
+            </div>
+
+            <div class="panel-body">
+                User Info Directive Goes Here
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="row">
-	<div class="col-md-12">Contact History</div>
+	<div class="col-md-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h2 class="panel-title">Vaccine Information</h2>
+			</div>
+			<div class="panel-body">
+				<div class="col-md-3">
+					<div class="btn-group" dropdown is-open="status.isopen">
+  				 <span class="dropdown">
+      				<button  class="btn btn-large btn-default dropdown-toggle">View all vaccines<span class="caret"></span></button>
+						    <ul class="dropdown-menu">
+						      <li ng-repeat="vaccine in vaccines">{{vaccine}}</li>
+						      <li class="divider"></li>
+						      <li>Add New Vaccine</li>
+						    </ul>
+  				 </span>
+			    </div>
+				</div>
+
+				<div class="col-md-9">
+					All Vaccinations Directive Goes Here
+			</div>
+   </div>
+ </div>
 </div>
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h2 class="panel-title">Contact History</h2>
+			</div>
+			<div class="panel-body">
+				Contact History Directive Goes Here
+			</div>
+   </div>
+ </div>
+</div>
+
+
 
 
   
