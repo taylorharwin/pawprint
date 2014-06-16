@@ -16,9 +16,5 @@ angular.module('admin.pages.controllers')
       isopen: false
     };
 
-    $scope.toggled = function (open) {
-      console.log('Dropdown is now: ', open);
-    };
-
   });
   
