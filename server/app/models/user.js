@@ -1,11 +1,14 @@
 var db = require('../db_config.js');
+var Pet = require('./pet.js');
+var Request = require('./request.js');
+var PetUser = require('./petuser.js')
 
 var User = db.Model.extend({
-  tableName: 'users',
+  tableName: 'user',
   hasTimestamps: true,
-  // link: function() {
-  //   return this.belongsTo(Link, 'link_id');
-  // }
+  pet: function() {
+    return this.belongsToMany(Pet, 'user_pet', 'pet_id', 'user_id');
+  }
 });
 
 module.exports = User;
