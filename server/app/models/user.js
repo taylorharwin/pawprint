@@ -1,7 +1,6 @@
 var db = require('../db_config.js');
 var Pet = require('./pet.js');
 var Request = require('./request.js');
-var PetUser = require('./petuser.js')
 
 var User = db.Model.extend({
   tableName: 'user',
