@@ -1,9 +1,11 @@
 <div ng-controller="MainCtrl">
-  <button ui-sref="^.profile" type="login" class="btn btn-default">PROFILE</button>
 
   <center>
     <img src="assets/logo.png"/>
   </center>
+
+  <button ng-click='addPetEntry()' class="btn btn-default">Add Pet</button>
+  <button ui-sref="^.profile" class="btn btn-default">User profile</button>
 
   <!-- @TODO make a directive for pets properly -->
   <accordion close-others="false">
@@ -14,9 +16,12 @@
             <td>
               <img class='petImg' ng-src='{{pet.pet.profileUrl}}'/>
             </td>
-            <td>Name: {{pet.pet.name}}</td>
-            <td>Birthday: {{pet.pet.birthdate}}</td>
-            <td>Breed: {{pet.pet.breed}}</td>
+            <td ng-hide="pet.edit">Name: {{pet.pet.name}}</td>
+            <td ng-show="pet.edit" ng-click="$event.stopPropagation()">Name: <input type="text" value="{{pet.pet.name}}" ng-required/></td>
+            <td ng-hide="pet.edit">Birthday: {{pet.pet.birthdate}}</td>
+            <td ng-show="pet.edit" ng-click="$event.stopPropagation()">Birthday: <input type="text" value="{{pet.pet.birthdate}}" ng-required/></td>
+            <td ng-hide="pet.edit" >Breed: {{pet.pet.breed}}</td>
+            <td ng-show="pet.edit" ng-click="$event.stopPropagation()">Breed: <input type="text" value="{{pet.pet.breed}}" ng-required/></td>
             <td ng-switch='pet.status.vaccine'>
               Vaccines:
               <span ng-switch-when='active' class="label label-success">Active</span>
@@ -34,20 +39,27 @@
       <table class="" style="width:100%">
         <tr>
           <td>
-            <p>Gender: {{pet.pet.gender}}</p>
-            <p>Color: {{pet.pet.color}}</p>
-            <p>Weight: {{pet.pet.weight}}</p>
-            <p>Neuter: {{pet.pet.neuter}}</p>
-            <p>Microchip #: {{pet.pet.microchip}}</p>
+            <p ng-hide="pet.edit">Gender: {{pet.pet.gender}}</p>
+            <p ng-show="pet.edit">Gender: <input type="text" value="{{pet.pet.gender}}" ng-required/></p>
+            <p ng-hide="pet.edit">Color: {{pet.pet.color}}</p>
+            <p ng-show="pet.edit">Color: <input type="text" value="{{pet.pet.color}}" ng-required/></p>
+            <p ng-hide="pet.edit">Weight: {{pet.pet.weight}}</p>
+            <p ng-show="pet.edit">Weight: <input type="text" value="{{pet.pet.weight}}" ng-required/></p>
+            <p ng-hide="pet.edit">Neuter: {{pet.pet.neuter}}</p>
+            <p ng-show="pet.edit">Neuter: <input type="text" value="{{pet.pet.neuter}}" ng-required/></p>
+            <p ng-hide="pet.edit">Microchip #: {{pet.pet.microchip}}</p>
+            <p ng-show="pet.edit">Microchip #: <input type="text" value="{{pet.pet.microchip}}" ng-required/></p>
           </td>
-          <td>
-            <button class="btn btn-default">EDIT</button>
+          <td ng-switch = "pet.edit">
+            <button ng-click='setUserPetEdit(pet.pet.id)' ng-switch-when='true' class="btn btn-default">SAVE</button>
+            <button ng-click='startUserPetEdit(pet.pet.id)' ng-switch-when='false' class="btn btn-default">EDIT</button>
           </td>
           <td>
             <button class="btn btn-default">SEND</button>
           </td>
-          <td>
-            <button class="btn btn-default">UPDATE</button>
+          <td ng-switch="pet.status.update">
+            <button ng-click='setUserPetUpdate(pet.pet.id)' ng-switch-when='normal' class="btn btn-default">UPDATE</button>
+            <button ng-click='cancelUserPetUpdate(pet.pet.id)' ng-switch-when='pending' class="btn btn-default">CANCEL UPDATE</button>
           </td>
         </tr>
       </table>
@@ -57,7 +69,7 @@
           <td>Expiration</td>
           <td>Status</td>
         </tr>
-        <tr ng-repeat='vaccine in pet.vaccine'>
+        <tr ng-repeat="vaccine in pet.vaccine">
           <td>{{vaccine.name}}</td>
           <td>{{vaccine.dateExpired}}</td>
           <td>

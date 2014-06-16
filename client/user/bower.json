@@ -13,6 +13,7 @@
     "lodash": "~2.4.1",
     "angular-mocks": "~1.2.17",
     "jasmine": "~2.0.0",
-    "karma-jasmine": "~0.2.2"
+    "karma-jasmine": "~0.2.2",
+    "restangular": "~1.4.0"
   }
 }
