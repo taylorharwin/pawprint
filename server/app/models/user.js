@@ -6,7 +6,7 @@ var User = db.Model.extend({
   tableName: 'user',
   hasTimestamps: true,
   pet: function() {
-    return this.belongsToMany(Pet, 'user_pet', 'pet_id', 'user_id');
+    return this.belongsToMany(Pet, 'user_pet', 'user_id', 'pet_id');
   }
 });
 

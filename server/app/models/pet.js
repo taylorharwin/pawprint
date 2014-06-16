@@ -8,7 +8,7 @@ var Pet = db.Model.extend({
   tableName: 'pet',
   hasTimestamps: true,
   user: function() {
-    return this.belongsToMany(User, 'user_pet', 'user_id', 'pet_id');
+    return this.belongsToMany(User, 'user_pet', 'pet_id', 'user_id');
   }
 });
 

@@ -32,18 +32,18 @@ describe('/user post requests', function() {
       request(app)
         .post('/user')
         .send({
-          email: 'yolo@yolo.com',
+          email: 'apple@yolo.com',
           firstName: 'apple'
         })
         .expect(201)
         .end(done);
     });
 
-    xit('post on /user/:id/pet', function(done){
+    it('post on /user/:id/pet', function(done){
       request(app)
-        .post('/user/1/pet')
+        .post('/user/2/pet')
         .send({
-          name: 'apple',
+          name: 'apple3',
         })
         .expect(201)
         .end(done);
@@ -83,7 +83,7 @@ describe('/user put requests', function() {
       .end(done);
   });
 
-  it('put', function(done){
+  xit('put', function(done){
     request(app)
       .put('/user/1/pet/1')
       .send({
