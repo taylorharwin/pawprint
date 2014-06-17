@@ -24,7 +24,7 @@ db.knex.schema.hasTable('user').then(function(exists) {
       user.string('firstName', 50);
       user.string('lastName', 50);
       user.string('password', 255);
-      user.string('salt', 255);
+      user.string('salt', 255); 
       user.string('streetAddress', 100);
       user.string('city', 100);
       user.string('state', 2);
@@ -77,7 +77,7 @@ db.knex.schema.hasTable('vaccine').then(function(exists) {
     db.knex.schema.createTable('vaccine', function (vaccine) {
       vaccine.increments('id').primary();
       vaccine.string('name', 100);
-      vaccine.date('expiration'); // string
+      vaccine.date('expiration'); // string - i don't think this is a date
       vaccine.timestamps();
     }).then(function (table) {
       console.log('Created Table', table);

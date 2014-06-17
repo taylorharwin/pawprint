@@ -26,83 +26,85 @@ var testCallback = function(res, expect){
   }
 };
 
-describe('/user post requests', function() {
-  describe('/:id', function() {
-    xit('post on /user', function(done){
+describe('pawprint tests', function(){ 
+  describe('/user post requests', function() {
+    describe('/:id', function() {
+      xit('post on /user', function(done){
+        request(app)
+          .post('/user')
+          .send({
+            email: 'apple@yolo.com',
+            firstName: 'apple'
+          })
+          .expect(201)
+          .end(done);
+      });
+
+      it('post on /user/:id/pet', function(done){
+        request(app)
+          .post('/user/2/pet')
+          .send({
+            name: 'apple3',
+          })
+          .expect(201)
+          .end(done);
+      });
+
+      xit('post on /user/vet', function(done){
+        request(app)
+          .post('/user/vet')
+          .send({
+            practiceName: 'appleVet',
+          })
+          .expect(201)
+          .end(done);
+      });
+
+      xit('post on /vet', function(done){
+        request(app)
+          .post('/user/:userid/pet/:petid/request')
+          .send({
+            vet_id: 1,
+          })
+          .expect(201)
+          .end(done);
+      });
+    }); 
+  });
+
+  describe('/user put requests', function() {
+    xit('put', function(done){
       request(app)
-        .post('/user')
+        .put('/user/1')
         .send({
-          email: 'apple@yolo.com',
+          email: 'applechanged@yolo.com',
           firstName: 'apple'
         })
-        .expect(201)
+        .expect(200)
         .end(done);
     });
 
-    it('post on /user/:id/pet', function(done){
+    xit('put', function(done){
       request(app)
-        .post('/user/2/pet')
+        .put('/user/1/pet/1')
         .send({
-          name: 'apple3',
+          name: 'apple2',
+          gender: 'F'
         })
-        .expect(201)
+        .expect(200)
         .end(done);
     });
-
-    xit('post on /user/vet', function(done){
-      request(app)
-        .post('/user/vet')
-        .send({
-          practiceName: 'appleVet',
-        })
-        .expect(201)
-        .end(done);
-    });
-
-    xit('post on /vet', function(done){
-      request(app)
-        .post('/user/:userid/pet/:petid/request')
-        .send({
-          vet_id: 1,
-        })
-        .expect(201)
-        .end(done);
-    });
-  }); 
-});
-
-describe('/user put requests', function() {
-  xit('put', function(done){
-    request(app)
-      .put('/user/1')
-      .send({
-        email: 'applechanged@yolo.com',
-        firstName: 'apple'
-      })
-      .expect(200)
-      .end(done);
   });
 
-  xit('put', function(done){
-    request(app)
-      .put('/user/1/pet/1')
-      .send({
-        name: 'apple2',
-        gender: 'F'
-      })
-      .expect(200)
-      .end(done);
-  });
-});
-
-xdescribe('/admin post requests', function() {
-  it('post on /admin/:adminid/request/:requestid/vaccine', function(done){
-    request(app)
-      .post('/admin/1/request/1/vaccine')
-      .send([{
-        vaccine_id : 1,
-      }, {vaccine_id : 1}])
-      .expect(201)
-      .end(done);
+  xdescribe('/admin post requests', function() {
+    it('post on /admin/:adminid/request/:requestid/vaccine', function(done){
+      request(app)
+        .post('/admin/1/request/1/vaccine')
+        .send([{
+          vaccine_id : 1,
+        }, {vaccine_id : 1}])
+        .expect(201)
+        .end(done);
+    });
   });
 });
