@@ -28,52 +28,50 @@ var testCallback = function(res, expect){
 
 describe('pawprint tests', function(){ 
   describe('/user post requests', function() {
-    describe('/:id', function() {
-      xit('post on /user', function(done){
-        request(app)
-          .post('/user')
-          .send({
-            email: 'apple@yolo.com',
-            firstName: 'apple'
-          })
-          .expect(201)
-          .end(done);
-      });
+    xit('post /user', function(done){
+      request(app)
+        .post('/user')
+        .send({
+          email: 'apple@yolo.com',
+          firstName: 'apple'
+        })
+        .expect(201)
+        .end(done);
+    });
 
-      it('post on /user/:id/pet', function(done){
-        request(app)
-          .post('/user/2/pet')
-          .send({
-            name: 'apple3',
-          })
-          .expect(201)
-          .end(done);
-      });
+    it('post /user/:id/pet', function(done){
+      request(app)
+        .post('/user/2/pet')
+        .send({
+          name: 'apple3',
+        })
+        .expect(201)
+        .end(done);
+    });
 
-      xit('post on /user/vet', function(done){
-        request(app)
-          .post('/user/vet')
-          .send({
-            practiceName: 'appleVet',
-          })
-          .expect(201)
-          .end(done);
-      });
+    xit('post /user/vet', function(done){
+      request(app)
+        .post('/user/vet')
+        .send({
+          practiceName: 'appleVet',
+        })
+        .expect(201)
+        .end(done);
+    });
 
-      xit('post on /vet', function(done){
-        request(app)
-          .post('/user/:userid/pet/:petid/request')
-          .send({
-            vet_id: 1,
-          })
-          .expect(201)
-          .end(done);
-      });
-    }); 
+    xit('post /user/:userid/pet/:petid/request', function(done){
+      request(app)
+        .post('/user/1/pet/1/request')
+        .send({
+          vet_id: 1,
+        })
+        .expect(201)
+        .end(done);
+    });
   });
 
   describe('/user put requests', function() {
-    xit('put', function(done){
+    xit('put /user/:userid', function(done){
       request(app)
         .put('/user/1')
         .send({
@@ -84,7 +82,7 @@ describe('pawprint tests', function(){
         .end(done);
     });
 
-    xit('put', function(done){
+    xit('put /user/:userid/pet/:petid', function(done){
       request(app)
         .put('/user/1/pet/1')
         .send({
@@ -97,7 +95,7 @@ describe('pawprint tests', function(){
   });
 
   xdescribe('/admin post requests', function() {
-    it('post on /admin/:adminid/request/:requestid/vaccine', function(done){
+    it('post /admin/:adminid/request/:requestid/vaccine', function(done){
       request(app)
         .post('/admin/1/request/1/vaccine')
         .send([{
