@@ -1,29 +1,169 @@
 <div>
   <div class="col-md-6">
-    <ul>
-      <li><h4>Customer Name:</h4><span>{{user.name}}</span></li>
-      <li>Address: <span>{{user.address}}</span></li>
-      <li>Phone Number: <span> {{user.phoneNumber}}</span></li>
-      <li>Email: <span> {{user.email}}</span></li>
-      <li>All Pets Pawprint: <span> {{user.pets}}</span></li>
-    </ul>
-  </div>
-  <div class="col-md-6">
-    <ul>
-      <li><h4>Pet Name:</h4><span>{{pet.name}}</span></li>
-      <div>
-        <img style="height:auto; width:auto; max-width:100px; max-height:100px" src="assets/june.jpg" alt="Pet_Photo">
-      </div>
-      <li>Birthday: <span>{{pet.birthday}}</span></li>
-      <li>Gender: <span>{{pet.gender}}</span></li>
-      <li>Breed: <span>{{pet.breed}}</span></li>
-      <li>Color: <span>{{pet.color}}</span></li>
-      <li>Weight: <span>{{pet.weight}}</span></li>
-      <li>Spay/Neuter: <span>{{pet.spay}}</span></li>
-      <li>Microchip: <span>{{pet.microChip}}</span></li>
-    </ul>
+  <button class="btn btn-default" ng-click="toggleEdit()">Edit</button>
+
+  <form class="form-horizontal">
+<fieldset>
+
+<!-- Form Name -->
+<legend>User Information</legend>
+
+<!-- Text input-->
+<div class="control-group">
+  <label class="control-label" for="textinput">First Name</label>
+  <div class="controls">
+    <input id="textinput" name="textinput" type="text" placeholder="{{user.firstName}}" class="input-small">
+    
   </div>
 </div>
 
+<!-- Text input-->
+<div class="control-group">
+  <label class="control-label" for="textinput">Last Name</label>
+  <div class="controls">
+    <input id="textinput" name="textinput" type="text" placeholder="{{user.lastName}}" class="input-small">
+    
+  </div>
+</div>
 
+<!-- Text input-->
+<div class="control-group">
+  <label class="control-label" for="textinput">Phone Number</label>
+  <div class="controls">
+    <input id="textinput" name="textinput" type="text" placeholder="{{user.phoneNumber}}" class="input-medium">
+    
+  </div>
+</div>
 
+<!-- Text input-->
+<div class="control-group">
+  <label class="control-label" for="textinput">Email</label>
+  <div class="controls">
+    <input id="textinput" name="textinput" type="text" placeholder="{{user.email}}" class="input-medium">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="control-group">
+  <label class="control-label" for="textinput">Street Address</label>
+  <div class="controls">
+    <input id="textinput" name="textinput" type="text" placeholder="{{user.address}}" class="input-medium">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="control-group">
+  <label class="control-label" for="textinput">City</label>
+  <div class="controls">
+    <input id="textinput" name="textinput" type="text" placeholder="{{user.city}}" class="input-small">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="control-group">
+  <label class="control-label" for="textinput">State</label>
+  <div class="controls">
+    <input id="textinput" name="textinput" type="text" placeholder="{{user.state}}" class="input-mini">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="control-group">
+  <label class="control-label" for="textinput">Zip</label>
+  <div class="controls">
+    <input id="textinput" name="textinput" type="text" placeholder="{{user.zip}}" class="input-small">
+    
+  </div>
+</div>
+
+</fieldset>
+</form>
+</div>
+<div class="col md-6">
+    <button class="btn btn-default" ng-click="toggleEdit()">Edit</button>
+      <form class="form-horizontal">
+    <fieldset>
+
+    <!-- Form Name -->
+    <legend>Pet Info</legend>
+
+    <!-- Text input-->
+    <div class="control-group">
+      <label class="control-label" for="textinput">Name</label>
+      <div class="controls">
+        <input id="textinput" name="textinput" type="text" placeholder="{{pet.name}}" class="input-small">
+        
+      </div>
+    </div>
+
+    <!-- Text input-->
+    <div class="control-group">
+      <label class="control-label" for="textinput">Birthday</label>
+      <div class="controls">
+        <input id="textinput" name="textinput" type="text" placeholder="{{pet.birthDay}}" class="input-small">
+        
+      </div>
+    </div>
+
+    <!-- Text input-->
+    <div class="control-group">
+      <label class="control-label" for="textinput">Gender</label>
+      <div class="controls">
+        <input id="textinput" name="textinput" type="text" placeholder="{{pet.gender}}" class="input-mini">
+        
+      </div>
+    </div>
+
+    <!-- Text input-->
+    <div class="control-group">
+      <label class="control-label" for="textinput">Breed</label>
+      <div class="controls">
+        <input id="textinput" name="textinput" type="text" placeholder="{{pet.breed}}" class="input-medium">
+        
+      </div>
+    </div>
+
+    <!-- Text input-->
+    <div class="control-group">
+      <label class="control-label" for="textinput">Color</label>
+      <div class="controls">
+        <input id="textinput" name="textinput" type="text" placeholder="{{pet.color}}" class="input-medium">
+        
+      </div>
+    </div>
+
+    <!-- Text input-->
+    <div class="control-group">
+      <label class="control-label" for="textinput">Weight</label>
+      <div class="controls">
+        <input id="textinput" name="textinput" type="text" placeholder="{{pet.weight}}" class="input-small">
+        
+      </div>
+    </div>
+
+    <!-- Text input-->
+    <div class="control-group">
+      <label class="control-label" for="textinput">Spay/Neuter Status</label>
+      <div class="controls">
+        <input id="textinput" name="textinput" type="text" placeholder="{{user.neuter}}" class="input-mini">
+        
+      </div>
+    </div>
+
+    <!-- Text input-->
+    <div class="control-group">
+      <label class="control-label" for="textinput">Microchip #</label>
+      <div class="controls">
+        <input id="textinput" name="textinput" type="text" placeholder="{{user.microChip}}" class="input-medium">
+        
+      </div>
+    </div>
+
+    </fieldset>
+    </form>
+</div>
+</div>

@@ -36,3 +36,6 @@ body {
 .form-control {
   width: 300px;
 }
+.editor {
+  float: right;
+}

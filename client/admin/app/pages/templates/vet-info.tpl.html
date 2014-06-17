@@ -1,15 +1,143 @@
 <div>
-  <ul>
-    <li>Practice Name: <span>{{pract.practiceName}}</span></li>
-    <li>Address: <span>{{pract.address}}</span></li>
-    <li>Phone Number: <span>{{pract.phoneNumber}}</span></li>
-    <li>Email: <span>{{pract.email}}</span></li>
-  </ul>
-  <hr>
-  <ul>
-    <li>Veterinarian Name: <span>{{vet.vetName}}</span></li>
-    <li>Phone Number: <span>{{vet.phoneNumber}}</span></li>
-    <li>Email: <span>{{vet.email}}</span></li>
-    <li>VetID: <span>{{vet.vetID}}</span></li>
-  </ul>
+  <div class="col-md-6">
+  <button class="btn btn-default" ng-click="toggleEdit()">Edit</button>
+
+  <form class="form-horizontal">
+<fieldset>
+
+<!-- Form Name -->
+<legend>Practice Info</legend>
+
+<!-- Text input-->
+<div class="control-group">
+  <label class="control-label" for="textinput">Practice</label>
+  <div class="controls">
+    <input id="textinput" name="textinput" type="text" placeholder="{{pract.practiceName}}" class="input-medium">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="control-group">
+  <label class="control-label" for="textinput">Website</label>
+  <div class="controls">
+    <input id="textinput" name="textinput" type="text" placeholder="{{pract.website}}" class="input-medium">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="control-group">
+  <label class="control-label" for="textinput">Email</label>
+  <div class="controls">
+    <input id="textinput" name="textinput" type="text" placeholder="{{pract.email}}" class="input-medium">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="control-group">
+  <label class="control-label" for="textinput">Phone number</label>
+  <div class="controls">
+    <input id="textinput" name="textinput" type="text" placeholder="{{pract.phoneNumber}}" class="input-medium">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="control-group">
+  <label class="control-label" for="textinput">Street Address</label>
+  <div class="controls">
+    <input id="textinput" name="textinput" type="text" placeholder="{{pract.address}}" class="input-large">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="control-group">
+  <label class="control-label" for="textinput">City</label>
+  <div class="controls">
+    <input id="textinput" name="textinput" type="text" placeholder="{{pract.city}}" class="input-small">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="control-group">
+  <label class="control-label" for="textinput">State</label>
+  <div class="controls">
+    <input id="textinput" name="textinput" type="text" placeholder="{{pract.state}}" class="input-mini">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="control-group">
+  <label class="control-label" for="textinput">Zip</label>
+  <div class="controls">
+    <input id="textinput" name="textinput" type="text" placeholder="{{pract.zip}}" class="input-mini">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="control-group">
+  <label class="control-label" for="textinput">Preferred Contact</label>
+  <div class="controls">
+    <input id="textinput" name="textinput" type="text" placeholder="{{pract.contact}}" class="input-medium">
+    
+  </div>
+</div>
+
+</fieldset>
+</form>
+</div>
+<div class="col-md-6">
+  <button class="btn btn-default" ng-click="toggleEdit()">Edit</button>
+
+  <form class="form-horizontal">
+<fieldset>
+
+<!-- Form Name -->
+<legend>Vet Info</legend>
+
+<!-- Text input-->
+<div class="control-group">
+  <label class="control-label" for="textinput">Name</label>
+  <div class="controls">
+    <input id="textinput" name="textinput" type="text" placeholder="{{vet.vetName}}" class="input-medium">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="control-group">
+  <label class="control-label" for="textinput">Title</label>
+  <div class="controls">
+    <input id="textinput" name="textinput" type="text" placeholder="{{vet.title}}" class="input-medium">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="control-group">
+  <label class="control-label" for="textinput">Phone number</label>
+  <div class="controls">
+    <input id="textinput" name="textinput" type="text" placeholder="{{vet.phoneNumber}}" class="input-medium">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="control-group">
+  <label class="control-label" for="textinput">Phone number</label>
+  <div class="controls">
+    <input id="textinput" name="textinput" type="text" placeholder="{{vet.email}}" class="input-medium">
+    
+  </div>
+</div>
+
+</fieldset>
+</form>
+   
 </div>
