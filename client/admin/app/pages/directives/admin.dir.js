@@ -4,24 +4,30 @@ angular.module('admin.pages.directives')
 
   .directive('vetInfo', function () {
     return {restrict: 'AE',
+     scope: false,
      replace: 'true',
-     template: '<h3>Vet Info Directive!!</h3>'};
+     templateUrl: 'app/pages/templates/vet-info.tpl.html'
+   };
   })
 
   .directive('userInfo', function () {
     return {restrict: 'AE',
+      scope: false,
       replace: 'true',
-      template: '<h3>Customer Info Directive!!</h3>'};
+      templateUrl: 'app/pages/templates/user-info.tpl.html'
+    };
   })
 
   .directive('vaccRecord', function () {
     return {restrict: 'AE',
+      scope: false,
       replace: 'true',
-      template: '<h3>Vaccine Records Directive!!</h3>'};
+      templateUrl: 'app/pages/templates/vacc-record.tpl.html'};
   })
 
   .directive('contactHist', function () {
     return {restrict: 'AE',
+    scope: false,
     replace: 'true',
-    template: '<h3>Contact History Directive!!</h3>'};
+    templateUrl: 'app/pages/templates/contact-hist.tpl.html'};
   });
