@@ -26,43 +26,83 @@ var testCallback = function(res, expect){
   }
 };
 
-describe('User /user', function() {
+describe('/user post requests', function() {
   describe('/:id', function() {
-    // beforeEach(function(done) {
-    //   // create database entries
-    //   var userid = '12345';
-    //   var userdata = {
-    //     id : '12345',
-    //     email : 'apple@hackreactor.com',
-    //   };
-    //   done();
-    // });
-
-    // it('get on /user/:id', function(done){
-    //   var reqPath = '/user/' + userid;
-    //   testPath(reqPath, 'get', 200, done, userdata);
-    // });
-
-    it('post on /user', function(done){
+    xit('post on /user', function(done){
       request(app)
         .post('/user')
         .send({
-          email: 'yolo@yolo.com',
+          email: 'apple@yolo.com',
           firstName: 'apple'
         })
-        .expect(200)
+        .expect(201)
         .end(done);
     });
 
     it('post on /user/:id/pet', function(done){
+      request(app)
+        .post('/user/2/pet')
+        .send({
+          name: 'apple3',
+        })
+        .expect(201)
+        .end(done);
+    });
+
+    xit('post on /user/vet', function(done){
+      request(app)
+        .post('/user/vet')
+        .send({
+          practiceName: 'appleVet',
+        })
+        .expect(201)
+        .end(done);
+    });
+
+    xit('post on /vet', function(done){
+      request(app)
+        .post('/user/:userid/pet/:petid/request')
+        .send({
+          vet_id: 1,
+        })
+        .expect(201)
+        .end(done);
+    });
+  }); 
+});
+
+describe('/user put requests', function() {
+  xit('put', function(done){
     request(app)
-      .post('/user/1/pets')
+      .put('/user/1')
       .send({
-        name: 'apple',
+        email: 'applechanged@yolo.com',
+        firstName: 'apple'
       })
       .expect(200)
       .end(done);
-    });
+  });
 
-  }); 
+  xit('put', function(done){
+    request(app)
+      .put('/user/1/pet/1')
+      .send({
+        name: 'apple2',
+        gender: 'F'
+      })
+      .expect(200)
+      .end(done);
+  });
+});
+
+xdescribe('/admin post requests', function() {
+  it('post on /admin/:adminid/request/:requestid/vaccine', function(done){
+    request(app)
+      .post('/admin/1/request/1/vaccine')
+      .send([{
+        vaccine_id : 1,
+      }, {vaccine_id : 1}])
+      .expect(201)
+      .end(done);
+  });
 });

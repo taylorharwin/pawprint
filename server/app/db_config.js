@@ -45,7 +45,7 @@ db.knex.schema.hasTable('user_pet').then(function(exists) {
       join.increments('id').primary();
       join.integer('user_id');
       join.integer('pet_id');
-      join.timestamps();
+      // join.timestamps();
     }).then(function (table) {
       console.log('Created Table', table);
     });
@@ -108,6 +108,7 @@ db.knex.schema.hasTable('request').then(function(exists) {
       request.integer('user_id');
       request.integer('pet_id');
       request.integer('vet_id');
+      request.string('status', 20);
       request.timestamps();
     }).then(function (table) {
       console.log('Created Table', table);
