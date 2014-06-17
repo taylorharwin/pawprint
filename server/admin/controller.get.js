@@ -12,27 +12,46 @@ var db           = require('../app/db_config.js');
     Q            = require('q');
 
 var getRequests = function(req, res) {
-
+  new Request().fetchAll()
+    .then(function(requests) {
+      res.send(200, requests);
+    });
 };
 
 var getRequest = function(req, res) {
   var requestid = req.params.requestid;
 
+  new Request({id:requestid}).fetch()
+    .then(function(request) {
+      res.send(200, request);
+    });
 };
 
 var getPet = function(req, res) {
   var petid = req.params.petid;
 
+  new Pet({id:petid}).fetch()
+    .then(function(request) {
+      res.send(200, request);
+    });
 };
 
 var getUser = function(req, res) {
   var userid = req.params.userid;
 
+  new User({id:userid}).fetch()
+    .then(function(request) {
+      res.send(200, request);
+    });
 };
 
 var getVet = function(req, res) {
   var vetid = req.params.vetid;
 
+  new Vet({id:vetid}).fetch()
+    .then(function(request) {
+      res.send(200, request);
+    });
 };
 
 var getVetContacts = function(req, res) {
@@ -52,7 +71,7 @@ var getLogs = function(req, res) {
 
 var getPDFs = function(req, res) {
   var requestid = req.params.requestid;
-  
+
 };
 
 
