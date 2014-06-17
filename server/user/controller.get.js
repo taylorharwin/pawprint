@@ -7,8 +7,6 @@ var User = require('../app/models/user.js'),
     db = require('../app/db_config.js'),
     Q    = require('q');
 
-// TODO: validations for field length/type
-
 // var getPet = function(req, res) {
 //   // doesn't take into account vaccines
 //   var userid = req.userid;
@@ -28,44 +26,38 @@ var User = require('../app/models/user.js'),
 // // pet belongs to this userid
 
 var getUser = function(req, res) {
-  var userid = req.userid;
+  var userid = req.params.userid;
   
-
-  db.knex('user_pet')
-    .join('user', 'user.id', '=', 'user_pet.userid')
-    .select()
-
-  // new User({id: userid}).fetch().then(function(found) {
-  //   if (found) {
-  //     res.send(200, found);
-  //   }
-  // });
+  User.forge({id: userid}).fetch().then(function(user){
+    res.send(200, user);
+  });
 };
 
-// var getRequest = function(req, res) {
-//   var userid = req.userid;
-//   var petid = req.petid;
-//   var request = req.body;
+var getPets = function(req, res) {
+  var userid = req.params.userid;
 
-//   var request = new Request(function(newRequest) {
-//     Requests.add(newRequest);
-//     new Pet({id: petid}).fetch().then(function(found) {
-//       if (found) {
-//         newRequest.belongsTo(found);
-//       }
-//       new User({id: userid}).fetch().then(function(found) {
-//         if (found) {
-//           newRequest.belongsTo(found);
-//         }
-//         res.send(200, newRequest);
-//       });
-//     });
-//   });
+  db.knex('user_pet')
+    .join('pet', 'user_pet.pet_id', '=', 'pet.id')
+    .where('user_pet.user_id', userid)
+    .select()
+    .then(function(pets) {
+      res.send(200, pets);
+    });
+};
 
-// };
+var getRequests = function(req, res) {
+  var userid = req.params.userid;
+  
+  db.knex('request')
+    .where('user_id', userid)
+    .select()
+    .then(function(requests) {
+      res.send(200, requests);
+    });
+};
 
-// module.exports = exports = {
-//   getUser : getUser, 
-//   getPet : getPet,
-//   getRequest : getRequest
-// };
+module.exports = exports = {
+  getUser : getUser, 
+  getPets : getPets,
+  getRequests : getRequests
+};

@@ -21,12 +21,12 @@ module.exports = exports = function (router) {
   router.route('/user/:userid/pet/:petid/request/:requestid')
     .delete(controllerDelete.deleteRequest);
 
-  // router.route('/:userid')
-  //   .get(controllerGet.getUser);
-  // router.route('/:userid/pets/:petid')
-  //   .get(controllerGet.getPet);
-  // router.route('/:userid/pets/:petid/request/:requestid')
-  //   .get(controllerGet.getRequest);
+
+  router.route('/:userid')
+    .get(controllerGet.getUser);
+  router.route('/:userid/pets')
+    .get(controllerGet.getPets);
+  router.route('/:userid/requests')
+    .get(controllerGet.getRequests);
 };
 
-// /user/:userid/pet/:petid/request/:requestid
