@@ -7,24 +7,6 @@ var User = require('../app/models/user.js'),
     db = require('../app/db_config.js'),
     Q    = require('q');
 
-// var getPet = function(req, res) {
-//   // doesn't take into account vaccines
-//   var userid = req.userid;
-//   var pet = new Pet(req.body); // does this work?
-//   // 
-//   pet.save().then(function(newPet) {
-//     Pets.add(newPet);
-//     new User({id: userid}).fetch().then(function(found) {
-//       if (found) {
-//         newPet.belongsTo(found);
-//       }
-//       res.send(200, newPet);
-//     });
-//   });
-// };
-
-// // pet belongs to this userid
-
 var getUser = function(req, res) {
   var userid = req.params.userid;
   
