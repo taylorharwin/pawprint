@@ -28,5 +28,7 @@ module.exports = exports = function (router) {
     .get(controllerGet.getPets);
   router.route('/:userid/requests')
     .get(controllerGet.getRequests);
+  router.route('/:userid/pet/:petid/vaccines')
+    .get(controllerGet.getVaccines);
 };
 

@@ -7,24 +7,6 @@ var User = require('../app/models/user.js'),
     db = require('../app/db_config.js'),
     Q    = require('q');
 
-// var getPet = function(req, res) {
-//   // doesn't take into account vaccines
-//   var userid = req.userid;
-//   var pet = new Pet(req.body); // does this work?
-//   // 
-//   pet.save().then(function(newPet) {
-//     Pets.add(newPet);
-//     new User({id: userid}).fetch().then(function(found) {
-//       if (found) {
-//         newPet.belongsTo(found);
-//       }
-//       res.send(200, newPet);
-//     });
-//   });
-// };
-
-// // pet belongs to this userid
-
 var getUser = function(req, res) {
   var userid = req.params.userid;
   
@@ -56,8 +38,40 @@ var getRequests = function(req, res) {
     });
 };
 
+var getVaccines = function(req, res) {
+  var userid = req.params.userid;
+  var petid = req.params.petid;
+  
+  // check if user has permissions for this pet
+  db.knex('user_pet')
+    .where({
+      user_id: userid,
+      pet_id: petid,
+    })
+    .select()
+    .then(function(found) {
+      if(found.length === 0) {
+        res.send(401, 'Not Authorized');
+        throw new Error('Not Authorized');
+      }
+    })
+    // if they own the pet, query pet-vaccine table with petid
+    .then(function() {
+      db.knex('pet_vaccine')
+        .where('pet_id', petid)
+        .select()
+        .then(function(vaccines) {
+          res.send(200, vaccines);
+        });
+    })
+    .catch(function(err) {
+      console.error(err);
+    });
+};
+
 module.exports = exports = {
   getUser : getUser, 
   getPets : getPets,
-  getRequests : getRequests
+  getRequests : getRequests,
+  getVaccines : getVaccines
 };
