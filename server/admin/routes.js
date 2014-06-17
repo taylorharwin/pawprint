@@ -1,4 +1,5 @@
 var controllerCreate = require('./controller.create.js');
+var controllerGet = require('./controller.get.js');
 
 module.exports = exports = function (router) {
   // create admin route
