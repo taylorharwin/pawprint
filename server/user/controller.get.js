@@ -38,8 +38,40 @@ var getRequests = function(req, res) {
     });
 };
 
+var getVaccines = function(req, res) {
+  var userid = req.params.userid;
+  var petid = req.params.petid;
+  
+  // check if user has permissions for this pet
+  db.knex('user_pet')
+    .where({
+      user_id: userid,
+      pet_id: petid,
+    })
+    .select()
+    .then(function(found) {
+      if(found.length === 0) {
+        res.send(401, 'Not Authorized');
+        throw new Error('Not Authorized');
+      }
+    })
+    // if they own the pet, query pet-vaccine table with petid
+    .then(function() {
+      db.knex('pet_vaccine')
+        .where('pet_id', petid)
+        .select()
+        .then(function(vaccines) {
+          res.send(200, vaccines);
+        });
+    })
+    .catch(function(err) {
+      console.error(err);
+    });
+};
+
 module.exports = exports = {
   getUser : getUser, 
   getPets : getPets,
-  getRequests : getRequests
+  getRequests : getRequests,
+  getVaccines : getVaccines
 };
