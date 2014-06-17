@@ -1,16 +1,20 @@
 <div class="Aligner">
   <div class="Aligner-item">
     <h2>Signup page</h2>
-    <form role="form">
+    <form ng-submit='createUser()' role="form">
+
       <div class="form-group">
         <label for="exampleInputEmail1">Email address</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="apple@hackreactor.com">
+        <input ng-model='user.email' type="email" class="form-control" placeholder="apple@hackreactor.com">
       </div>
+
       <div class="form-group">
         <label for="exampleInputPassword1">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="woofwoof">
+        <input ng-model='user.password' type="password" class="form-control" placeholder="woofwoof">
       </div>
-      <button type="submit" class="btn btn-default">SIGNUP</button>
+
+      <button ui-sref='app.main' type="submit" class="btn btn-default">SIGNUP</button>
+
     </form>
   </div>
 </div>
