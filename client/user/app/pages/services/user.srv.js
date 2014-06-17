@@ -6,7 +6,6 @@ angular.module('user.pages.services')
 
   .factory('UserFactory', function (Restangular, $http){
 
-    var baseUrl = 'http://127.0.0.1:8000/';
     var config = {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -16,8 +15,9 @@ angular.module('user.pages.services')
     //@TODO test all the functions in this factory
     //@TODO use these functions to request API:
     function setNewUser (data) {
-      var url = baseUrl + 'user';
-      return $http.post(url, data, config);
+      $http.post('/user', data, config).success(function(res){
+        return res.id;
+      });
     }
 
     function setNewUserPet (data) {
