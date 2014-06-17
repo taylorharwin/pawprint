@@ -1,12 +1,6 @@
 var db = require('../app/db_config.js')
-    User = require('../app/models/user.js'),
-    Users = require('../app/collections/users.js'),
-    Pet = require('../app/models/pet.js'),
-    Pets = require('../app/collections/pets.js'),
     Request = require('../app/models/request.js'),
     Requests = require('../app/collections/requests.js'),
-    Vet = require('../app/models/vet.js'),
-    Vets = require('../app/collections/vets.js'),
     Pet_Vaccine = require('../app/models/pet_vaccine.js'),
     Pet_Vaccines = require('../app/collections/pet_vaccines.js'),
     Q    = require('q');
@@ -21,6 +15,7 @@ var createVaccine = function(req, res) {
       if (request) {
         // insert pet_id into vaccine information
         for (var i = 0; i < vaccines.length; i++) {
+          // check if this works
           vaccines[i].pet_id = request.attributes.pet_id;
         }
         // Bookshelf syntax for inserting a collection of vaccines
