@@ -16,35 +16,43 @@ var getRequests = function(req, res) {
 };
 
 var getRequest = function(req, res) {
+  var requestid = req.params.requestid;
 
 };
 
 var getPet = function(req, res) {
+  var petid = req.params.petid;
 
 };
 
 var getUser = function(req, res) {
+  var userid = req.params.userid;
 
 };
 
 var getVet = function(req, res) {
+  var vetid = req.params.vetid;
 
 };
 
 var getVetContacts = function(req, res) {
+  var vetid = req.params.vetid;
 
 };
 
 var getVaccines = function(req, res) {
+  var requestid = req.params.requestid;
 
 };
 
 var getLogs = function(req, res) {
+  var requestid = req.params.requestid;
 
 };
 
 var getPDFs = function(req, res) {
-
+  var requestid = req.params.requestid;
+  
 };
 
 
