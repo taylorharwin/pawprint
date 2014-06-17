@@ -1,8 +1,6 @@
-'use strict'
-
-angular.module('user.common.services')
+angular.module('user.common.services');
   
-  //inject lowdash
-  .factory('_', function () {
-    return window._;
-  });
+  // //inject lowdash
+  // .factory('_', function () {
+  //   return window._;
+  // });
