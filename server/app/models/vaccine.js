@@ -5,7 +5,10 @@ var Pet_Vaccine = require('./pet_vaccine.js');
 
 var Vaccine = db.Model.extend({
   tableName: 'vaccine',
-  hasTimestamps: true
+  hasTimestamps: true,
+  pet_vaccine: function(){
+    return this.belongsTo(Pet_Vaccine);
+  }
 });
 
 module.exports = Vaccine;
