@@ -25,7 +25,7 @@ module.exports = exports = function (router) {
     .get(Get.getRequests);
   router.route('/:userid/pet/:petid/request')
     .post(Create.createRequest);
-  router.route('/user/:userid/pet/:petid/request/:requestid')
+  router.route('/:userid/pet/:petid/request/:requestid')
     .delete(Delete.deleteRequest);
   
   router.route('/vet')
