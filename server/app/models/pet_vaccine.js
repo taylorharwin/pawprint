@@ -6,7 +6,7 @@ var Request = require('./request.js');
 var Pet = db.Model.extend({
   tableName: 'pet_vaccine',
   hasTimestamps: true,
-  request: function() { 
+  request: function() {
     return this.belongsTo(Request);
   },
   pet: function() {

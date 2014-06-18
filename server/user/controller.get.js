@@ -70,7 +70,7 @@ var getVaccines = function(req, res) {
 };
 
 module.exports = exports = {
-  getUser : getUser, 
+  getUser : getUser,
   getPets : getPets,
   getRequests : getRequests,
   getVaccines : getVaccines

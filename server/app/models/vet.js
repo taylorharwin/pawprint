@@ -12,7 +12,7 @@ var Vet = db.Model.extend({
   user: function() {
     return this.hasMany(User);
   },
-  vetContact: function() { 
+  vetContact: function() {
     return this.hasMany(VetContact);
   }
 });

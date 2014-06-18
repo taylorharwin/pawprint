@@ -1,4 +1,4 @@
-var db = require('../app/db_config.js')
+var db = require('../app/db_config.js'),
     Request = require('../app/models/request.js'),
     Requests = require('../app/collections/requests.js'),
     Pet_Vaccine = require('../app/models/pet_vaccine.js'),

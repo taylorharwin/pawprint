@@ -54,7 +54,7 @@ var createVet = function(req, res) {
 };
 
 module.exports = exports = {
-  createUser : createUser, 
+  createUser : createUser,
   createPet : createPet,
   createRequest : createRequest,
   createVet : createVet

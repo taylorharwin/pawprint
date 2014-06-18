@@ -24,7 +24,7 @@ db.knex.schema.hasTable('user').then(function(exists) {
       user.string('firstName', 50);
       user.string('lastName', 50);
       user.string('password', 255);
-      user.string('salt', 255); 
+      user.string('salt', 255);
       user.string('streetAddress', 100);
       user.string('city', 100);
       user.string('state', 2);
@@ -60,7 +60,7 @@ db.knex.schema.hasTable('pet').then(function(exists) {
       pet.date('birthdate');
       pet.string('gender', 1);
       pet.string('breed', 255);
-      pet.string('color', 50); 
+      pet.string('color', 50);
       pet.integer('weight');
       pet.boolean('neuter');
       pet.string('microchip', 255);
