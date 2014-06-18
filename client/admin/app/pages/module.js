@@ -23,7 +23,7 @@ angular.module('admin.pages')
 
     .state('app', {
       abstract: true,
-      url: '/app',
+      url: '/admin/app',
       template: '<div ui-view class="realm"></div>'
     })
 

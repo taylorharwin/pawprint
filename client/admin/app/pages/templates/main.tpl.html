@@ -18,13 +18,13 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="request in requests" ng-click='setReqAndTransition(request.requestID, request.statusCode)'>
-					<td>{{request.requestID}}</td>
+			<tr ng-repeat="request in requests" ng-click='setReqAndTransition(request.id, request.status)'>
+					<td>{{request.id}}</td>
 					<td>{{request.user}}</td>
 					<td>{{request.pet}}</td>
 					<td>{{request.dateCreated}}</td>
 					<td>{{request.dateLastModified}}</td>
-					<td><div ng-class="setClassOnRequest('{{request.statusCode}}')">{{request.statusCode}}</div></td>
+					<td><div ng-class="setClassOnRequest('{{request.status}}')">{{request.status}}</div></td>
 			</tr>
 		</tbody>
 	</table>
