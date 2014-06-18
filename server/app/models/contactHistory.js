@@ -1,6 +1,7 @@
 var db = require('../db_config.js');
 var Request = require('./request.js');
 var Admin = require('./admin.js');
+var Vet_Contact = require('./vet_contact.js');
 
 var ContactHistory = db.Model.extend({
   tableName: 'contactHistory',
@@ -10,6 +11,9 @@ var ContactHistory = db.Model.extend({
   },
   admin: function() {
     return this.belongsTo(Admin);
+  },
+  vet_contact: function() {
+    return this.belongsTo(Vet_Contact);
   }
 });
 

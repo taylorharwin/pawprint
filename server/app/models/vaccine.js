@@ -7,7 +7,7 @@ var Vaccine = db.Model.extend({
   tableName: 'vaccine',
   hasTimestamps: true,
   pet_vaccine: function(){
-    return this.belongsTo(Pet_Vaccine);
+    return this.hasMany(Pet_Vaccine);
   }
 });
 
