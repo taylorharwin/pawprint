@@ -15,15 +15,13 @@ module.exports = exports = function (router) {
     .post(controllerCreate.createVet);
 
   router.route('/:userid')
-    .put(controllerPut.putUser);
+    .put(controllerPut.putUser)
+    .get(controllerGet.getUser);
   router.route('/:userid/pet/:petid')
     .put(controllerPut.putPet);
   router.route('/user/:userid/pet/:petid/request/:requestid')
     .delete(controllerDelete.deleteRequest);
 
-
-  router.route('/:userid')
-    .get(controllerGet.getUser);
   router.route('/:userid/pets')
     .get(controllerGet.getPets);
   router.route('/:userid/requests')

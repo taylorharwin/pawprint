@@ -1,12 +1,9 @@
 var controllerCreate = require('./controller.create.js');
 var controllerGet = require('./controller.get.js');
+var controllerPut = require('./controller.put.js');
 
 module.exports = exports = function (router) {
   // create admin route
-  router.route('/:adminid/request/:requestid/vaccine')
-    .post(controllerCreate.createVaccine);
-
-
   router.route('/:adminid/requests')
     .get(controllerGet.getRequests);
   router.route('/:adminid/request/:requestid')
@@ -25,6 +22,17 @@ module.exports = exports = function (router) {
     .get(controllerGet.getLogs);
   router.route('/:adminid/request/:requestid/pdfs')
     .get(controllerGet.getPDFs);
+  router.route('/:adminid/request/:requestid/contact')
+    .post(controllerCreate.createContact);
+  router.route('/:adminid/vet/:vetid/vetcontact')
+    .post(controllerCreate.createVetContact);
+  router.route('/:adminid/request/:requestid/pdf')
+    .post(controllerCreate.createPdf);
+  router.route('/:adminid/request/:requestid/vaccine')
+    .post(controllerCreate.createVaccine)
+    .put(controllerPut.putVaccine);
+  router.route('/:adminid/request/:requestid/contact/:contactid')
+    .put(controllerPut.putContact);
 };
 
 // PUT /admin/:adminid/request/:requestid/contact/:id  update contact log  {contactID: {contact type: xxx, admin: xxx, ...}}

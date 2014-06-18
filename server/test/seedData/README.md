@@ -9,6 +9,8 @@ copy "user" from 'dirname/pawprint/server/test/seedData/user.csv' delimiters ','
 copy "request" from 'dirname/pawprint/server/test/seedData/request.csv' delimiters ',' csv;
 copy "vaccine" from 'dirname/pawprint/server/test/seedData/vaccine.csv' delimiters ',' csv;
 copy "vet" from 'dirname/pawprint/server/test/seedData/vet.csv' delimiters ',' csv;
-
-
+copy "admin" from 'dirname/pawprint/server/test/seedData/admin.csv' delimiters ',' csv;
+copy "contactHistory" from 'dirname/pawprint/server/test/seedData/contactHistory.csv' delimiters ',' csv;
+copy "pdfRecord" from 'dirname/pawprint/server/test/seedData/pdfRecord.csv' delimiters ',' csv;
+copy "vetContact" from 'dirname/pawprint/server/test/seedData/vetContact.csv' delimiters ',' csv;
 
