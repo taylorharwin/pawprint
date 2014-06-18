@@ -35,12 +35,6 @@ angular.module('admin.pages.directives')
       scope: true,
       replace: 'true',
       templateUrl: 'app/pages/templates/vacc-record.tpl.html',
-      link: function (scope) {
-        scope.editingVacc = true;
-        scope.editVacc = function () {
-          scope.editingVacc = !scope.editingVacc;
-        };
-      }
    };
   })
 
@@ -50,4 +44,18 @@ angular.module('admin.pages.directives')
     replace: 'true',
     templateUrl: 'app/pages/templates/contact-hist.tpl.html',
    };
+  })
+
+  .directive('editVacc', function () {
+    return {restrict: 'AE',
+    scope: true,
+    replace: 'true',
+    templateUrl: 'app/pages/templates/edit-vacc.tpl.html',
+    link: function (scope) {
+      scope.editingVacc = true;
+      scope.editVacc = function () {
+      scope.editingVacc = !scope.editingVacc;
+      };
+    }
+  };
   });

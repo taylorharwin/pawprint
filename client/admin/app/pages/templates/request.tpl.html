@@ -11,7 +11,7 @@
   				 <span class="dropdown">
       				<button  class="btn btn-large btn-default dropdown-toggle">Update Status<span class="caret"></span></button>
 						    <ul class="dropdown-menu">
-						      <li ng-repeat="statusCode in statusCodes">{{statusCode}}</li>
+						      <li ng-repeat="statusCode in statusCodes"><a href="#">{{statusCode}}</a></li>
 						    </ul>
   				 </span>
 			    </div>
@@ -53,20 +53,7 @@
 			</div>
 			<div class="panel-body">
 				<div class="col-md-3">
-					<div class="btn-group" dropdown is-open="status.isopen">
-  				 <span class="dropdown">
-      				<button  class="btn btn-large btn-default dropdown-toggle">Add an existing vaccine<span class="caret"></span></button>
-						    <ul class="dropdown-menu">
-						      <li ng-repeat="vaccine in vaccines">{{vaccine}}</li>
-						    </ul>
-  				 </span>
-  				 <form>
-  				 	<legend>Add a Vaccine</legend>
-							Vaccine: <input type="text" name="firstname" placeholder="{{vaccine.name}}"><br>
-							Date Administered: <input type="text" name="lastname" placeholder="{{vaccine.date}}"><br>
-							Expiration: <input type="text" name="expiration" placeholder="{{vaccine.expiration}}"><br>
-						</form>
-			    </div>
+					<edit-vacc></edit-vacc>
 				</div>
 
 				<div class="col-md-9">

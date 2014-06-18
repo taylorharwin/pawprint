@@ -1,0 +1,14 @@
+<div class="btn-group" dropdown is-open="status.isopen">
+   <span class="dropdown">
+      <button  class="btn btn-large btn-default dropdown-toggle">Add an existing vaccine<span class="caret"></span></button>
+        <ul class="dropdown-menu">
+          <li ng-repeat="vaccine in vaccines"><a href="#">{{vaccine}}</a></li>
+        </ul>
+   </span>
+   <form>
+    <legend>Add a Vaccine</legend>
+      Vaccine: <input type="text" name="firstname" placeholder="{{vaccine.name}}"><br>
+      Date Administered: <input type="text" name="lastname" placeholder="{{vaccine.date}}"><br>
+      Expiration: <input type="text" name="expiration" placeholder="{{vaccine.expiration}}"><br>
+    </form>
+</div>

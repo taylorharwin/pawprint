@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('admin.pages.controllers')
-  .controller('MainCtrl', function ($scope, reqIDFactory, $state) {
+  .controller('MainCtrl', function ($scope, reqIDFactory, $state, $http) {
 
     $scope.setClassOnRequest = reqIDFactory.setClassforStatus;
 
@@ -28,4 +28,16 @@ angular.module('admin.pages.controllers')
       reqIDFactory.setRequestStatus(status);
       $state.go('^.request');
     };
+
+    $scope.getAllRequests = function (func) {
+      $http.get('/admin/requests')
+      .success(function (json) {
+        console.log(json);
+        $scope.requests = json;
+        if (func) {
+          func(json);
+        }
+      });
+    };
+
   });
