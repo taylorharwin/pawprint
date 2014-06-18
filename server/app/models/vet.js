@@ -10,7 +10,7 @@ var Vet = db.Model.extend({
     return this.hasMany(Request);
   },
   user: function() {
-    return this.hasMany(User)
+    return this.hasMany(User);
   },
   vetContact: function() { 
     return this.hasMany(VetContact);
