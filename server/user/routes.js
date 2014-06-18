@@ -1,32 +1,32 @@
-var controllerCreate = require('./controller.create.js');
-var controllerGet = require('./controller.get.js');
-var controllerPut = require('./controller.put.js');
-var controllerDelete = require('./controller.delete.js');
+var Create = require('./controller.create.js');
+var Get = require('./controller.get.js');
+var Put = require('./controller.put.js');
+var Delete = require('./controller.delete.js');
 
 module.exports = exports = function (router) {
 
   router.route('/')
-    .post(controllerCreate.createUser);
+    .post(Create.createUser);
   router.route('/:userid/pet')
-    .post(controllerCreate.createPet);
+    .post(Create.createPet);
   router.route('/:userid/pet/:petid/request')
-    .post(controllerCreate.createRequest);
+    .post(Create.createRequest);
   router.route('/vet')
-    .post(controllerCreate.createVet);
+    .post(Create.createVet);
 
   router.route('/:userid')
-    .put(controllerPut.putUser)
-    .get(controllerGet.getUser);
+    .put(Put.putUser)
+    .get(Get.getUser);
   router.route('/:userid/pet/:petid')
-    .put(controllerPut.putPet);
+    .put(Put.putPet);
   router.route('/user/:userid/pet/:petid/request/:requestid')
-    .delete(controllerDelete.deleteRequest);
+    .delete(Delete.deleteRequest);
 
   router.route('/:userid/pets')
-    .get(controllerGet.getPets);
+    .get(Get.getPets);
   router.route('/:userid/requests')
-    .get(controllerGet.getRequests);
+    .get(Get.getRequests);
   router.route('/:userid/pet/:petid/vaccines')
-    .get(controllerGet.getVaccines);
+    .get(Get.getVaccines);
 };
 
