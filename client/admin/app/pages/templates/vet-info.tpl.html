@@ -1,7 +1,7 @@
 <div>
   <div class="col-md-6">
-  <button class="btn btn-default" ng-click="toggleEdit()">Edit</button>
-
+  <button class="btn btn-default" ng-click="editVet()">Edit</button>
+  <button class="btn btn-warning" ng-hide="editingVet">Submit</button>
   <form class="form-horizontal">
 <fieldset>
 
@@ -12,7 +12,7 @@
 <div class="control-group">
   <label class="control-label" for="textinput">Practice</label>
   <div class="controls">
-    <input id="textinput" name="textinput" type="text" placeholder="{{pract.practiceName}}" class="input-medium">
+    <input id="textinput" name="textinput" type="text" placeholder="{{pract.practiceName}}" class="input-medium" ng-readonly="editingVet">
     
   </div>
 </div>
@@ -21,7 +21,7 @@
 <div class="control-group">
   <label class="control-label" for="textinput">Website</label>
   <div class="controls">
-    <input id="textinput" name="textinput" type="text" placeholder="{{pract.website}}" class="input-medium">
+    <input id="textinput" name="textinput" type="text" placeholder="{{pract.website}}" class="input-medium" ng-readonly="editingVet">
     
   </div>
 </div>
@@ -30,7 +30,7 @@
 <div class="control-group">
   <label class="control-label" for="textinput">Email</label>
   <div class="controls">
-    <input id="textinput" name="textinput" type="text" placeholder="{{pract.email}}" class="input-medium">
+    <input id="textinput" name="textinput" type="text" placeholder="{{pract.email}}" class="input-medium" ng-readonly="editingVet">
     
   </div>
 </div>
@@ -39,7 +39,7 @@
 <div class="control-group">
   <label class="control-label" for="textinput">Phone number</label>
   <div class="controls">
-    <input id="textinput" name="textinput" type="text" placeholder="{{pract.phoneNumber}}" class="input-medium">
+    <input id="textinput" name="textinput" type="text" placeholder="{{pract.phoneNumber}}" class="input-medium" ng-readonly="editingVet">
     
   </div>
 </div>
@@ -48,7 +48,7 @@
 <div class="control-group">
   <label class="control-label" for="textinput">Street Address</label>
   <div class="controls">
-    <input id="textinput" name="textinput" type="text" placeholder="{{pract.address}}" class="input-large">
+    <input id="textinput" name="textinput" type="text" placeholder="{{pract.address}}" class="input-large" ng-readonly="editingVet">
     
   </div>
 </div>
@@ -57,7 +57,7 @@
 <div class="control-group">
   <label class="control-label" for="textinput">City</label>
   <div class="controls">
-    <input id="textinput" name="textinput" type="text" placeholder="{{pract.city}}" class="input-small">
+    <input id="textinput" name="textinput" type="text" placeholder="{{pract.city}}" class="input-small" ng-readonly="editingVet">
     
   </div>
 </div>
@@ -66,7 +66,7 @@
 <div class="control-group">
   <label class="control-label" for="textinput">State</label>
   <div class="controls">
-    <input id="textinput" name="textinput" type="text" placeholder="{{pract.state}}" class="input-mini">
+    <input id="textinput" name="textinput" type="text" placeholder="{{pract.state}}" class="input-mini" ng-readonly="editingVet">
     
   </div>
 </div>
@@ -75,7 +75,7 @@
 <div class="control-group">
   <label class="control-label" for="textinput">Zip</label>
   <div class="controls">
-    <input id="textinput" name="textinput" type="text" placeholder="{{pract.zip}}" class="input-mini">
+    <input id="textinput" name="textinput" type="text" placeholder="{{pract.zip}}" class="input-mini" ng-readonly="editingVet">
     
   </div>
 </div>
@@ -84,7 +84,7 @@
 <div class="control-group">
   <label class="control-label" for="textinput">Preferred Contact</label>
   <div class="controls">
-    <input id="textinput" name="textinput" type="text" placeholder="{{pract.contact}}" class="input-medium">
+    <input id="textinput" name="textinput" type="text" placeholder="{{pract.contact}}" class="input-medium" ng-readonly="editingVet">
     
   </div>
 </div>
@@ -93,8 +93,6 @@
 </form>
 </div>
 <div class="col-md-6">
-  <button class="btn btn-default" ng-click="toggleEdit()">Edit</button>
-
   <form class="form-horizontal">
 <fieldset>
 
@@ -105,7 +103,7 @@
 <div class="control-group">
   <label class="control-label" for="textinput">Name</label>
   <div class="controls">
-    <input id="textinput" name="textinput" type="text" placeholder="{{vet.vetName}}" class="input-medium">
+    <input id="textinput" name="textinput" type="text" placeholder="{{vet.vetName}}" class="input-medium" ng-readonly="editingVet">
     
   </div>
 </div>
@@ -114,7 +112,7 @@
 <div class="control-group">
   <label class="control-label" for="textinput">Title</label>
   <div class="controls">
-    <input id="textinput" name="textinput" type="text" placeholder="{{vet.title}}" class="input-medium">
+    <input id="textinput" name="textinput" type="text" placeholder="{{vet.title}}" class="input-medium" ng-readonly="editingVet">
     
   </div>
 </div>
@@ -123,7 +121,7 @@
 <div class="control-group">
   <label class="control-label" for="textinput">Phone number</label>
   <div class="controls">
-    <input id="textinput" name="textinput" type="text" placeholder="{{vet.phoneNumber}}" class="input-medium">
+    <input id="textinput" name="textinput" type="text" placeholder="{{vet.phoneNumber}}" class="input-medium" ng-readonly="editingVet">
     
   </div>
 </div>
@@ -132,7 +130,7 @@
 <div class="control-group">
   <label class="control-label" for="textinput">Phone number</label>
   <div class="controls">
-    <input id="textinput" name="textinput" type="text" placeholder="{{vet.email}}" class="input-medium">
+    <input id="textinput" name="textinput" type="text" placeholder="{{vet.email}}" class="input-medium" ng-readonly="editingVet">
     
   </div>
 </div>
