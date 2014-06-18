@@ -15,7 +15,7 @@ var createUser = function(req, res) {
   // figure out logic for breaking up account creation and user details?
   User.forge(req.body).save().then(function(newUser) {
     Users.add(newUser);
-    res.send(201, newUser);
+    res.send(201, newUser.id);
   });
 };
 
@@ -27,7 +27,7 @@ var createPet = function(req, res) {
     // attaches pet to user through the user_pet table
     User.forge({id: userid}).pet().attach(pet);
     Pets.add(pet);
-    res.send(201, pet);
+    res.send(201, pet.id);
   });
 };
 
@@ -42,14 +42,14 @@ var createRequest = function(req, res) {
   });
   request.save().then(function(newRequest) {
     Requests.add(newRequest);
-    res.send(201, newRequest);
+    res.send(201, newRequest.id);
   });
 };
 
 var createVet = function(req, res) {
   Vet.forge(req.body).save().then(function(newVet) {
     Vets.add(newVet);
-    res.send(201, newVet);
+    res.send(201, newVet.id);
   });
 };
 
