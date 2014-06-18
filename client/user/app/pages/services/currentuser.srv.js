@@ -13,27 +13,27 @@ angular.module('user.pages.services')
       return userId;
     }
 
-    function addPetId (id) {
-      petIds.push(id);
-    }
+    // function addPetId (id) {
+    //   petIds.push(id);
+    // }
 
-    function removePetId (id) {
-      for (var i=0; i<petIds.length; i++) {
-        if (petIds[i] === id) {
-          petIds.splice(i, 1);
-        }
-      }
-    }
+    // function removePetId (id) {
+    //   for (var i=0; i<petIds.length; i++) {
+    //     if (petIds[i] === id) {
+    //       petIds.splice(i, 1);
+    //     }
+    //   }
+    // }
 
-    function getPetIds () {
-      return petIds;
-    }
+    // function getPetIds () {
+    //   return petIds;
+    // }
 
     return {
       setUserId: setUserId,
       getUserId: getUserId,
-      addPetId: addPetId,
-      getPetIds: getPetIds
+      // addPetId: addPetId,
+      // getPetIds: getPetIds
       // removePetId: removePetId,
     };
 
