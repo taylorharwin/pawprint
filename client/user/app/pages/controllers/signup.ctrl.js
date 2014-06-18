@@ -5,8 +5,9 @@ angular.module('user.pages.controllers')
     console.log($scope);
 
     $scope.createUser = function() {
-      var userId = UserFactory.setNewUser($scope.user);
-      CurrentUserFactory.setUserId(userId);
+      UserFactory.setNewUser($scope.user).then(function(res){
+        CurrentUserFactory.setUserId(res.id);
+      });
     };
     
   });
