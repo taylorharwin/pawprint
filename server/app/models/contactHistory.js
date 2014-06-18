@@ -1,7 +1,7 @@
 var db = require('../db_config.js');
 var Request = require('./request.js');
 var Admin = require('./admin.js');
-var Vet_Contact = require('./vet_contact.js');
+var Vet_Contact = require('./vetContact.js');
 
 var ContactHistory = db.Model.extend({
   tableName: 'contactHistory',
