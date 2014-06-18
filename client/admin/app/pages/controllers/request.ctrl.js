@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('admin.pages.controllers')
-  .controller('RequestCtrl', function ($scope, reqIDFactory, statusCodeConst) {
+  .controller('RequestCtrl', function ($scope, reqIDFactory, statusCodeConst, $http) {
 
     $scope.reqID = reqIDFactory.getRequestID();
     $scope.reqStatus = reqIDFactory.getRequestStatus();
@@ -19,12 +19,7 @@ angular.module('admin.pages.controllers')
       isopen: false
     };
 
-    $scope.editing = true;
-
-    $scope.toggleEdit = function () {
-      $scope.editing = !$scope.editing;
-      };
-
+  
 
   });
   
