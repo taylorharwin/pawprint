@@ -7,13 +7,13 @@ var ContactHistory = db.Model.extend({
   tableName: 'contactHistory',
   hasTimestamps: true,
   request: function() {
-    return this.hasOne(Request);
+    return this.belongsTo(Request);
   },
   admin: function() {
-    return this.hasOne(Admin);
+    return this.belongsTo(Admin);
   },
   vet_contact: function() {
-    return this.hasOne(Vet_Contact);
+    return this.belongsTo(Vet_Contact);
   }
 });
 

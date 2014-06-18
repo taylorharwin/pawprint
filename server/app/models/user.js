@@ -13,7 +13,7 @@ var User = db.Model.extend({
     return this.hasMany(Request);
   },
   vet: function() {
-    return this.hasOne(Vet);
+    return this.belongsTo(Vet);
   }
 });
 
