@@ -6,18 +6,16 @@ angular.module('user.pages.services')
 
   .factory('UserFactory', function (Restangular, $http){
 
-    var config = {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      }
-    };
+    // var config = {
+    //   headers: {
+    //     'Content-Type': 'application/x-www-form-urlencoded'
+    //   }
+    // }; 
 
     //@TODO test all the functions in this factory
     //@TODO use these functions to request API:
     function setNewUser (data) {
-      $http.post('/user', data, config).success(function(res){
-        return res.id;
-      });
+      return Restangular.all('user').post(data);
     }
 
     function setNewUserPet (data) {
@@ -58,23 +56,23 @@ angular.module('user.pages.services')
     //==========================================//
     //@NOTE dummy functions returning dummy data//
     //==========================================//
-    function getUser () {
-      return {
-        user: {
-          id: '123',
-          email: 'apple@hackreactor.com',
-          firstName: 'Benjamin',
-          lastName: 'Lee',
-          streetAddress: 'Pineapple Street',
-          city: 'SF',
-          state: 'CA',
-          zip: '41212',
-          phone: '12313131'
-        },
-        pet: ['petId1', 'petId2'],
-        request: ['requestId1', 'requestId1']
-      };
-    }
+    // function getUser () {
+    //   return {
+    //     user: {
+    //       id: '123',
+    //       email: 'apple@hackreactor.com',
+    //       firstName: 'Benjamin',
+    //       lastName: 'Lee',
+    //       streetAddress: 'Pineapple Street',
+    //       city: 'SF',
+    //       state: 'CA',
+    //       zip: '41212',
+    //       phone: '12313131'
+    //     },
+    //     pet: ['petId1', 'petId2'],
+    //     request: ['requestId1', 'requestId1']
+    //   };
+    // }
 
     function getUserPets () {
       return [
