@@ -19,5 +19,12 @@ angular.module('admin.pages.controllers')
       isopen: false
     };
 
+    $scope.editing = true;
+
+    $scope.toggleEdit = function () {
+      $scope.editing = !$scope.editing;
+      };
+
+
   });
   

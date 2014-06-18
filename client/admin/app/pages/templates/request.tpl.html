@@ -21,10 +21,10 @@
 </div>
 
 <div class='row'>
-	<div class="col-md-6">
+	<div class="col-md-4">
      <div class="panel panel-default">
             <div class="panel-heading">
-                <h2 class="panel-title">Veterinarian Information</h2>
+                <h2 class="panel-title">Vet Information 
             </div>
 
             <div class="panel-body">
@@ -32,10 +32,10 @@
             </div>
      </div>
   </div>
-    <div class="col-md-6">
+    <div class="col-md-8">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h2 class="panel-title">User Information</h2>
+                <h2 class="panel-title">User Information 
             </div>
 
             <div class="panel-body">
@@ -49,19 +49,23 @@
 	<div class="col-md-12">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<h2 class="panel-title">Vaccine Information</h2>
+          <h2 class="panel-title">Vaccine Information</h2>
 			</div>
 			<div class="panel-body">
 				<div class="col-md-3">
 					<div class="btn-group" dropdown is-open="status.isopen">
   				 <span class="dropdown">
-      				<button  class="btn btn-large btn-default dropdown-toggle">View all vaccines<span class="caret"></span></button>
+      				<button  class="btn btn-large btn-default dropdown-toggle">Add an existing vaccine<span class="caret"></span></button>
 						    <ul class="dropdown-menu">
 						      <li ng-repeat="vaccine in vaccines">{{vaccine}}</li>
-						      <li class="divider"></li>
-						      <li>Add New Vaccine</li>
 						    </ul>
   				 </span>
+  				 <form>
+  				 	<legend>Add a Vaccine</legend>
+							Vaccine: <input type="text" name="firstname" placeholder="{{vaccine.name}}"><br>
+							Date Administered: <input type="text" name="lastname" placeholder="{{vaccine.date}}"><br>
+							Expiration: <input type="text" name="expiration" placeholder="{{vaccine.expiration}}"><br>
+						</form>
 			    </div>
 				</div>
 
@@ -76,7 +80,9 @@
 	<div class="col-md-12">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<h2 class="panel-title">Contact History</h2>
+        <div>
+        <h2 class="panel-title">Contact History</h2>
+      </div>
 			</div>
 			<div class="panel-body">
 				<contact-hist></contact-hist>
