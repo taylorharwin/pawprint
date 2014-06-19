@@ -1,7 +1,9 @@
+<button ui-sref="^.main" class="btn btn-primary">MAIN PAGE</button>
+
 <div>
   <div class="row">
     <div class="col-md-4 col-md-offset-4">
-      <form ng-submit="save()" class="form-horizontal">
+      <form ng-submit="updateUser()" class="form-horizontal">
         <fieldset>
 
           <!-- Form Name -->
@@ -80,7 +82,7 @@
                 
               </div>
               <div class="pull-right">
-                <button ui-sref="^.main" class="btn btn-primary">CANCEL</button>
+                <button ng-click"deleteUser()" class="btn btn-primary btn-danger">DELETE USER</button>
                 <button type="submit" class="btn btn-primary">UPDATE</button>
               </div>
             </div>
@@ -89,7 +91,9 @@
         </fieldset>
       </form>
 
-      <alert ng-show="updateError" type="danger">Something's wrong here, please try again!</alert>
+      <alert ng-if="updateSuccess" type="success">User profile records updated!</alert>
+
+      <alert ng-if="updateError" type="danger">Something's wrong here, please try again!</alert>
 
     </div>
   </div>
