@@ -5,12 +5,7 @@ angular.module('user.pages.services')
     function checkExpiry (vaccine) {
       var now = Date.now();
       var onemonth = now + 2592000000;
-      // @TODO parse date from received from db to milliseconds
-      // var expiryDate = vaccine.dateExpired;
-      //==========================================//
-      //@NOTE dummy variables returning dummy data//
-      //==========================================// 
-      var expiryDate = now - 2692000000;
+      var expiryDate = new Date(vaccine.dateExpired).getTime();
 
       if (expiryDate > now) {
         return 'active';

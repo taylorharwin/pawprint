@@ -1,19 +1,7 @@
-//=============================================
-//@TODO split into user.srv.js && pet.srv.js
-//=============================================
-
 angular.module('user.pages.services')
 
   .factory('UserFactory', function (Restangular, $http){
 
-    // var config = {
-    //   headers: {
-    //     'Content-Type': 'application/x-www-form-urlencoded'
-    //   }
-    // }; 
-
-    //@TODO test all the functions in this factory
-    //@TODO use these functions to request API:
     function postUserSignup (data) {
       // return Restangular.all('user/signup').post(data);
       return Restangular.all('user').post(data);
@@ -21,8 +9,6 @@ angular.module('user.pages.services')
 
     function postUserLogin (data) {
       // return Restangular.all('user/login').post(data);
-      console.log('inside postUserLogin...');
-      console.log('data', data);
       return Restangular.all('user').post(data);
     }
 
@@ -30,37 +16,31 @@ angular.module('user.pages.services')
       return Restangular.one('user', id).get();
     }
 
-    function getUserPets (id) {
-      return Restangular.one('user', id).all('pets').getList();
+    function deleteUser (id) {
+      return Restangular.one('user', id).remove();
     }
-
-    function getPet (id) {
-      return Restangular.one('pet', id).get();
-    }
-
-    function postPet (data) {
-      return Restangular.all('pet').post(data);
-    }
-
-    // function postPetUpdate (id, status) {
-    //   var request = {
-    //     update: status,
-    //   };
-    //   return Restangular.one('pet', id).post(request);
-    // }
 
     return {
       postUserSignup: postUserSignup,
       postUserLogin: postUserLogin,
       getUser: getUser,
-      getUserPets: getUserPets,
-      getPet: getPet,
-      postPet: postPet
-      // postPetUpdate: postPetUpdate
+      deleteUser: deleteUser
     };
 
   });
 
+
+    // function getUserPets (id) {
+    //   return Restangular.one('user', id).all('pets').getList();
+    // }
+
+    // function getPet (id) {
+    //   return Restangular.one('pet', id).get();
+    // }
+
+    // function postPet (data) {
+    //   return Restangular.all('pet').post(data);
+    // }
 
     // function setNewUserPet (data) {
     //   var url = baseUrl + 'pet';
