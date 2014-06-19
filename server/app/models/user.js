@@ -17,5 +17,4 @@ var User = db.Model.extend({
   }
 });
 
-// console.log(Pet);
 module.exports = exports = db.model('User', User);
