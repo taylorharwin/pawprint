@@ -2,6 +2,7 @@ angular.module('user.pages.controllers')
 
   .controller('MainCtrl', function ($scope, UserFactory, VaccineFactory, CurrentUserFactory) {
     console.log($scope);
+    console.log(CurrentUserFactory.getUserId());
 
     $scope.checkExpiry = VaccineFactory.checkExpiry;
     $scope.userId = CurrentUserFactory.getUserId();
