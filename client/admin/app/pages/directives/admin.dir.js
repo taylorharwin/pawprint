@@ -12,6 +12,14 @@ angular.module('admin.pages.directives')
       scope.editVet = function () {
         scope.editingVet = !scope.editingVet;
       };
+      scope.getStuff(1, 'vet', scope.vetID, function (data) {
+        scope.vetData = data;
+        console.log(scope.vetData);
+      });
+       scope.getStuff(1, 'vet', scope.vetID, function (data) {
+        scope.vetData = data;
+        console.log(scope.vetData);
+      });
     }
    };
   })
@@ -26,6 +34,14 @@ angular.module('admin.pages.directives')
         scope.editUser = function () {
           scope.editingUser = !scope.editingUser;
         };
+        scope.getStuff(1, 'pet', scope.petID, function (data) {
+          scope.petData = data;
+          console.log(scope.petData);
+        });
+        scope.getStuff(1, 'user', scope.userID, function (data) {
+          scope.userData = data;
+          console.log(scope.userData);
+        });
       }
    };
   })
@@ -36,10 +52,10 @@ angular.module('admin.pages.directives')
       replace: 'true',
       templateUrl: 'app/pages/templates/vacc-record.tpl.html',
       link: function (scope) {
-        scope.editingVacc = true;
-        scope.editVacc = function () {
-          scope.editingVacc = !scope.editingVacc;
-        };
+        scope.getStuff(1, 'request', scope.reqID, function (data) {
+          scope.vaccinations = data;
+          console.log(scope.vaccinations);
+        }, 'vaccines');
       }
    };
   })
@@ -49,5 +65,25 @@ angular.module('admin.pages.directives')
     scope: true,
     replace: 'true',
     templateUrl: 'app/pages/templates/contact-hist.tpl.html',
+    link: function (scope) {
+      scope.getStuff(1, 'request', scope.reqID, function (data) {
+        scope.contacts = data;
+        console.log("Here is scope.contacts", scope.contacts);
+      }, 'logs');
+    }
    };
+  })
+
+  .directive('editVacc', function () {
+    return {restrict: 'AE',
+    scope: true,
+    replace: 'true',
+    templateUrl: 'app/pages/templates/edit-vacc.tpl.html',
+    link: function (scope) {
+      scope.editingVacc = true;
+      scope.editVacc = function () {
+        scope.editingVacc = !scope.editingVacc;
+      };
+    }
+  };
   });

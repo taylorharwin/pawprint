@@ -8,6 +8,7 @@ client/user/bower_components
 client/bower_components
 # client/**/*.css
 client/lib
+server/test/seedData/README.md
 
 node_modules/
 

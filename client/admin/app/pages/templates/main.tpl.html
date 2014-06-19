@@ -11,6 +11,7 @@
 			<tr>
 				<th>Request ID</th>
 				<th>User</th>
+				<th>Vet</th>
 				<th>Pet</th>
 				<th>Date Created</th>
 				<th>Date Last Modified</th>
@@ -18,13 +19,14 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="request in requests" ng-click='setReqAndTransition(request.requestID, request.statusCode)'>
-					<td>{{request.requestID}}</td>
-					<td>{{request.user}}</td>
-					<td>{{request.pet}}</td>
-					<td>{{request.dateCreated}}</td>
-					<td>{{request.dateLastModified}}</td>
-					<td><div ng-class="setClassOnRequest('{{request.statusCode}}')">{{request.statusCode}}</div></td>
+			<tr ng-repeat="request in requests" ng-click='setReqAndTransition(request.id, request.vet_id, request.user_id, request.pet_id, request.status)'>
+					<td>{{request.id}}</td>
+					<td>{{request.user_id}}</td>
+					<td>{{request.vet_id}}</td>
+					<td>{{request.pet_id}}</td>
+					<td>{{request.created_at}}</td>
+					<td>{{request.updated_at}}</td>
+					<td><div ng-class="setClassOnRequest('{{request.status}}')">{{request.status}}</div></td>
 			</tr>
 		</tbody>
 	</table>

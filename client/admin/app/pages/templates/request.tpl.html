@@ -1,17 +1,20 @@
 <div class="row">
-	<div class="col-md-6">
+	<div class="col-md-4">
 		<div class="panel panel-default">
-			<h2>Viewing Request: {{reqID}}</h2>
-  		<h2>Status: <span ng-class="setClassOnRequest('{{reqStatus}}')">{{reqStatus}}</span></h2>
+			<h5>Viewing Request: {{reqID}}</h5>
+      <h5>Vet ID: {{vetID}}</h5>
+      <h5>User ID: {{userID}}</h5>
+      <h5>Pet ID: {{petID}}</h5>
+      <h5>Request Status: <span ng-class="setClassOnRequest('{{reqStatus}}')">{{reqStatus}}</span></h5>
 		</div>
 	</div>
 
-  <div class="col-md-6">
+  <div class="col-md-8">
   		<div class="btn-group" dropdown is-open="status.isopen">
   				 <span class="dropdown">
       				<button  class="btn btn-large btn-default dropdown-toggle">Update Status<span class="caret"></span></button>
 						    <ul class="dropdown-menu">
-						      <li ng-repeat="statusCode in statusCodes">{{statusCode}}</li>
+						      <li ng-repeat="statusCode in statusCodes"><a href="#">{{statusCode}}</a></li>
 						    </ul>
   				 </span>
 			    </div>
@@ -53,20 +56,7 @@
 			</div>
 			<div class="panel-body">
 				<div class="col-md-3">
-					<div class="btn-group" dropdown is-open="status.isopen">
-  				 <span class="dropdown">
-      				<button  class="btn btn-large btn-default dropdown-toggle">Add an existing vaccine<span class="caret"></span></button>
-						    <ul class="dropdown-menu">
-						      <li ng-repeat="vaccine in vaccines">{{vaccine}}</li>
-						    </ul>
-  				 </span>
-  				 <form>
-  				 	<legend>Add a Vaccine</legend>
-							Vaccine: <input type="text" name="firstname" placeholder="{{vaccine.name}}"><br>
-							Date Administered: <input type="text" name="lastname" placeholder="{{vaccine.date}}"><br>
-							Expiration: <input type="text" name="expiration" placeholder="{{vaccine.expiration}}"><br>
-						</form>
-			    </div>
+					<edit-vacc></edit-vacc>
 				</div>
 
 				<div class="col-md-9">

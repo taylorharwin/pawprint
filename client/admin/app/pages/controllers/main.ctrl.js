@@ -1,31 +1,39 @@
 'use strict';
 
 angular.module('admin.pages.controllers')
-  .controller('MainCtrl', function ($scope, reqIDFactory, $state) {
+  .controller('MainCtrl', function ($scope, reqIDFactory, $state, $http) {
+
+// adds CSS styling based on the status of the request
 
     $scope.setClassOnRequest = reqIDFactory.setClassforStatus;
 
 
-    $scope.requests = [{
-      requestID: 1234,
-      user: 'Taylor Harwin',
-      pet: 'Wednesday',
-      dateCreated: '11/7/1985',
-      dateLastModified: '11/7/2014',
-      statusCode: 'New'
-    },
-      {requestID: 5678,
-      user: 'Jillian Underwood',
-      pet: 'June',
-      dateCreated: '8/3/2007',
-      dateLastModified: '8/10/2008',
-      statusCode: 'Cancelled'
-    }
-    ];
+// Calls setter functions for all values in requests which are needed to make request-specific GET requests
 
-    $scope.setReqAndTransition = function (id, status) {
-      reqIDFactory.setRequestID(id);
+    $scope.setReqAndTransition = function (reqID, vetID, userID, petID, status) {
+      reqIDFactory.setRequestID(reqID);
+      reqIDFactory.setVetID(vetID);
+      reqIDFactory.setPetID(userID);
+      reqIDFactory.setUserID(petID);
       reqIDFactory.setRequestStatus(status);
       $state.go('^.request');
     };
+
+// Function for getting all existing requests to display on Main page. 
+
+    $scope.getAllRequests = function (func) {
+      $http.get('/admin/1/requests')
+      .success(function (json) {
+        $scope.requests = json;
+        if (func) {
+          func(json);
+        }
+      })
+      .error(function (data, status, headers, config) {
+        console.log('error', data, status);
+      });
+    };
+//Loads all existing requests. TODO: Add sorting for admin, and eventually pagination when we have many requests
+    $scope.requests = $scope.getAllRequests();
+    console.log($scope.requests);
   });

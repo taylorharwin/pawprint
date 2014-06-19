@@ -3,7 +3,7 @@
 angular.module('admin.common.services')
   .factory('reqIDFactory', function () {
 
-    var data = { requestID: '', requestStatus: ''};
+    var data = { requestID: '', requestStatus: '', userID: '', petID: '', vetID: ''};
 
     return {
       getRequestID: function () {
@@ -18,24 +18,44 @@ angular.module('admin.common.services')
       setRequestStatus: function (requestStatus) {
         data.requestStatus = requestStatus;
       },
+      getPetID: function () {
+        return data.petID;
+      },
+      setPetID: function (petID) {
+        data.petID = petID;
+      },
+      getUserID: function () {
+        return data.userID;
+      },
+      setUserID: function (userID) {
+        data.userID = userID;
+      },
+      getVetID: function () {
+        console.log(data);
+        return data.vetID;
+      },
+      setVetID: function (vetID) {
+        data.vetID = vetID;
+      },
+
       setClassforStatus: function (requestStatus) {
-        if (requestStatus === 'New') {
+        if (requestStatus === 'new') {
           return 'label label-primary';
         }
-        if (requestStatus === 'Pending') {
+        if (requestStatus === 'pending') {
           return 'label label-info';
         }
-        if (requestStatus === 'Closed') {
+        if (requestStatus === 'complete') {
           return 'label label-default';
         }
-        if (requestStatus === 'Cancelled') {
+        if (requestStatus === 'cancelled') {
           return 'label label-warning';
         }
       }
     };
   })
 
-.constant('statusCodeConst', ['New', 'Pending', 'Closed', 'Cancelled']);
+.constant('statusCodeConst', ['new', 'pending', 'complete', 'cancelled']);
 
     
 
