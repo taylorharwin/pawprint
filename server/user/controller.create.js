@@ -15,7 +15,7 @@ var createUser = function(req, res) {
   // figure out logic for breaking up account creation and user details?
   User.forge(req.body).save().then(function(newUser) {
     Users.add(newUser);
-    res.send(201, newUser.id);
+    res.send(201, {id: newUser.id});
   });
 };
 
