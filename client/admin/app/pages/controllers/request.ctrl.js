@@ -13,6 +13,13 @@ angular.module('admin.pages.controllers')
     $scope.statusCodes = statusCodeConst;
     $scope.setClassOnRequest = reqIDFactory.setClassforStatus;
 
+    $scope.vaccines = [
+      'Rabies', 'Rabbit Flu', 'Cat Cold', 'Dog Ebola'];
+
+    //Variable for two-way binding with account note form
+
+    $scope.noteText;
+
     //toggles whether or not a given dropdown menu is open
 
     $scope.status = {
@@ -53,8 +60,24 @@ angular.module('admin.pages.controllers')
         console.log('error making request:', data, status);
       });
     };
+    $scope.getAllVaccines();
 
-    $scope.vaccines = $scope.getAllVaccines();
+    $scope.postNote = function () {
+      console.log($scope.noteText);
+    };
+
+    $scope.alerts = [
+      { type: 'danger', msg: 'Oh snap! Change a few things up and try submitting again.' },
+      { type: 'success', msg: 'Well done! You successfully read this important alert message.' }
+    ];
+
+    $scope.addAlert = function () {
+      $scope.alerts.push({msg: 'Another alert!'});
+    };
+
+    $scope.closeAlert = function (index) {
+      $scope.alerts.splice(index, 1);
+    };
 
   });
   

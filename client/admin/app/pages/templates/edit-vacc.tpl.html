@@ -1,14 +1,23 @@
-<div class="btn-group" dropdown is-open="status.isopen">
-   <span class="dropdown">
-      <button  class="btn btn-large btn-default dropdown-toggle">Add an existing vaccine<span class="caret"></span></button>
-        <ul class="dropdown-menu">
-          <li ng-repeat="vaccine in vaccines"><a href="#">{{vaccine}}</a></li>
-        </ul>
-   </span>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title">Vaccine Information
+      <div class="btn-group" dropdown is-open="status.isopen">
+        <span class="dropdown">
+          <button  class="btn btn-large btn-default dropdown-toggle">Add<span class="caret"></span></button>
+              <ul class="dropdown-menu">
+                <li ng-repeat="vaccine in vaccines"><a href="#">{{vaccine}}</a></li>
+              </ul>
+        </span>
+      </div>
+    </h2>
+      </div>
+    <div class="panel-body">
+        
    <form>
-    <legend>Add a Vaccine</legend>
+    <legend>Add a new Vaccine</legend>
       Vaccine: <input type="text" name="firstname" placeholder="{{vaccine.name}}"><br>
       Date Administered: <input type="text" name="lastname" placeholder="{{vaccine.date}}"><br>
       Expiration: <input type="text" name="expiration" placeholder="{{vaccine.expiration}}"><br>
     </form>
+</div>
 </div>
