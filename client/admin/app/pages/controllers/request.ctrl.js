@@ -48,7 +48,7 @@ angular.module('admin.pages.controllers')
     //Gets all vaccines in database 
 
     $scope.getAllVaccines = function (func) {
-      $http.get('/admin/1/vaccines')
+      $http.get('/admin/1/requests/3/vaccines')
       .success(function (json) {
         $scope.vaccines = json;
         console.log($scope.vaccines);
