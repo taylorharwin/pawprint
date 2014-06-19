@@ -6,4 +6,4 @@ var Vaccines = new db.Collection();
 
 Vaccines.model = Vaccine;
 
-module.exports = Vaccines;
+module.exports = exports = Vaccines;

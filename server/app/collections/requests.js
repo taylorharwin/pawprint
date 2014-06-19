@@ -6,4 +6,4 @@ var Requests = new db.Collection();
 
 Requests.model = Request;
 
-module.exports = Requests;
+module.exports = exports = Requests;

@@ -6,4 +6,4 @@ var Vets = new db.Collection();
 
 Vets.model = Vet;
 
-module.exports = Vets;
+module.exports = exports = Vets;

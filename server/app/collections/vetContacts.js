@@ -6,4 +6,4 @@ var VetContacts = new db.Collection();
 
 VetContacts.model = VetContact;
 
-module.exports = VetContacts;
+module.exports = exports = VetContacts;
