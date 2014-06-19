@@ -6,32 +6,34 @@ module.exports = exports = function (router) {
   // create admin route
   router.route('/:adminid/requests')
     .get(Get.getRequests);
-  router.route('/:adminid/request/:requestid')
+  router.route('/:adminid/requests/:requestid')
     .get(Get.getRequest);
-  router.route('/:adminid/pet/:petid')
+  router.route('/:adminid/pets/:petid')
     .get(Get.getPet);
-  router.route('/:adminid/user/:userid')
+  router.route('/:adminid/users/:userid')
     .get(Get.getUser);
-  router.route('/:adminid/vet/:vetid')
+  router.route('/:adminid/vets/:vetid')
     .get(Get.getVet);
-  router.route('/:adminid/vet/:vetid/contacts')
+  router.route('/:adminid/vets/:vetid/contacts')
     .get(Get.getVetContacts);
-  router.route('/:adminid/request/:requestid/vaccines')
+  router.route('/:adminid/requests/:requestid/vaccines')
     .get(Get.getVaccines);
-  router.route('/:adminid/request/:requestid/logs')
+  router.route('/:adminid/requests/:requestid/logs')
     .get(Get.getLogs);
-  router.route('/:adminid/request/:requestid/pdfs')
+  router.route('/:adminid/requests/:requestid/pdfs')
     .get(Get.getPDFs);
-  router.route('/:adminid/request/:requestid/contact')
+  
+  router.route('/:adminid/requests/:requestid/contacts')
     .post(Create.createContact);
-  router.route('/:adminid/vet/:vetid/vetcontact')
+  router.route('/:adminid/vets/:vetid/contacts')
     .post(Create.createVetContact);
-  router.route('/:adminid/request/:requestid/pdf')
+  router.route('/:adminid/requests/:requestid/pdf')
     .post(Create.createPdf);
-  router.route('/:adminid/request/:requestid/vaccine')
+  
+  router.route('/:adminid/requests/:requestid/vaccines')
     .post(Create.createVaccine)
     .put(Put.putVaccine);
-  router.route('/:adminid/request/:requestid/contact/:contactid')
+  router.route('/:adminid/requests/:requestid/contacts/:contactid')
     .put(Put.putContact);
 };
 
