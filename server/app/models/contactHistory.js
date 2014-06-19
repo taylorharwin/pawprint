@@ -1,20 +1,20 @@
 var db = require('../db_config.js');
-var Request = require('./request.js');
-var Admin = require('./admin.js');
-var Vet_Contact = require('./vetContact.js');
+require('./request.js');
+require('./admin.js');
+require('./vetContact.js');
 
 var ContactHistory = db.Model.extend({
   tableName: 'contactHistory',
   hasTimestamps: true,
   request: function() {
-    return this.belongsTo(Request);
+    return this.belongsTo('Request');
   },
   admin: function() {
-    return this.belongsTo(Admin);
+    return this.belongsTo('Admin');
   },
   vet_contact: function() {
-    return this.belongsTo(Vet_Contact);
+    return this.belongsTo('Vet_Contact');
   }
 });
 
-module.exports = ContactHistory;
+module.exports = exports = db.model('ContactHistory', ContactHistory);

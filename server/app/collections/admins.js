@@ -6,4 +6,4 @@ var Admins = new db.Collection();
 
 Admins.model = Admin;
 
-module.exports = Admins;
+module.exports = exports = Admins;

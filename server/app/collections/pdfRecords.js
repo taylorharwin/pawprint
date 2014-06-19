@@ -6,4 +6,4 @@ var PdfRecords = new db.Collection();
 
 PdfRecords.model = PdfRecord;
 
-module.exports = PdfRecords;
+module.exports = exports = PdfRecords;

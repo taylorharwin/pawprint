@@ -6,4 +6,4 @@ var ContactHistorys = new db.Collection();
 
 ContactHistorys.model = ContactHistory;
 
-module.exports = ContactHistorys;
+module.exports = exports = ContactHistorys;

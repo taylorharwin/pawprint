@@ -10,7 +10,7 @@ var deleteRequest = function(req, res) {
     request.attributes.status = 'canceled';
     request.save(request.attributes);
     res.send(200, request);
-  })
+  });
 };
 
 module.exports = exports = {
