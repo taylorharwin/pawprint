@@ -1,32 +1,35 @@
-var controllerCreate = require('./controller.create.js');
-var controllerGet = require('./controller.get.js');
-var controllerPut = require('./controller.put.js');
-var controllerDelete = require('./controller.delete.js');
+var Create = require('./controller.create.js');
+var Get = require('./controller.get.js');
+var Put = require('./controller.put.js');
+var Delete = require('./controller.delete.js');
 
 module.exports = exports = function (router) {
 
   router.route('/')
-    .post(controllerCreate.createUser);
-  router.route('/:userid/pet')
-    .post(controllerCreate.createPet);
-  router.route('/:userid/pet/:petid/request')
-    .post(controllerCreate.createRequest);
-  router.route('/vet')
-    .post(controllerCreate.createVet);
-
+    .post(Create.createUser);
   router.route('/:userid')
-    .put(controllerPut.putUser)
-    .get(controllerGet.getUser);
-  router.route('/:userid/pet/:petid')
-    .put(controllerPut.putPet);
-  router.route('/user/:userid/pet/:petid/request/:requestid')
-    .delete(controllerDelete.deleteRequest);
+    .get(Get.getUser)
+    .put(Put.putUser)
+    // .delete(Delete.deleteUser);
 
   router.route('/:userid/pets')
-    .get(controllerGet.getPets);
-  router.route('/:userid/requests')
-    .get(controllerGet.getRequests);
-  router.route('/:userid/pet/:petid/vaccines')
-    .get(controllerGet.getVaccines);
+    .get(Get.getPets)
+    .post(Create.createPet);
+  router.route('/:userid/pets/:petid')
+    .put(Put.putPet)
+    // .delete(Delete.deletePet);
+
+  router.route('/:userid/pets/:petid/vaccines')
+    .get(Get.getVaccines);
+
+  router.route('/:userid/pets/:petid/requests')
+    .get(Get.getRequests) // change this to get requests per pet
+    .post(Create.createRequest);
+  router.route('/:userid/pets/:petid/requests/:requestid')
+    .delete(Delete.deleteRequest);
+  
+  router.route('/vets')
+    // .get(Get.getVets)
+    .post(Create.createVet); // Change this to auto happen on the admin side?
 };
 
