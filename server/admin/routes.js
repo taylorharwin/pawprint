@@ -16,6 +16,8 @@ module.exports = exports = function (router) {
     .get(controllerGet.getVet);
   router.route('/:adminid/vet/:vetid/contacts')
     .get(controllerGet.getVetContacts);
+  router.route('/:adminid/vet/:vetid/vetcontact')
+    .post(controllerCreate.createVetContact);
   router.route('/:adminid/request/:requestid/vaccines')
     .get(controllerGet.getVaccines);
   router.route('/:adminid/request/:requestid/logs')
@@ -24,8 +26,6 @@ module.exports = exports = function (router) {
     .get(controllerGet.getPDFs);
   router.route('/:adminid/request/:requestid/contact')
     .post(controllerCreate.createContact);
-  router.route('/:adminid/vet/:vetid/vetcontact')
-    .post(controllerCreate.createVetContact);
   router.route('/:adminid/request/:requestid/pdf')
     .post(controllerCreate.createPdf);
   router.route('/:adminid/request/:requestid/vaccine')
