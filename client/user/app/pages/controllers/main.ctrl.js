@@ -1,105 +1,192 @@
 angular.module('user.pages.controllers')
 
-  .controller('MainCtrl', function ($scope, UserFactory, VaccineFactory, CurrentUserFactory) {
+  .controller('MainCtrl', function ($scope, $modal, UserFactory, CurrentUserFactory, PetFactory, VaccineFactory) {
     console.log($scope);
     console.log(CurrentUserFactory.getUserId());
 
-    $scope.checkExpiry = VaccineFactory.checkExpiry;
     $scope.userId = CurrentUserFactory.getUserId();
+    $scope.pets = [];
+    $scope.vaccines = [];
+    $scope.requests = [];
+    $scope.checkExpiry = VaccineFactory.checkExpiry;
 
-    UserFactory.getUserPets($scope.userId).then(function (pets) {
-      for (var i=0; i<pets.length; i++) {
-        pets[i].edit = false;
-      }
+
+    PetFactory.getPets($scope.userId).then(function (pets) {
       $scope.pets = pets;
-    });
 
-    $scope.petEdit = function (id) {
-      for (var i=0; i<$scope.pets.length ; i++) {
-        if ($scope.pets[i].pet.id === id) {
-          $scope.pets[i].edit = true;
-        }
-      }
-    };
-
-    $scope.savePetEdit = function (id, newPet) {
-      for (var i=0; i<$scope.pets.length ; i++) {
-        if ($scope.pets[i].pet.id === id) {
-          $scope.pets[i].put().then (function () {
-            $scope.pets[i].status.update = 'pending';
-            $scope.pets[i].edit = false;
-          }, function (response) {
-            console.log('Error with response status code', response.status);
+      for (var i=0; i<$scope.pets.length; i++){
+        PetFactory.getPetVaccines($scope.userId, $scope.pets[i].id)
+          .then(function (response) {
+            $scope.vaccines.push(response);
+          }, function (error) {
+            console.log(error);
           });
-        }
+        PetFactory.getPetRequests($scope.userId, $scope.pets[i].id)
+          .then(function (response) {
+            $scope.requests.push(response);
+          }, function (error) {
+            console.log(error);
+          });
       }
+    });
+    
+    $scope.cancelRequest = function (petIndex, requestIndex) {
+      PetFactory.cancelPetRequest($scope.userId, $scope.pets[petIndex].id, $scope.requests[petIndex][requestIndex])
+        .then(function (response) {
+          $scope.requests[petIndex].splice(requestIndex, 1);
+        }, function (error) {
+          console.log(error);
+        });
     };
 
-    $scope.petUpdate = function (id) {
-      UserFactory.postPetUpdate(id, true).then(function () {
-        for (var i=0; i<$scope.pets.length ; i++) {
-          if ($scope.pets[i].pet.id === petId) {
-            $scope.pets[i].status.update = 'pending';
+    $scope.editPet = function (index) {
+    
+      var modalInstance = $modal.open({
+        templateUrl: 'app/pages/templates/editpet.tpl.html',
+        controller: 'EditPetCtrl',
+        resolve: {
+          pet: function () {
+            return $scope.pets[index];
           }
         }
-        console.log('success update');
-      }, function (response) {
-        console.log('Error with response status code', response.status);
       });
+
+      modalInstance.result.then(function (pet) {
+        pet.put().then(function (response) {
+          console.log('successfully updated pet info');
+          $scope.pets[index] = response;
+        }, function (error) {
+          console.log(error);
+        });
+      });
+
     };
 
-    $scope.cancelPetUpdate = function (id) {
-      UserFactory.postPetUpdate(id, false).then(function () {
-        for (var i=0; i<$scope.pets.length ; i++) {
-          if ($scope.pets[i].pet.id === petId) {
-            $scope.pets[i].status.update = 'normal';
-          }
-        }        
-        console.log('success update');
-      }, function (response) {
-        console.log('Error with response status code', response.status);
+    $scope.addPet = function () {
+
+      var modalInstance = $modal.open({
+        templateUrl: 'app/pages/templates/editpet.tpl.html',
+        controller: 'EditPetCtrl'
       });
+
+      modalInstance.result.then(function (pet) {
+        PetFactory.postPet(pet).then(function (response) {
+          console.log('successfully created pet');
+          $scope.pets.push(response);
+        }, function (error) {
+          console.log(error);
+        });
+      });
+
     };
 
-    $scope.addPetEntry = function () {
-      // @TODO make this in editing mode immediately
-      // then send to server only when save is clicked
-      // (maybe with .save() in restangular)
-      // then refresh all pets => db remain source of truth
-      var newPet = {
-        pet: {
-          name: '',
-          birthdate: '',
-          gender: '',
-          breed: '',
-          color: '',
-          weight: '',
-          neuter: '',
-          microchip: '',
-          profileUrl: ''
-        },
-        vaccine: [],
-        status: {
-          vaccine: 'active',
-          update: 'pending'
-        },
-        edit: true,
-        newPet: true
-      };
-      $scope.pets.push(newPet);
-    };
+    $scope.updatePet = function (index) {
 
-    $scope.saveNewPet = function (data) {
-      UserFactory.postPet(data).then(function () {
-        var len = $scope.pets.length;
-        delete $scope.pets[len-1].newPet;
-      }, function (response) {
-        $scope.pets.pop();
-        console.log('Error with response status code', response.status);
+      var modalInstance = $modal.open({
+        templateUrl: 'app/pages/templates/updatepet.tpl.html',
+        controller: 'UpdatePetCtrl'
       });
+
+      modalInstance.result.then(function (request) {
+        PetFactory.postPetRequest(request.userId, request.petId, request).then(function (response) {
+          console.log('successfully sent pet update request');
+          $scope.pets[index].push(response);
+        }, function (error) {
+          console.log(error);
+        });
+      });
+
     };
 
   });
+
+
+  //   $scope.petEdit = function (id) {
+  //     for (var i=0; i<$scope.pets.length ; i++) {
+  //       if ($scope.pets[i].pet.id === id) {
+  //         $scope.pets[i].edit = true;
+  //       }
+  //     }
+  //   };
+
+  //   $scope.savePetEdit = function (id, newPet) {
+  //     for (var i=0; i<$scope.pets.length ; i++) {
+  //       if ($scope.pets[i].pet.id === id) {
+  //         $scope.pets[i].put().then (function () {
+  //           $scope.pets[i].status.update = 'pending';
+  //           $scope.pets[i].edit = false;
+  //         }, function (response) {
+  //           console.log('Error with response status code', response.status);
+  //         });
+  //       }
+  //     }
+  //   };
+
+  //   $scope.petUpdate = function (id) {
+  //     UserFactory.postPetUpdate(id, true).then(function () {
+  //       for (var i=0; i<$scope.pets.length ; i++) {
+  //         if ($scope.pets[i].pet.id === petId) {
+  //           $scope.pets[i].status.update = 'pending';
+  //         }
+  //       }
+  //       console.log('success update');
+  //     }, function (response) {
+  //       console.log('Error with response status code', response.status);
+  //     });
+  //   };
+
+  //   $scope.cancelPetUpdate = function (id) {
+  //     UserFactory.postPetUpdate(id, false).then(function () {
+  //       for (var i=0; i<$scope.pets.length ; i++) {
+  //         if ($scope.pets[i].pet.id === petId) {
+  //           $scope.pets[i].status.update = 'normal';
+  //         }
+  //       }        
+  //       console.log('success update');
+  //     }, function (response) {
+  //       console.log('Error with response status code', response.status);
+  //     });
+  //   };
+
+  //   $scope.addPetEntry = function () {
+  //     // @TODO make this in editing mode immediately
+  //     // then send to server only when save is clicked
+  //     // (maybe with .save() in restangular)
+  //     // then refresh all pets => db remain source of truth
+  //     var newPet = {
+  //       pet: {
+  //         name: '',
+  //         birthdate: '',
+  //         gender: '',
+  //         breed: '',
+  //         color: '',
+  //         weight: '',
+  //         neuter: '',
+  //         microchip: '',
+  //         profileUrl: ''
+  //       },
+  //       vaccine: [],
+  //       status: {
+  //         vaccine: 'active',
+  //         update: 'pending'
+  //       },
+  //       edit: true,
+  //       newPet: true
+  //     };
+  //     $scope.pets.push(newPet);
+  //   };
+
+  //   $scope.saveNewPet = function (data) {
+  //     UserFactory.postPet(data).then(function () {
+  //       var len = $scope.pets.length;
+  //       delete $scope.pets[len-1].newPet;
+  //     }, function (response) {
+  //       $scope.pets.pop();
+  //       console.log('Error with response status code', response.status);
+  //     });
+  //   };
+
+  // });
 
 
     //@NOTE actual functions

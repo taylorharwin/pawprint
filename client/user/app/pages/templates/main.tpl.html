@@ -4,7 +4,7 @@
     <img src="assets/logo.png"/>
   </center>
 
-  <button ng-click='addPetEntry()' class="btn btn-default">Add Pet</button>
+  <button ng-click='addPet()' class="btn btn-default">Add Pet</button>
   <button ui-sref="^.profile" class="btn btn-default">User profile</button>
 
   <!-- @TODO make a directive for pets properly -->
@@ -14,62 +14,43 @@
         <table class="" style="width:100%">
           <tr>
             <td>
-              <img class='petImg' ng-src='{{pet.pet.profileUrl}}'/>
+              <img class='petImg' ng-src='{{pet.picture}}'/>
             </td>
-            <span ng-hide="pet.edit">
-              <td>Name: {{pet.pet.name}}</td>
-              <td>Birthday: {{pet.pet.birthdate}}</td>
-              <td>Breed: {{pet.pet.breed}}</td>
-            </span>
-            <span ng-show="pet.edit">
-              <td ng-click="$event.stopPropagation()">Name: <input type="text" value="{{pet.pet.name}}" ng-required/></td>
-              <td ng-click="$event.stopPropagation()">Birthday: <input type="text" value="{{pet.pet.birthdate}}" ng-required/></td>
-              <td ng-click="$event.stopPropagation()">Breed: <input type="text" value="{{pet.pet.breed}}" ng-required/></td>
-            </span>
-            <td ng-switch='pet.status.vaccine'>
+            <td>Name: {{pet.name}}</td>
+            <td>Birthday: {{pet.birthdate}}</td>
+            <td>Breed: {{pet.breed}}</td>
+            <td ng-switch='pet.vaccineStatus'>
               Vaccines:
-              <span ng-switch-when='active' class="label label-success">Active</span>
+              <span ng-switch-when='active' class="label label-success">Active</span> 
               <span ng-switch-when='expiring' class="label label-warning">Expiring</span>
               <span ng-switch-when='expired' class="label label-danger">Expired</span>
-            </td>
-            <td ng-switch='pet.status.update'>
-              Updates:
-              <span ng-switch-when='normal' class="label label-success">Normal</span>
-              <span ng-switch-when='pending' class="label label-warning">Pending</span>
             </td>
           </tr>
         </table>
       </accordion-heading>
       <table class="" style="width:100%">
         <tr>
-          <td ng-hide="pet.edit">
-            <p>Gender: {{pet.pet.gender}}</p>
-            <p>Color: {{pet.pet.color}}</p>
-            <p>Weight: {{pet.pet.weight}}</p>
-            <p>Neuter: {{pet.pet.neuter}}</p>
-            <p ng-show="pet.edit">Neuter: <input type="text" value="{{pet.pet.neuter}}" ng-required/></p>
-            <p>Microchip #: {{pet.pet.microchip}}</p>
+          <td>
+            <p>Gender: {{pet.gender}}</p>
+            <p>Color: {{pet.color}}</p>
+            <p>Weight: {{pet.weight}}</p>
+            <p>Neuter: {{pet.neuter}}</p>
+            <p>Microchip #: {{pet.microchip}}</p>
           </td>
-          <td ng-show="pet.edit">
-            <p>Gender: <input type="text" value="{{pet.pet.gender}}" ng-required/></p>
-            <p>Color: <input type="text" value="{{pet.pet.color}}" ng-required/></p>
-            <p>Weight: <input type="text" value="{{pet.pet.weight}}" ng-required/></p>
-            <p>Microchip #: <input type="text" value="{{pet.pet.microchip}}" ng-required/></p>
-          </td>
-          <td ng-switch = "pet.edit">
-            <button ng-click='savePetEdit(pet.pet.id)' ng-switch-when='true' class="btn btn-default">SAVE</button>
-            <button ng-click='petEdit(pet.pet.id)' ng-switch-when='false' class="btn btn-default">EDIT</button>
+          <td>
+            <button ng-click="editPet($index)" class="btn btn-default">EDIT</button>
           </td>
           <td>
             <button class="btn btn-default">SEND</button>
           </td>
-          <td ng-switch="pet.status.update">
-            <button ng-click='petUpdate(pet.pet.id)' ng-switch-when='normal' class="btn btn-default">UPDATE</button>
-            <button ng-click='cancelPetUpdate(pet.pet.id)' ng-switch-when='pending' class="btn btn-default">CANCEL UPDATE</button>
+          <td>
+            <button ng-click="updatePet($index)" class="btn btn-default">UPDATE</button>
           </td>
-          <td ng-if="pet.newPet">
-          <button ng-click='saveNewPet(pet)' class="btn btn-default">SAVE NEW PET</button>
-          </td>
+        </tr>
+      </table>
+      <table>
+        <tr ng-repeat="request in requests[$parent.$index]">
+          <alert ng-if="request.status === 'New' || request.status === 'Pending'" type="warning" close="cancelRequest($parent.index, $index)">We are processing your request to {{request.vet.practice_name}}</alert>
         </tr>
       </table>
       <table class="" style="width:100%">
@@ -78,7 +59,7 @@
           <td>Expiration</td>
           <td>Status</td>
         </tr>
-        <tr ng-repeat="vaccine in pet.vaccine">
+        <tr ng-repeat="vaccine in vaccines[$parent.$index]">
           <td>{{vaccine.name}}</td>
           <td>{{vaccine.dateExpired}}</td>
           <td>
