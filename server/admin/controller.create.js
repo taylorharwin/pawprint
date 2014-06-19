@@ -32,7 +32,7 @@ var createVaccine = function(req, res) {
             return pet_vaccine.get('id');
           });
         }).then(function(done) {
-          res.send(201, done.id);
+          res.send(201, {id: done.id});
         });
       }
     });
@@ -47,7 +47,7 @@ var createContact = function(req, res) {
 
   Contact.forge(newContactHistory).save().then(function(contactHistory) {
     ContactHistorys.add(contactHistory);
-    res.send(201, contactHistory.id);
+    res.send(201, {id: contactHistory.id});
   });
 };
 
@@ -65,7 +65,7 @@ var createVetContact = function(req, res) {
       return vetcontact.get('id');
     });
   }).then(function(done) {
-    res.send(20, done.id);
+    res.send(201, {id: done.id});
   });
 };
 
@@ -77,7 +77,7 @@ var createPdf = function(req, res) {
 
   PdfRecord.forge(pdf).save().then(function(pdfrecord) {
     PdfRecords.add(pdfrecord);
-    res.send(201, pdfrecord.id);
+    res.send(201, {id: pdfrecord.id});
   });
 };
 

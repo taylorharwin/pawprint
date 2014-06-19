@@ -15,19 +15,21 @@ var createUser = function(req, res) {
   // figure out logic for breaking up account creation and user details?
   User.forge(req.body).save().then(function(newUser) {
     Users.add(newUser);
-    res.send(201, newUser.id);
+    res.send(201, {id: newUser.id});
   });
 };
 
 var createPet = function(req, res) {
   // doesn't take into account vaccines
   var userid = req.params.userid;
+  // console.log(userid);
   // create a new pet with userid
   Pet.forge(req.body).save().then(function(pet) {
     // attaches pet to user through the user_pet table
-    User.forge({id: userid}).pet().attach(pet);
-    Pets.add(pet);
-    res.send(201, pet.id);
+      console.log(pet);
+      User.forge({id: userid}).pet().attach(pet);
+      Pets.add(pet);
+      res.send(201, {id: pet.id});
   });
 };
 
@@ -42,14 +44,14 @@ var createRequest = function(req, res) {
   });
   request.save().then(function(newRequest) {
     Requests.add(newRequest);
-    res.send(201, newRequest.id);
+    res.send(201, {id: newRequest.id});
   });
 };
 
 var createVet = function(req, res) {
   Vet.forge(req.body).save().then(function(newVet) {
     Vets.add(newVet);
-    res.send(201, newVet.id);
+    res.send(201, {id: newVet.id});
   });
 };
 
