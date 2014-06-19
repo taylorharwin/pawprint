@@ -12,7 +12,7 @@
 <div class="control-group">
   <label class="control-label" for="textinput">First Name</label>
   <div class="controls">
-    <input id="textinput" name="textinput" type="text" placeholder="{{user.firstName}}" class="input-small" ng-readonly="editingUser">
+    <input id="textinput" name="textinput" type="text" placeholder="{{userData.firstName}}" class="input-small" ng-readonly="editingUser">
     
   </div>
 </div>
@@ -21,7 +21,7 @@
 <div class="control-group">
   <label class="control-label" for="textinput">Last Name</label>
   <div class="controls">
-    <input id="textinput" name="textinput" type="text" placeholder="{{user.lastName}}" class="input-small" ng-readonly="editingUser">
+    <input id="textinput" name="textinput" type="text" placeholder="{{userData.lastName}}" class="input-small" ng-readonly="editingUser">
     
   </div>
 </div>
@@ -30,7 +30,7 @@
 <div class="control-group">
   <label class="control-label" for="textinput">Phone Number</label>
   <div class="controls">
-    <input id="textinput" name="textinput" type="text" placeholder="{{user.phoneNumber}}" class="input-medium" ng-readonly="editingUser">
+    <input id="textinput" name="textinput" type="text" placeholder="{{userData.phone}}" class="input-medium" ng-readonly="editingUser">
     
   </div>
 </div>
@@ -39,7 +39,7 @@
 <div class="control-group">
   <label class="control-label" for="textinput">Email</label>
   <div class="controls">
-    <input id="textinput" name="textinput" type="text" placeholder="{{user.email}}" class="input-medium" ng-readonly="editingUser">
+    <input id="textinput" name="textinput" type="text" placeholder="{{userData.email}}" class="input-medium" ng-readonly="editingUser">
     
   </div>
 </div>
@@ -48,7 +48,7 @@
 <div class="control-group">
   <label class="control-label" for="textinput">Street Address</label>
   <div class="controls">
-    <input id="textinput" name="textinput" type="text" placeholder="{{user.address}}" class="input-medium" ng-readonly="editingUser">
+    <input id="textinput" name="textinput" type="text" placeholder="{{userData.streetAddress}}" class="input-medium" ng-readonly="editingUser">
     
   </div>
 </div>
@@ -57,7 +57,7 @@
 <div class="control-group">
   <label class="control-label" for="textinput">City</label>
   <div class="controls">
-    <input id="textinput" name="textinput" type="text" placeholder="{{user.city}}" class="input-small" ng-readonly="editingUser">
+    <input id="textinput" name="textinput" type="text" placeholder="{{userData.city}}" class="input-small" ng-readonly="editingUser">
     
   </div>
 </div>
@@ -66,7 +66,7 @@
 <div class="control-group">
   <label class="control-label" for="textinput">State</label>
   <div class="controls">
-    <input id="textinput" name="textinput" type="text" placeholder="{{user.state}}" class="input-mini" ng-readonly="editingUser">
+    <input id="textinput" name="textinput" type="text" placeholder="{{userData.state}}" class="input-mini" ng-readonly="editingUser">
     
   </div>
 </div>
@@ -75,7 +75,7 @@
 <div class="control-group">
   <label class="control-label" for="textinput">Zip</label>
   <div class="controls">
-    <input id="textinput" name="textinput" type="text" placeholder="{{user.zip}}" class="input-small" ng-readonly="editingUser">
+    <input id="textinput" name="textinput" type="text" placeholder="{{userData.zip}}" class="input-small" ng-readonly="editingUser">
     
   </div>
 </div>
@@ -94,7 +94,7 @@
     <div class="control-group">
       <label class="control-label" for="textinput">Name</label>
       <div class="controls">
-        <input id="textinput" name="textinput" type="text" placeholder="{{pet.name}}" class="input-small" ng-readonly="editingUser">
+        <input id="textinput" name="textinput" type="text" placeholder="{{petData.name}}" class="input-small" ng-readonly="editingUser">
         
       </div>
     </div>
@@ -103,7 +103,7 @@
     <div class="control-group">
       <label class="control-label" for="textinput">Birthday</label>
       <div class="controls">
-        <input id="textinput" name="textinput" type="text" placeholder="{{pet.birthDay}}" class="input-small" ng-readonly="editingUser">
+        <input id="textinput" name="textinput" type="text" placeholder="{{petData.birthdate}}" class="input-small" ng-readonly="editingUser">
         
       </div>
     </div>
@@ -112,7 +112,7 @@
     <div class="control-group">
       <label class="control-label" for="textinput">Gender</label>
       <div class="controls">
-        <input id="textinput" name="textinput" type="text" placeholder="{{pet.gender}}" class="input-mini" ng-readonly="editingUser">
+        <input id="textinput" name="textinput" type="text" placeholder="{{petData.gender}}" class="input-mini" ng-readonly="editingUser">
         
       </div>
     </div>
@@ -121,7 +121,7 @@
     <div class="control-group">
       <label class="control-label" for="textinput">Breed</label>
       <div class="controls">
-        <input id="textinput" name="textinput" type="text" placeholder="{{pet.breed}}" class="input-medium" ng-readonly="editingUser">
+        <input id="textinput" name="textinput" type="text" placeholder="{{petData.breed}}" class="input-medium" ng-readonly="editingUser">
         
       </div>
     </div>
@@ -130,7 +130,7 @@
     <div class="control-group">
       <label class="control-label" for="textinput">Color</label>
       <div class="controls">
-        <input id="textinput" name="textinput" type="text" placeholder="{{pet.color}}" class="input-medium" ng-readonly="editingUser">
+        <input id="textinput" name="textinput" type="text" placeholder="{{petData.color}}" class="input-medium" ng-readonly="editingUser">
         
       </div>
     </div>
@@ -139,7 +139,7 @@
     <div class="control-group">
       <label class="control-label" for="textinput">Weight</label>
       <div class="controls">
-        <input id="textinput" name="textinput" type="text" placeholder="{{pet.weight}}" class="input-small" ng-readonly="editingUser">
+        <input id="textinput" name="textinput" type="text" placeholder="{{petData.weight}}" class="input-small" ng-readonly="editingUser">
         
       </div>
     </div>
@@ -148,7 +148,7 @@
     <div class="control-group">
       <label class="control-label" for="textinput">Spay/Neuter Status</label>
       <div class="controls">
-        <input id="textinput" name="textinput" type="text" placeholder="{{user.neuter}}" class="input-mini" ng-readonly="editingUser">
+        <input id="textinput" name="textinput" type="text" placeholder="{{petData.neuter}}" class="input-mini" ng-readonly="editingUser">
         
       </div>
     </div>
@@ -157,7 +157,7 @@
     <div class="control-group">
       <label class="control-label" for="textinput">Microchip #</label>
       <div class="controls">
-        <input id="textinput" name="textinput" type="text" placeholder="{{user.microChip}}" class="input-medium" ng-readonly="editingUser">
+        <input id="textinput" name="textinput" type="text" placeholder="{{petData.microchip}}" class="input-medium" ng-readonly="editingUser">
         
       </div>
     </div>

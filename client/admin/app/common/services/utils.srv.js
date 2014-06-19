@@ -3,7 +3,7 @@
 angular.module('admin.common.services')
   .factory('reqIDFactory', function () {
 
-    var data = { requestID: '', requestStatus: ''};
+    var data = { requestID: '', requestStatus: '', userID: '', petID: '', vetID: ''};
 
     return {
       getRequestID: function () {
@@ -18,6 +18,26 @@ angular.module('admin.common.services')
       setRequestStatus: function (requestStatus) {
         data.requestStatus = requestStatus;
       },
+      getPetID: function () {
+        return data.petID;
+      },
+      setPetID: function (petID) {
+        data.petID = petID;
+      },
+      getUserID: function () {
+        return data.userID;
+      },
+      setUserID: function (userID) {
+        data.userID = userID;
+      },
+      getVetID: function () {
+        console.log(data);
+        return data.vetID;
+      },
+      setVetID: function (vetID) {
+        data.vetID = vetID;
+      },
+
       setClassforStatus: function (requestStatus) {
         if (requestStatus === 'new') {
           return 'label label-primary';
