@@ -34,7 +34,7 @@ angular.module('admin.pages.controllers')
       $http.get(path)
       .success(callback)
       .error(function (data, status, headers, config) {
-        console.log('error', data, status);
+        console.log('error making request:', data, status);
       });
     };
 
@@ -50,7 +50,7 @@ angular.module('admin.pages.controllers')
         }
       })
       .error(function (data, status, headers, config) {
-        console.log('error', data, status);
+        console.log('error making request:', data, status);
       });
     };
 
