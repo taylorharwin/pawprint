@@ -22,7 +22,7 @@ module.exports = exports = function (router) {
     .get(Get.getVet);
 
   router.route('/:adminid/requests/:requestid/vaccines')
-    .get(Get.getVaccines)
+    .get(Get.getPetVaccines)
     .post(Create.createPetVaccine);
   // router.route('/:adminid/requests/:requestid/vaccines/:vaccineID')
     // .put(Put.putVaccine) // TODO
