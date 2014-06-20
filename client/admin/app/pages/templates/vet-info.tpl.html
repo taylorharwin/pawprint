@@ -1,8 +1,9 @@
+<form class="form-horizontal">
 <div class="panel panel-default">
   <div class="panel-heading">
     <h2 class="panel-title">Vet Information 
        <button class="btn btn-default" ng-click="editVet()">Edit</button>
-    <button class="btn btn-warning" ng-hide="editingVet">Submit</button>
+    <button ng-click="updateVetInfo()" class="btn btn-warning" ng-hide="editingVet">Submit</button>
     <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
     </h2>
   </div>
@@ -12,7 +13,6 @@
   <div>
     <div class="col-md-6">
  
-    <form class="form-horizontal">
 <fieldset>
 
 <!-- Form Name -->
@@ -22,7 +22,7 @@
 <div class="control-group">
   <label class="control-label" for="textinput">Practice</label>
   <div class="controls">
-    <input id="textinput" name="textinput" type="text" placeholder="{{vetData.practiceName}}" class="formText" ng-readonly="editingVet">
+    <input id="textinput" name="textinput" type="text" ng-model="vetData.practiceName" placeholder="{{vetData.practiceName}}" class="formText" ng-readonly="editingVet">
     
   </div>
 </div>
@@ -31,7 +31,7 @@
 <div class="control-group">
   <label class="control-label" for="textinput">Website</label>
   <div class="controls">
-    <input id="textinput" name="textinput" type="text" placeholder="{{vetData.website}}" class="input-medium" ng-readonly="editingVet">
+    <input id="textinput" name="textinput" type="text"ng-model="vetData.website" placeholder="{{vetData.website}}" class="input-medium" ng-readonly="editingVet">
     
   </div>
 </div>
@@ -40,7 +40,7 @@
 <div class="control-group">
   <label class="control-label" for="textinput">Email</label>
   <div class="controls">
-    <input id="textinput" name="textinput" type="text" placeholder="{{vetData.email}}" class="input-medium" ng-readonly="editingVet">
+    <input id="textinput" name="textinput" type="text" ng-model="vetData.email" placeholder="{{vetData.email}}" class="input-medium" ng-readonly="editingVet">
     
   </div>
 </div>
@@ -49,7 +49,7 @@
 <div class="control-group">
   <label class="control-label" for="textinput">Phone number</label>
   <div class="controls">
-    <input id="textinput" name="textinput" type="text" placeholder="{{vetData.phone}}" class="input-medium" ng-readonly="editingVet">
+    <input id="textinput" name="textinput" type="text" ng-model="vetData.phone" placeholder="{{vetData.phone}}" class="input-medium" ng-readonly="editingVet">
     
   </div>
 </div>
@@ -58,7 +58,7 @@
 <div class="control-group">
   <label class="control-label" for="textinput">Street Address</label>
   <div class="controls">
-    <input id="textinput" name="textinput" type="text" placeholder="{{vetData.streetAddress}}" class="input-large" ng-readonly="editingVet">
+    <input id="textinput" name="textinput" type="text" ng-model="vetData.streetAddress" placeholder="{{vetData.streetAddress}}" class="input-large" ng-readonly="editingVet">
     
   </div>
 </div>
@@ -67,7 +67,7 @@
 <div class="control-group">
   <label class="control-label" for="textinput">City</label>
   <div class="controls">
-    <input id="textinput" name="textinput" type="text" placeholder="{{vetData.city}}" class="input-small" ng-readonly="editingVet">
+    <input id="textinput" name="textinput" type="text" ng-model="vetData.city" placeholder="{{vetData.city}}" class="input-small" ng-readonly="editingVet">
     
   </div>
 </div>
@@ -76,7 +76,7 @@
 <div class="control-group">
   <label class="control-label" for="textinput">State</label>
   <div class="controls">
-    <input id="textinput" name="textinput" type="text" placeholder="{{vetData.state}}" class="input-mini" ng-readonly="editingVet">
+    <input id="textinput" name="textinput" type="text" ng-model="vetData.state" placeholder="{{vetData.state}}" class="input-mini" ng-readonly="editingVet">
     
   </div>
 </div>
@@ -85,7 +85,7 @@
 <div class="control-group">
   <label class="control-label" for="textinput">Zip</label>
   <div class="controls">
-    <input id="textinput" name="textinput" type="text" placeholder="{{vetData.zip}}" class="input-mini" ng-readonly="editingVet">
+    <input id="textinput" name="textinput" type="text" ng-model="vetData.zip" placeholder="{{vetData.zip}}" class="input-mini" ng-readonly="editingVet">
     
   </div>
 </div>
@@ -94,13 +94,12 @@
 <div class="control-group">
   <label class="control-label" for="textinput">Preferred Contact</label>
   <div class="controls">
-    <input id="textinput" name="textinput" type="text" placeholder="{{vetData.contactMethod}}" class="input-medium" ng-readonly="editingVet">
+    <input id="textinput" name="textinput" type="text" ng-model="vetData.contactMethod" placeholder="{{vetData.contactMethod}}" class="input-medium" ng-readonly="editingVet">
     
   </div>
 </div>
 
 </fieldset>
-</form>
 </div>
 <div class="col-md-6">
   <form class="form-horizontal">
@@ -152,3 +151,4 @@
   </div>
      </div>
 
+</form>
