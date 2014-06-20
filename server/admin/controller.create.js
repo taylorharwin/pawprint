@@ -11,7 +11,7 @@ var db = require('../app/db_config.js'),
     PdfRecords = require('../app/collections/pdfRecords.js'),
     Q    = require('q');
 
-var createVaccine = function(req, res) {
+var createPetVaccine = function(req, res) {
   var requestid = req.params.requestid;
   var vaccines = req.body; // assumes request with vaccine_i
 
@@ -36,6 +36,10 @@ var createVaccine = function(req, res) {
         });
       }
     });
+};
+
+var createVaccine = function(req, res) {
+
 };
 
 var createContact = function(req, res) {
@@ -82,6 +86,7 @@ var createPdf = function(req, res) {
 };
 
 module.exports = exports = {
+  createPetVaccine : createPetVaccine,
   createVaccine : createVaccine,
   createContact : createContact,
   createVetContact : createVetContact,
