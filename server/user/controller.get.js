@@ -9,9 +9,9 @@ var User = require('../app/models/user.js'),
 
 var getUser = function(req, res) {
   var userid = req.params.userid;
-  
-  User.forge({id: userid}).fetch().then(function(user){
-    res.send(200, user);
+
+  User.forge({id: userid}).fetch().then(function(model){
+    res.send(200, model.omit('password', 'salt', 'signature'));
   });
 };
 
