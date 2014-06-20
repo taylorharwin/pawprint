@@ -11,8 +11,8 @@ module.exports = exports = function (router) {
     .get(Get.getRequests);
 
   router.route('/:adminid/requests/:requestid')
-    .get(Get.getRequest); // TODO deprecate this route
-    // .put(Put.putRequest); // TODO
+    .get(Get.getRequest) // TODO deprecate this route
+    .put(Put.putRequest);
 
   router.route('/:adminid/pets/:petid')
     .get(Get.getPet);

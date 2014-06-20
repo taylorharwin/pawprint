@@ -41,10 +41,24 @@ var putVetContact = function(req, res) {
   });
 };
 
+var putRequest = function(req, res) {
+  var requestid = req.params.requestid;
+  var newStatus = req.body.status;
+  // TODO: throw error if status is empty
+
+  Request.forge({id : requestid}).fetch().then(function(request) {
+    request.attributes.status = newStatus;
+    return request.save(request.attributes, {patch: true});
+  }).then(function(model) {
+    res.send(200, model);
+  });
+};
+
 module.exports = exports = {
   putContact: putContact,
   putVaccine: putVaccine,
-  putVetContact: putVetContact
+  putVetContact: putVetContact,
+  putRequest: putRequest
 };
 
 
