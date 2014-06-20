@@ -4,22 +4,32 @@ angular.module('user.pages.controllers')
 
     $scope.userId = CurrentUserFactory.getUserId();
 
-    UserFactory.getUser($scope.userId).then(function (data) {
-      $scope.user = data;
-      // console.log($scope.user, 'beginning');
+    UserFactory.getUser($scope.userId).then(function (response) {
+      if (response.status === 200) {
+        $scope.user = data;
+        // console.log($scope.user, 'beginning');
+      } else {
+        console.log('Error with request', response.status);
+      }
+    }, function (error) {
+      console.log(error);
     });
 
     $scope.updateUser = function() {
       // console.log($scope.user, '=========');
       $scope.user.put().then(function (response){
-        console.log('successful put');
-        // console.log(response);
-        //update the scope user to reflect db
-        $scope.user = response;
-        $scope.updateSuccess = true;
-        $scope.updateError = false;
-      }, function (response) {
-        console.log('Error with request');
+        if (response.status === 200) {
+          console.log('successful put');
+          // console.log(response);
+          //update the scope user to reflect db
+          $scope.user = response.body;
+          $scope.updateSuccess = true;
+          $scope.updateError = false;
+        } else {
+          console.log('Error with request', response.status);
+        }
+      }, function (error) {
+        console.log(error);
         $scope.updateSuccess = false;
         $scope.updateError = true;
       });
@@ -27,12 +37,16 @@ angular.module('user.pages.controllers')
     
     $scope.deleteUser = function() {
       UserFactory.deleteUser($scope.userId).then(function (response) {
-        console.log('deleted user');
-        // @NOTE delete the local auth settings
-        CurrentUserFactory.setUserId('');
-        $state.go('public.home');
-      }, function (response) {
-        console.log('Error with request');
+        if (response.status === 200) {
+          console.log('deleted user');
+          // @NOTE delete the local auth settings
+          CurrentUserFactory.setUserId('');
+          $state.go('public.home'); 
+        } else {
+          console.log('Error with request', response.status);
+        }
+      }, function (error) {
+        console.log(error);
       });
     };
 

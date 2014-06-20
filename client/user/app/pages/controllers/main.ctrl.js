@@ -17,13 +17,21 @@ angular.module('user.pages.controllers')
       for (var i=0; i<$scope.pets.length; i++){
         PetFactory.getPetVaccines($scope.userId, $scope.pets[i].id)
           .then(function (response) {
-            $scope.vaccines.push(response);
+            if (response.status === 200) {
+              $scope.vaccines.push(response);
+            } else {
+              console.log('Error with request', response.status);
+            }
           }, function (error) {
             console.log(error);
           });
         PetFactory.getPetRequests($scope.userId, $scope.pets[i].id)
           .then(function (response) {
-            $scope.requests.push(response);
+            if (response.status === 200) {
+              $scope.requests.push(response);
+            } else {
+              console.log('Error with request', response.status);
+            }
           }, function (error) {
             console.log(error);
           });
@@ -33,7 +41,11 @@ angular.module('user.pages.controllers')
     $scope.cancelRequest = function (petIndex, requestIndex) {
       PetFactory.cancelPetRequest($scope.userId, $scope.pets[petIndex].id, $scope.requests[petIndex][requestIndex])
         .then(function (response) {
-          $scope.requests[petIndex].splice(requestIndex, 1);
+          if (response.status === 200) {
+            $scope.requests[petIndex].splice(requestIndex, 1);
+          } else {
+            console.log('Error with request', response.status);
+          }
         }, function (error) {
           console.log(error);
         });
@@ -53,8 +65,12 @@ angular.module('user.pages.controllers')
 
       modalInstance.result.then(function (pet) {
         pet.put().then(function (response) {
-          console.log('successfully updated pet info');
-          $scope.pets[index] = response;
+          if (response.status === 200) {
+            console.log('successfully updated pet info');
+            $scope.pets[index] = response;
+          } else {
+            console.log('Error with request', response.status);
+          }
         }, function (error) {
           console.log(error);
         });
@@ -66,13 +82,42 @@ angular.module('user.pages.controllers')
 
       var modalInstance = $modal.open({
         templateUrl: 'app/pages/templates/editpet.tpl.html',
-        controller: 'EditPetCtrl'
+        controller: 'EditPetCtrl',
+        resolve: {
+          pet: function () {
+            return {};
+          }
+        }
       });
 
       modalInstance.result.then(function (pet) {
-        PetFactory.postPet(pet).then(function (response) {
-          console.log('successfully created pet');
-          $scope.pets.push(response);
+        PetFactory.postPet(pet).then(function (petResponse) {
+          if (petResponse.status === 201) {
+            console.log('successfully created pet');
+            $scope.pets.push(petResponse);
+            PetFactory.getPetVaccines($scope.userId, petResponse.id)
+              .then(function (response) {
+                if (response.status === 201) {
+                  $scope.vaccines.push(response);
+                } else {
+                  console.log('Error with request', response.status);
+                }
+              }, function (error) {
+                console.log(error);
+              });
+            PetFactory.getPetRequests($scope.userId, petResponse.id)
+              .then(function (response) {
+                if (response.status === 201) {
+                  $scope.requests.push(response);
+                } else {
+                  console.log('Error with request', response.status);
+                }
+              }, function (error) {
+                console.log(error);
+              });
+          } else {
+            console.log('Error with request', petResponse.status);
+          }
         }, function (error) {
           console.log(error);
         });
@@ -84,13 +129,23 @@ angular.module('user.pages.controllers')
 
       var modalInstance = $modal.open({
         templateUrl: 'app/pages/templates/updatepet.tpl.html',
-        controller: 'UpdatePetCtrl'
+        controller: 'UpdatePetCtrl',
+        resolve: {
+          pet: function () {
+            return $scope.pets[index];
+          }
+        }
       });
 
       modalInstance.result.then(function (request) {
         PetFactory.postPetRequest(request.userId, request.petId, request).then(function (response) {
-          console.log('successfully sent pet update request');
-          $scope.pets[index].push(response);
+          if (response.status === 200) {
+            console.log('successfully sent pet update request');
+            console.log($scope.requests, 'requests');
+            $scope.requests[index].push(response);
+          } else {
+            console.log('Error with request', response.status);
+          }
         }, function (error) {
           console.log(error);
         });

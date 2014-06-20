@@ -12,8 +12,13 @@ angular.module('user.pages.controllers')
       // console.log('function userLogin running...');
       UserFactory.postUserLogin($scope.user).then(function (response) {
         // console.log('successful post to server');
-        CurrentUserFactory.setUserId(response.id);
-        $state.go('app.main');
+        if (response.status === 200) {
+          CurrentUserFactory.setUserId(response.id);
+          $state.go('app.main');
+        } else {
+          console.log('Error with request', response.status);
+          $scope.loginError = true;
+        }
       }, function (response) {
         console.log('Error with login request');
         $scope.loginError = true;
