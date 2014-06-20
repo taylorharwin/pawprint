@@ -36,10 +36,7 @@ angular.module('admin.pages.controllers')
       .success(function (json) {
         $scope.cleanDates(json);
         $scope.requests = json;
-        console.log($scope.requests);
-        if (func) {
-          func(json);
-        }
+        $scope.allRequestsCount = json.length;
       })
       .error(function (data, status, headers, config) {
         console.log('error', data, status);
