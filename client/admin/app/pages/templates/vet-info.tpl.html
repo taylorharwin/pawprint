@@ -1,8 +1,18 @@
-<div>
-  <div class="col-md-6">
-  <button class="btn btn-default" ng-click="editVet()">Edit</button>
-  <button class="btn btn-warning" ng-hide="editingVet">Submit</button>
-  <form class="form-horizontal">
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title">Vet Information 
+       <button class="btn btn-default" ng-click="editVet()">Edit</button>
+    <button class="btn btn-warning" ng-hide="editingVet">Submit</button>
+    <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+    </h2>
+  </div>
+
+
+<div class="panel-body">
+  <div>
+    <div class="col-md-6">
+ 
+    <form class="form-horizontal">
 <fieldset>
 
 <!-- Form Name -->
@@ -139,3 +149,6 @@
 </form>
    
 </div>
+  </div>
+     </div>
+

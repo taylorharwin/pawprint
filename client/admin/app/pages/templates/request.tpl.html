@@ -1,5 +1,5 @@
 <div class="row">
-	<div class="col-md-4">
+	<div class="col-md-3">
 		<div class="panel panel-default">
 			<h5>Viewing Request: {{reqID}}</h5>
       <h5>Vet ID: {{vetID}}</h5>
@@ -9,7 +9,7 @@
 		</div>
 	</div>
 
-  <div class="col-md-8">
+  <div class="col-md-6">
   		<div class="btn-group" dropdown is-open="status.isopen">
   				 <span class="dropdown">
       				<button  class="btn btn-large btn-default dropdown-toggle">Update Status<span class="caret"></span></button>
@@ -20,51 +20,38 @@
 			    </div>
   		<button class="btn btn-large btn-info">Download PDF</button>
   		<button ui-sref="app.main" class="btn btn-large btn-default">Back to All Requests</button>
+      <div>
+      <textarea id="note" class="form-control" ng-model="noteText" rows="3"></textarea>
+          <button class="btn btn-large btn-info" ng-click='postNote()'>Leave a Note</button>
+      </div>
   </div>
+  <div class="col-md-3">
+    <div>
+      <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+  </div>
+</div>
+
 </div>
 
 <div class='row'>
 	<div class="col-md-4">
-     <div class="panel panel-default">
-            <div class="panel-heading">
-                <h2 class="panel-title">Vet Information 
-            </div>
-
-            <div class="panel-body">
-                <vet-info></vet-info>
-            </div>
-     </div>
+    <vet-info></vet-info>
   </div>
     <div class="col-md-8">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h2 class="panel-title">User Information 
-            </div>
-
-            <div class="panel-body">
-                <user-info></user-info>
-            </div>
-        </div>
+      <user-info></user-info>
     </div>
 </div>
 
-<div class="row">
-	<div class="col-md-12">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-          <h2 class="panel-title">Vaccine Information</h2>
-			</div>
-			<div class="panel-body">
-				<div class="col-md-3">
-					<edit-vacc></edit-vacc>
-				</div>
 
-				<div class="col-md-9">
-					<vacc-record></vacc-record>
-			</div>
-   </div>
- </div>
+<div class="row">
+  <div class="col-md-3">
+		<edit-vacc></edit-vacc>
+	</div>
+	<div class="col-md-9">
+		<vacc-record></vacc-record>
+	</div>
 </div>
+
 
 <div class="row">
 	<div class="col-md-12">

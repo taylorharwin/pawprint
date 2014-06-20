@@ -54,7 +54,7 @@ angular.module('admin.pages.directives')
       link: function (scope) {
         scope.getStuff(1, 'request', scope.reqID, function (data) {
           scope.vaccinations = data;
-          console.log(scope.vaccinations);
+          console.log('BDFDFSDFSDF', scope.vaccinations);
         }, 'vaccines');
       }
    };
