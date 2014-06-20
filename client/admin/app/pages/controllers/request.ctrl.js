@@ -16,9 +16,11 @@ angular.module('admin.pages.controllers')
     $scope.vaccines = [
       'Rabies', 'Rabbit Anti-Depressant', 'Cat Cold'];
 
-    //Variable for two-way binding with account note form
+    //Variables for two-way binding with account note form and status update dropdown
 
     $scope.noteText;
+    $scope.code = {status: ''};
+
 
     //toggles whether or not a given dropdown menu is open
 
@@ -59,6 +61,8 @@ angular.module('admin.pages.controllers')
       .success(callback)
       .error(function (data, status, headers, config) {
         console.log('error making request:', data, status);
+        $scope.alerts.push({type: 'danger', msg: 'There was an error trying to update'});
+
       });
     };
 
@@ -82,6 +86,15 @@ angular.module('admin.pages.controllers')
 
     $scope.postNote = function () {
       console.log($scope.noteText);
+    };
+
+    $scope.postUpdatedStatus = function (name) {
+      $scope.code.status = name;
+      console.log($scope.code);
+      $scope.submitStuff($scope.code, 1, 'requests', $scope.reqID, function () {
+        console.log('success!');
+        $scope.alerts.push({ type: 'success', msg: 'Great, you updated status to ' +  $scope.code.status});
+      });
     };
 
     $scope.alerts = [];
