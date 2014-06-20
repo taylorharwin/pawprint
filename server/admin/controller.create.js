@@ -11,31 +11,31 @@ var db = require('../app/db_config.js'),
     PdfRecords = require('../app/collections/pdfRecords.js'),
     Q    = require('q');
 
-var createVaccine = function(req, res) {
+var createPetVaccine = function(req, res) {
   var requestid = req.params.requestid;
-  var vaccines = req.body; // assumes request with vaccine_i
+  var vaccines = req.body;
 
   // search for the request with the desired request id
   Request.forge({id: requestid}).fetch()
     .then(function(request){
-      if (request) {
-        // insert pet_id into vaccine information
-        for (var i = 0; i < vaccines.length; i++) {
-          // check if this works
-          vaccines[i].pet_id = request.attributes.pet_id;
-        }
-        // Bookshelf syntax for inserting a collection of vaccines
-        var PetVaccines = db.Collection.extend({model: Pet_Vaccine});
-        PetVaccines.forge(vaccines).mapThen(function(model){
-          console.log(model);
-          return model.save().then(function(pet_vaccine){
-            return pet_vaccine.get('id');
-          });
-        }).then(function(done) {
-          res.send(201, {id: done.id});
+      var PetVaccines = db.Collection.extend({model: Pet_Vaccine});
+      return PetVaccines.forge(vaccines).mapThen(function(model){
+        model.set({
+          request_id: req.params.requestid,
+          pet_id: request.attributes.pet_id
+          // TODO set date of expiration
         });
-      }
+        return model.save().then(function(pet_vaccine){
+          return pet_vaccine;
+        });
+      });
+    }).then(function(collection) {
+      res.send(201, collection);
     });
+};
+
+var createVaccine = function(req, res) {
+
 };
 
 var createContact = function(req, res) {
@@ -82,6 +82,7 @@ var createPdf = function(req, res) {
 };
 
 module.exports = exports = {
+  createPetVaccine : createPetVaccine,
   createVaccine : createVaccine,
   createContact : createContact,
   createVetContact : createVetContact,

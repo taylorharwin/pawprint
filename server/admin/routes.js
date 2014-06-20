@@ -11,8 +11,8 @@ module.exports = exports = function (router) {
     .get(Get.getRequests);
 
   router.route('/:adminid/requests/:requestid')
-    .get(Get.getRequest); // TODO deprecate this route
-    // .put(Put.putRequest); // TODO
+    .get(Get.getRequest) // TODO deprecate this route
+    .put(Put.putRequest);
 
   router.route('/:adminid/pets/:petid')
     .get(Get.getPet);
@@ -22,8 +22,8 @@ module.exports = exports = function (router) {
     .get(Get.getVet);
 
   router.route('/:adminid/requests/:requestid/vaccines')
-    .get(Get.getVaccines)
-    // .post(Create.createVaccine); // TODO
+    .get(Get.getPetVaccines)
+    .post(Create.createPetVaccine);
   // router.route('/:adminid/requests/:requestid/vaccines/:vaccineID')
     // .put(Put.putVaccine) // TODO
     // .delete(Delete.deleteVaccine); // TODO
@@ -49,8 +49,8 @@ module.exports = exports = function (router) {
   //   .put(Put.putContact) // TODO
   //   .delete(Delete.deleteContact); // TODO
 
-  router.route('/:adminid/requests/:requestid/vaccines')
+  router.route('/:adminid/vaccines')
     // .get(Get.getVaccines) //TODO
-    .post(Create.createVaccine)
+    .post(Create.createVaccine) // TODO
     .put(Put.putVaccine); // TODO: deprecate this route?
 };

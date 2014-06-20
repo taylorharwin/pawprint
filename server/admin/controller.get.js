@@ -41,7 +41,7 @@ var getUser = function(req, res) {
 
   new User({id:userid}).fetch()
     .then(function(request) {
-      res.send(200, request);
+      res.send(200, request.omit('password', 'salt'));
     });
 };
 
@@ -59,9 +59,13 @@ var getVetContacts = function(req, res) {
 
 };
 
-var getVaccines = function(req, res) {
+var getPetVaccines = function(req, res) {
   var requestid = req.params.requestid;
 
+  new Pet_Vaccine().query({where: {request_id: requestid}}).fetchAll()
+    .then(function(request) {
+      res.send(200, request);
+    });
 };
 
 var getLogs = function(req, res) {
@@ -74,6 +78,10 @@ var getPDFs = function(req, res) {
 
 };
 
+var getVaccines = function(req, res) {
+  var requestid = req.params.requestid;
+
+};
 
 module.exports = exports = {
   getRequests : getRequests,
@@ -82,7 +90,8 @@ module.exports = exports = {
   getUser : getUser,
   getVet : getVet,
   getVetContacts : getVetContacts,
-  getVaccines : getVaccines,
+  getPetVaccines : getPetVaccines,
   getLogs : getLogs,
-  getPDFs : getPDFs
+  getPDFs : getPDFs,
+  getVaccines : getVaccines
 };
