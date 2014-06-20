@@ -10,13 +10,17 @@ angular.module('user.pages.controllers')
 
     $scope.userSignup = function () {
       UserFactory.postUserSignup($scope.user).then(function (response) {
-        if (response.status === 200) {
-          CurrentUserFactory.setUserId(response.id);
-          $state.go('app.profile');
-        } else {
-          console.log('Error with request', response.status);
-          $scope.signupError = true;
-        }
+        console.log(response);
+        CurrentUserFactory.setUser(response);
+        console.log(CurrentUserFactory.getUser());
+        $state.go('app.profile');
+        // if (response.status === 201) {
+        //   CurrentUserFactory.setUserId(response.id);
+        //   $state.go('app.profile');
+        // } else {
+        //   console.log('Error with request', response.status);
+        //   $scope.signupError = true;
+        // }
       }, function (error) {
         console.log(error);
         $scope.signupError = true;
