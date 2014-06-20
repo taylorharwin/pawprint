@@ -13,9 +13,9 @@ var User = require('../app/models/user.js'),
 var createUser = function(req, res) {
   // need to bcrypt at some point
   // figure out logic for breaking up account creation and user details?
-  User.forge(req.body).save().then(function(newUser) {
-    Users.add(newUser);
-    res.send(201, {id: newUser.id});
+  User.forge(req.body).save().then(function(model) {
+    Users.add(model);
+    res.send(201, model.omit('password'));
   });
 };
 
