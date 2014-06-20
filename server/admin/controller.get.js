@@ -41,7 +41,7 @@ var getUser = function(req, res) {
 
   new User({id:userid}).fetch()
     .then(function(request) {
-      res.send(200, request);
+      res.send(200, request.omit('password', 'salt'));
     });
 };
 
