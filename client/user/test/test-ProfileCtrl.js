@@ -1,4 +1,4 @@
-describe('ProfileCtrl variable types test', function () {
+describe('ProfileCtrl', function () {
   beforeEach(module('user'));
 
   var sampleCtrl, scope;
@@ -10,12 +10,16 @@ describe('ProfileCtrl variable types test', function () {
       });
   }));
 
-  it('user, object', function(){
-    expect(typeof scope.user).toBe('object');
-  });
+  describe(' variable types test', function () {
 
-  it('setUserEdit, function', function(){
-    expect(typeof scope.setUserEdit).toBe('function');
+    it('scope.updateUser, function', function(){
+      expect(typeof scope.updateUser).toBe('function');
+    });
+
+    it('scope.deleteUser, function', function(){
+      expect(typeof scope.deleteUser).toBe('function');
+    });
+    
   });
 
 });
