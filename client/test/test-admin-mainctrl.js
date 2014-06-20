@@ -6,8 +6,10 @@ describe('MainCtrl Test', function () {
 
   beforeEach(inject(function ($controller, $rootScope, $injector) {
     scope = $rootScope;
-    sampleCtrl = $controller('MainCtrl', {
+    reqIDFactory = $injector.get('reqIDFactory');
+    sampleCtrl = $controller('MainCtrl' {
         $scope: scope
+        reqIDFactory: reqIDFactory
       });
   }));
 
@@ -17,3 +19,4 @@ describe('MainCtrl Test', function () {
   
 
 });
+
