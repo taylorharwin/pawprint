@@ -15,7 +15,7 @@ var createUser = function(req, res) {
   // figure out logic for breaking up account creation and user details?
   User.forge(req.body).save().then(function(model) {
     Users.add(model);
-    res.send(201, model.omit('password'));
+    res.send(201, model.omit('password', 'salt'));
   });
 };
 
