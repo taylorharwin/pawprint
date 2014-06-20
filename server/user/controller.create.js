@@ -13,9 +13,9 @@ var User = require('../app/models/user.js'),
 var createUser = function(req, res) {
   // need to bcrypt at some point
   // figure out logic for breaking up account creation and user details?
-  User.forge(req.body).save().then(function(newUser) {
-    Users.add(newUser);
-    res.send(201, {id: newUser.id});
+  User.forge(req.body).save().then(function(model) {
+    Users.add(model);
+    res.send(201, model.omit('password', 'salt'));
   });
 };
 
@@ -26,10 +26,10 @@ var createPet = function(req, res) {
   // create a new pet with userid
   Pet.forge(req.body).save().then(function(pet) {
     // attaches pet to user through the user_pet table
-      console.log(pet);
-      User.forge({id: userid}).pet().attach(pet);
-      Pets.add(pet);
-      res.send(201, {id: pet.id});
+    console.log(pet);
+    User.forge({id: userid}).pet().attach(pet);
+    Pets.add(pet);
+    res.send(201, pet);
   });
 };
 

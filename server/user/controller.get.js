@@ -9,9 +9,9 @@ var User = require('../app/models/user.js'),
 
 var getUser = function(req, res) {
   var userid = req.params.userid;
-  
-  User.forge({id: userid}).fetch().then(function(user){
-    res.send(200, user);
+
+  User.forge({id: userid}).fetch().then(function(model){
+    res.send(200, model.omit('password', 'salt', 'signature'));
   });
 };
 
@@ -29,12 +29,27 @@ var getPets = function(req, res) {
 
 var getRequests = function(req, res) {
   var userid = req.params.userid;
+  var petid = req.params.petid;
   
-  db.knex('request')
-    .where('user_id', userid)
+  // check if user has permissions for this pet
+  db.knex('user_pet')
+    .where({
+      user_id: userid,
+      pet_id: petid,
+    })
     .select()
-    .then(function(requests) {
-      res.send(200, requests);
+    .then(function(found) {
+      if(found.length === 0) {
+        res.send(401, 'Not Authorized');
+        throw new Error('Not Authorized');
+      }
+    }).then(function() {
+      db.knex('request')
+        .where('pet_id', petid)
+        .select()
+        .then(function(requests) {
+          res.send(200, requests);
+        }); 
     });
 };
 
