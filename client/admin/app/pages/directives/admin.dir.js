@@ -14,10 +14,14 @@ angular.module('admin.pages.directives')
       };
       scope.getStuff(1, 'vets', scope.vetID, function (data) {
         scope.vetData = data;
-        console.log(scope.vetData);
       });
+
+      scope.updateVetInfo = function () {
+        scope.vetData = angular.copy(scope.vetData);
+        console.log(scope.vetData);
+      };
     }
-   };
+  };
   })
 
   .directive('userInfo', function () {
@@ -38,6 +42,12 @@ angular.module('admin.pages.directives')
           scope.userData = data;
           console.log(scope.userData);
         });
+        scope.updateUserInfo = function () {
+        scope.petData = angular.copy(scope.petData);
+        console.log(scope.petData);
+        scope.userData = angular.copy(scope.userData);
+        console.log(scope.userData);
+      };
       }
    };
   })
@@ -79,6 +89,11 @@ angular.module('admin.pages.directives')
       scope.editingVacc = true;
       scope.editVacc = function () {
         scope.editingVacc = !scope.editingVacc;
+      };
+      scope.newVac = {};
+     scope.updateVacData = function () {
+      scope.newVac = angular.copy(scope.newVac);
+      console.log(scope.newVac);
       };
     }
   };
