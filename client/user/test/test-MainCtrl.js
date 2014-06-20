@@ -1,4 +1,4 @@
-describe('MainCtrl variable types test', function () {
+describe('MainCtrl', function () {
   beforeEach(module('user'));
 
   var sampleCtrl, scope;
@@ -10,36 +10,40 @@ describe('MainCtrl variable types test', function () {
       });
   }));
 
-  it('checkExpiry, function', function(){
-    expect(typeof scope.checkExpiry).toBe('function');
-  });
+  describe('variable types test', function() {
 
-  it('setUserPetUpdate, function', function(){
-    expect(typeof scope.setUserPetUpdate).toBe('function');
-  });
+    it('checkExpiry, function', function(){
+      expect(typeof scope.checkExpiry).toBe('function');
+    });
 
-  it('cancelUserPetUpdate, function', function(){
-    expect(typeof scope.cancelUserPetUpdate).toBe('function');
-  });
+    it('pets, array', function(){
+      expect(Array.isArray(scope.pets)).toBe(true);
+    });
 
-  it('setUserPetEdit, function', function(){
-    expect(typeof scope.setUserPetEdit).toBe('function');
-  });
+    it('vaccines, array', function(){
+      expect(Array.isArray(scope.vaccines)).toBe(true);
+    });
 
-  it('startUserPetEdit, function', function(){
-    expect(typeof scope.startUserPetEdit).toBe('function');
-  });
+    it('requests, array', function(){
+      expect((Array.isArray(scope.requests))).toBe(true);
+    });
 
-  it('addPetEntry, function', function(){
-    expect(typeof scope.addPetEntry).toBe('function');
-  });
+    it('cancelRequest, function', function(){
+      expect(typeof scope.cancelRequest).toBe('function');
+    });
 
-  it('user, object', function(){
-    expect(typeof scope.user).toBe('object');
-  });
+    it('editPet, function', function(){
+      expect(typeof scope.editPet).toBe('function');
+    });
 
-  it('pets, array', function(){
-    expect(Array.isArray(scope.pets)).toBe(true);
+    it('addPet, function', function(){
+      expect(typeof scope.addPet).toBe('function');
+    });
+
+    it('updatePet, function', function(){
+      expect(typeof scope.updatePet).toBe('function');
+    });
+
   });
 
 });
