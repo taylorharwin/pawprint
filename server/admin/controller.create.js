@@ -41,7 +41,11 @@ var createPetVaccine = function(req, res) {
 };
 
 var createVaccine = function(req, res) {
+  var newVaccine = req.body;
 
+  Vaccine.forge(newVaccine).save().then(function(model) {
+    res.send(201, model);
+  });
 };
 
 var createLog = function(req, res) {
