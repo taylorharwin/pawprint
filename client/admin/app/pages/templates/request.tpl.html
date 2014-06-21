@@ -7,7 +7,10 @@
         <div class="col-md-8">
           <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
         </div>
-          <button class="btn btn-large btn-info logout">Log Out</button>
+        <div class="right">
+          <button ui-sref="app.main" class="btn btn-large btn-info">Back to All Requests</button>
+          <button class="btn btn-large btn-danger">Log Out</button>
+        </div>
         </div>
     </div>
 </div>
@@ -38,10 +41,9 @@
   				 </span>
 			    </div>
   		<button class="btn btn-large btn-info">Download PDF</button>
-  		<button ui-sref="app.main" class="btn btn-large btn-default">Back to All Requests</button>
       <div>
       <textarea id="note" class="form-control" ng-model="noteText" rows="3"></textarea>
-          <button class="btn btn-large btn-info" ng-click='postNote()'>Leave a Note</button>
+          <button class="btn btn-large btn-info" ng-click='postNote(noteText)'>Leave a Note</button>
       </div>
   </div>
 
