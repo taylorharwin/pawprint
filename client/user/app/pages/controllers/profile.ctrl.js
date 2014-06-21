@@ -3,31 +3,21 @@ angular.module('user.pages.controllers')
     console.log($scope);
 
     $scope.userId = CurrentUserFactory.getUserId();
-
     UserFactory.getUser($scope.userId).then(function (response) {
-      if (response.status === 200) {
-        $scope.user = data;
-        // console.log($scope.user, 'beginning');
-      } else {
-        console.log('Error with request', response.status);
-      }
-    }, function (error) {
-      console.log(error);
+      // console.log(response);
+      $scope.user = response;
     });
 
     $scope.updateUser = function() {
-      // console.log($scope.user, '=========');
-      $scope.user.put().then(function (response){
-        if (response.status === 200) {
+      console.log('=================');
+      console.log($scope.user);
+      console.log('=================');
+      $scope.user.put().then(function (response) {
           console.log('successful put');
-          // console.log(response);
-          //update the scope user to reflect db
-          $scope.user = response.body;
+          // update the scope user to reflect db
+          $scope.user = response;
           $scope.updateSuccess = true;
           $scope.updateError = false;
-        } else {
-          console.log('Error with request', response.status);
-        }
       }, function (error) {
         console.log(error);
         $scope.updateSuccess = false;
@@ -37,14 +27,10 @@ angular.module('user.pages.controllers')
     
     $scope.deleteUser = function() {
       UserFactory.deleteUser($scope.userId).then(function (response) {
-        if (response.status === 200) {
-          console.log('deleted user');
-          // @NOTE delete the local auth settings
-          CurrentUserFactory.setUserId('');
-          $state.go('public.home'); 
-        } else {
-          console.log('Error with request', response.status);
-        }
+        console.log('deleted user');
+        // @NOTE delete the local auth settings
+        CurrentUserFactory.setUserId(null);
+        $state.go('public.home');
       }, function (error) {
         console.log(error);
       });
