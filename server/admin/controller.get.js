@@ -1,15 +1,18 @@
-var db           = require('../app/db_config.js');
-    User         = require('../app/models/user.js'),
-    Users        = require('../app/collections/users.js'),
-    Pet          = require('../app/models/pet.js'),
-    Pets         = require('../app/collections/pets.js'),
-    Request      = require('../app/models/request.js'),
-    Requests     = require('../app/collections/requests.js'),
-    Vet          = require('../app/models/vet.js'),
-    Vets         = require('../app/collections/vets.js'),
-    Pet_Vaccine  = require('../app/models/pet_vaccine.js'),
-    Pet_Vaccines = require('../app/collections/pet_vaccines.js'),
-    Q            = require('q');
+var db                = require('../app/db_config.js'),
+    ContactHistory    = require('../app/models/contactHistory.js'),
+    ContactHistorys   = require('../app/collections/contactHistorys.js'),
+    User              = require('../app/models/user.js'),
+    Users             = require('../app/collections/users.js'),
+    Pet               = require('../app/models/pet.js'),
+    Pets              = require('../app/collections/pets.js'),
+    Request           = require('../app/models/request.js'),
+    Requests          = require('../app/collections/requests.js'),
+    Vet               = require('../app/models/vet.js'),
+    Vets              = require('../app/collections/vets.js'),
+    Pet_Vaccine       = require('../app/models/pet_vaccine.js'),
+    Pet_Vaccines      = require('../app/collections/pet_vaccines.js'),
+    Q                 = require('q');
+
 
 var getRequests = function(req, res) {
   new Request().fetchAll()
@@ -71,6 +74,10 @@ var getPetVaccines = function(req, res) {
 var getLogs = function(req, res) {
   var requestid = req.params.requestid;
 
+  new ContactHistory().query({where: {request_id: requestid}}).fetchAll()
+    .then(function(request) {
+      res.send(200, request);
+    });
 };
 
 var getPDFs = function(req, res) {

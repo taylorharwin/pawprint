@@ -30,7 +30,7 @@ module.exports = exports = function (router) {
 
   router.route('/:adminid/requests/:requestid/logs')
     .get(Get.getLogs)
-    .post(Create.createContact); // TODO: change name to 'createLog'
+    // .post(Create.createContact); // TODO: change name to 'createLog'
   router.route('/:adminid/requests/:requestid/logs/:logid')
     .put(Put.putContact) // TODO: change name to 'putLog'
     // .delete(Delete.deleteLog); // TODO
