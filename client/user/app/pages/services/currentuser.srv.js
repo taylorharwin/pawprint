@@ -2,14 +2,14 @@ angular.module('user.pages.services')
 
   .factory('CurrentUserFactory', function () {
 
-    var userId = null;
+    var currentUser = null;
 
-    function setUserId (id) {
-      userId = id;
+    function setUserId (userId) {
+      currentUser = userId;
     }
 
     function getUserId () {
-      return userId;
+      return currentUser;
     }
 
     return {
