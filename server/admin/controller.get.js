@@ -19,12 +19,35 @@ var db                = require('../app/db_config.js'),
     Vaccines          = require('../app/collections/vaccines.js'),
     Q                 = require('q');
 
-var getter = function (req, res, Model, options) {
-  // Options is an object with 3 parameters
-    // all: a boolean value for fetchALL or just fetch, defaults to fetch
-    // query: an object for query parameters to pass into fetch
-    // omit: a string or array of strings of parameters
-    //       that should be omitted from the returned model
+/*************DOCS***************/
+
+// _getter makes GET requests with query options and allows you to omit things in the return
+// Options is an object with 3 parameters
+  // all: a boolean value for fetchALL or just fetch, defaults to fetch
+  // query: an object for query parameters to pass into fetch
+  // omit: a string or array of strings of parameters
+  //       that should be omitted from the returned model
+
+// Example:
+
+  // var getUser = function(req, res) {
+  //   var getUser = function(req, res) {
+  //   var userid = req.params.userid;
+  //   
+  //   new User({id:userid}).fetch()
+  //     .then(function(request) {
+  //       res.send(200, request.omit('password', 'salt'));
+  //     });
+  //    
+  //   };
+  // };
+
+  // becomes
+
+  // var getUser = function(req, res) {
+  //   _getter(req, res, User, {id:req.params.userid}, {omit: ['password', 'salt']});
+  // };
+var _getter = function (req, res, Model, options) {
   var params = options.query || {};
   var model = new Model().query({where: params});
 
@@ -44,64 +67,64 @@ var getter = function (req, res, Model, options) {
 };
 
 var getRequests = function(req, res) {
-  getter(req, res, Request, { all: true });
+  _getter(req, res, Request, { all: true });
 };
 
 var getRequest = function(req, res) {
-  getter(req, res, Request, {
+  _getter(req, res, Request, {
     query: { id: req.params.requestid}
   });
 };
 
 var getPet = function(req, res) {
-  getter(req, res, Pet, {
+  _getter(req, res, Pet, {
     query: { id: req.params.petid }
   });
 };
 
 var getUser = function(req, res) {
-  getter(req, res, User, {
+  _getter(req, res, User, {
     query: { id: req.params.userid },
     omit: ['password', 'salt']
   });
 };
 
 var getVet = function(req, res) {
-  getter(req, res, Vet, {
+  _getter(req, res, Vet, {
     query: { id: req.params.vetid }
   });
 };
 
 var getVetContacts = function(req, res) {
-  getter(req, res, VetContact, {
+  _getter(req, res, VetContact, {
     query: { vet_id: req.params.vetid },
     all: true
   });
 };
 
 var getPetVaccines = function(req, res) {
-  getter(req, res, Pet_Vaccine, {
+  _getter(req, res, Pet_Vaccine, {
     query: { request_id: req.params.requestid },
     all: true
   });
 };
 
 var getLogs = function(req, res) {
-  getter(req, res, ContactHistory, {
+  _getter(req, res, ContactHistory, {
     query: { request_id: req.params.requestid },
     all: true
   });
 };
 
 var getPDFs = function(req, res) {
-  getter(req, res, PdfRecord, {
+  _getter(req, res, PdfRecord, {
     query: { request_id: req.params.requestid },
     all: true
   });
 };
 
 var getVaccines = function(req, res) {
-  getter(req, res, Vaccine, {
+  _getter(req, res, Vaccine, {
     all: true
   });
 };
