@@ -21,15 +21,17 @@ var getter = function (req, res, Model, options) {
     //       that should be omitted from the returned model
   var model = new Model(options.query);
 
-  (function() {
-    if (options.all) {
-      return model.fetchAll();
-    } else {
-      return model.fetch();
-    }
-  })().then(function(requests) {
-    res.send(200, requests.omit(options.omit));
-  });
+  if (options.all) {
+    model.fetchAll().then(function(requests) {
+      // TODO omit for collections
+      res.send(200, requests);
+    });
+  } else {
+    model.fetch().then(function(requests) {
+      res.send(200, requests.omit(options.omit));
+    });
+  }
+
 };
 
 var getRequests = function(req, res) {
