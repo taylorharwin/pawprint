@@ -98,7 +98,7 @@ var getPDFs = function(req, res) {
 };
 
 var getVaccines = function(req, res) {
-  getter(req, res, Vaccines, {
+  getter(req, res, Vaccine, {
     all: true
   });
 };
