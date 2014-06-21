@@ -94,16 +94,18 @@ angular.module('admin.pages.directives')
     scope: true,
     replace: 'true',
     templateUrl: 'app/pages/templates/edit-vacc.tpl.html',
-    link: function (scope) {
+    link: function (scope, $http) {
+      scope.getAllVaccines();
       scope.editingVacc = true;
       scope.editVacc = function () {
         scope.editingVacc = !scope.editingVacc;
       };
       scope.newVac = {};
-     scope.updateVacData = function () {
-      scope.newVac = angular.copy(scope.newVac);
-      console.log(scope.newVac);
+      scope.updateVacData = function () {
+        scope.newVac = angular.copy(scope.newVac);
+        console.log(scope.newVac);
       };
+   
     }
   };
   });
