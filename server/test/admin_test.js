@@ -70,12 +70,42 @@ module.exports = exports = function() {
       var input = {
         link: 'www.testpost.asd'
       };
-      request.post('/admin/1/requests/1/pdfs', createForm(input), function(err, res, body) {
+      request.post(reqUrl + '/admin/1/requests/1/pdfs', createForm(input), function(err, res, body) {
         expect(!!err).to.equal(false);
         expect(res.statusCode).to.equal(201);
         body = JSON.parse(body);
         expect(body.request_id).to.equal(1);
         expect(body.link).to.equal('www.testpost.asd');
+        done();
+      });
+    });
+
+    it('/admin/:adminid/vets/:vetid/contacts', function(done) {
+      var input = {
+        name: 'pauldummy',
+        title: 'dummyvet',
+        email: 'paul@dummy.asd',
+        phone: '1234567890'
+      };
+      requet.post(reqUrl + '/admin/1/vets/1/contacts', createForm(input), function(err, res, body) {
+        expect(!!err).to.equal(false);
+        expect(res.statusCode).to.equal(201);
+        body = JSON.parse(body);
+        expect(body.vet_id).to.equal(1);
+        expect(body.name).to.equal('pauldummy');
+        done();
+      });
+    });
+
+    it('/admin/:adminid/vaccines', function(done) {
+      var input = {
+        name: 'dummyvaccine'
+      };
+      request.post(reqUrl + '/admin/1/vaccines', createForm(input), function(err, res, body) {
+        expect(!!err).to.equal(false);
+        expect(res.statusCode).to.equal(201);
+        body = JSON.parse(body);
+        expect(body.name).to.equal('dummyvaccine');
         done();
       });
     });
@@ -160,6 +190,31 @@ module.exports = exports = function() {
         done();
       });
     });
+
+    it('/admin/:adminid/vets/:vetid/contacts', function(done) {
+      request.get(reqUrl + '/admin/1/vets/1/contacts', function(err, res, body) {
+        expect(!!err).to.equal(false);
+        expect(res.statusCode).to.equal(200);
+        body = JSON.parse(body);
+        expect(body).to.be.a('array');
+        expect(body.length).to.be.above(0);
+        expect(body[0].vet_id).to.be.equal(1);
+        expect(!!body[0].name).to.equal(true);
+        done();
+      });
+    });
+
+    it('/admin/:adminid/vaccines', function(done) {
+      request.get(reqUrl + '/admin/1/vaccines', function(err, res, body) {
+        expect(!!err).to.equal(false);
+        expect(res.statusCode).to.equal(200);
+        body = JSON.parse(body);
+        expect(body).to.be.a('array');
+        expect(body.length).to.be.above(0);
+        expect(!!body[0].name).to.equal(true);
+        done();
+      });
+    });
   });
 
   describe('PUT', function() {
@@ -208,7 +263,7 @@ module.exports = exports = function() {
       var input = {
         link: 'www.put.asd'
       };
-      request(reqUrl + '/admin/1/requests/1/pdfs/1', createForm(input), function(err, res, body) {
+      request.put(reqUrl + '/admin/1/requests/1/pdfs/1', createForm(input), function(err, res, body) {
         expect(!!err).to.equal(false);
         expect(res.statusCode).to.equal(200);
         body = JSON.parse(body);
@@ -216,6 +271,28 @@ module.exports = exports = function() {
         expect(body.link).to.equal('www.put.asd');
         done();
       });
+    });
+
+    it('/admin/:adminid/vets/:vetid/contacts/:contactid', function(done) {
+      var input = {
+        name: 'changedvetcontact'
+      };
+      request.put(reqUrl + '/admin/1/vets/1/contacts/1', createForm(input), function(err, res, body) {
+        expect(!!err).to.equal(false);
+        expect(res.statusCode).to.equal(200);
+        body = JSON.parse(body);
+        expect(body.id).to.equal(1);
+        expect(body.vet_id).to.equal(1);
+        expect(body.name).to.equal('changedvetcontact');
+        done();
+      });
+    });
+  });
+
+  describe('DELETE', function() {
+    before(function(done) {
+      // create stuff
+      
     });
   });
 };
