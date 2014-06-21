@@ -58,7 +58,10 @@ var getPet = function(req, res) {
 };
 
 var getUser = function(req, res) {
-  getter(req, res, User, {id:req.params.userid}, {omit: ['password', 'salt']});
+  getter(req, res, User, {
+    query: {id:req.params.userid},
+    omit: ['password', 'salt']
+  });
 };
 
 var getVet = function(req, res) {
