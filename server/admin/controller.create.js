@@ -33,9 +33,7 @@ var createPetVaccine = function(req, res) {
           pet_id: request.attributes.pet_id
           // TODO set date of expiration
         });
-        return model.save().then(function(pet_vaccine){
-          return pet_vaccine;
-        });
+        return model.save();
       });
     }).then(function(collection) {
       res.send(201, collection);
