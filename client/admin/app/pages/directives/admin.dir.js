@@ -34,7 +34,7 @@ angular.module('admin.pages.directives')
         scope.editUser = function () {
           scope.editingUser = !scope.editingUser;
         };
-        scope.getStuff(99, 'pets', scope.petID, function (data) {
+        scope.getStuff(1, 'pets', scope.petID, function (data) {
           scope.petData = data;
           console.log(scope.petData);
         });
