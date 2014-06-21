@@ -19,6 +19,44 @@ var db                = require('../app/db_config.js'),
     Vaccines          = require('../app/collections/vaccines.js'),
     Q                 = require('q');
 
+/************DOCS****************/
+// _creator returns a function that makes POST request with the req.body extended by any params passed in
+// params is an object with properties for each property the model should be extended with
+  // Example: 
+    // var createLog = function(req, res) {
+    //   var newLog = req.body;
+    //   newLog.admin_id = req.params.adminid;
+    //   newLog.request_id = req.params.requestid;
+    //   ContactHistory.forge(newLog).save().then(function(model) {
+    //     res.send(201, model);
+    //   });
+    // };
+
+    // becomes
+
+    // var createLog = function(req, res) {
+    //   creator(req, res, ContactHistory, {
+    //     admin_id: req.params.adminid,
+    //     request_id: req.params.requestid
+    //   });
+    // }; 
+var _creator = function(Model, params) {
+  return function (req, res) {
+    var newObj = req.body;
+    for (var property in params) {
+      newObj[property] = req.params[property];
+    }
+
+    Model.forge(newObj).save().then(function(model) {
+      res.send(201, model);
+    }).catch(function(err) {
+      console.error(err);
+      res.send(500, 'Internal server error');
+    });
+  };
+};
+
+// createPetVaccine
 var createPetVaccine = function(req, res) {
   var requestid = req.params.requestid;
   var vaccines = req.body;
@@ -40,43 +78,19 @@ var createPetVaccine = function(req, res) {
     });
 };
 
-var createVaccine = function(req, res) {
-  var newVaccine = req.body;
+var createVaccine = _creator(Vaccine);
 
-  Vaccine.forge(newVaccine).save().then(function(model) {
-    res.send(201, model);
-  });
-};
+var createLog = _creator(ContactHistory, {
+  admin_id: 'adminid',
+  request_id: 'requestid'
+});
 
-var createLog = function(req, res) {
-  var newLog = req.body;
-  newLog.admin_id = req.params.adminid;
-  newLog.request_id = req.params.requestid;
-
-  ContactHistory.forge(newLog).save().then(function(model) {
-    res.send(201, model);
-  });
-};
-
-var createVetContact = function(req, res) {
-  var newContact = req.body;
-  newContact.vet_id = req.params.vetid;
-
-  VetContact.forge(newContact).save().then(function(model) {
-    res.send(201, model);
-  });
-};
+var createVetContact = _creator(VetContact, {
+  vet_id: 'vetid'
+});
 
 var createPdf = function(req, res) {
-  var adminid = req.params.adminid;
-  var requestid = req.params.requestid;
-  var pdf = req.body;
-  pdf.request_id = requestid;
-
-  PdfRecord.forge(pdf).save().then(function(pdfrecord) {
-    PdfRecords.add(pdfrecord);
-    res.send(201, {id: pdfrecord.id});
-  });
+  // TODO, this will be a multi-part form request
 };
 
 module.exports = exports = {
