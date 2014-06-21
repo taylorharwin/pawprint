@@ -35,10 +35,7 @@ var getter = function (req, res, Model, options) {
 };
 
 var getRequests = function(req, res) {
-  new Request().fetchAll()
-    .then(function(requests) {
-      res.send(200, requests);
-    });
+  getter(req, res, Request, { all: true });
 };
 
 var getRequest = function(req, res) {
@@ -61,7 +58,7 @@ var getPet = function(req, res) {
 
 var getUser = function(req, res) {
   getter(req, res, User, {
-    query: {id:req.params.userid},
+    query: { id: req.params.userid },
     omit: ['password', 'salt']
   });
 };
