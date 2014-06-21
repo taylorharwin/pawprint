@@ -13,6 +13,23 @@ var db                = require('../app/db_config.js'),
     Pet_Vaccines      = require('../app/collections/pet_vaccines.js'),
     Q                 = require('q');
 
+var getter = function (req, res, Model, queryParams, options) {
+  // Options is an object with 2 parameters
+    // all: a boolean value for fetchALL or just fetch, defaults to fetch
+    // omit: a string or array of strings of parameters
+    //       that should be omitted from the returned model
+  var model = new Model();
+
+  (function() {
+    if (options.all) {
+      return model.fetchAll();
+    } else {
+      return model.fetch();
+    }
+  })().then(function(requests) {
+    res.send(200, requests.omit(options.omit));
+  });
+};
 
 var getRequests = function(req, res) {
   new Request().fetchAll()
