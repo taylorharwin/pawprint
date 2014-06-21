@@ -8,7 +8,7 @@ var User             = require('../app/models/user.js'),
 
 // TODO: validations for field length/type
 
-var putContact = function(req, res) {
+var putLog = function(req, res) {
   var adminid = req.params.adminid;
   var requestid = req.params.requestid;
   var contactid = req.params.contactid;
@@ -19,11 +19,18 @@ var putContact = function(req, res) {
   });
 };
 
-var putVaccine = function(req, res) {
+var putPetVaccine = function(req, res) {
+// /:adminid/request/:requestid/vaccine
   var adminid = req.params.adminid;
   var requestid = req.params.requestid;
   
-// /:adminid/request/:requestid/vaccine
+};
+
+var putPdf = function(req, res) {
+  var adminid = req.params.adminid;
+  var requestid = req.params.requestid;
+  var pdfid = req.params.pdfid;
+
 };
 
 var putVetContact = function(req, res) {
@@ -51,8 +58,9 @@ var putRequest = function(req, res) {
 };
 
 module.exports = exports = {
-  putContact: putContact,
-  putVaccine: putVaccine,
+  putLog: putLog,
+  putPdf: putPdf,
+  putPetVaccine: putPetVaccine,
   putVetContact: putVetContact,
   putRequest: putRequest
 };
