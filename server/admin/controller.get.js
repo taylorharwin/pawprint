@@ -57,12 +57,7 @@ var getPet = function(req, res) {
 };
 
 var getUser = function(req, res) {
-  var userid = req.params.userid;
-
-  new User({id:userid}).fetch()
-    .then(function(request) {
-      res.send(200, request.omit('password', 'salt'));
-    });
+  getter(req, res, User, {id:req.params.userid}, {omit: ['password', 'salt']});
 };
 
 var getVet = function(req, res) {
