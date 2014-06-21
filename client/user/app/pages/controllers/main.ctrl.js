@@ -117,7 +117,6 @@ angular.module('user.pages.controllers')
         PetFactory.postPetRequest(request.userId, request.petId, request).then(function (response) {
           console.log('successfully sent pet update request');
           console.log($scope.requests, 'requests');
-          console.log(index, "INDEXXX!!!!");
           $scope.requests[index].push(response);
           console.log($scope.requests[index], 'PET REQUESTS.....');
         }, function (error) {
