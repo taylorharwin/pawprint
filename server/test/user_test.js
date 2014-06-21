@@ -21,7 +21,7 @@ module.exports = exports = function() {
     it('/user', function(done) {
       var input = {email: 'apple@dog.com', password: 'password'};
       request.post(reqUrl + '/user', createForm(input), function(err, res, body) {
-        expect(!!err).to.be(false);
+        expect(!!err).to.equal(false);
         expect(res.statusCode).to.equal(201);
         body = JSON.parse(body);
         User.forge({id: body.id}).fetch().then(function(user) {
@@ -35,7 +35,7 @@ module.exports = exports = function() {
     it('/user/:userid/pets', function(done) {
       var input = {name: 'testapple', gender: 'F'};
       request.post(reqUrl + '/user/1/pets', createForm(input), function(err, res, body) {
-        expect(!!err).to.be(false);
+        expect(!!err).to.equal(false);
         expect(res.statusCode).to.equal(201);
         body = JSON.parse(body);
         Pet.forge({id: body.id}).fetch().then(function(pet) {
@@ -49,7 +49,7 @@ module.exports = exports = function() {
     it('/user/:userid/pets/:petid/requests', function(done) {
       var input = {practiceName: 'vet123', contactMethod: 'phone', phone: '123456789'};
       request.post(reqUrl + '/user/1/pets/1/requests', createForm(input), function(err, res, body) {
-          expect(!!err).to.be(false);
+          expect(!!err).to.equal(false);
           expect(res.statusCode).to.equal(201);
           body = JSON.parse(body);
           Request.forge({id: body.id}).fetch().then(function(request) {
@@ -64,7 +64,7 @@ module.exports = exports = function() {
   describe('GET', function() {
     it('/user/:userid', function(done) {
       request.get(reqUrl + '/user/1', function(err, res, body) {
-        expect(!!err).to.be(false);
+        expect(!!err).to.equal(false);
         expect(res.statusCode).to.equal(200);
         body = JSON.parse(body);
         expect(body.id).to.equal(1);
@@ -76,7 +76,7 @@ module.exports = exports = function() {
     // TODO: more comprehensive for the arrays
     it('/user/:userid/pets', function(done) {
       request.get(reqUrl + '/user/1/pets', function(err, res, body) {
-        expect(!!err).to.be(false);
+        expect(!!err).to.equal(false);
         expect(res.statusCode).to.equal(200);
         body = JSON.parse(body);
         console.log('pets', body);
@@ -87,7 +87,7 @@ module.exports = exports = function() {
 
     it('/user/:userid/pets/:petid/vaccines/', function(done) {
       request.get(reqUrl + '/user/1/pets/1/vaccines', function(err, res, body) {
-        expect(!!err).to.be(false);
+        expect(!!err).to.equal(false);
         expect(res.statusCode).to.equal(200);
         body = JSON.parse(body);
         console.log('vaccines', body);
@@ -98,7 +98,7 @@ module.exports = exports = function() {
 
     it('/user/:userid/pets/:petid/requests', function(done) {
       request.get(reqUrl + '/user/1/pets/1/requests', function(err, res, body) {
-        expect(!!err).to.be(false);
+        expect(!!err).to.equal(false);
         expect(res.statusCode).to.equal(200);
         body = JSON.parse(body);
         console.log('requests', body);
@@ -109,7 +109,7 @@ module.exports = exports = function() {
 
     it('/user/vets', function(done) {
       request.get(reqUrl + '/user/vets', function(err, res, body) {
-        expect(!!err).to.be(false);
+        expect(!!err).to.equal(false);
         expect(res.statusCode).to.equal(200);
         body = JSON.parse(body);
         expect(body).to.be.a('array');
@@ -122,7 +122,7 @@ module.exports = exports = function() {
     it('/user/:userid', function(done) {
       var input = {email: 'change@d.com', password: 'password2'};
       request.put(reqUrl + '/user/1', createForm(input), function(err, res, body) {
-        expect(!!err).to.be(false);
+        expect(!!err).to.equal(false);
         expect(res.statusCode).to.equal(200);
         body = JSON.parse(body);
         expect(body.id).to.equal(1);
@@ -134,7 +134,7 @@ module.exports = exports = function() {
     it('/user/:userid/pets/:petid', function(done) {
       var input = {name: 'applechange'};
       request.put(reqUrl + '/user/1/pets/1', createForm(input), function(err, res, body) {
-        expect(!!err).to.be(false);
+        expect(!!err).to.equal(false);
         expect(res.statusCode).to.equal(200);
         body = JSON.parse(body);
         expect(body.id).to.equal(1);
@@ -180,7 +180,7 @@ module.exports = exports = function() {
 
     it('/user/:userid', function(done) {
       request.del(reqUrl + '/user/' + userid, function(err, res, body) {
-        expect(!!err).to.be(false);
+        expect(!!err).to.equal(false);
         expect(res.statusCode).to.equal(200);
         db.knex('user')
           .where('user_id', userid)
@@ -194,7 +194,7 @@ module.exports = exports = function() {
 
     it('/user/:userid/pets/:petid', function(done) {
       request.del(reqUrl + '/user/1/pets/' + petid, function(err, res, body) {
-        expect(!!err).to.be(false);
+        expect(!!err).to.equal(false);
         expect(res.statusCode).to.equal(200);
         db.knex('user_pet')
           .where('id', userpetid)
@@ -209,7 +209,7 @@ module.exports = exports = function() {
     it('/user/:userid/pets/:petid/requests/:requestid', function(done) {
       request.del(reqUrl + 'user/1/pets/1/requests/1', function(err, res, body) {
         console.log(err);
-        expect(!!err).to.be(false);
+        expect(!!err).to.equal(false);
         expect(res.statusCode).to.equal(200);
         db.knex('request')
           .where('id', 1)

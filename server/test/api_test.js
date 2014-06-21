@@ -24,6 +24,6 @@ describe('Pawprint Tests', function() {
   serverDataCallback();
 
   // TODO: add negative tests
-  describe('user routes', usertests);
+  xdescribe('user routes', usertests);
   describe('server routes', admintests);
 });
