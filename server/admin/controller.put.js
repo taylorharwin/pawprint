@@ -9,13 +9,16 @@ var User             = require('../app/models/user.js'),
 // TODO: validations for field length/type
 
 var putLog = function(req, res) {
-  var adminid = req.params.adminid;
-  var requestid = req.params.requestid;
-  var contactid = req.params.contactid;
+  var logid = req.params.logid;
+  // req.body should have type, notes, vetcontactid
+  var patchObj = req.body;
+  // extend patchObj with adminid
+  patchObj.admin_id = req.params.adminid;
 
-  ContactHistory.forge({id: contactid}).fetch().then(function(contactHistory) {
-    contactHistory.save(req.body, {patch: true});
-    res.send(200, contactHistory.id);
+  ContactHistory.forge({id: logid}).fetch().then(function(model) {
+    return model.save(patchObj, {patch: true});
+  }).then(function(model) {
+    res.send(200, model);
   });
 };
 
