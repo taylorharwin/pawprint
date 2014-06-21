@@ -13,8 +13,8 @@ var db                = require('../app/db_config.js'),
     Vets              = require('../app/collections/vets.js'),
     Pet_Vaccine       = require('../app/models/pet_vaccine.js'),
     Pet_Vaccines      = require('../app/collections/pet_vaccines.js'),
-    VetContact       = require('../app/models/vetContact.js'),
-    VetContacts      = require('../app/collections/vetContacts.js'),
+    VetContact        = require('../app/models/vetContact.js'),
+    VetContacts       = require('../app/collections/vetContacts.js'),
     Vaccine           = require('../app/models/vaccine.js'),
     Vaccines          = require('../app/collections/vaccines.js'),
     Q                 = require('q');
@@ -25,7 +25,7 @@ var getter = function (req, res, Model, options) {
     // query: an object for query parameters to pass into fetch
     // omit: a string or array of strings of parameters
     //       that should be omitted from the returned model
-  var model = new Model(options.query);
+  var model = new Model().query({where: options.query});
 
   if (options.all) {
     model.fetchAll().then(function(requests) {
@@ -37,6 +37,8 @@ var getter = function (req, res, Model, options) {
       res.send(200, requests.omit(options.omit));
     });
   }
+  // TODO catch error
+  // Can't omit on null object { require: true}
 
 };
 
@@ -78,7 +80,7 @@ var getVetContacts = function(req, res) {
 
 var getPetVaccines = function(req, res) {
   getter(req, res, Pet_Vaccine, {
-    query: { id: req.params.requestid },
+    query: { request_id: req.params.requestid },
     all: true
   });
 };
