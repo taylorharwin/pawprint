@@ -137,7 +137,7 @@ db.knex.schema.hasTable('contactHistory').then(function(exists) {
       history.string('type', 100);
       history.string('notes', 255);
       history.integer('request_id');
-      history.string('vetContact_id');
+      history.integer('vetContact_id');
       history.timestamps();
     }).then(function (table) {
       console.log('Created Table', table);

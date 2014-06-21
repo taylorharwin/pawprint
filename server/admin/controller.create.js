@@ -44,7 +44,7 @@ var _creator = function(Model, params) {
   return function (req, res) {
     var newObj = req.body;
     for (var property in params) {
-      newObj[property] = req.params[property];
+      newObj[property] = req.params[params[property]];
     }
 
     Model.forge(newObj).save().then(function(model) {
