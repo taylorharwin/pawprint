@@ -4,17 +4,17 @@ angular.module('user.pages.services')
 
     var currentUser = null;
 
-    function setUser (user) {
-      currentUser = user;
+    function setUserId (userId) {
+      currentUser = userId;
     }
 
-    function getUser () {
+    function getUserId () {
       return currentUser;
     }
 
     return {
-      setUser: setUser,
-      getUser: getUser
+      setUserId: setUserId,
+      getUserId: getUserId
     };
 
   });
