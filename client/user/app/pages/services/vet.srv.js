@@ -1,9 +1,7 @@
 angular.module('user.pages.services')
 
-  .factory('VetFactory', function ($http) {
+  .factory('VetFactory', function ($http, Restangular) {
 
-    //@TODO test all the functions in this factory
-    //@TODO use these functions to request API:
     function getVets () {
       return Restangular.all('vets').getList().then(function (vets){
         return vets;
