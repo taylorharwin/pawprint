@@ -110,17 +110,21 @@ angular.module('admin.pages.directives')
     scope: true,
     replace: 'true',
     templateUrl: 'app/pages/templates/edit-vacc.tpl.html',
-    link: function (scope, $http) {
+    link: function (scope) {
       scope.getAllVaccines();
       scope.editingVacc = true;
       scope.editVacc = function () {
         scope.editingVacc = !scope.editingVacc;
       };
       scope.newVac = '';
-      scope.addNewVaccine = function (vac) {
-        console.log(vac);
+      scope.sendVaccine = function (vac) {
+        var packet = {name: vac};
+        scope.postNewVaccine(packet, function () {
+          scope.getAllVaccines();
+          scope.alerts.push({type: 'success', msg: 'Added new vaccine,' + vac});
+        });
       };
-   
     }
-  };
+   };
   });
+ 

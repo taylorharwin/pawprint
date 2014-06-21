@@ -95,6 +95,15 @@ angular.module('admin.pages.controllers')
       });
     };
 
+    $scope.postNewVaccine = function (obj, callback) {
+      $http.post('/admin/1/vaccines', obj)
+      .success(callback)
+      .error(function (data, status) {
+        console.log('error making request:', data, status);
+      });
+    };
+
+
     $scope.postUpdatedStatus = function (name) {
       $scope.code.status = name;
       console.log($scope.code);
