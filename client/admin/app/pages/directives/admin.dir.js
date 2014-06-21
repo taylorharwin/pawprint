@@ -113,15 +113,26 @@ angular.module('admin.pages.directives')
     link: function (scope) {
       scope.getAllVaccines();
       scope.editingVacc = true;
+      scope.vaccine = {name: ''};
       scope.editVacc = function () {
         scope.editingVacc = !scope.editingVacc;
       };
+      scope.setVacc = function (vac) {
+        scope.vaccine.name = vac;
+        console.log(scope.vaccine.name);
+      };
       scope.newVac = '';
+      scope.newVacID = '';
+      scope.administered = '';
+      scope.expired = '';
+
+      //Posts a new vaccine to the global list of vaccines
       scope.sendVaccine = function (vac) {
         var packet = {name: vac};
         scope.postNewVaccine(packet, function () {
           scope.getAllVaccines();
           scope.alerts.push({type: 'success', msg: 'Added new vaccine,' + vac});
+          console.log(scope.alerts);
         });
       };
     }

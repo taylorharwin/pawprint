@@ -33,7 +33,7 @@
   				 <span class="dropdown">
       				<button  class="btn btn-large btn-default dropdown-toggle">Update Status<span class="caret"></span></button>
 						    <ul class="dropdown-menu">
-						      <li ng-repeat="code in statusCodes"><a ng-model="code.name" ng-click="postUpdatedStatus(code.name)">{{code.name}}</a></li>
+						      <li ng-repeat="code in statusCodes"ng-model="code.name" ng-click="postUpdatedStatus(code.name)">{{code.name}}</li>
 						    </ul>
   				 </span>
 			    </div>
