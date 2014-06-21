@@ -13,12 +13,8 @@ angular.module('admin.pages.controllers')
     $scope.statusCodes = statusCodeConst;
     $scope.setClassOnRequest = reqIDFactory.setClassforStatus;
 
-    //Variables for two-way binding with account note form and status update dropdown
-    $scope.noteText;
-    $scope.noteObj = {
-      notes: ''
-    };
-
+    //Variable for two-way binding with request status dropdown
+   
     $scope.code = {status: ''};
 
     //toggles whether or not a given dropdown menu is open
@@ -96,14 +92,6 @@ angular.module('admin.pages.controllers')
       })
       .error(function (data, status) {
         console.log('error making request:', data, status);
-      });
-    };
-
-    $scope.postNote = function () {
-      $scope.noteObj.notes = $scope.noteText;
-      console.log($scope.noteObj);
-      $scope.submitStuff($scope.noteObj, 1, 'requests', $scope.reqID, function () {
-        $scope.alerts.push({type: 'success', msg: 'Added a new note, ' + $scope.noteText});
       });
     };
 
