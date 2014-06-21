@@ -46,16 +46,13 @@ var createVaccine = function(req, res) {
 
 };
 
-var createContact = function(req, res) {
-  var adminid = req.params.adminid;
-  var requestid = req.params.requestid;
-  var newContactHistory = req.body;
-  newContactHistory.admin_id = adminid;
-  newContactHistory.request_id = requestid;
+var createLog = function(req, res) {
+  var newLog = req.body;
+  newLog.admin_id = req.params.adminid;
+  newLog.request_id = req.params.requestid;
 
-  Contact.forge(newContactHistory).save().then(function(contactHistory) {
-    ContactHistorys.add(contactHistory);
-    res.send(201, {id: contactHistory.id});
+  ContactHistory.forge(newLog).save().then(function(model) {
+    res.send(201, model);
   });
 };
 
@@ -92,7 +89,7 @@ var createPdf = function(req, res) {
 module.exports = exports = {
   createPetVaccine : createPetVaccine,
   createVaccine : createVaccine,
-  createContact : createContact,
+  createLog : createLog,
   createVetContact : createVetContact,
   createPdf : createPdf
 };
