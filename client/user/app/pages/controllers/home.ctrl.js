@@ -5,6 +5,4 @@ angular.module('user.pages.controllers')
     //Function added to prove that tests work. Can remove
     $scope.dogSpeak = 'woof';
 
-    console.log('======================');
-    console.log($scope.$state);
   });
