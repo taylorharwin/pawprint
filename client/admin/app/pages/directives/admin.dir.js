@@ -58,10 +58,20 @@ angular.module('admin.pages.directives')
       replace: 'true',
       templateUrl: 'app/pages/templates/vacc-record.tpl.html',
       link: function (scope) {
-        scope.getStuff(1, 'requests', scope.reqID, function (data) {
-          scope.vaccinations = data;
-        }, 'vaccines');
-      }
+      scope.cleanDates = function (arr) {
+        for (var i = 0; i < arr.length; i++) {
+          var administered = new Date(arr[i].dateAdministered);
+          var expires = new Date(arr[i].dateExpired);
+          arr[i].dateAdministered = administered.toLocaleDateString();
+          arr[i].dateExpired = expires.toLocaleDateString();
+        }
+        return arr;
+      };
+
+      scope.getStuff(1, 'requests', scope.reqID, function (data) {
+        scope.vaccinations = scope.cleanDates(data);
+      }, 'vaccines');
+    }
    };
   })
 
