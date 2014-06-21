@@ -23,7 +23,7 @@ var db                = require('../app/db_config.js'),
 
 // _getter makes GET requests with query options and allows you to omit things in the return
 // Options is an object with 3 parameters
-  // all: a boolean value for fetchALL or just fetch, defaults to fetch
+  // all: a boolean value, set true for all values that match the queries and false for just the first (defaults to false)
   // query: an object for query parameters to pass into fetch
   // omit: a string or array of strings of parameters
   //       that should be omitted from the returned model
@@ -44,90 +44,87 @@ var db                = require('../app/db_config.js'),
 
   // becomes
 
-  // var getUser = function(req, res) {
-  //   _getter(req, res, User, {id:req.params.userid}, {omit: ['password', 'salt']});
-  // };
-var _getter = function (req, res, Model, options) {
-  var params = options.query || {};
-  var model = new Model().query({where: params});
+  // var getUser = _getter(User, {
+  //   query: { id: 'userid' },
+  //   omit: ['password', 'salt']
+  // });
 
-  if (options.all) {
-    model.fetchAll().then(function(requests) {
-      // TODO omit for collections
-      res.send(200, requests);
+var _getter = function (Model, options) {
+  return function(req, res) {
+    options = options || {};
+    
+    // Get parameters from req.params
+    var query = options.query || {};
+    var params = {};
+    for (var property in query) {
+      params[property] = req.params[query[property]];
+    }
+    
+    // Query the database 
+    var model = new Model().query({where: params});
+
+    // Get all objects that match the query
+    model.fetchAll().then(function(collection) {
+      // Iterate through the collection to exclude private properties
+      return collection.mapThen(function(model) {
+        return model.omit(options.omit);
+      });
+    }).then(function(collection){
+      // If all is true, return everything; else return only the first
+      var result = !!options.all ? collection : collection[0];
+      if (collection.length > 1) {
+        // TODO throw some error about only sending the first of many obj
+      }
+      res.send(200, result);
+    }).catch(function(err) {
+      console.error(err);
+      res.send(500, 'Internal server error');
     });
-  } else {
-    model.fetch().then(function(requests) {
-      res.send(200, requests.omit(options.omit));
-    });
-  }
-  // TODO catch error
-  // Can't omit on null object { require: true}
-
+  };
 };
 
-var getRequests = function(req, res) {
-  _getter(req, res, Request, { all: true });
-};
+var getRequests = _getter(Request, {all: true});
 
-var getRequest = function(req, res) {
-  _getter(req, res, Request, {
-    query: { id: req.params.requestid}
-  });
-};
+var getRequest = _getter(Request, {
+  query: { id: 'requestid'}
+});
 
-var getPet = function(req, res) {
-  _getter(req, res, Pet, {
-    query: { id: req.params.petid }
-  });
-};
+var getPet = _getter(Pet, {
+  query: { id: 'petid' }
+});
 
-var getUser = function(req, res) {
-  _getter(req, res, User, {
-    query: { id: req.params.userid },
-    omit: ['password', 'salt']
-  });
-};
+var getUser = _getter(User, {
+  query: { id: 'userid' },
+  omit: ['password', 'salt']
+});
 
-var getVet = function(req, res) {
-  _getter(req, res, Vet, {
-    query: { id: req.params.vetid }
-  });
-};
+var getVet =_getter(Vet, {
+  query: { id: 'vetid' }
+});
 
-var getVetContacts = function(req, res) {
-  _getter(req, res, VetContact, {
-    query: { vet_id: req.params.vetid },
-    all: true
-  });
-};
+var getVetContacts = _getter(VetContact, {
+  query: { vet_id: 'vetid' },
+  all: true
+});
 
-var getPetVaccines = function(req, res) {
-  _getter(req, res, Pet_Vaccine, {
-    query: { request_id: req.params.requestid },
-    all: true
-  });
-};
+var getPetVaccines = _getter(Pet_Vaccine, {
+  query: { request_id: 'requestid' },
+  all: true
+});
 
-var getLogs = function(req, res) {
-  _getter(req, res, ContactHistory, {
-    query: { request_id: req.params.requestid },
-    all: true
-  });
-};
+var getLogs = _getter(ContactHistory, {
+  query: { request_id: 'requestid' },
+  all: true
+});
 
-var getPDFs = function(req, res) {
-  _getter(req, res, PdfRecord, {
-    query: { request_id: req.params.requestid },
-    all: true
-  });
-};
+var getPDFs = _getter(PdfRecord, {
+  query: { request_id: 'requestid' },
+  all: true
+});
 
-var getVaccines = function(req, res) {
-  _getter(req, res, Vaccine, {
-    all: true
-  });
-};
+var getVaccines = _getter(Vaccine, {
+  all: true
+});
 
 module.exports = exports = {
   getRequests : getRequests,
