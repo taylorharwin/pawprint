@@ -77,7 +77,7 @@ db.knex.schema.hasTable('vaccine').then(function(exists) {
     db.knex.schema.createTable('vaccine', function (vaccine) {
       vaccine.increments('id').primary();
       vaccine.string('name', 100);
-      vaccine.date('expiration'); // string - i don't think this is a date
+      vaccine.integer('duration');
       vaccine.timestamps();
     }).then(function (table) {
       console.log('Created Table', table);
