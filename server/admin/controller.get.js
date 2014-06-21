@@ -45,21 +45,15 @@ var getRequests = function(req, res) {
 };
 
 var getRequest = function(req, res) {
-  var requestid = req.params.requestid;
-
-  new Request({id:requestid}).fetch()
-    .then(function(request) {
-      res.send(200, request);
-    });
+  getter(req, res, Request, {
+    query: { id: req.params.requestid}
+  });
 };
 
 var getPet = function(req, res) {
-  var petid = req.params.petid;
-
-  new Pet({id:petid}).fetch()
-    .then(function(request) {
-      res.send(200, request);
-    });
+  getter(req, res, Pet, {
+    query: { id: req.params.petid }
+  });
 };
 
 var getUser = function(req, res) {
@@ -70,45 +64,43 @@ var getUser = function(req, res) {
 };
 
 var getVet = function(req, res) {
-  var vetid = req.params.vetid;
-
-  new Vet({id:vetid}).fetch()
-    .then(function(request) {
-      res.send(200, request);
-    });
+  getter(req, res, Vet, {
+    query: { id: req.params.vetid }
+  });
 };
 
 var getVetContacts = function(req, res) {
-  var vetid = req.params.vetid;
-
+  getter(req, res, VetContact, {
+    query: { vet_id: req.params.vetid },
+    all: true
+  });
 };
 
 var getPetVaccines = function(req, res) {
-  var requestid = req.params.requestid;
-
-  new Pet_Vaccine().query({where: {request_id: requestid}}).fetchAll()
-    .then(function(request) {
-      res.send(200, request);
-    });
+  getter(req, res, Pet_Vaccine, {
+    query: { id: req.params.requestid },
+    all: true
+  });
 };
 
 var getLogs = function(req, res) {
-  var requestid = req.params.requestid;
-
-  new ContactHistory().query({where: {request_id: requestid}}).fetchAll()
-    .then(function(request) {
-      res.send(200, request);
-    });
+  getter(req, res, ContactHistory, {
+    query: { request_id: req.params.requestid },
+    all: true
+  });
 };
 
 var getPDFs = function(req, res) {
-  var requestid = req.params.requestid;
-
+  getter(req, res, PdfRecord, {
+    query: { request_id: req.params.requestid },
+    all: true
+  });
 };
 
 var getVaccines = function(req, res) {
-  var requestid = req.params.requestid;
-
+  getter(req, res, Vaccines, {
+    all: true
+  });
 };
 
 module.exports = exports = {
