@@ -1,6 +1,8 @@
 var db                = require('../app/db_config.js'),
     ContactHistory    = require('../app/models/contactHistory.js'),
     ContactHistorys   = require('../app/collections/contactHistorys.js'),
+    PdfRecord         = require('../app/models/pdfRecord.js'),
+    PdfRecords        = require('../app/collections/pdfRecords.js'),
     User              = require('../app/models/user.js'),
     Users             = require('../app/collections/users.js'),
     Pet               = require('../app/models/pet.js'),
@@ -11,6 +13,10 @@ var db                = require('../app/db_config.js'),
     Vets              = require('../app/collections/vets.js'),
     Pet_Vaccine       = require('../app/models/pet_vaccine.js'),
     Pet_Vaccines      = require('../app/collections/pet_vaccines.js'),
+    VetContact       = require('../app/models/vetContact.js'),
+    VetContacts      = require('../app/collections/vetContacts.js'),
+    Vaccine           = require('../app/models/vaccine.js'),
+    Vaccines          = require('../app/collections/vaccines.js'),
     Q                 = require('q');
 
 var getter = function (req, res, Model, options) {
