@@ -1,15 +1,9 @@
 var User             = require('../app/models/user.js'),
-    Users            = require('../app/collections/users.js'),
     Pet              = require('../app/models/pet.js'),
-    Pets             = require('../app/collections/pets.js'),
     Vaccine          = require('../app/models/vaccine.js'),
-    Vaccines         = require('../app/collections/vaccines.js'),
     ContactHistory   = require('../app/models/contactHistory.js'),
-    ContactHistorys  = require('../app/collections/contactHistorys.js'),
     Request          = require('../app/models/request.js'),
-    Requests         = require('../app/collections/requests.js'),
     VetContact       = require('../app/models/vetContact.js'),
-    VetContacts      = require('../app/collections/vetContacts.js'),
     Q                = require('q');
 
 // TODO: validations for field length/type
