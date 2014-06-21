@@ -74,42 +74,24 @@ var createPetVaccine = function(req, res) {
 };
 
 var createVaccine = function(req, res) {
-  var newVaccine = req.body;
-
-  Vaccine.forge(newVaccine).save().then(function(model) {
-    res.send(201, model);
-  });
+  _creator(req, res, Vaccine);
 };
 
 var createLog = function(req, res) {
-  var newLog = req.body;
-  newLog.admin_id = req.params.adminid;
-  newLog.request_id = req.params.requestid;
-
-  ContactHistory.forge(newLog).save().then(function(model) {
-    res.send(201, model);
+  _creator(req, res, ContactHistory, {
+    admin_id: req.params.adminid,
+    request_id: req.params.requestid
   });
 };
 
 var createVetContact = function(req, res) {
-  var newContact = req.body;
-  newContact.vet_id = req.params.vetid;
-
-  VetContact.forge(newContact).save().then(function(model) {
-    res.send(201, model);
+  _creator(req, res, VetContact, {
+    vet_id: req.params.vetid
   });
 };
 
 var createPdf = function(req, res) {
-  var adminid = req.params.adminid;
-  var requestid = req.params.requestid;
-  var pdf = req.body;
-  pdf.request_id = requestid;
-
-  PdfRecord.forge(pdf).save().then(function(pdfrecord) {
-    PdfRecords.add(pdfrecord);
-    res.send(201, {id: pdfrecord.id});
-  });
+  // TODO, this will be a multi-part form request
 };
 
 module.exports = exports = {
