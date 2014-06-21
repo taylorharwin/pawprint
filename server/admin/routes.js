@@ -43,14 +43,14 @@ module.exports = exports = function (router) {
     // .delete(Delete.deletePdf); // TODO
 
   router.route('/:adminid/vets/:vetid/contacts')
-    .get(Get.getVetContacts) // TODO: change to 'getContacts'
-    .post(Create.createVetContact); // TODO: change to 'createContacts'
+    .get(Get.getVetContacts)
+    .post(Create.createVetContact);
   // router.route('/:adminid/vets/:vetid/contacts/:contactid')
   //   .put(Put.putContact) // TODO
   //   .delete(Delete.deleteContact); // TODO
 
   router.route('/:adminid/vaccines')
     .get(Get.getVaccines)
-    .post(Create.createVaccine) // TODO
+    .post(Create.createVaccine)
     .put(Put.putVaccine); // TODO: deprecate this route?
 };

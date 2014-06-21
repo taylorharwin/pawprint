@@ -33,9 +33,7 @@ var createPetVaccine = function(req, res) {
           pet_id: request.attributes.pet_id
           // TODO set date of expiration
         });
-        return model.save().then(function(pet_vaccine){
-          return pet_vaccine;
-        });
+        return model.save();
       });
     }).then(function(collection) {
       res.send(201, collection);
@@ -43,7 +41,11 @@ var createPetVaccine = function(req, res) {
 };
 
 var createVaccine = function(req, res) {
+  var newVaccine = req.body;
 
+  Vaccine.forge(newVaccine).save().then(function(model) {
+    res.send(201, model);
+  });
 };
 
 var createLog = function(req, res) {
@@ -57,20 +59,11 @@ var createLog = function(req, res) {
 };
 
 var createVetContact = function(req, res) {
-  var adminid = req.params.adminid;
-  var vetid = req.paramas.vetid;
-  var contacts = req.body;
-  for (var i = 0; i<contacts.length; i++) {
-    contacts[i].vet_id = vetid;
-  }
-  var newVetContacts = db.Collection.extend({model: VetContact});
-  newVetContacts.forge(contacts).mapThen(function(model){
-    console.log(model);
-    return model.save().then(function(vetcontact){
-      return vetcontact.get('id');
-    });
-  }).then(function(done) {
-    res.send(201, {id: done.id});
+  var newContact = req.body;
+  newContact.vet_id = req.params.vetid;
+
+  VetContact.forge(newContact).save().then(function(model) {
+    res.send(201, model);
   });
 };
 
