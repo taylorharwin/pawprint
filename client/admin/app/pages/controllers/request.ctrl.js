@@ -14,14 +14,9 @@ angular.module('admin.pages.controllers')
     $scope.setClassOnRequest = reqIDFactory.setClassforStatus;
 
     //Variables for two-way binding with account note form and status update dropdown
-
-    $scope.noteText = '';
-
+    $scope.noteText;
     $scope.noteObj = {
-      admin_id: 1,
-      created_at: new Date(),
-      notes: '',
-      request_id: $scope.reqID
+      notes: ''
     };
 
     $scope.code = {status: ''};
@@ -108,7 +103,7 @@ angular.module('admin.pages.controllers')
       $scope.noteObj.notes = $scope.noteText;
       console.log($scope.noteObj);
       $scope.submitStuff($scope.noteObj, 1, 'requests', $scope.reqID, function () {
-        $scope.alerts.push({type: 'success', mst: 'Added a new note, ' + $scope.noteText});
+        $scope.alerts.push({type: 'success', msg: 'Added a new note, ' + $scope.noteText});
       });
     };
 
