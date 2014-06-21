@@ -23,7 +23,7 @@ module.exports = exports = function (router) {
     .get(Get.getVaccines);
 
   router.route('/:userid/pets/:petid/requests')
-    .get(Get.getRequests) // change this to get requests per pet
+    .get(Get.getRequests)
     .post(Create.createRequest);
   router.route('/:userid/pets/:petid/requests/:requestid')
     .delete(Delete.deleteRequest);
