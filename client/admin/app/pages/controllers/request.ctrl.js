@@ -21,6 +21,9 @@ angular.module('admin.pages.controllers')
     $scope.noteText;
     $scope.code = {status: ''};
 
+   
+
+
 
     //toggles whether or not a given dropdown menu is open
 
@@ -94,6 +97,7 @@ angular.module('admin.pages.controllers')
       $scope.submitStuff($scope.code, 1, 'requests', $scope.reqID, function () {
         console.log('success!');
         $scope.alerts.push({ type: 'success', msg: 'Great, you updated status to ' +  $scope.code.status});
+        $scope.reqStatus = $scope.code.status;
       });
     };
 

@@ -7,22 +7,24 @@
         <div class="col-md-8">
           <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
         </div>
-      </div>
+          <button class="btn btn-large btn-info logout">Log Out</button>
+        </div>
     </div>
 </div>
+
           
     
 
-<div id="container">
+<div class="container" id="container">
 
 <div class="row">
 	<div class="col-md-3">
 		<div class="panel panel-default">
-			<h5>Viewing Request: {{reqID}}</h5>
-      <h5>Vet ID: {{vetID}}</h5>
-      <h5>User ID: {{userID}}</h5>
-      <h5>Pet ID: {{petID}}</h5>
-      <h5>Request Status: <span ng-class="setClassOnRequest('{{reqStatus}}')">{{reqStatus}}</span></h5>
+			<h4>Viewing Request: {{reqID}}</h4>
+      <h4>Vet ID: {{vetID}}</h4>
+      <h4>User ID: {{userID}}</h4>
+      <h4>Pet ID: {{petID}}</h4>
+      <h4>Request Status:<span>{{reqStatus}}</span></h4>
 		</div>
 	</div>
 
