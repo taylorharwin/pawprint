@@ -80,9 +80,9 @@ body {
     z-index:1001;
 
 }
-.logout
+.right
 {
   position: absolute;
-  right: 0px;
+  right: 10px;
   top:10px;
 }

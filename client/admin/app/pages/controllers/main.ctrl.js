@@ -33,7 +33,7 @@ angular.module('admin.pages.controllers')
 
 // Function for getting all existing requests to display on Main page. 
 
-    $scope.getAllRequests = function (func) {
+    $scope.getAllRequests = function () {
       $http.get('/admin/1/requests')
       .success(function (json) {
         $scope.cleanDates(json);
