@@ -88,6 +88,19 @@ angular.module('admin.pages.directives')
         }, 'logs');
       };
       scope.updateContacts();
+      scope.noteText = '';
+      scope.noteObj = {
+        notes: ''
+      };
+      scope.postNote = function () {
+        scope.noteObj.notes = scope.noteText;
+        console.log(scope.noteObj);
+        scope.postStuff(scope.noteObj, 1, 'requests', scope.reqID, function () {
+          scope.alerts.push({type: 'success', msg: 'Added a new note, ' + scope.noteText});
+          scope.updateContacts();
+        }, 'logs');
+      };
+
     }
    };
   })
