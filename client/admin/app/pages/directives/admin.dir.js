@@ -34,7 +34,7 @@ angular.module('admin.pages.directives')
         scope.editUser = function () {
           scope.editingUser = !scope.editingUser;
         };
-        scope.getStuff(1, 'pets', scope.petID, function (data) {
+        scope.getStuff(99, 'pets', scope.petID, function (data) {
           scope.petData = data;
           console.log(scope.petData);
         });
@@ -43,11 +43,11 @@ angular.module('admin.pages.directives')
           console.log(scope.userData);
         });
         scope.updateUserInfo = function () {
-        scope.petData = angular.copy(scope.petData);
-        console.log(scope.petData);
-        scope.userData = angular.copy(scope.userData);
-        console.log(scope.userData);
-      };
+          scope.petData = angular.copy(scope.petData);
+          console.log(scope.petData);
+          scope.userData = angular.copy(scope.userData);
+          console.log(scope.userData);
+        };
       }
    };
   })
@@ -60,7 +60,6 @@ angular.module('admin.pages.directives')
       link: function (scope) {
         scope.getStuff(1, 'requests', scope.reqID, function (data) {
           scope.vaccinations = data;
-          console.log('BDFDFSDFSDF', scope.vaccinations);
         }, 'vaccines');
       }
    };
