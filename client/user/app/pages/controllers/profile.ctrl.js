@@ -9,9 +9,9 @@ angular.module('user.pages.controllers')
     });
 
     $scope.updateUser = function() {
-      console.log('=================');
-      console.log($scope.user);
-      console.log('=================');
+      // console.log('=================');
+      // console.log($scope.user);
+      // console.log('=================');
       $scope.user.put().then(function (response) {
           console.log('successful put');
           // update the scope user to reflect db

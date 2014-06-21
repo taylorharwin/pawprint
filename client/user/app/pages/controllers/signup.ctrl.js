@@ -11,7 +11,6 @@ angular.module('user.pages.controllers')
     $scope.userSignup = function () {
       UserFactory.postUserSignup($scope.user)
         .then(function (response) {
-          //@NOTE, should actually check for 201 response before continuing
           CurrentUserFactory.setUserId(response.id);
           $state.go('app.profile');
         }, function (error) {
