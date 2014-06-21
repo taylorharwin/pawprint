@@ -81,10 +81,13 @@ angular.module('admin.pages.directives')
     replace: 'true',
     templateUrl: 'app/pages/templates/contact-hist.tpl.html',
     link: function (scope) {
-      scope.getStuff(1, 'requests', scope.reqID, function (data) {
-        scope.contacts = data;
-        console.log("Here is scope.contacts", scope.contacts);
-      }, 'logs');
+      scope.updateContacts = function () {
+        scope.getStuff(1, 'requests', scope.reqID, function (data) {
+          scope.contacts = data;
+          console.log('Here is scope.contacts', scope.contacts);
+        }, 'logs');
+      };
+      scope.updateContacts();
     }
    };
   })
