@@ -1,21 +1,25 @@
 <div>
+      <div>
+      <textarea id="note" class="form-control" ng-model="noteText" rows="3"></textarea>
+          <button class="btn btn-large btn-info" ng-click='postNote(noteText)'>Leave a Note</button>
+      </div>
 <table class="table">
     <thead>
       <tr>
         <th>Admin ID</th>
-        <th>Action Type</th>
         <th>Notes</th>
         <th>Request_ID</th>
         <th>Vet Contact</th>
+        <th>Form of Communication</th>
       </tr>
     </thead>
     <tbody>
       <tr ng-repeat="contact in contacts">
-          <td>ID</td>
-          <td>Action Type</td>
-          <td>Notes</td>
-          <td>Request ID</td>
-          <td>Vet Contact</td>
+          <td>{{contact.admin_id}}</td>
+          <td>{{contact.notes}}</td>
+          <td>{{contact.request_id}}</td>
+          <td>{{contact.vetContact_id}}</td>
+          <td>{{contact.type}}</td>
       </tr>
     </tbody>
   </table>

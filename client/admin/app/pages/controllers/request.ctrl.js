@@ -13,17 +13,9 @@ angular.module('admin.pages.controllers')
     $scope.statusCodes = statusCodeConst;
     $scope.setClassOnRequest = reqIDFactory.setClassforStatus;
 
-    $scope.vaccines = [
-      'Rabies', 'Rabbit Anti-Depressant', 'Cat Cold'];
-
-    //Variables for two-way binding with account note form and status update dropdown
-
-    $scope.noteText;
-    $scope.code = {status: ''};
-
+    //Variable for two-way binding with request status dropdown
    
-
-
+    $scope.code = {status: ''};
 
     //toggles whether or not a given dropdown menu is open
 
@@ -45,12 +37,32 @@ angular.module('admin.pages.controllers')
       console.log(path);
       $http.get(path)
       .success(callback)
-      .error(function (data, status, headers, config) {
+      .error(function (data, status) {
         console.log('error making request:', data, status);
       });
     };
 
-    $scope.submitStuff = function(obj, adminID, endPoint, extraID, callback, subPath){
+    $scope.postStuff = function (obj, adminID, endPoint, extraID, callback, subPath) {
+      var path;
+      if (subPath) {
+        path = '/admin/' + adminID.toString() + '/' + endPoint.toString() + '/' + extraID.toString() + '/' + subPath.toString();
+      } else if (extraID) {
+        path = '/admin/' + adminID.toString() + '/' + endPoint.toString() + '/' + extraID.toString();
+      } else {
+        path = '/admin/' + adminID.toString() + '/' + endPoint.toString();
+      }
+      console.log(path);
+      $http.post(path, obj)
+      .success(callback)
+      .error(function (data, status) {
+        console.log('error posting data', data, status);
+      });
+    };
+
+
+    // A Generic PUT functions that gets used across all directives
+
+    $scope.submitStuff = function (obj, adminID, endPoint, extraID, callback, subPath) {
       var path;
       if (subPath) {
         path = '/admin/' + adminID.toString() + '/' + endPoint.toString() + '/' + extraID.toString() + '/' + subPath.toString();
@@ -62,7 +74,7 @@ angular.module('admin.pages.controllers')
       console.log('posting to', path);
       $http.put(path, obj)
       .success(callback)
-      .error(function (data, status, headers, config) {
+      .error(function (data, status) {
         console.log('error making request:', data, status);
         $scope.alerts.push({type: 'danger', msg: 'There was an error trying to update'});
 
@@ -72,31 +84,32 @@ angular.module('admin.pages.controllers')
 
     //Gets all vaccines in database 
 
-    $scope.getAllVaccines = function (func) {
-      $http.get('/admin/1/requests/3/vaccines')
+    $scope.getAllVaccines = function () {
+      $http.get('/admin/1/vaccines')
       .success(function (json) {
         $scope.vaccines = json;
         console.log($scope.vaccines);
-        if (func) {
-          func(json);
-        }
       })
-      .error(function (data, status, headers, config) {
+      .error(function (data, status) {
         console.log('error making request:', data, status);
       });
     };
-    $scope.getAllVaccines();
 
-    $scope.postNote = function () {
-      console.log($scope.noteText);
+    $scope.postNewVaccine = function (obj, callback) {
+      $http.post('/admin/1/vaccines', obj)
+      .success(callback)
+      .error(function (data, status) {
+        console.log('error making request:', data, status);
+      });
     };
+
 
     $scope.postUpdatedStatus = function (name) {
       $scope.code.status = name;
       console.log($scope.code);
       $scope.submitStuff($scope.code, 1, 'requests', $scope.reqID, function () {
         console.log('success!');
-        $scope.alerts.push({ type: 'success', msg: 'Great, you updated status to ' +  $scope.code.status});
+        $scope.alerts.push({ type: 'success', msg: 'Updated status to ' +  $scope.code.status});
         $scope.reqStatus = $scope.code.status;
       });
     };

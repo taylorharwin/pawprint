@@ -34,7 +34,7 @@ angular.module('admin.pages.directives')
         scope.editUser = function () {
           scope.editingUser = !scope.editingUser;
         };
-        scope.getStuff(99, 'pets', scope.petID, function (data) {
+        scope.getStuff(1, 'pets', scope.petID, function (data) {
           scope.petData = data;
           console.log(scope.petData);
         });
@@ -81,10 +81,26 @@ angular.module('admin.pages.directives')
     replace: 'true',
     templateUrl: 'app/pages/templates/contact-hist.tpl.html',
     link: function (scope) {
-      scope.getStuff(1, 'requests', scope.reqID, function (data) {
-        scope.contacts = data;
-        console.log("Here is scope.contacts", scope.contacts);
-      }, 'logs');
+      scope.updateContacts = function () {
+        scope.getStuff(1, 'requests', scope.reqID, function (data) {
+          scope.contacts = data;
+          console.log('Here is scope.contacts', scope.contacts);
+        }, 'logs');
+      };
+      scope.updateContacts();
+      scope.noteText = '';
+      scope.noteObj = {
+        notes: ''
+      };
+      scope.postNote = function () {
+        scope.noteObj.notes = scope.noteText;
+        console.log(scope.noteObj);
+        scope.postStuff(scope.noteObj, 1, 'requests', scope.reqID, function () {
+          scope.alerts.push({type: 'success', msg: 'Added a new note, ' + scope.noteText});
+          scope.updateContacts();
+        }, 'logs');
+      };
+
     }
    };
   })
@@ -95,15 +111,31 @@ angular.module('admin.pages.directives')
     replace: 'true',
     templateUrl: 'app/pages/templates/edit-vacc.tpl.html',
     link: function (scope) {
+      scope.getAllVaccines();
       scope.editingVacc = true;
+      scope.vaccine = {name: ''};
       scope.editVacc = function () {
         scope.editingVacc = !scope.editingVacc;
       };
-      scope.newVac = {};
-     scope.updateVacData = function () {
-      scope.newVac = angular.copy(scope.newVac);
-      console.log(scope.newVac);
+      scope.setVacc = function (vac) {
+        scope.vaccine.name = vac;
+        console.log(scope.vaccine.name);
+      };
+      scope.newVac = '';
+      scope.newVacID = '';
+      scope.administered = '';
+      scope.expired = '';
+
+      //Posts a new vaccine to the global list of vaccines
+      scope.sendVaccine = function (vac) {
+        var packet = {name: vac};
+        scope.postNewVaccine(packet, function () {
+          scope.getAllVaccines();
+          scope.alerts.push({type: 'success', msg: 'Added new vaccine,' + vac});
+          console.log(scope.alerts);
+        });
       };
     }
-  };
+   };
   });
+ 
