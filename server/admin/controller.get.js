@@ -13,12 +13,13 @@ var db                = require('../app/db_config.js'),
     Pet_Vaccines      = require('../app/collections/pet_vaccines.js'),
     Q                 = require('q');
 
-var getter = function (req, res, Model, queryParams, options) {
-  // Options is an object with 2 parameters
+var getter = function (req, res, Model, options) {
+  // Options is an object with 3 parameters
     // all: a boolean value for fetchALL or just fetch, defaults to fetch
+    // query: an object for query parameters to pass into fetch
     // omit: a string or array of strings of parameters
     //       that should be omitted from the returned model
-  var model = new Model();
+  var model = new Model(options.query);
 
   (function() {
     if (options.all) {
