@@ -19,6 +19,39 @@ var db                = require('../app/db_config.js'),
     Vaccines          = require('../app/collections/vaccines.js'),
     Q                 = require('q');
 
+/************DOCS****************/
+// _creator makes POST request with the req.body extended by any params passed in
+// params is an object with properties for each property the model should be extended with
+  // Example: 
+    // var createLog = function(req, res) {
+    //   var newLog = req.body;
+    //   newLog.admin_id = req.params.adminid;
+    //   newLog.request_id = req.params.requestid;
+    //   ContactHistory.forge(newLog).save().then(function(model) {
+    //     res.send(201, model);
+    //   });
+    // };
+
+    // becomes
+
+    // var createLog = function(req, res) {
+    //   creator(req, res, ContactHistory, {
+    //     admin_id: req.params.adminid,
+    //     request_id: req.params.requestid
+    //   });
+    // }; 
+var _creator = function(req, res, Model, params) {
+  var newObj = req.body;
+  for (var property in params) {
+    newObj[property] = params[property];
+  }
+
+  Model.forge(newObj).save().then(function(model) {
+    res.send(201, model);
+  });
+  // TODO add error handling
+};
+
 var createPetVaccine = function(req, res) {
   var requestid = req.params.requestid;
   var vaccines = req.body;
