@@ -12,16 +12,16 @@ angular.module('admin.pages.directives')
       scope.editVet = function () {
         scope.editingVet = !scope.editingVet;
       };
-      scope.getStuff(1, 'vet', scope.vetID, function (data) {
+      scope.getStuff(1, 'vets', scope.vetID, function (data) {
         scope.vetData = data;
-        console.log(scope.vetData);
       });
-       scope.getStuff(1, 'vet', scope.vetID, function (data) {
-        scope.vetData = data;
+
+      scope.updateVetInfo = function () {
+        scope.vetData = angular.copy(scope.vetData);
         console.log(scope.vetData);
-      });
+      };
     }
-   };
+  };
   })
 
   .directive('userInfo', function () {
@@ -34,14 +34,20 @@ angular.module('admin.pages.directives')
         scope.editUser = function () {
           scope.editingUser = !scope.editingUser;
         };
-        scope.getStuff(1, 'pet', scope.petID, function (data) {
+        scope.getStuff(99, 'pets', scope.petID, function (data) {
           scope.petData = data;
           console.log(scope.petData);
         });
-        scope.getStuff(1, 'user', scope.userID, function (data) {
+        scope.getStuff(1, 'users', scope.userID, function (data) {
           scope.userData = data;
           console.log(scope.userData);
         });
+        scope.updateUserInfo = function () {
+          scope.petData = angular.copy(scope.petData);
+          console.log(scope.petData);
+          scope.userData = angular.copy(scope.userData);
+          console.log(scope.userData);
+        };
       }
    };
   })
@@ -52,11 +58,20 @@ angular.module('admin.pages.directives')
       replace: 'true',
       templateUrl: 'app/pages/templates/vacc-record.tpl.html',
       link: function (scope) {
-        scope.getStuff(1, 'request', scope.reqID, function (data) {
-          scope.vaccinations = data;
-          console.log('BDFDFSDFSDF', scope.vaccinations);
-        }, 'vaccines');
-      }
+      scope.cleanDates = function (arr) {
+        for (var i = 0; i < arr.length; i++) {
+          var administered = new Date(arr[i].dateAdministered);
+          var expires = new Date(arr[i].dateExpired);
+          arr[i].dateAdministered = administered.toLocaleDateString();
+          arr[i].dateExpired = expires.toLocaleDateString();
+        }
+        return arr;
+      };
+
+      scope.getStuff(1, 'requests', scope.reqID, function (data) {
+        scope.vaccinations = scope.cleanDates(data);
+      }, 'vaccines');
+    }
    };
   })
 
@@ -66,7 +81,7 @@ angular.module('admin.pages.directives')
     replace: 'true',
     templateUrl: 'app/pages/templates/contact-hist.tpl.html',
     link: function (scope) {
-      scope.getStuff(1, 'request', scope.reqID, function (data) {
+      scope.getStuff(1, 'requests', scope.reqID, function (data) {
         scope.contacts = data;
         console.log("Here is scope.contacts", scope.contacts);
       }, 'logs');
@@ -83,6 +98,11 @@ angular.module('admin.pages.directives')
       scope.editingVacc = true;
       scope.editVacc = function () {
         scope.editingVacc = !scope.editingVacc;
+      };
+      scope.newVac = {};
+     scope.updateVacData = function () {
+      scope.newVac = angular.copy(scope.newVac);
+      console.log(scope.newVac);
       };
     }
   };

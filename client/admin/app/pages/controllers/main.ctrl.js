@@ -7,6 +7,8 @@ angular.module('admin.pages.controllers')
 
     $scope.setClassOnRequest = reqIDFactory.setClassforStatus;
 
+//iterates through an array and converts timestamp objects to user-friendly date strings.
+
     $scope.cleanDates = function (arr) {
       for (var i = 0; i < arr.length; i++) {
         var created = new Date(arr[i].created_at);
@@ -36,10 +38,7 @@ angular.module('admin.pages.controllers')
       .success(function (json) {
         $scope.cleanDates(json);
         $scope.requests = json;
-        console.log($scope.requests);
-        if (func) {
-          func(json);
-        }
+        $scope.allRequestsCount = json.length;
       })
       .error(function (data, status, headers, config) {
         console.log('error', data, status);

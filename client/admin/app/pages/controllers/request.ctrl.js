@@ -14,11 +14,16 @@ angular.module('admin.pages.controllers')
     $scope.setClassOnRequest = reqIDFactory.setClassforStatus;
 
     $scope.vaccines = [
-      'Rabies', 'Rabbit Flu', 'Cat Cold', 'Dog Ebola'];
+      'Rabies', 'Rabbit Anti-Depressant', 'Cat Cold'];
 
-    //Variable for two-way binding with account note form
+    //Variables for two-way binding with account note form and status update dropdown
 
     $scope.noteText;
+    $scope.code = {status: ''};
+
+   
+
+
 
     //toggles whether or not a given dropdown menu is open
 
@@ -45,6 +50,26 @@ angular.module('admin.pages.controllers')
       });
     };
 
+    $scope.submitStuff = function(obj, adminID, endPoint, extraID, callback, subPath){
+      var path;
+      if (subPath) {
+        path = '/admin/' + adminID.toString() + '/' + endPoint.toString() + '/' + extraID.toString() + '/' + subPath.toString();
+      } else if (extraID) {
+        path = '/admin/' + adminID.toString() + '/' + endPoint.toString() + '/' + extraID.toString();
+      } else {
+        path = '/admin/' + adminID.toString() + '/' + endPoint.toString();
+      }
+      console.log('posting to', path);
+      $http.put(path, obj)
+      .success(callback)
+      .error(function (data, status, headers, config) {
+        console.log('error making request:', data, status);
+        $scope.alerts.push({type: 'danger', msg: 'There was an error trying to update'});
+
+      });
+    };
+
+
     //Gets all vaccines in database 
 
     $scope.getAllVaccines = function (func) {
@@ -66,14 +91,20 @@ angular.module('admin.pages.controllers')
       console.log($scope.noteText);
     };
 
-    $scope.alerts = [
-      { type: 'danger', msg: 'Oh snap! Change a few things up and try submitting again.' },
-      { type: 'success', msg: 'Well done! You successfully read this important alert message.' }
-    ];
-
-    $scope.addAlert = function () {
-      $scope.alerts.push({msg: 'Another alert!'});
+    $scope.postUpdatedStatus = function (name) {
+      $scope.code.status = name;
+      console.log($scope.code);
+      $scope.submitStuff($scope.code, 1, 'requests', $scope.reqID, function () {
+        console.log('success!');
+        $scope.alerts.push({ type: 'success', msg: 'Great, you updated status to ' +  $scope.code.status});
+        $scope.reqStatus = $scope.code.status;
+      });
     };
+
+    $scope.alerts = [];
+
+    $scope.addAlert = function () {}
+     
 
     $scope.closeAlert = function (index) {
       $scope.alerts.splice(index, 1);

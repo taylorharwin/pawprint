@@ -55,7 +55,7 @@ angular.module('admin.common.services')
     };
   })
 
-.constant('statusCodeConst', ['new', 'pending', 'complete', 'cancelled']);
+.constant('statusCodeConst', [{name: 'new'}, {name: 'pending'}, {name: 'complete'}, {name: 'cancelled'}]);
 
     
 
