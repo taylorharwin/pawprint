@@ -25,7 +25,8 @@ var getter = function (req, res, Model, options) {
     // query: an object for query parameters to pass into fetch
     // omit: a string or array of strings of parameters
     //       that should be omitted from the returned model
-  var model = new Model().query({where: options.query});
+  var params = options.query || {};
+  var model = new Model().query({where: params});
 
   if (options.all) {
     model.fetchAll().then(function(requests) {
