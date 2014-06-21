@@ -100,10 +100,9 @@ angular.module('admin.pages.directives')
       scope.editVacc = function () {
         scope.editingVacc = !scope.editingVacc;
       };
-      scope.newVac = {};
-      scope.updateVacData = function () {
-        scope.newVac = angular.copy(scope.newVac);
-        console.log(scope.newVac);
+      scope.newVac = '';
+      scope.addNewVaccine = function (vac) {
+        console.log(vac);
       };
    
     }
