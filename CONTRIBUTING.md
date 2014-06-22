@@ -5,7 +5,7 @@ Use github’s interface to make a fork of the repo, then add this repo
 as an upstream remote:
 
 ```
-git remote add upstream https://github.com/MedHawk/Medhawk.git
+git remote add upstream https://github.com/getpawprint/pawprint.git
 ```
 
 ## Create your branch based off of the development branch
