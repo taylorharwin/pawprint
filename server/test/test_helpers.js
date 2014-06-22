@@ -12,44 +12,45 @@ var createForm = function(obj) {
 };
 
 var userDataCallback = function() {
+  var userid, petid, vetid, requestid, vaccineid;
   before(function(done) {
     db.knex('user').returning('id')
       .insert({email: 'hell@o.com', password: 'password'})
-      .then(function(userid) {
-        userid = userid[0];
-        db.knex('pet').returning('id')
-          .insert({name: 'appl'})
-          .then(function(petid) {
-            petid = petid[0];
-            db.knex('user_pet').returning('id')
-              .insert({user_id: userid, pet_id: petid})
-              .then(function(userpet){
-                db.knex('vet').returning('id')
-                  .insert({practiceName: 'vetpractice', contactMethod: 'phone'})
-                  .then(function(vetid) {
-                    vetid = vetid[0];
-                    db.knex('request').returning('id')
-                      .insert({user_id: userid, pet_id: petid, vet_id: vetid, status: 'Pending'})
-                      .then(function(requestid){
-                        requestid = requestid[0];
-                        db.knex('vaccine').returning('id')
-                          .insert({name: 'vaccine1'})
-                          .then(function(vaccineid) {
-                            vaccineid = vaccineid[0];
-                            db.knex('pet_vaccine').returning('id')
-                              .insert({pet_id: petid, vaccine_id: vaccineid, request_id: requestid})
-                              .then(function(petvaccine) {
-                                db.knex('pet_vaccine').returning('id')
-                                  .insert({pet_id: petid, vaccine_id: vaccineid, request_id: requestid})
-                                  .then(function(petvaccine2) {
-                                    done();
-                                  });
-                              });
-                          });
-                      });
-                  });
-              });
-          });
+      .then(function(user) {
+        userid = user[0];
+        return db.knex('pet').returning('id')
+          .insert({name: 'appl'});
+      })
+      .then(function(pet) {
+        petid = pet[0];
+        return db.knex('user_pet').returning('id')
+          .insert({user_id: userid, pet_id: petid});
+      })
+      .then(function(userpet){
+        return db.knex('vet').returning('id')
+          .insert({practiceName: 'vetpractice', contactMethod: 'phone'});
+      })
+      .then(function(vet) {
+        vetid = vet[0];
+        return db.knex('request').returning('id')
+          .insert({user_id: userid, pet_id: petid, vet_id: vetid, status: 'Pending'});
+      })
+      .then(function(request){
+        requestid = request[0];
+        return db.knex('vaccine').returning('id')
+          .insert({name: 'vaccine1'});
+      })
+      .then(function(vaccine) {
+        vaccineid = vaccine[0];
+        return db.knex('pet_vaccine').returning('id')
+          .insert({pet_id: petid, vaccine_id: vaccineid, request_id: requestid});
+      })
+      .then(function(petvaccine) {
+        return db.knex('pet_vaccine').returning('id')
+          .insert({pet_id: petid, vaccine_id: vaccineid, request_id: requestid});
+      })
+      .then(function(petvaccine2) {
+        done();
       });
   });
 };
