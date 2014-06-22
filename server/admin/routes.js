@@ -45,7 +45,7 @@ module.exports = exports = function (router) {
   router.route('/:adminid/vets/:vetid/contacts')
     .get(Get.getVetContacts)
     .post(Create.createVetContact);
-  router.route('/:adminid/vets/:vetid/contacts/:contactid')
+  router.route('/:adminid/vets/:vetid/contacts/:vetcontactid')
     .put(Put.putVetContact)
   //   .delete(Delete.deleteVetContact); // TODO
 
