@@ -10,7 +10,6 @@ var createUser = function(req, res) {
   // need to bcrypt at some point
   // figure out logic for breaking up account creation and user details?
   User.forge(req.body).save().then(function(model) {
-    Users.add(model);
     res.send(201, model.omit('password', 'salt'));
   });
 };
@@ -25,7 +24,6 @@ var createPet = function(req, res) {
     console.log(pet);
     User.forge({id: userid}).fetch().then(function(user) {
       user.pet().attach(pet);
-      Pets.add(pet);
       res.send(201, {id: pet.id});
     });
   });
@@ -41,14 +39,12 @@ var createRequest = function(req, res) {
     vet_id: vet
   });
   request.save().then(function(newRequest) {
-    Requests.add(newRequest);
     res.send(201, {id: newRequest.id});
   });
 };
 
 var createVet = function(req, res) {
   Vet.forge(req.body).save().then(function(newVet) {
-    Vets.add(newVet);
     res.send(201, {id: newVet.id});
   });
 };
