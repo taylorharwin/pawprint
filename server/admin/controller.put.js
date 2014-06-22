@@ -1,61 +1,69 @@
 var User             = require('../app/models/user.js'),
     Pet              = require('../app/models/pet.js'),
     Vaccine          = require('../app/models/vaccine.js'),
+    Pet_Vaccine      = require('../app/models/pet_vaccine.js'),
+    PdfRecord        = require('../app/models/pdfRecord.js'),
     ContactHistory   = require('../app/models/contactHistory.js'),
     Request          = require('../app/models/request.js'),
     VetContact       = require('../app/models/vetContact.js'),
     Q                = require('q');
 
-// TODO: validations for field length/type
 
-var putContact = function(req, res) {
-  var adminid = req.params.adminid;
-  var requestid = req.params.requestid;
-  var contactid = req.params.contactid;
+/*************DOCS***************/
 
-  ContactHistory.forge({id: contactid}).fetch().then(function(contactHistory) {
-    contactHistory.save(req.body, {patch: true});
-    res.send(200, contactHistory.id);
-  });
+// _updater makes PUT requests which update entries in the Model passed in
+// options takes an object which must have a property id for the id of the entry you would like to update
+
+// Example:
+
+// var putLog = function(req, res) {
+//   var logid = req.params.logid;
+//   // req.body should have type, notes, vetcontactid
+//   var patchObj = req.body;
+//   // extend patchObj with adminid
+//   patchObj.admin_id = req.params.adminid;
+
+//   ContactHistory().query({where: {id: logid}}).fetch().then(function(model) {
+//     return model.save(patchObj, {patch: true});
+//   }).then(function(model) {
+//     res.send(200, model);
+//   });
+// };
+
+// becomes
+
+// var putLog = _updater(ContactHistory, {id: 'logid'});
+
+// TODO: validations for field length/type, options cannot be empty, throw 4xx
+var _updater = function (Model, options) {
+  return function(req, res) {
+    var patchObj = req.body;
+
+    Model.forge({id: req.params[options.id]}).fetch().then(function(model) {
+      return model.save(patchObj, {patch: true});
+    }).then(function(model) {
+      res.send(200, model);
+    }).catch(function(err) {
+      console.err(err);
+      res.send(500, 'Internal server error');
+    });
+  };
 };
 
-var putVaccine = function(req, res) {
-  var adminid = req.params.adminid;
-  var requestid = req.params.requestid;
-  
-// /:adminid/request/:requestid/vaccine
-};
+var putLog = _updater(ContactHistory, {id: 'logid'});
 
-var putVetContact = function(req, res) {
-  var adminid = req.params.adminid;
-  var vetid = req.params.vetid;
-  var vetcontactid = req.params.vetcontactid;
+var putPetVaccine = _updater(Pet_Vaccine, {id: 'vaccineid'});
 
-  VetContact.forge({id: vetcontactid}).fetch().then(function(vetContact) {
-    vetContact.save(req.body, {patch: true});
-    res.send(200, vetContact.id);
-  });
-};
+var putPdf = _updater(PdfRecord, {id: 'pdfid'});
 
-var putRequest = function(req, res) {
-  var requestid = req.params.requestid;
-  var newStatus = req.body.status;
-  // TODO: throw error if status is empty
+var putVetContact = _updater(VetContact, {id: 'vetcontactid'});
 
-  Request.forge({id : requestid}).fetch().then(function(request) {
-    request.attributes.status = newStatus;
-    return request.save(request.attributes, {patch: true});
-  }).then(function(model) {
-    res.send(200, model);
-  });
-};
+var putRequest = _updater(Request, {id: 'requestid'});
 
 module.exports = exports = {
-  putContact: putContact,
-  putVaccine: putVaccine,
+  putLog: putLog,
+  putPdf: putPdf,
+  putPetVaccine: putPetVaccine,
   putVetContact: putVetContact,
   putRequest: putRequest
 };
-
-
-// PUT /admin/:adminid/request/:requestid/vaccine
