@@ -1,55 +1,60 @@
-var Create = require('./controller.create.js');
-var Get = require('./controller.get.js');
-var Put = require('./controller.put.js');
-var Delete = require('./controller.delete.js');
+var Controller = require('./controller.js');
 
 module.exports = exports = function (router) {
   // router.route('/:adminid/requests')
   //   .post(Post.adminLogin);
 
+  // GET ALL REQUESTS
   router.route('/:adminid/requests')
-    .get(Get.getRequests);
+    .get(Controller.get.requests);
 
+  // GET AND POST FOR REQUEST
   router.route('/:adminid/requests/:requestid')
-    .get(Get.getRequest) // TODO deprecate this route
-    .put(Put.putRequest);
+    .get(Controller.get.request) // TODO deprecate this route
+    .put(Controller.put.request);
 
+  // GET A SPECIFIC PET, USER OR VET
   router.route('/:adminid/pets/:petid')
-    .get(Get.getPet);
+    .get(Controller.get.pet);
   router.route('/:adminid/users/:userid')
-    .get(Get.getUser);
+    .get(Controller.get.user);
   router.route('/:adminid/vets/:vetid')
-    .get(Get.getVet);
+    .get(Controller.get.vet);
 
+  // ROUTES FOR PET VACCINE ENTRIES
   router.route('/:adminid/requests/:requestid/vaccines')
-    .get(Get.getPetVaccines)
-    .post(Create.createPetVaccine);
+    .get(Controller.get.petVaccines)
+    .post(Controller.post.petVaccine);
   router.route('/:adminid/requests/:requestid/vaccines/:vaccineid')
-    .put(Put.putPetVaccine)
-    .delete(Delete.deletePetVaccine);
+    .put(Controller.put.petVaccine)
+    .delete(Controller.destroy.petVaccine);
 
+  // ROUTES FOR CONTACT HISTORY LOGS
   router.route('/:adminid/requests/:requestid/logs')
-    .get(Get.getLogs)
-    .post(Create.createLog);
+    .get(Controller.get.logs)
+    .post(Controller.post.log);
   router.route('/:adminid/requests/:requestid/logs/:logid')
-    .put(Put.putLog)
-    .delete(Delete.deleteLog);
+    .put(Controller.put.log)
+    .delete(Controller.destroy.log);
 
+  // ROUTES FOR PDFS
   router.route('/:adminid/requests/:requestid/pdfs')
-    .get(Get.getPDFs)
-    .post(Create.createPdf);
+    .get(Controller.get.pdfs)
+    .post(Controller.post.pdf);
   router.route('/:adminid/requests/:requestid/pdfs/:pdfid')
-    .put(Put.putPdf)
-    .delete(Delete.deletePdf);
+    .put(Controller.put.pdf)
+    .delete(Controller.destroy.pdf);
 
+  // ROUTES FOR VET CONTACTS
   router.route('/:adminid/vets/:vetid/contacts')
-    .get(Get.getVetContacts)
-    .post(Create.createVetContact);
+    .get(Controller.get.vetContacts)
+    .post(Controller.post.vetContact);
   router.route('/:adminid/vets/:vetid/contacts/:vetcontactid')
-    .put(Put.putVetContact)
-    .delete(Delete.deleteVetContact);
+    .put(Controller.put.vetContact)
+    .delete(Controller.destroy.vetContact);
 
+  // ROUTES FOR UNIVERSAL VACCINES
   router.route('/:adminid/vaccines')
-    .get(Get.getVaccines)
-    .post(Create.createVaccine);
+    .get(Controller.get.vaccines)
+    .post(Controller.post.vaccine);
 };
