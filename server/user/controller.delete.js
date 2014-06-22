@@ -8,7 +8,7 @@ var deleteRequest = function(req, res) {
   Request.forge({id : requestid}).fetch().then(function(request) {
     // TODO: verify
     request.attributes.status = 'canceled';
-    request.save(request.attributes);
+    request.save(request.attributes, {patch: true});
     res.send(200, request);
   });
 };

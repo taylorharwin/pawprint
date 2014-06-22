@@ -194,5 +194,4 @@ db.knex.schema.hasTable('vetContact').then(function(exists) {
   }
 });
 
-// revisit whether this is the best way to export 
 module.exports = exports = db.plugin('registry');

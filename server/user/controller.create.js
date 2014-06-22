@@ -27,9 +27,11 @@ var createPet = function(req, res) {
   Pet.forge(req.body).save().then(function(pet) {
     // attaches pet to user through the user_pet table
     console.log(pet);
-    User.forge({id: userid}).pet().attach(pet);
-    Pets.add(pet);
-    res.send(201, pet);
+    User.forge({id: userid}).fetch().then(function(user) {
+      user.pet().attach(pet);
+      Pets.add(pet);
+      res.send(201, {id: pet.id});
+    });
   });
 };
 
