@@ -1,101 +1,89 @@
 var db = require('../app/db_config.js');
+var request = require('request');
+var expect = require('chai').expect;
 var User = require('../app/models/user.js'),
     Pet = require('../app/models/pet.js'),
     Request = require('../app/models/request.js'),
     Vet = require('../app/models/vet.js');
+
     
 var reqPort = 9000;
 var reqUrl = 'http://localhost:' + reqPort;
 
 var createForm = function(obj) {
-  return {form : obj};
+  if (obj) {
+    return {form : obj};
+  }
+};
+
+var insert = function(table, prop, data) {
+  return db.knex(table).returning(prop)
+    .insert(data);
+};
+
+var _test = function(reqType, url, status, cb, input) {
+  request[reqType](reqUrl + url, createForm(input), function(err, res, body) {
+    expect(!!err).to.equal(false);
+    expect(res.statusCode).to.equal(status);
+    if (body) {
+      body = JSON.parse(body);
+      cb(body);
+    }
+  });
 };
 
 var userDataCallback = function() {
+  var userid, petid, vetid, requestid, vaccineid;
   before(function(done) {
-    db.knex('user').returning('id')
-      .insert({email: 'hell@o.com', password: 'password'})
-      .then(function(userid) {
-        userid = userid[0];
-        db.knex('pet').returning('id')
-          .insert({name: 'appl'})
-          .then(function(petid) {
-            petid = petid[0];
-            db.knex('user_pet').returning('id')
-              .insert({user_id: userid, pet_id: petid})
-              .then(function(userpet){
-                db.knex('vet').returning('id')
-                  .insert({practiceName: 'vetpractice', contactMethod: 'phone'})
-                  .then(function(vetid) {
-                    vetid = vetid[0];
-                    db.knex('request').returning('id')
-                      .insert({user_id: userid, pet_id: petid, vet_id: vetid, status: 'Pending'})
-                      .then(function(requestid){
-                        requestid = requestid[0];
-                        db.knex('vaccine').returning('id')
-                          .insert({name: 'vaccine1'})
-                          .then(function(vaccineid) {
-                            vaccineid = vaccineid[0];
-                            db.knex('pet_vaccine').returning('id')
-                              .insert({pet_id: petid, vaccine_id: vaccineid, request_id: requestid})
-                              .then(function(petvaccine) {
-                                db.knex('pet_vaccine').returning('id')
-                                  .insert({pet_id: petid, vaccine_id: vaccineid, request_id: requestid})
-                                  .then(function(petvaccine2) {
-                                    done();
-                                  });
-                              });
-                          });
-                      });
-                  });
-              });
-          });
+    insert('user', 'id', {email: 'hell@o.com', password: 'password'})
+      .then(function(user){
+        userid = user[0];
+        return insert('pet', 'id', {name: 'appl'});
+      })
+      .then(function(pet) {
+        petid = pet[0];
+        return insert('user_pet', 'id', {user_id: userid, pet_id: petid});
+      })
+      .then(function(userpet){
+        return insert('vet', 'id', {practiceName: 'vetpractice', contactMethod: 'phone'});
+      })
+      .then(function(vet) {
+        vetid = vet[0];
+        return insert('request', 'id', {user_id: userid, pet_id: petid, vet_id: vetid, status: 'Pending'});
+      })
+      .then(function(request){
+        requestid = request[0];
+        return insert('vaccine', 'id', {name: 'vaccine1'});
+      })
+      .then(function(vaccine) {
+        vaccineid = vaccine[0];
+        return insert('pet_vaccine', 'id', {pet_id: petid, vaccine_id: vaccineid, request_id: requestid});
+      })
+      .then(function(petvaccine) {
+        return insert('pet_vaccine', 'id', {pet_id: petid, vaccine_id: vaccineid, request_id: requestid});
+      })
+      .then(function(petvaccine2) {
+        done();
       });
   });
 };
 
 var serverDataCallback = function() {
   before(function(done) {
-    db.knex('admin').returning('id')
-      .insert({email: 'admi@n.com', password: 'password'})
+    insert('admin', 'id', {email: 'admi@n.com', password: 'password'})
       .then(function(adminid) {
-        adminid = adminid[0];
-        done();
-      });
-  });
-
-  before(function(done) {
-    db.knex('vetContact').returning('id')
-      .insert({name: 'paul', title: 'receptionist', email: 'paul@vet.com', phone: '1234567890', vet_id: 1})
+        return insert('vetContact', 'id', {name: 'paul', title: 'receptionist', email: 'paul@vet.com', phone: '1234567890', vet_id: 1});
+      })
       .then(function(vetContactid) {
-        vetContactid = vetContactid[0];
-        done();
-      });
-  });
-
-  before(function(done) {
-    db.knex('contactHistory').returning('id')
-      .insert({admin_id: 1, type: 'phone', request_id: 1, vetContact_id: 1})
+        return insert('contactHistory', 'id', {admin_id: 1, type: 'phone', request_id: 1, vetContact_id: 1});
+      })
       .then(function(contactHistoryid) {
-        contactHistoryid = contactHistoryid[0];
-        done();
-      });
-  });
-
-  before(function(done) {
-    db.knex('contactHistory').returning('id')
-      .insert({admin_id: 1, type: 'phone', request_id: 1, vetContact_id: 1})
+        return insert('contactHistory', 'id', {admin_id: 1, type: 'phone', request_id: 1, vetContact_id: 1});
+      })
       .then(function(contactHistoryid) {
-        contactHistoryid = contactHistoryid[0];
-        done();
-      });
-  });
-
-  before(function(done) {
-    db.knex('pdfRecord').returning('id')
-      .insert({link: 'www.samplepdf.asd', request_id: 1})
+        return insert('pdfRecord', 'id', {link: 'www.samplepdf.asd', request_id: 1});
+      })
       .then(function(pdfid) {
-        pdfid = pdfid[0];
         done();
       });
   });
@@ -105,5 +93,7 @@ module.exports = exports = {
   createForm : createForm,
   userDataCallback : userDataCallback,
   serverDataCallback : serverDataCallback,
-  reqUrl : reqUrl
+  reqUrl : reqUrl,
+  insert : insert,
+  _test : _test
 };

@@ -23,15 +23,17 @@ db.knex.schema.hasTable('user').then(function(exists) {
       user.string('email', 100);
       user.string('firstName', 50);
       user.string('lastName', 50);
-      user.string('password', 255);
-      user.string('salt', 255);
       user.string('streetAddress', 100);
       user.string('city', 100);
       user.string('state', 2);
-      user.string('zip', 10);             // string/int
-      user.string('phone', 11);           // string/int
-      user.string('signature', 255);      // what is this?
+      user.string('zip', 10);
+      user.string('phone', 11);
+      user.string('signature', 255);
       user.integer('vet_id');
+      admin.string('password', 255);
+      admin.string('salt', 255);
+      admin.string('jwt', 255);
+      admin.string('type', 5);
       user.timestamps();
     }).then(function (table) {
       console.log('Created Table', table);
@@ -45,7 +47,6 @@ db.knex.schema.hasTable('user_pet').then(function(exists) {
       join.increments('id').primary();
       join.integer('user_id');
       join.integer('pet_id');
-      // join.timestamps();
     }).then(function (table) {
       console.log('Created Table', table);
     });
@@ -133,26 +134,12 @@ db.knex.schema.hasTable('contactHistory').then(function(exists) {
   if (!exists) {
     db.knex.schema.createTable('contactHistory', function (history) {
       history.increments('id').primary();
-      history.integer('admin_id');
+      history.integer('adminUser_id');
       history.string('type', 100);
       history.string('notes', 255);
       history.integer('request_id');
       history.integer('vetContact_id');
       history.timestamps();
-    }).then(function (table) {
-      console.log('Created Table', table);
-    });
-  }
-});
-
-db.knex.schema.hasTable('admin').then(function(exists) {
-  if (!exists) {
-    db.knex.schema.createTable('admin', function (admin) {
-      admin.increments('id').primary();
-      admin.string('email', 100);
-      admin.string('password', 255);
-      admin.string('salt', 255);
-      admin.timestamps();
     }).then(function (table) {
       console.log('Created Table', table);
     });
@@ -167,10 +154,10 @@ db.knex.schema.hasTable('vet').then(function(exists) {
       vet.string('website', 255);
       vet.string('streetAddress', 100);
       vet.string('city', 100);
-      vet.string('state', 2);               // added this 
-      vet.string('zip', 10);                // string/int
-      vet.string('phone', 11);              // string/int
-      vet.string('contactMethod', 100);    // integer instead?
+      vet.string('state', 2);
+      vet.string('zip', 10);
+      vet.string('phone', 11);
+      vet.string('contactMethod', 100);
       vet.timestamps();
     }).then(function (table) {
       console.log('Created Table', table);
