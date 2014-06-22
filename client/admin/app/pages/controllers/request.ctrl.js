@@ -80,7 +80,14 @@ angular.module('admin.pages.controllers')
 
       });
     };
-
+    //Takes an array of objects and a vacc name, returns the ID for that vaccine
+    $scope.searchVaccinesArrayforID = function (arr, vaccineName) {
+      for (var i = 0; i < arr.length; i++) {
+        if (arr[i].name === vaccineName) {
+          return arr[i].id;
+        }
+      }
+    };
 
     //Gets all vaccines in database 
 
@@ -88,7 +95,7 @@ angular.module('admin.pages.controllers')
       $http.get('/admin/1/vaccines')
       .success(function (json) {
         $scope.vaccines = json;
-        console.log($scope.vaccines);
+        console.log(json);
       })
       .error(function (data, status) {
         console.log('error making request:', data, status);
