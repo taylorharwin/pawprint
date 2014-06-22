@@ -6,40 +6,17 @@ var User             = require('../app/models/user.js'),
     ContactHistory   = require('../app/models/contactHistory.js'),
     Request          = require('../app/models/request.js'),
     VetContact       = require('../app/models/vetContact.js'),
-    Q                = require('q');
+    Q                = require('q'),
+    Utils            = require('../app/utils.js');
 
 
-/*************DOCS***************/
+var deletePetVaccine = Utils.deleter(Pet_Vaccine, {id: 'vaccineid'});
 
-// _deleter makes DELETE requests
+var deleteLog = Utils.deleter(ContactHistory, {id: 'logid'});
 
-// Example:
-// var deletePetVaccine = function(req, res) {
-//   Pet_Vaccine.forge({id: req.params.vaccineid}).fetch().then(function(model){
-//     model.destroy(res.send(200, model));
-//   });
-// };
+var deletePdf = Utils.deleter(PdfRecord, {id: 'pdfid'});
 
-// BECOMES
-// var deletePetVaccine = _deleter(Pet_Vaccine, {id: 'vaccineid'});
-
-
-// TODO: validations
-var _deleter = function (Model, options) {
-  return function(req, res) {
-    Model.forge({id: req.params[options.id]}).fetch().then(function(model){
-      model.destroy(res.send(200, model));
-    });
-  };
-};
-
-var deletePetVaccine = _deleter(Pet_Vaccine, {id: 'vaccineid'});
-
-var deleteLog = _deleter(ContactHistory, {id: 'logid'});
-
-var deletePdf = _deleter(PdfRecord, {id: 'pdfid'});
-
-var deleteVetContact = _deleter(VetContact, {id: 'vetcontactid'});
+var deleteVetContact = Utils.deleter(VetContact, {id: 'vetcontactid'});
 
 module.exports = exports = {
   deletePetVaccine: deletePetVaccine,
