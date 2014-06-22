@@ -14,22 +14,32 @@ var User             = require('../app/models/user.js'),
 // _deleter makes DELETE requests
 
 // Example:
+// var deletePetVaccine = function(req, res) {
+//   Pet_Vaccine.forge({id: req.params.vaccineid}).fetch().then(function(model){
+//     model.destroy(res.send(200, model));
+//   });
+// };
+
+// BECOMES
+// var deletePetVaccine = _deleter(Pet_Vaccine, {id: 'vaccineid'});
 
 
 // TODO: validations
 var _deleter = function (Model, options) {
   return function(req, res) {
-    // TODO
+    Model.forge({id: req.params[options.id]}).fetch().then(function(model){
+      model.destroy(res.send(200, model));
+    });
   };
 };
 
-var deletePetVaccine
+var deletePetVaccine = _deleter(Pet_Vaccine, {id: 'vaccineid'});
 
-var deleteLog
+var deleteLog = _deleter(ContactHistory, {id: 'logid'});
 
-var deletePdf
+var deletePdf = _deleter(PdfRecord, {id: 'pdfid'});
 
-var deleteVetContact
+var deleteVetContact = _deleter(VetContact, {id: 'vetcontactid'});
 
 module.exports = exports = {
   deletePetVaccine: deletePetVaccine,
