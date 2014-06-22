@@ -1,13 +1,9 @@
 var db = require('../app/db_config.js');
 var User = require('../app/models/user.js'),
-    Users = require('../app/collections/users.js'),
     Pet = require('../app/models/pet.js'),
-    Pets = require('../app/collections/pets.js'),
     Request = require('../app/models/request.js'),
-    Requests = require('../app/collections/requests.js'),
-    Vet = require('../app/models/vet.js'),
-    Vets = require('../app/collections/vets.js');
-
+    Vet = require('../app/models/vet.js');
+    
 var reqPort = 9000;
 var reqUrl = 'http://localhost:' + reqPort;
 

@@ -1,22 +1,13 @@
 var db                = require('../app/db_config.js'),
     ContactHistory    = require('../app/models/contactHistory.js'),
-    ContactHistorys   = require('../app/collections/contactHistorys.js'),
     PdfRecord         = require('../app/models/pdfRecord.js'),
-    PdfRecords        = require('../app/collections/pdfRecords.js'),
     User              = require('../app/models/user.js'),
-    Users             = require('../app/collections/users.js'),
     Pet               = require('../app/models/pet.js'),
-    Pets              = require('../app/collections/pets.js'),
     Request           = require('../app/models/request.js'),
-    Requests          = require('../app/collections/requests.js'),
     Vet               = require('../app/models/vet.js'),
-    Vets              = require('../app/collections/vets.js'),
     Pet_Vaccine       = require('../app/models/pet_vaccine.js'),
-    Pet_Vaccines      = require('../app/collections/pet_vaccines.js'),
     VetContact        = require('../app/models/vetContact.js'),
-    VetContacts       = require('../app/collections/vetContacts.js'),
     Vaccine           = require('../app/models/vaccine.js'),
-    Vaccines          = require('../app/collections/vaccines.js'),
     Q                 = require('q');
 
 /************DOCS****************/

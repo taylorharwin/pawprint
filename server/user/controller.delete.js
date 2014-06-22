@@ -1,5 +1,4 @@
 var Request = require('../app/models/request.js'),
-    Requests = require('../app/collections/requests.js'),
     Q    = require('q');
 
 var deleteRequest = function(req, res) {
