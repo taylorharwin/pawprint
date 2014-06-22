@@ -15,10 +15,8 @@ angular.module('admin.pages.directives')
       scope.getStuff(1, 'vets', scope.vetID, function (data) {
         scope.vetData = data;
       });
-
       scope.updateVetInfo = function () {
         scope.vetData = angular.copy(scope.vetData);
-        console.log(scope.vetData);
       };
     }
   };
@@ -36,17 +34,13 @@ angular.module('admin.pages.directives')
         };
         scope.getStuff(1, 'pets', scope.petID, function (data) {
           scope.petData = data;
-          console.log(scope.petData);
         });
         scope.getStuff(1, 'users', scope.userID, function (data) {
           scope.userData = data;
-          console.log(scope.userData);
         });
         scope.updateUserInfo = function () {
           scope.petData = angular.copy(scope.petData);
-          console.log(scope.petData);
           scope.userData = angular.copy(scope.userData);
-          console.log(scope.userData);
         };
       }
    };
@@ -58,21 +52,9 @@ angular.module('admin.pages.directives')
       replace: 'true',
       templateUrl: 'app/pages/templates/vacc-record.tpl.html',
       link: function (scope) {
-      scope.cleanDates = function (arr) {
-        for (var i = 0; i < arr.length; i++) {
-          var administered = new Date(arr[i].dateAdministered);
-          var expires = new Date(arr[i].dateExpired);
-          arr[i].dateAdministered = administered.toLocaleDateString();
-          arr[i].dateExpired = expires.toLocaleDateString();
-        }
-        return arr;
-      };
-
-      scope.getStuff(1, 'requests', scope.reqID, function (data) {
-        scope.vaccinations = scope.cleanDates(data);
-      }, 'vaccines');
-    }
-   };
+        scope.getAllVaccinesForRequest();
+      }
+    };
   })
 
   .directive('contactHist', function () {
@@ -81,10 +63,11 @@ angular.module('admin.pages.directives')
     replace: 'true',
     templateUrl: 'app/pages/templates/contact-hist.tpl.html',
     link: function (scope) {
+
+      //Gets all contact records for a given Request ID
       scope.updateContacts = function () {
         scope.getStuff(1, 'requests', scope.reqID, function (data) {
           scope.contacts = data;
-          console.log('Here is scope.contacts', scope.contacts);
         }, 'logs');
       };
       scope.updateContacts();
@@ -92,9 +75,10 @@ angular.module('admin.pages.directives')
       scope.noteObj = {
         notes: ''
       };
+
+      //Posts a new note for a given Request ID
       scope.postNote = function () {
         scope.noteObj.notes = scope.noteText;
-        console.log(scope.noteObj);
         scope.postStuff(scope.noteObj, 1, 'requests', scope.reqID, function () {
           scope.alerts.push({type: 'success', msg: 'Added a new note, ' + scope.noteText});
           scope.updateContacts();
@@ -113,22 +97,38 @@ angular.module('admin.pages.directives')
     link: function (scope) {
       scope.getAllVaccines();
       scope.editingVacc = true;
-      scope.vaccine = {name: ''};
+      scope.newVaccine = {name: '',
+        dateAdministered: '',
+        vaccine_id: ''
+      };
+
+      //Not a great practice, but using this constant to track validity of a new vaccine
+      scope.duration = 0;
+
+
+
       scope.editVacc = function () {
         scope.editingVacc = !scope.editingVacc;
       };
-      scope.setVacc = function (vac) {
-        scope.vaccine.name = vac;
-        console.log(scope.vaccine.name);
+
+      //Sets properties on an object at the time when user selects name from dropdown
+      scope.setVacc = function (vac, id) {
+        scope.newVaccine.name = vac;
+        scope.newVaccine.vaccine_id = id;
       };
-      scope.newVac = '';
-      scope.newVacID = '';
-      scope.administered = '';
-      scope.expired = '';
+
+      //This adds an individual vaccination record for a given request
+      scope.postVacc = function (vaccineObject) {
+        var toPass = [{id: scope.newVaccine.vaccine_id, dateAdministered: scope.newVaccine.dateAdministered}];
+        scope.postStuff(toPass, 1, 'requests', scope.reqID, function () {
+          scope.alerts.push({type: 'success', msg: 'Added a new vaccination record'});
+          scope.getAllVaccinesForRequest();
+        }, 'vaccines');
+      };
 
       //Posts a new vaccine to the global list of vaccines
-      scope.sendVaccine = function (vac) {
-        var packet = {name: vac};
+      scope.sendVaccine = function (vac, duration) {
+        var packet = {name: vac, duration: scope.duration};
         scope.postNewVaccine(packet, function () {
           scope.getAllVaccines();
           scope.alerts.push({type: 'success', msg: 'Added new vaccine,' + vac});
