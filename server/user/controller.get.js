@@ -8,7 +8,7 @@ var getUser = function(req, res) {
   var userid = req.params.userid;
 
   User.forge({id: userid}).fetch().then(function(model){
-    res.send(200, model.omit('password', 'salt', 'signature'));
+    res.send(200, model.omit('password', 'salt', 'signature', 'type', 'jwt'));
   });
 };
 

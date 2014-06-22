@@ -2,7 +2,6 @@ var db                = require('../app/db_config.js'),
     Q                 = require('q'),
     Utils             = require('../app/utils.js'),
     // INCLUDE DATA MODELS FOR BOOKSHELF.JS
-    Admin             = require('../app/models/admin.js'),
     ContactHistory    = require('../app/models/contactHistory.js'),
     PdfRecord         = require('../app/models/pdfRecord.js'),
     Pet               = require('../app/models/pet.js'),
@@ -26,7 +25,7 @@ var get = {
 
   user: Utils.getter(User, {
     query: { id: 'userid' },
-    omit: ['password', 'salt']
+    omit: ['password', 'salt', 'jwt']
   }),
 
   vet: Utils.getter(Vet, {
@@ -84,7 +83,7 @@ var post = {
   vaccine: Utils.creator(Vaccine),
 
   log: Utils.creator(ContactHistory, {
-    admin_id: 'adminid',
+    adminUser_id: 'adminid',
     request_id: 'requestid'
   }),
 

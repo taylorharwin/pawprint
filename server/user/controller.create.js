@@ -9,8 +9,9 @@ var User = require('../app/models/user.js'),
 var createUser = function(req, res) {
   // need to bcrypt at some point
   // figure out logic for breaking up account creation and user details?
+  req.body.type = 'user';
   User.forge(req.body).save().then(function(model) {
-    res.send(201, model.omit('password', 'salt'));
+    res.send(201, model.omit('password', 'salt', 'jwt', 'type'));
   });
 };
 

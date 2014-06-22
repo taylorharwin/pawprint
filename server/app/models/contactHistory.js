@@ -1,6 +1,6 @@
 var db = require('../db_config.js');
 require('./request.js');
-require('./admin.js');
+require('./user.js');
 require('./vetContact.js');
 
 var ContactHistory = db.Model.extend({
@@ -9,8 +9,8 @@ var ContactHistory = db.Model.extend({
   request: function() {
     return this.belongsTo('Request');
   },
-  admin: function() {
-    return this.belongsTo('Admin');
+  adminUser: function() {
+    return this.belongsTo('User'); // user table but is an admin
   },
   vet_contact: function() {
     return this.belongsTo('Vet_Contact');
