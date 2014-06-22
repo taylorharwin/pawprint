@@ -14,13 +14,14 @@
     <div class="panel-body">
         
    <form>
-    <legend>Add a Vaccine</legend>
+    <legend>Manage Vaccinations</legend>
       Vaccine: <input type="text" name="firstname" ng-model="newVaccine.name"><br>
       Date Administered: <input type="text" name="lastname" ng-model="newVaccine.dateAdministered">
     <button class="btn btn-small btn-danger" ng-click="postVacc(newVaccine)">Create Record</button>
 
       <hr>
-      Add a new global vaccine type: <input type="text" name="vaccine" ng-model="newVacc">
+      Add a new global vaccine type: <input type="text" name="vaccine" ng-model="newVacc"><br>
+      How many days is it valid for?: <input type="text" name="validity" ng-model="duration">
       <button class="btn btn-small btn-danger" ng-click="sendVaccine(newVacc)">Add a new vaccine</button>
 
     </form>

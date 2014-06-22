@@ -41,7 +41,7 @@ angular.module('admin.pages.controllers')
         console.log('error making request:', data, status);
       });
     };
-
+    //A generic POST function that gets used across all directives
     $scope.postStuff = function (obj, adminID, endPoint, extraID, callback, subPath) {
       var path;
       if (subPath) {
@@ -61,7 +61,6 @@ angular.module('admin.pages.controllers')
 
 
     // A Generic PUT functions that gets used across all directives
-
     $scope.submitStuff = function (obj, adminID, endPoint, extraID, callback, subPath) {
       var path;
       if (subPath) {
@@ -89,8 +88,18 @@ angular.module('admin.pages.controllers')
       }
     };
 
-    //Gets all vaccines in database 
+    //iterates over array to change date objects into date strings
+    $scope.cleanDates = function (arr) {
+        for (var i = 0; i < arr.length; i++) {
+          var administered = new Date(arr[i].dateAdministered);
+          var expires = new Date(arr[i].dateExpired);
+          arr[i].dateAdministered = administered.toLocaleDateString();
+          arr[i].dateExpired = expires.toLocaleDateString();
+        }
+        return arr;
+      };
 
+    //Gets all vaccines in database 
     $scope.getAllVaccines = function () {
       $http.get('/admin/1/vaccines')
       .success(function (json) {
@@ -102,6 +111,8 @@ angular.module('admin.pages.controllers')
       });
     };
 
+
+    //Posts a new global vaccine to database
     $scope.postNewVaccine = function (obj, callback) {
       $http.post('/admin/1/vaccines', obj)
       .success(callback)
@@ -110,7 +121,14 @@ angular.module('admin.pages.controllers')
       });
     };
 
-
+    //Gets all vaccination records for a given request. Gets called on page-load, and when a new record is added
+    $scope.getAllVaccinesForRequest = function () {
+      $scope.getStuff(1, 'requests', $scope.reqID, function (data) {
+        $scope.vaccinations = $scope.cleanDates(data);
+      }, 'vaccines');
+    };
+      
+  //Change the status for a given request
     $scope.postUpdatedStatus = function (name) {
       $scope.code.status = name;
       console.log($scope.code);
@@ -121,11 +139,10 @@ angular.module('admin.pages.controllers')
       });
     };
 
+//Array containing all alerts
     $scope.alerts = [];
 
-    $scope.addAlert = function () {}
-     
-
+     //Function to remove any one alert (Admins may have multiple alerts on screen for any requests);
     $scope.closeAlert = function (index) {
       $scope.alerts.splice(index, 1);
     };
