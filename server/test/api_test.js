@@ -21,5 +21,5 @@ describe('Pawprint Tests', function() {
 
   // TODO: add negative tests
   xdescribe('user routes', usertests);
-  describe('server routes', admintests);
+  xdescribe('server routes', admintests);
 });
