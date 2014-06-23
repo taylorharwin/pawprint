@@ -82,14 +82,14 @@ var post = {
 
   vaccine: Utils.creator(Vaccine),
 
-  log: Utils.creator(ContactHistory, {
+  log: Utils.creator(ContactHistory, {params: {
     adminUser_id: 'adminid',
     request_id: 'requestid'
-  }),
+  }}),
 
-  vetContact: Utils.creator(VetContact, {
+  vetContact: Utils.creator(VetContact, {params: {
     vet_id: 'vetid'
-  }),
+  }}),
 
   pdf: function(req, res) {
     // TODO, this will be a multi-part form request

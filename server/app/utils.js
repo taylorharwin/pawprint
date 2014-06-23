@@ -79,8 +79,8 @@ var getter = function (Model, options) {
 
 /*
  * creator makes POST request with the req.body extended by any params passed in
- *   params is an object with properties for each property the model should be extended with
- *   
+ *   params: is an object with properties for each property the model should be extended with
+ *   omit: a string or array of strings of parameters that should be omitted from the returned model   
  * EXAMPLE:
  *
  * === BEFORE === *
@@ -104,15 +104,16 @@ var getter = function (Model, options) {
  *   };
  */
 
-var creator = function(Model, params) {
+var creator = function(Model, options) {
   return function (req, res) {
     var newObj = req.body;
+    var params = options.params;
     for (var property in params) {
       newObj[property] = req.params[params[property]];
     }
 
     Model.forge(newObj).save().then(function(model) {
-      res.send(201, model);
+      res.send(201, model.omit(options.omit));
     }).catch(function(err) {
       console.error(err);
       res.send(500, 'Internal server error');
@@ -123,8 +124,9 @@ var creator = function(Model, params) {
 
 /*
  * updater makes PUT requests which update entries in the Model passed in
- * options takes an object which must have a property id for the id of the entry you would like to update
- *   
+ * options
+ *   id: the string name of the req.params property for the id of the entry you would like to update
+ *   omit: a string or array of strings of parameters that should be omitted from the returned model    
  * EXAMPLE:
  *
  * === BEFORE === *
@@ -153,7 +155,7 @@ var updater = function (Model, options) {
     Model.forge({id: req.params[options.id]}).fetch().then(function(model) {
       return model.save(patchObj, {patch: true});
     }).then(function(model) {
-      res.send(200, model);
+      res.send(200, model.omit(options.omit));
     }).catch(function(err) {
       console.err(err);
       res.send(500, 'Internal server error');
@@ -164,7 +166,9 @@ var updater = function (Model, options) {
 
 /*
  * deleter makes DELETE requests which update entries in the Model passed in
- * options takes an object which must have a property id for the id of the entry you would like to delete
+ * options
+ *   id: the string name of the req.params property for the id of the entry you would like to delete
+ *   omit: a string or array of strings of parameters that should be omitted from the returned model
  *   
  * EXAMPLE:
  *
@@ -184,7 +188,7 @@ var updater = function (Model, options) {
 var deleter = function (Model, options) {
   return function(req, res) {
     Model.forge({id: req.params[options.id]}).fetch().then(function(model){
-      model.destroy(res.send(200, model));
+      model.destroy(res.send(200, model.omit(options.omit)));
     });
   };
 };
