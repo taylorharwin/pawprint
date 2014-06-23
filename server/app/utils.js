@@ -195,6 +195,9 @@ var deleter = function (Model, options) {
   return function(req, res) {
     Model.forge({id: req.params[options.id]}).fetch().then(function(model){
       model.destroy(res.send(200, model.omit(options.omit)));
+    }).catch(function(err) {
+      console.error(err);
+      res.send(500, 'Internal server error');
     });
   };
 };
