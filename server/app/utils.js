@@ -1,4 +1,4 @@
-/*
+/* ABOUT THIS FILE:
  * Utils.js holds 4 helper functions that return a function that takes req and res
  * These functions correlate with the standard HTTP methods (GET, PUT, POST, and DELETE)
  * and are invoked on the data Model passed in with options using Bookshelf.js
@@ -11,7 +11,7 @@
   // validations for DELETE
 
 
-/*
+/* DOCUMENTATION: getter
  * getter makes GET requests with query options and allows you to omit things in the return
  * Options is an object with 3 parameters
  *   all: a boolean value, set true for all values that match the queries and false for just the first (defaults to false)
@@ -77,7 +77,7 @@ var getter = function (Model, options) {
 };
 
 
-/*
+/* DOCUMENTATION: creator
  * creator makes POST request with the req.body extended by any params passed in
  *   params: is an object with properties for each property the model should be extended with
  *   omit: a string or array of strings of parameters that should be omitted from the returned model   
@@ -123,7 +123,7 @@ var creator = function(Model, options) {
 };
 
 
-/*
+/* DOCUMENTATION: updater
  * updater makes PUT requests which update entries in the Model passed in
  * options
  *   id: the string name of the req.params property for the id of the entry you would like to update
@@ -170,7 +170,7 @@ var updater = function (Model, options) {
 };
 
 
-/*
+/* DOCUMENTATION: deleter
  * deleter makes DELETE requests which update entries in the Model passed in
  * options
  *   id: the string name of the req.params property for the id of the entry you would like to delete
