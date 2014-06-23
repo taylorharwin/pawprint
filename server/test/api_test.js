@@ -12,12 +12,12 @@ var admintests = require('./admin_test.js');
 
 var createForm = helpers.createForm;
 var userDataCallback = helpers.userDataCallback;
-var serverDataCallback = helpers.serverDataCallback;
+var adminDataCallback = helpers.adminDataCallback;
 var reqUrl = helpers.reqUrl;
 
 describe('Pawprint Tests', function() {
   userDataCallback();
-  serverDataCallback();
+  adminDataCallback();
 
   // TODO: add negative tests
   xdescribe('user routes', usertests);

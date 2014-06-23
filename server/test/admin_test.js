@@ -72,7 +72,7 @@ module.exports = exports = function() {
         email: 'paul@dummy.asd',
         phone: '1234567890'
       };
-      _test('post', '/admin/1/vets/1/contacts', function(body) {
+      _test('post', '/admin/1/vets/1/contacts', 201, function(body) {
         expect(body.vet_id).to.equal('1');
         expect(body.name).to.equal('pauldummy');
         done();
@@ -83,7 +83,7 @@ module.exports = exports = function() {
       var input = {
         name: 'dummyvaccine'
       };
-      _test('post', '/admin/1/vaccines', function(body) {
+      _test('post', '/admin/1/vaccines', 201, function(body) {
         body = JSON.parse(body);
         expect(body.name).to.equal('dummyvaccine');
         done();
@@ -93,7 +93,7 @@ module.exports = exports = function() {
 
   describe('GET', function() {
     it('/admin/:adminid/requests', function(done) {
-      _test('get', '/admin/1/requests', function(body) {
+      _test('get', '/admin/1/requests', 200, function(body) {
         expect(body).to.be.a('array');
         expect(!!body.length).to.equal(true);
         done();
@@ -101,7 +101,7 @@ module.exports = exports = function() {
     });
 
     it('/admin/:adminid/users/:userid', function(done) {
-      _test('get', '/admin/1/users/1', function(body) {
+      _test('get', '/admin/1/users/1', 200, function(body) {
         expect(body.id).to.equal(1);
         expect(!!body.email).to.equal(true);
         done();
@@ -109,10 +109,7 @@ module.exports = exports = function() {
     });
 
     it('/admin/:adminid/pets/:petid', function(done) {
-      request.get(reqUrl + '/admin/1/pets/1', function(err, res, body) {
-        expect(!!err).to.equal(false);
-        expect(res.statusCode).to.equal(200);
-        body = JSON.parse(body);
+      _test('get', '/admin/1/pets/1', 200, function(body) {
         expect(body.id).to.equal(1);
         expect(!!body.name).to.equal(true);
         done();
@@ -120,10 +117,7 @@ module.exports = exports = function() {
     });
 
     it('/admin/:adminid/vets/:vetid', function(done) {
-      request.get(reqUrl + '/admin/1/vets/1', function(err, res, body) {
-        expect(!!err).to.equal(false);
-        expect(res.statusCode).to.equal(200);
-        body = JSON.parse(body);
+      _test('get', '/admin/1/vets/1', 200, function(body) {
         expect(body.id).to.equal(1);
         expect(!!body.practiceName).to.equal(true);
         done();
@@ -131,10 +125,7 @@ module.exports = exports = function() {
     });
 
     it('/admin/:adminid/requests/:requestid/logs', function(done) {
-      request.get(reqUrl + '/admin/1/requests/1/logs', function(err, res, body) {
-        expect(!!err).to.equal(false);
-        expect(res.statusCode).to.equal(200);
-        body = JSON.parse(body);
+      _test('get', '/admin/1/requests/1/logs', 200, function(body) {
         expect(body).to.be.a('array');
         expect(body.length).to.be.above(1);
         done();
@@ -142,10 +133,7 @@ module.exports = exports = function() {
     });
 
     it('/admin/:adminid/requests/:requestid/vaccines', function(done) {
-      request.get(reqUrl + '/admin/1/requests/1/vaccines', function(err, res, body) {
-        expect(!!err).to.equal(false);
-        expect(res.statusCode).to.equal(200);
-        body = JSON.parse(body);
+      _test('get', '/admin/1/requests/1/vaccines', 200, function(body) {
         expect(body).to.be.a('array');
         expect(body.length).to.be.above(0);
         expect(!!body[0].vaccine_id).to.equal(true);
@@ -154,10 +142,7 @@ module.exports = exports = function() {
     });
 
     it('/admin/:adminid/requests/:requestid/pdfs', function(done) {
-      request.get(reqUrl + '/admin/1/requests/1/pdfs', function(err, res, body) {
-        expect(!!err).to.equal(false);
-        expect(res.statusCode).to.equal(200);
-        body = JSON.parse(body);
+      _test('get', '/admin/1/requests/1/pdfs', 200, function(body) {
         expect(body).to.be.a('array');
         expect(body.length).to.be.above(0);
         expect(!!body[0].link).to.equal(true);
@@ -166,10 +151,7 @@ module.exports = exports = function() {
     });
 
     it('/admin/:adminid/vets/:vetid/contacts', function(done) {
-      request.get(reqUrl + '/admin/1/vets/1/contacts', function(err, res, body) {
-        expect(!!err).to.equal(false);
-        expect(res.statusCode).to.equal(200);
-        body = JSON.parse(body);
+      _test('get', '/admin/1/vets/1/contacts', 200, function(body){
         expect(body).to.be.a('array');
         expect(body.length).to.be.above(0);
         expect(body[0].vet_id).to.be.equal(1);
@@ -179,10 +161,7 @@ module.exports = exports = function() {
     });
 
     it('/admin/:adminid/vaccines', function(done) {
-      request.get(reqUrl + '/admin/1/vaccines', function(err, res, body) {
-        expect(!!err).to.equal(false);
-        expect(res.statusCode).to.equal(200);
-        body = JSON.parse(body);
+      _test('get', '/admin/1/vaccines', 200, function(body) {
         expect(body).to.be.a('array');
         expect(body.length).to.be.above(0);
         expect(!!body[0].name).to.equal(true);
@@ -196,70 +175,55 @@ module.exports = exports = function() {
       var input = {
         status: 'Complete'
       };
-      request.put(reqUrl + '/admin/1/requests/1', createForm(input), function(err, res, body) {
-        expect(!!err).to.equal(false);
-        expect(res.statusCode).to.equal(200);
-        body = JSON.parse(body);
+      _test('put', '/admin/1/requests/1', 200, function(body) {
         expect(body.status).to.equal('Complete');
         done();
-      });
+      }, input);
     });
 
     it('/admin/:adminid/requests/:requestid/logs/:logid', function(done) {
       var input = {
         notes: 'changed',
       };
-      request.put(reqUrl + '/admin/1/requests/1/logs/1', createForm(input), function(err, res, body) {
-        expect(!!err).to.equal(false);
-        expect(res.statusCode).to.equal(200);
-        body = JSON.parse(body);
+      _test('put', '/admin/1/requests/1/logs/1', 200, function(body) {
         expect(body.id).to.equal(1);
         expect(body.notes).to.equal('Changed');
         done();
-      });
+      }, input);
     });
 
     it('/admin/:adminid/requests/:requestid/vaccines/:vaccineid', function(done) {
       var input = {
         dateAdministered : new Date()
       };
-      request.put(reqUrl + '/admin/1/requests/1/vaccines/1', createForm(input), function(err, res, body) {
-        expect(!!err).to.equal(false);
-        expect(res.statusCode).to.equal(200);
-        body = JSON.parse(body);
+      _test('put', '/admin/1/requests/1/vaccines/1', 200, function(body) {
         expect(body.id).to.equal(1);
         expect(!!body.dateAdministered).to.equal(true);
         done();
-      });
+      }, input);
     });
 
     it('/admin/:adminid/requests/:requestid/pdfs/:pdfid', function(done) {
       var input = {
         link: 'www.put.asd'
       };
-      request.put(reqUrl + '/admin/1/requests/1/pdfs/1', createForm(input), function(err, res, body) {
-        expect(!!err).to.equal(false);
-        expect(res.statusCode).to.equal(200);
-        body = JSON.parse(body);
+      _test('put', '/admin/1/requests/1/pdfs/1', 200, function(body) {
         expect(body.id).to.equal(1);
         expect(body.link).to.equal('www.put.asd');
         done();
-      });
+      }, input);
     });
 
     it('/admin/:adminid/vets/:vetid/contacts/:contactid', function(done) {
       var input = {
         name: 'changedvetcontact'
       };
-      request.put(reqUrl + '/admin/1/vets/1/contacts/1', createForm(input), function(err, res, body) {
-        expect(!!err).to.equal(false);
-        expect(res.statusCode).to.equal(200);
-        body = JSON.parse(body);
+      _test('put', '/admin/1/vets/1/contacts/1', 200, function(body) {
         expect(body.id).to.equal(1);
         expect(body.vet_id).to.equal(1);
         expect(body.name).to.equal('changedvetcontact');
         done();
-      });
+      }, input);
     });
   });
 
