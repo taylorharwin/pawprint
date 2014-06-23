@@ -44,7 +44,7 @@
 
 var getter = function (Model, options) {
   return function(req, res) {
-    options = options || {};
+    options = options || {}; // Protects against null options, b/c options required
     
     // Get parameters from req.params
     var query = options.query || {};
@@ -106,6 +106,7 @@ var getter = function (Model, options) {
 
 var creator = function(Model, options) {
   return function (req, res) {
+    options = options || {}; // Protects against null options, b/c options required
     var newObj = req.body;
     var params = options.params;
     for (var property in params) {
