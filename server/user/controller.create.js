@@ -16,19 +16,24 @@ var createUser = Utils.creator(User, {
 
 var createPet = function(req, res) {
   var userid = req.params.userid;
+  var newpet;
 
   Pet.forge(req.body).save().then(function(pet) {
+    newpet = pet;
+    return User.forge({id: userid}).fetch();
+  })
+  .then(function(user) {
     // attaches pet to user through the user_pet table
-    User.forge({id: userid}).fetch().then(function(user) {
-      user.pet().attach(pet).then(function(h1, h2) {
-        var exjoin = User_Pet.forge({user_id: user.id, pet_id: pet.id});
-        exjoin.fetch().then(function(join) {
-          var date = new Date();
-          join.save({created_at: date, updated_at: date}, {patch: true});
-          res.send(201, pet);
-        });
-      });
-    });
+    user.pet().attach(newpet);
+    return user;
+  })
+  .then(function(user) {
+    return User_Pet.forge({user_id: user.id, pet_id: newpet.id}).fetch();
+  })
+  .then(function(join) {
+    var date = new Date();
+    join.save({created_at: date, updated_at: date}, {patch: true});
+    res.send(201, newpet);
   });
 };
 
