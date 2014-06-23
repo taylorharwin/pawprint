@@ -30,10 +30,10 @@ db.knex.schema.hasTable('user').then(function(exists) {
       user.string('phone', 11);
       user.string('signature', 255);
       user.integer('vet_id');
-      admin.string('password', 255);
-      admin.string('salt', 255);
-      admin.string('jwt', 255);
-      admin.string('type', 5);
+      user.string('password', 255);
+      user.string('salt', 255);
+      user.string('jwt', 255);
+      user.string('type', 5);
       user.timestamps();
     }).then(function (table) {
       console.log('Created Table', table);
