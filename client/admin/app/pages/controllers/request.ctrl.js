@@ -1,11 +1,12 @@
 'use strict';
 
 angular.module('admin.pages.controllers')
-  .controller('RequestCtrl', function ($scope, reqIDFactory, formattingService, statusCodeConst, $http) {
+  .controller('RequestCtrl', function ($scope, reqIDFactory, alertsService, formattingService, statusCodeConst, $http) {
 
 
     //links scope to generic formatting Service
     $scope.formattingService = formattingService;
+    $scope.alertsService = alertsService;
 
     //sets all values necessary for display of the page
     $scope.reqID = reqIDFactory.getRequestID();
