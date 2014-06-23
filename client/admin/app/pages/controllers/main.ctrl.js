@@ -11,16 +11,6 @@ angular.module('admin.pages.controllers')
 
 //iterates through an array and converts timestamp objects to user-friendly date strings.
 
-    // $scope.cleanDates = function (arr) {
-    //   for (var i = 0; i < arr.length; i++) {
-    //     var created = new Date(arr[i].created_at);
-    //     var updated = new Date(arr[i].updated_at);
-    //     arr[i].created_at = created.toLocaleDateString();
-    //     arr[i].updated_at = updated.toLocaleDateString();
-    //   }
-    //   return arr;
-    // };
-
 
 // Calls setter functions for all values in requests which are needed to make request-specific GET requests
 
