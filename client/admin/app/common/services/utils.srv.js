@@ -55,9 +55,27 @@ angular.module('admin.common.services')
     };
   })
 
-.constant('statusCodeConst', [{name: 'new'}, {name: 'pending'}, {name: 'complete'}, {name: 'cancelled'}]);
+.constant('statusCodeConst', [{name: 'new'}, {name: 'pending'}, {name: 'complete'}, {name: 'cancelled'}])
 
-    
+  
+.service('formattingService', function () {
+  this.cleanDates = function () {
+    return angular.forEach(this, function (item) {
+      if (item.created_at) {
+        item.created_at = (new Date(item.created_at)).toLocaleDateString();
+      }
+      if (item.updated_at) {
+        item.updated_at = (new Date(item.updated_at)).toLocaleDateString();
+      }
+      if (item.dateAdministered) {
+        item.dateAdministered = (new Date(item.dateAdministered)).toLocaleDateString();
+      }
+      if (item.dateExpired) {
+        item.dateExpired = (new Date(item.dateExpired)).toLocaleDateString();
+      }
+    });
+  };
+});
 
 
 

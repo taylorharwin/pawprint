@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('admin.pages.controllers')
-  .controller('MainCtrl', function ($scope, reqIDFactory, $state, $http) {
+  .controller('MainCtrl', function ($scope, reqIDFactory, formattingService, $state, $http) {
+
+    $scope.formattingService = formattingService;
 
 // adds CSS styling based on the status of the request
 
@@ -9,15 +11,15 @@ angular.module('admin.pages.controllers')
 
 //iterates through an array and converts timestamp objects to user-friendly date strings.
 
-    $scope.cleanDates = function (arr) {
-      for (var i = 0; i < arr.length; i++) {
-        var created = new Date(arr[i].created_at);
-        var updated = new Date(arr[i].updated_at);
-        arr[i].created_at = created.toLocaleDateString();
-        arr[i].updated_at = updated.toLocaleDateString();
-      }
-      return arr;
-    };
+    // $scope.cleanDates = function (arr) {
+    //   for (var i = 0; i < arr.length; i++) {
+    //     var created = new Date(arr[i].created_at);
+    //     var updated = new Date(arr[i].updated_at);
+    //     arr[i].created_at = created.toLocaleDateString();
+    //     arr[i].updated_at = updated.toLocaleDateString();
+    //   }
+    //   return arr;
+    // };
 
 
 // Calls setter functions for all values in requests which are needed to make request-specific GET requests
@@ -32,11 +34,10 @@ angular.module('admin.pages.controllers')
     };
 
 // Function for getting all existing requests to display on Main page. 
-
     $scope.getAllRequests = function () {
       $http.get('/admin/1/requests')
       .success(function (json) {
-        $scope.cleanDates(json);
+        $scope.formattingService.cleanDates.call(json);
         $scope.requests = json;
         $scope.allRequestsCount = json.length;
       })
