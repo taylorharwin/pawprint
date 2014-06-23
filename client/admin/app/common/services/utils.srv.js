@@ -59,6 +59,8 @@ angular.module('admin.common.services')
 
   
 .service('formattingService', function () {
+
+  //A function to make date objects into formatted date strings
   this.cleanDates = function () {
     return angular.forEach(this, function (item) {
       if (item.created_at) {
@@ -75,6 +77,21 @@ angular.module('admin.common.services')
       }
     });
   };
+
+  //Uses client-side record of all vaccines to match a vaccination name to each record for a given request. 
+  this.addVaccineNames = function (allVaccines) {
+    return angular.forEach(this, function (vaccinationRecord) {
+      var ID = vaccinationRecord.vaccine_id;
+      angular.forEach(allVaccines, function (vaccine) {
+        if (vaccine.id === ID) {
+          vaccinationRecord.name = vaccine.name;
+          console.log(vaccinationRecord);
+        }
+      });
+    });
+
+  };
+
 });
 
 

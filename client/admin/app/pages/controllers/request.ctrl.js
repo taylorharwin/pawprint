@@ -6,7 +6,7 @@ angular.module('admin.pages.controllers')
 
     //links scope to generic formatting Service
     $scope.formattingService = formattingService;
-    
+
     //sets all values necessary for display of the page
     $scope.reqID = reqIDFactory.getRequestID();
     $scope.vetID = reqIDFactory.getVetID();
@@ -117,6 +117,7 @@ angular.module('admin.pages.controllers')
     $scope.getAllVaccinesForRequest = function () {
       $scope.getStuff(1, 'requests', $scope.reqID, function (data) {
         $scope.vaccinations = $scope.formattingService.cleanDates.call(data);
+        $scope.formattingService.addVaccineNames.call($scope.vaccinations, $scope.vaccines);
       }, 'vaccines');
     };
       
