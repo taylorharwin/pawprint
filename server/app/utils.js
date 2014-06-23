@@ -127,6 +127,7 @@ var creator = function(Model, options) {
  * updater makes PUT requests which update entries in the Model passed in
  * options
  *   id: the string name of the req.params property for the id of the entry you would like to update
+ *   params: is an object with properties for each property the req.body model should be extended with
  *   omit: a string or array of strings of parameters that should be omitted from the returned model    
  * EXAMPLE:
  *
@@ -151,7 +152,11 @@ var creator = function(Model, options) {
 
 var updater = function (Model, options) {
   return function(req, res) {
-    var patchObj = req.body;
+    var patchObj = req.body || {};
+    var params = options.params;
+    for (var property in params) {
+      newObj[property] = req.params[params[property]];
+    }
 
     Model.forge({id: req.params[options.id]}).fetch().then(function(model) {
       return model.save(patchObj, {patch: true});

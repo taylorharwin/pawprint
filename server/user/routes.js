@@ -10,14 +10,14 @@ module.exports = exports = function (router) {
   router.route('/:userid')
     .get(Get.getUser)
     .put(Put.putUser)
-    // .delete(Delete.deleteUser);
+    .delete(Delete.deleteUser);
 
   router.route('/:userid/pets')
     .get(Get.getPets)
     .post(Create.createPet);
   router.route('/:userid/pets/:petid')
     .put(Put.putPet)
-    // .delete(Delete.deletePet);
+    .delete(Delete.deletePet);
 
   router.route('/:userid/pets/:petid/vaccines')
     .get(Get.getVaccines);
