@@ -1,5 +1,5 @@
 /* ABOUT THIS FILE:
- * Utils.js holds 4 helper functions that return a function that takes req and res
+ * utils.js holds 4 helper functions that return a function that takes req and res
  * These functions correlate with the standard HTTP methods (GET, PUT, POST, and DELETE)
  * and are invoked on the data Model passed in with options using Bookshelf.js
  */
@@ -110,7 +110,7 @@ var creator = function(Model, options) {
     var newObj = req.body;
     var params = options.params;
     for (var property in params) {
-      newObj[property] = req.params[params[property]];
+      newObj[property] = req.params[params[property]]; // Uses params from req.params
     }
 
     Model.forge(newObj).save().then(function(model) {
@@ -155,7 +155,7 @@ var updater = function (Model, options) {
     var patchObj = req.body || {};
     var params = options.params;
     for (var property in params) {
-      newObj[property] = req.params[params[property]];
+      patchObj[property] = params[property]; // Uses params from options
     }
 
     Model.forge({id: req.params[options.id]}).fetch().then(function(model) {
