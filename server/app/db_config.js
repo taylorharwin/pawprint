@@ -30,10 +30,11 @@ db.knex.schema.hasTable('user').then(function(exists) {
       user.string('phone', 11);
       user.string('signature', 255);
       user.integer('vet_id');
+      user.string('status', 10);
       user.string('password', 255);
       user.string('salt', 255);
       user.string('jwt', 255);
-      user.string('type', 5);
+      user.string('type', 10);
       user.timestamps();
     }).then(function (table) {
       console.log('Created Table', table);
@@ -47,6 +48,7 @@ db.knex.schema.hasTable('user_pet').then(function(exists) {
       join.increments('id').primary();
       join.integer('user_id');
       join.integer('pet_id');
+      join.timestamps();
     }).then(function (table) {
       console.log('Created Table', table);
     });
