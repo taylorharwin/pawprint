@@ -1,26 +1,22 @@
-var User = require('../app/models/user.js'),
-    Pet = require('../app/models/pet.js'),
-    Request = require('../app/models/request.js'),
-    Vet = require('../app/models/vet.js'),
-    User_Pet = require('../app/models/user_pet.js'),
-    Q    = require('q');
+
+var User      = require('../app/models/user.js'),
+    Pet       = require('../app/models/pet.js'),
+    Request   = require('../app/models/request.js'),
+    Vet       = require('../app/models/vet.js'),
+    User_Pet  = require('../app/models/user_pet.js'),
+    db        = require('../app/db_config.js'),
+    Utils     = require('../app/utils.js'),
+    Q         = require('q');
 
 // TODO: validations for field length/type
 
-var createUser = function(req, res) {
-  // need to bcrypt at some point
-  // figure out logic for breaking up account creation and user details?
-  req.body.type = 'user';
-  User.forge(req.body).save().then(function(model) {
-    res.send(201, model.omit('password', 'salt', 'jwt', 'type'));
-  });
-};
+var createUser = Utils.creator(User, {
+  omit: ['password', 'salt', 'jwt', 'type']
+});
 
 var createPet = function(req, res) {
-  // doesn't take into account vaccines
   var userid = req.params.userid;
-  // console.log(userid);
-  // create a new pet with userid
+
   Pet.forge(req.body).save().then(function(pet) {
     // attaches pet to user through the user_pet table
     User.forge({id: userid}).fetch().then(function(user) {
@@ -29,32 +25,19 @@ var createPet = function(req, res) {
         exjoin.fetch().then(function(join) {
           var date = new Date();
           join.save({created_at: date, updated_at: date}, {patch: true});
-          res.send(201, {id: pet.id});
+          res.send(201, pet);
         });
       });
     });
   });
 };
 
-var createRequest = function(req, res) {
-  var userid = req.params.userid;
-  var petid = req.params.petid;
-  var vet = req.body.vet_id;
-  var request = new Request({
-    user_id: userid,
-    pet_id: petid,
-    vet_id: vet
-  });
-  request.save().then(function(newRequest) {
-    res.send(201, {id: newRequest.id});
-  });
-};
+var createRequest = Utils.creator(Request, {params: {
+  user_id: 'userid',
+  pet_id: 'petid'
+}});
 
-var createVet = function(req, res) {
-  Vet.forge(req.body).save().then(function(newVet) {
-    res.send(201, {id: newVet.id});
-  });
-};
+var createVet = Utils.creator(Vet);
 
 module.exports = exports = {
   createUser : createUser,

@@ -1,16 +1,14 @@
-var User = require('../app/models/user.js'),
-    Pet = require('../app/models/pet.js'),
-    Request = require('../app/models/request.js'),
-    db = require('../app/db_config.js'),
-    Q    = require('q');
+var User      = require('../app/models/user.js'),
+    Pet       = require('../app/models/pet.js'),
+    Request   = require('../app/models/request.js'),
+    db        = require('../app/db_config.js'),
+    Utils     = require('../app/utils.js'),
+    Q         = require('q');
 
-var getUser = function(req, res) {
-  var userid = req.params.userid;
-
-  User.forge({id: userid}).fetch().then(function(model){
-    res.send(200, model.omit('password', 'salt', 'signature', 'type', 'jwt'));
-  });
-};
+var getUser = Utils.getter(User, {
+  query: { id: 'userid'},
+  omit: ['password', 'salt', 'signature', 'type', 'jwt']
+});
 
 var getPets = function(req, res) {
   var userid = req.params.userid;
