@@ -91,17 +91,6 @@ angular.module('admin.pages.controllers')
       }
     };
 
-    //iterates over array to change date objects into date strings
-    $scope.cleanDates = function (arr) {
-        for (var i = 0; i < arr.length; i++) {
-          var administered = new Date(arr[i].dateAdministered);
-          var expires = new Date(arr[i].dateExpired);
-          arr[i].dateAdministered = administered.toLocaleDateString();
-          arr[i].dateExpired = expires.toLocaleDateString();
-        }
-        return arr;
-      };
-
     //Gets all vaccines in database 
     $scope.getAllVaccines = function () {
       $http.get('/admin/1/vaccines')
@@ -127,7 +116,7 @@ angular.module('admin.pages.controllers')
     //Gets all vaccination records for a given request. Gets called on page-load, and when a new record is added
     $scope.getAllVaccinesForRequest = function () {
       $scope.getStuff(1, 'requests', $scope.reqID, function (data) {
-        $scope.vaccinations = $scope.cleanDates(data);
+        $scope.vaccinations = $scope.formattingService.cleanDates.call(data);
       }, 'vaccines');
     };
       
