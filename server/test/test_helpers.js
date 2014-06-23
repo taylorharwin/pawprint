@@ -68,7 +68,7 @@ var userDataCallback = function() {
   });
 };
 
-var serverDataCallback = function() {
+var adminDataCallback = function() {
   before(function(done) {
     insert('admin', 'id', {email: 'admi@n.com', password: 'password'})
       .then(function(adminid) {
@@ -92,7 +92,7 @@ var serverDataCallback = function() {
 module.exports = exports = {
   createForm : createForm,
   userDataCallback : userDataCallback,
-  serverDataCallback : serverDataCallback,
+  adminDataCallback : adminDataCallback,
   reqUrl : reqUrl,
   insert : insert,
   _test : _test
