@@ -16,7 +16,7 @@ angular.module('user.common.services')
           pets.pets = petsResult;
           var vaccinePromises = [];
 
-          angular.forEach(pets, function (pet) {
+          angular.forEach(pets.pets, function (pet) {
             var deferred = $q.defer();
             PetService.getPetVaccines(userId, pet.id)
               .then(function (response) {
@@ -34,16 +34,17 @@ angular.module('user.common.services')
           pets.vaccines = vaccinesResult;
           var requestPromises = [];
 
-          angular.forEach(pets, function (pet) {
-          var deferred = $q.defer();
-          PetService.getPetRequests(userId, pet.id)
-            .then(function (response) {
-              deferred.resolve(response);
-            }, function (error) {
-              deferred.reject();
-            });
-          requestPromises.push(deferred.promise);
-        
+          angular.forEach(pets.pets, function (pet) {
+            var deferred = $q.defer();
+            PetService.getPetRequests(userId, pet.id)
+              .then(function (response) {
+                deferred.resolve(response);
+              }, function (error) {
+                deferred.reject();
+              });
+            requestPromises.push(deferred.promise);
+          });
+      
           return $q.all(requestPromises);
         })
         .then(function (requestsResult) {
@@ -51,7 +52,6 @@ angular.module('user.common.services')
           pets.requests = requestsResult;
 
         });
-      });
     }
 
     function getPets () {
@@ -67,7 +67,7 @@ angular.module('user.common.services')
         });
     }
 
-    $scope.addPet = function (userId) {
+    function addPet (userId) {
 
       var modalInstance = $modal.open({
         templateUrl: 'app/pet/templates/editpet.tpl.html',
@@ -101,10 +101,9 @@ angular.module('user.common.services')
           console.log(error);
         });
       });
+    }
 
-    };
-
-    $scope.editPet = function (userId, index) {
+    function editPet (userId, index) {
     
       console.log(pets.pets[index]);
       var modalInstance = $modal.open({
@@ -129,9 +128,9 @@ angular.module('user.common.services')
         console.log('Modal dismissed');
       });
 
-    };
+    }
 
-    $scope.updatePet = function (userId, index) {
+    function updatePet (userId, index) {
 
       var modalInstance = $modal.open({
         templateUrl: 'app/pages/templates/updatepet.tpl.html',
@@ -154,7 +153,13 @@ angular.module('user.common.services')
         });
       });
 
-    };
+    }
 
+    this.retrievePets = retrievePets;
+    this.getPets = getPets;
+    this.cancelRequest = cancelRequest;
+    this.addPet = addPet;
+    this.editPet = editPet;
+    this.updatePet = updatePet;
 
   });

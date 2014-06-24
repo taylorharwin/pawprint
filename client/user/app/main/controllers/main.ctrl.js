@@ -1,6 +1,6 @@
 angular.module('user.main.controllers')
 
-  .controller('MainCtrl', function ($scope, CurrentUserService, CurrentPetService, VaccineService) {
+  .controller('MainCtrl', function ($scope, CurrentUserService, CurrentPetsService, VaccineService) {
     console.log($scope);
     console.log(CurrentUserService.getUser());
 
