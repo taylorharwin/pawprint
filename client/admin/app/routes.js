@@ -1,4 +1,6 @@
-angular.module('admin'), [
+'use strict';
+
+angular.module('admin')
   .config(function ($stateProvider) {
 
   $stateProvider
