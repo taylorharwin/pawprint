@@ -1,10 +1,14 @@
 'use strict';
 
-angular.module('admin.pages.controllers')
-  .controller('RequestCtrl', function ($scope, reqIDFactory, statusCodeConst, $http) {
+angular.module('admin.eachRequest.controllers')
+  .controller('EachRequestCtrl', function ($scope, reqIDFactory, alertsService, formattingService, statusCodeConst, $http) {
+
+
+    //links scope to generic formatting Service
+    $scope.formattingService = formattingService;
+    $scope.alertsService = alertsService;
 
     //sets all values necessary for display of the page
-
     $scope.reqID = reqIDFactory.getRequestID();
     $scope.vetID = reqIDFactory.getVetID();
     $scope.userID = reqIDFactory.getPetID();
@@ -88,17 +92,6 @@ angular.module('admin.pages.controllers')
       }
     };
 
-    //iterates over array to change date objects into date strings
-    $scope.cleanDates = function (arr) {
-        for (var i = 0; i < arr.length; i++) {
-          var administered = new Date(arr[i].dateAdministered);
-          var expires = new Date(arr[i].dateExpired);
-          arr[i].dateAdministered = administered.toLocaleDateString();
-          arr[i].dateExpired = expires.toLocaleDateString();
-        }
-        return arr;
-      };
-
     //Gets all vaccines in database 
     $scope.getAllVaccines = function () {
       $http.get('/admin/1/vaccines')
@@ -124,7 +117,8 @@ angular.module('admin.pages.controllers')
     //Gets all vaccination records for a given request. Gets called on page-load, and when a new record is added
     $scope.getAllVaccinesForRequest = function () {
       $scope.getStuff(1, 'requests', $scope.reqID, function (data) {
-        $scope.vaccinations = $scope.cleanDates(data);
+        $scope.vaccinations = $scope.formattingService.cleanDates.call(data);
+        $scope.formattingService.addVaccineNames.call($scope.vaccinations, $scope.vaccines);
       }, 'vaccines');
     };
       

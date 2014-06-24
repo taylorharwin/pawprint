@@ -55,9 +55,44 @@ angular.module('admin.common.services')
     };
   })
 
-.constant('statusCodeConst', [{name: 'new'}, {name: 'pending'}, {name: 'complete'}, {name: 'cancelled'}]);
+.constant('statusCodeConst', [{name: 'new'}, {name: 'pending'}, {name: 'complete'}, {name: 'cancelled'}])
 
-    
+  
+.service('formattingService', function () {
+
+  //A function to make date objects into formatted date strings
+  this.cleanDates = function () {
+    return angular.forEach(this, function (item) {
+      if (item.created_at) {
+        item.created_at = (new Date(item.created_at)).toLocaleDateString();
+      }
+      if (item.updated_at) {
+        item.updated_at = (new Date(item.updated_at)).toLocaleDateString();
+      }
+      if (item.dateAdministered) {
+        item.dateAdministered = (new Date(item.dateAdministered)).toLocaleDateString();
+      }
+      if (item.dateExpired) {
+        item.dateExpired = (new Date(item.dateExpired)).toLocaleDateString();
+      }
+    });
+  };
+
+  //Uses client-side record of all vaccines to match a vaccination name to each record for a given request. 
+  this.addVaccineNames = function (allVaccines) {
+    return angular.forEach(this, function (vaccinationRecord) {
+      var ID = vaccinationRecord.vaccine_id;
+      angular.forEach(allVaccines, function (vaccine) {
+        if (vaccine.id === ID) {
+          vaccinationRecord.name = vaccine.name;
+          console.log(vaccinationRecord);
+        }
+      });
+    });
+
+  };
+
+});
 
 
 
