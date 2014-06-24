@@ -20,7 +20,6 @@
     <div class='realm' ui-view></div>
 
     <!-- bower scripts -->
-
     <script src="../bower_components/angular/angular.js"></script>
     <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
     <script src="../bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
@@ -28,20 +27,28 @@
     <script src="../bower_components/restangular/src/restangular.js"></script>
 
 
-    <!-- build script -->
+    <!-- build scripts -->
     <script src="app/app.js"></script>
+    <script src="app/routes.js"></script>
+
 
     <!-- common scripts -->
     <script src="app/common/module.js"></script>
-
-    <!-- pages scripts -->
-    <script src="app/pages/module.js"></script>
-    <script src="app/pages/controllers/login.ctrl.js"></script>
-    <script src="app/all_requests/controllers/all_requests.ctrl.js"></script>
-    <script src="app/pages/controllers/each_request.ctrl.js"></script>
-    <script src="app/common/services/utils.srv.js"></script>
+    <script src="app/common/directives/admin.dir.js"></script>
     <script src="app/common/services/alerts.srv.js"></script>
-    <script src="app/pages/directives/admin.dir.js"></script>
+    <script src="app/common/services/utils.srv.js"></script>
+
+    <!-- feature scripts -->
+
+    <script src="app/all_requests/controllers/all_requests.ctrl.js"></script>
+    <script src="app/all_requests/module.js"></script>
+
+    <script src="app/each_request/controllers/each_request.ctrl.js"></script>
+    <script src="app/each_request/module.js"></script>
+
+    <script src="app/login/controllers/login.ctrl.js"></script>
+    <script src="app/login/module.js"></script>
+
   </body>
 
 </html>
