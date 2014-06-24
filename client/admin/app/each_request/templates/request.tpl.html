@@ -8,8 +8,8 @@
           <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
         </div>
         <div class="right">
-          <button ui-sref="app.main" class="btn btn-large btn-info">Back to All Requests</button>
-          <button class="btn btn-large btn-danger">Log Out</button>
+          <button ui-sref="app.allRequests" class="btn btn-large btn-info">Back to All Requests</button>
+          <button class="btn btn-large btn-danger" ui-sref="public.login">Log Out</button>
         </div>
         </div>
     </div>

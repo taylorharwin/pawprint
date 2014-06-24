@@ -20,7 +20,7 @@ angular.module('admin.allRequests.controllers')
       reqIDFactory.setPetID(userID);
       reqIDFactory.setUserID(petID);
       reqIDFactory.setRequestStatus(status);
-      $state.go('^.request');
+      $state.go('app.eachRequest');
     };
 
 // Function for getting all existing requests to display on Main page. 

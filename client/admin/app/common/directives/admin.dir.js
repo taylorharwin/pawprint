@@ -6,7 +6,7 @@ angular.module('admin.common.directives')
     return {restrict: 'AE',
      scope: true,
      replace: 'true',
-     templateUrl: 'app/pages/templates/vet-info.tpl.html',
+     templateUrl: 'app/each_request/templates/vet-info.tpl.html',
      link: function (scope) {
       scope.editingVet = true;
       scope.editVet = function () {
@@ -26,7 +26,7 @@ angular.module('admin.common.directives')
     return {restrict: 'AE',
       scope: true,
       replace: 'true',
-      templateUrl: 'app/pages/templates/user-info.tpl.html',
+      templateUrl: 'app/each_request/templates/user-info.tpl.html',
       link: function (scope) {
         scope.editingUser = true;
         scope.editUser = function () {
@@ -50,7 +50,7 @@ angular.module('admin.common.directives')
     return {restrict: 'AE',
       scope: true,
       replace: 'true',
-      templateUrl: 'app/pages/templates/vacc-record.tpl.html',
+      templateUrl: 'app/each_request/templates/vacc-record.tpl.html',
       link: function (scope) {
         scope.getAllVaccinesForRequest();
       }
@@ -61,7 +61,7 @@ angular.module('admin.common.directives')
     return {restrict: 'AE',
     scope: true,
     replace: 'true',
-    templateUrl: 'app/pages/templates/contact-hist.tpl.html',
+    templateUrl: 'app/each_request/templates/contact-hist.tpl.html',
     link: function (scope) {
 
       //Gets all contact records for a given Request ID
@@ -93,7 +93,7 @@ angular.module('admin.common.directives')
     return {restrict: 'AE',
     scope: true,
     replace: 'true',
-    templateUrl: 'app/pages/templates/edit-vacc.tpl.html',
+    templateUrl: 'app/each_request/templates/edit-vacc.tpl.html',
     link: function (scope) {
       scope.getAllVaccines();
       scope.editingVacc = true;
