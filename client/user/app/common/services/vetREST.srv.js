@@ -1,6 +1,6 @@
 angular.module('user.common.services')
 
-  .service('VetService', function (Restangular) {
+  .service('VetRESTService', function (Restangular) {
 
     // function getVets () {
     //   return Restangular.all('vets').getList().then(function (vets){

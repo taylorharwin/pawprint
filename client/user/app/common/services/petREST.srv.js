@@ -1,6 +1,6 @@
 angular.module('user.common.services')
 
-  .service('PetService', function (Restangular) {
+  .service('PetRESTService', function (Restangular) {
 
     function postPet (id, data) {
       return Restangular.one('user', id).all('pets').post(data);

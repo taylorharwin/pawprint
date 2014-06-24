@@ -1,6 +1,6 @@
 angular.module('user.common.services')
 
-  .service('CurrentPetsService', function ($q, PetService, VaccineService, Restangular, $modal) {
+  .service('CurrentPetsService', function ($q, PetRESTService, VaccineService, Restangular, $modal) {
 
     var pets = {
       pets: [],

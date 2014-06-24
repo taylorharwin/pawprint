@@ -1,6 +1,6 @@
 angular.module('user.common.services')
 
-  .service('CurrentUserService', function (UserService, $rootScope) {
+  .service('CurrentUserService', function (UserRESTService, $rootScope) {
 
     var currentUser = null;
 
