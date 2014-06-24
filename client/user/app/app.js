@@ -6,12 +6,11 @@ angular.module('user', [
   'restangular',
 
   'user.common',
+  'user.enter',
   'user.landing',
-  'user.login',
   'user.main',
   'user.pet',
-  'user.profile',
-  'user.signup'
+  'user.profile'
 ]);
 
 angular.module('user')

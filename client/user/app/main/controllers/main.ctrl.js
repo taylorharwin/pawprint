@@ -2,9 +2,9 @@ angular.module('user.main.controllers')
 
   .controller('MainCtrl', function ($scope, $modal, UserService, CurrentUserService, PetService, VaccineService, Restangular) {
     console.log($scope);
-    console.log(CurrentUserService.getUserId());
+    console.log(CurrentUserService.getUser());
 
-    $scope.userId = CurrentUserService.getUserId();
+    $scope.userId = CurrentUserService.getUser().id;
     $scope.pets = [];
     $scope.vaccines = [];
     $scope.requests = [];

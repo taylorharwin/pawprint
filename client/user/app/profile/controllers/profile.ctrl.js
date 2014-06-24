@@ -2,7 +2,7 @@ angular.module('user.profile.controllers')
   .controller('ProfileCtrl', function ($scope, $state, UserService, CurrentUserService) {
     console.log($scope);
 
-    $scope.userId = CurrentUserService.getUserId();
+    $scope.userId = CurrentUserService.getUser().id;
     UserService.getUser($scope.userId).then(function (response) {
       // console.log(response);
       $scope.user = response;

@@ -1,18 +1,33 @@
 angular.module('user.common.services')
 
-  .service('CurrentUserService', function () {
+  .service('CurrentUserService', function (UserService, $rootScope) {
 
     var currentUser = null;
 
-    function setUserId (userId) {
-      currentUser = userId;
+    function setUser (user) {
+      currentUser = user;
     }
 
-    function getUserId () {
+    function getUser () {
       return currentUser;
     }
 
-    this.setUserId = setUserId;
-    this.getUserId = getUserId;
+    function enterUser (user, type, error) {
+      UserService.postUserLogin(user)
+        .then(function (response) {
+          setUser(response);
+          if (type === 'login') {
+            $rootScope.$state.go('app.main');
+          } else if (type === 'signup') {
+            $rootScope.$state.go('app.profile');
+          }
+        }, function (error) {
+          error = true;
+        });
+    }
+
+    this.setUser = setUser;
+    this.getUser = getUser;
+    this.enterUser = enterUser;
 
   });

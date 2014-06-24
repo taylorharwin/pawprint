@@ -17,14 +17,14 @@ angular.module('user')
 
     .state('public.login', {
       url: 'login',
-      templateUrl: 'app/login/templates/login.tpl.html',
-      controller: 'LoginCtrl'
+      templateUrl: 'app/enter/templates/login.tpl.html',
+      controller: 'EnterCtrl'
     })
 
     .state('public.signup', {
       url: 'signup',
-      templateUrl: 'app/signup/templates/signup.tpl.html',
-      controller: 'SignupCtrl'
+      templateUrl: 'app/enter/templates/signup.tpl.html',
+      controller: 'EnterCtrl'
     })
 
     .state('app', {
