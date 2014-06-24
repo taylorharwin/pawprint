@@ -51,16 +51,21 @@ var userOwnsPet = function(userid, petid) {
     })
     .select()
     .then(function(found) {
-      if(found.length === 0) {
-        return false;
-      } else {
-        return true;
-      }
+      return found.length === 0 ? false : true;
     });
 };
 
 // isRequester: Only user of the request can cancel the request
+var userIsRequester = function(userid, requestid) {
+  return db.knex('request')
+    .where({id: requestid})
+    .first()
+    .then(function(request) {
+      return request.user_id === parseInt(userid) ? true : false;
+    });
+};
 
 module.exports = exports = {
-  userOwnsPet: userOwnsPet
+  userOwnsPet:     userOwnsPet,
+  userIsRequester: userIsRequester
 };
