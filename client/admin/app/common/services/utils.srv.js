@@ -84,7 +84,6 @@ angular.module('admin.common.services')
       angular.forEach(allVaccines, function (vaccine) {
         if (vaccine.id === ID) {
           vaccinationRecord.name = vaccine.name;
-          console.log(vaccinationRecord);
         }
       });
     });

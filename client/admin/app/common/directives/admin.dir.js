@@ -16,7 +16,6 @@ angular.module('admin.common.directives')
       };
       scope.vetService.getVetInfo(1, scope.vetID).then(function (data) {
         scope.vetData = data;
-        console.log('this is vet info:', scope.vetData);
       });
     }
   };
@@ -34,7 +33,6 @@ angular.module('admin.common.directives')
         };
         scope.petService.getPetInfo(1, scope.petID).then(function (data) {
           scope.petData = data;
-          console.log('This is pet info:', scope.petData);
         });
       }
     };
@@ -90,7 +88,10 @@ angular.module('admin.common.directives')
     replace: 'true',
     templateUrl: 'app/each_request/templates/edit-vacc.tpl.html',
     link: function (scope) {
-      scope.getAllVaccines();
+      scope.vaccineService.getAllVaccines(1).then(function (data) {
+        scope.vaccines = data;
+      });
+
       scope.editingVacc = true;
       scope.newVaccine = {name: '',
         dateAdministered: '',
