@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('admin.pages.directives')
+angular.module('admin.common.directives')
 
   .directive('vetInfo', function () {
     return {restrict: 'AE',

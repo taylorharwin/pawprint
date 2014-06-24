@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('user.landing', [
+angular.module('admin.allRequests', [
 
-  'user.landing.controllers'
+  'admin.allRequests.controllers'
 ]);
 
-angular.module('user.landing.controllers', []);
+angular.module('admin.allRequests.controllers', []);

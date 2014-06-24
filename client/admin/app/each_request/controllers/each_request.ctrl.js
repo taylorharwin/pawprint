@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('admin.pages.controllers')
-  .controller('RequestCtrl', function ($scope, reqIDFactory, alertsService, formattingService, statusCodeConst, $http) {
+angular.module('admin.eachRequest.controllers')
+  .controller('eachRequestCtrl', function ($scope, reqIDFactory, alertsService, formattingService, statusCodeConst, $http) {
 
 
     //links scope to generic formatting Service
