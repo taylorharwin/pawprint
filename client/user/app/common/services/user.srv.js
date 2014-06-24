@@ -12,6 +12,11 @@ angular.module('user.common.services')
       return Restangular.all('user').post(data);
     }
 
+    //@TODO, use this instead when auth is working,
+    // function postUser(data, type) {
+    //   return Restangular.all('user/' + type).post(data);
+    // }
+
     function getUser (id) {
       return Restangular.one('user', id).get();
     }

@@ -1,7 +1,7 @@
 <div class="Aligner">
   <div class="Aligner-item">
     <h2>Signup page</h2>
-    <form ng-submit='userSignup()'>
+    <form ng-submit="CurrentUserService.enterUser(user, 'signup', error)">
 
       <div class="form-group">
         <label for="email">Email address</label>
@@ -15,7 +15,7 @@
 
       <button type="submit" class="btn btn-default">SIGNUP</button>
 
-      <alert ng-show="signupError" type="danger">Something's wrong here, please try again!</alert>
+      <alert ng-show="error" type="danger">Something's wrong here, please try again!</alert>
 
     </form>
   </div>

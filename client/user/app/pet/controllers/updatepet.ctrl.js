@@ -2,8 +2,8 @@ angular.module('user.pet.controllers')
 
   .controller('UpdatePetCtrl', function ($scope, $modalInstance, pet, CurrentUserService) {
 
-    $scope.userId = CurrentUserService.getUserId();
-    $scope.pet = pet;
+    var userId = CurrentUserService.getUser().id;
+    var petId = pet.id;
     $scope.request = {
       userId: $scope.userId,
       petId: $scope.pet.id,
