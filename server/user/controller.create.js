@@ -19,11 +19,12 @@ var createPet = function(req, res) {
   var newpet;
 
   Pet.forge(req.body).save().then(function(pet) {
+    if (!pet) throw new Error('Save Failed');
     newpet = pet;
     return User.forge({id: userid}).fetch();
   })
   .then(function(user) {
-    // attaches pet to user through the user_pet table
+    if (!user) throw new Error('User Does Not Exist');
     user.pet().attach(newpet);
     return user;
   })
@@ -31,9 +32,13 @@ var createPet = function(req, res) {
     return User_Pet.forge({user_id: user.id, pet_id: newpet.id}).fetch();
   })
   .then(function(join) {
+    if (!join) throw new Error('Failed Join');
     var date = new Date();
     join.save({created_at: date, updated_at: date}, {patch: true});
     res.send(201, newpet);
+  })
+  .catch(function(err){
+    res.send(400, err);
   });
 };
 
