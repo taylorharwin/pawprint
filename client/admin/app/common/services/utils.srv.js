@@ -3,7 +3,7 @@
 angular.module('admin.common.services')
   .factory('reqIDFactory', function () {
 
-    var data = { requestID: '', requestStatus: '', userID: '', petID: '', vetID: ''};
+    var data = {requestID: '', requestStatus: '', userID: '', petID: '', vetID: ''};
 
     return {
       getRequestID: function () {

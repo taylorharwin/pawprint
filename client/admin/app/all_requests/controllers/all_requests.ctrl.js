@@ -23,7 +23,7 @@ angular.module('admin.allRequests.controllers')
       $state.go('app.eachRequest');
     };
 
-// Function for getting all existing requests to display on Main page. 
+// Gets all existing requests for display on Main page. 
     $scope.getAllRequests = function () {
       $http.get('/admin/1/requests')
       .success(function (json) {
