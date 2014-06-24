@@ -1,16 +1,20 @@
+'use strict';
+
 angular.module('admin', [
   'ui.router',
-  'admin.common',
-  'admin.pages'
-]);
+  'ui.bootstrap',
+  'restangular',
 
-angular.module('admin')
+  'admin.common',
+  'admin.login',
+  'admin.allRequests',
+  'admin.eachRequest'
+])
   .config(function ($locationProvider, $urlRouterProvider) {
-    
+
+    //routes to default state if none provided
     $urlRouterProvider.otherwise('/');
 
-    // enable the HTML5 push/pop history API  
-    // $locationProvider.html5Mode(true);
   })
 
   .run(function ($rootScope, $state, $stateParams) {
