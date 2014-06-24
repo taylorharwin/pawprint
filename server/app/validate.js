@@ -1,8 +1,6 @@
 /* ABOUT THIS FILE:
  * validate.js is for helper functions that checks for specific permissions
  * All functions should return a boolean in the form of a promise
- * If the validation is false, validate functions will send a 401: 'Not Authorized'
- * When calling a validate function, only act if validate returns true
  */
 
 var db                = require('../app/db_config.js'),
@@ -19,7 +17,7 @@ var db                = require('../app/db_config.js'),
     Vet               = require('../app/models/vet.js'),
     VetContact        = require('../app/models/vetContact.js');
 
-var userOwnsPet = function(userid, petid, res) {
+var userOwnsPet = function(userid, petid) {
   return db.knex('user_pet')
     .where({
       user_id: userid,
@@ -28,7 +26,6 @@ var userOwnsPet = function(userid, petid, res) {
     .select()
     .then(function(found) {
       if(found.length === 0) {
-        res.send(401, 'Not Authorized');
         return false;
       } else {
         return true;
@@ -36,7 +33,7 @@ var userOwnsPet = function(userid, petid, res) {
     });
 };
 
-// isUser: Only user should be able to delete use
+// isUser: Only user should be able to delete user
 // isRequester: Only user of the request can cancel the request
 
 module.exports = exports = {
