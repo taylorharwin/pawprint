@@ -16,10 +16,10 @@ var adminDataCallback = helpers.adminDataCallback;
 var reqUrl = helpers.reqUrl;
 
 describe('Pawprint Tests', function() {
-  userDataCallback();
+  // userDataCallback();
   adminDataCallback();
 
   // TODO: add negative tests
-  xdescribe('user routes', usertests);
-  xdescribe('server routes', admintests);
+  // describe('user routes', usertests);
+  describe('server routes', admintests);
 });

@@ -14,7 +14,7 @@ var _test = helpers._test;
 
 module.exports = exports = function() {
   xdescribe('POST', function() {
-    it('/user', function(done) {
+    xit('/user', function(done) {
       var input = {email: 'apple@dog.com', password: 'password'};
       _test('post', '/user', 201, function(body) {
         User.forge({id: body.id}).fetch().then(function(user) {
@@ -25,10 +25,11 @@ module.exports = exports = function() {
       }, input);
     });
 
-    it('/user/:userid/pets', function(done) {
+    xit('/user/:userid/pets', function(done) {
       var input = {name: 'testapple', gender: 'F'};
       _test('post', '/user/1/pets', 201, function(body) {
         Pet.forge({id: body.id}).fetch().then(function(pet) {
+          console.log(pet);
           expect(pet);
         }).then(function() {
           done();
@@ -36,8 +37,8 @@ module.exports = exports = function() {
       }, input);
     });
 
-    it('/user/:userid/pets/:petid/requests', function(done) {
-      var input = {practiceName: 'vet123', contactMethod: 'phone', phone: '123456789'};
+    xit('/user/:userid/pets/:petid/requests', function(done) {
+      var input = {practiceName: 'vet123', contactMethod: 'phone', phone: '12345'};
       _test('post', '/user/1/pets/1/requests', 201, function(body) {
         Request.forge({id: body.id}).fetch().then(function(request) {
           expect(request);
@@ -107,7 +108,7 @@ module.exports = exports = function() {
     });
   });
 
-  describe('DELETE', function() {
+  xdescribe('DELETE', function() {
     var userid, petid, userpetid;
     before(function(done) {
       insert('user', 'id', {email: 'delet@e.com'})
@@ -139,7 +140,7 @@ module.exports = exports = function() {
           .where('user_id', userid)
           .select()
           .then(function(found) {
-            expect(found.length).to.equal(0);
+            expect(found.status).to.equal('not active');
             done();
           });
       });

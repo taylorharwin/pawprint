@@ -24,6 +24,7 @@ var insert = function(table, prop, data) {
 var _test = function(reqType, url, status, cb, input) {
   request[reqType](reqUrl + url, createForm(input), function(err, res, body) {
     expect(!!err).to.equal(false);
+    if (err) {throw err;}
     expect(res.statusCode).to.equal(status);
     if (body) {
       body = JSON.parse(body);
@@ -35,7 +36,7 @@ var _test = function(reqType, url, status, cb, input) {
 var userDataCallback = function() {
   var userid, petid, vetid, requestid, vaccineid;
   before(function(done) {
-    insert('user', 'id', {email: 'hell@o.com', password: 'password'})
+    insert('user', 'id', {email: 'hell@o.com', password: 'password', type: 'user', status: 'active'})
       .then(function(user){
         userid = user[0];
         return insert('pet', 'id', {name: 'appl'});
@@ -69,16 +70,18 @@ var userDataCallback = function() {
 };
 
 var adminDataCallback = function() {
+  var adminid;
   before(function(done) {
-    insert('admin', 'id', {email: 'admi@n.com', password: 'password'})
-      .then(function(adminid) {
+    insert('user', 'id', {email: 'admi@n.com', password: 'password', type: 'admin', status: 'active'})
+      .then(function(admin) {
+        adminid = admin[0];
         return insert('vetContact', 'id', {name: 'paul', title: 'receptionist', email: 'paul@vet.com', phone: '1234567890', vet_id: 1});
       })
       .then(function(vetContactid) {
-        return insert('contactHistory', 'id', {admin_id: 1, type: 'phone', request_id: 1, vetContact_id: 1});
+        return insert('contactHistory', 'id', {adminUser_id: adminid, type: 'phone', request_id: 1, vetContact_id: 1});
       })
       .then(function(contactHistoryid) {
-        return insert('contactHistory', 'id', {admin_id: 1, type: 'phone', request_id: 1, vetContact_id: 1});
+        return insert('contactHistory', 'id', {adminUser_id: adminid, type: 'phone', request_id: 1, vetContact_id: 1});
       })
       .then(function(contactHistoryid) {
         return insert('pdfRecord', 'id', {link: 'www.samplepdf.asd', request_id: 1});
