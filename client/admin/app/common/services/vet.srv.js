@@ -3,10 +3,15 @@
 angular.module('admin.common.services')
   .service('vetService', function (Restangular, reqIDFactory) {
 
-    this.getVetInfo = function (variety, message) {
-      var alerts = this.alerts;
-      alerts.push({type: variety, msg: message});
-      setTimeout(function () {alerts.splice(0, 1); }, 5000);
-    };
+  function getVetInfo(adminID, vetID) {
+    return Restangular.one('admin', adminID).one('vets', vetID).get();
+  }
+
+  function editVetInfo(adminID, vetID, data) {
+    return Restangular.one('admin', adminID).one('vets', vetID).put(data);
+  }
+
+  this.getVetInfo = getVetInfo;
+  this.editVetInfo = editVetInfo;
      
-  });
+});

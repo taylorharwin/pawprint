@@ -31,7 +31,6 @@ angular.module('admin.common.services')
         data.userID = userID;
       },
       getVetID: function () {
-        console.log(data);
         return data.vetID;
       },
       setVetID: function (vetID) {

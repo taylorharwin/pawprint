@@ -12,12 +12,12 @@ angular.module('admin.common.directives')
       scope.editVet = function () {
         scope.editingVet = !scope.editingVet;
       };
-      scope.getStuff(1, 'vets', scope.vetID, function (data) {
-        scope.vetData = data;
-      });
       scope.updateVetInfo = function () {
-        scope.vetData = angular.copy(scope.vetData);
       };
+      scope.vetService.getVetInfo(1, scope.vetID).then(function (data) {
+        scope.vetData = data;
+        console.log('this is vet info:', scope.vetData);
+      });
     }
   };
   })
@@ -32,19 +32,14 @@ angular.module('admin.common.directives')
         scope.editUser = function () {
           scope.editingUser = !scope.editingUser;
         };
-        scope.getStuff(1, 'pets', scope.petID, function (data) {
+        scope.petService.getPetInfo(1, scope.petID).then(function (data) {
           scope.petData = data;
+          console.log('This is pet info:', scope.petData);
         });
-        scope.getStuff(1, 'users', scope.userID, function (data) {
-          scope.userData = data;
-        });
-        scope.updateUserInfo = function () {
-          scope.petData = angular.copy(scope.petData);
-          scope.userData = angular.copy(scope.userData);
-        };
       }
-   };
+    };
   })
+  
 
   .directive('vaccRecord', function () {
     return {restrict: 'AE',
@@ -52,7 +47,7 @@ angular.module('admin.common.directives')
       replace: 'true',
       templateUrl: 'app/each_request/templates/vacc-record.tpl.html',
       link: function (scope) {
-        scope.getAllVaccinesForRequest();
+        // scope.getAllVaccinesForRequest();
       }
     };
   })
@@ -65,12 +60,12 @@ angular.module('admin.common.directives')
     link: function (scope) {
 
       //Gets all contact records for a given Request ID
-      scope.updateContacts = function () {
-        scope.getStuff(1, 'requests', scope.reqID, function (data) {
-          scope.contacts = data;
-        }, 'logs');
-      };
-      scope.updateContacts();
+      // scope.updateContacts = function () {
+      //   scope.getStuff(1, 'requests', scope.reqID, function (data) {
+      //     scope.contacts = data;
+      //   }, 'logs');
+      // };
+      // scope.updateContacts();
       scope.noteText = '';
       scope.noteObj = {
         notes: ''
@@ -129,11 +124,11 @@ angular.module('admin.common.directives')
       //Posts a new vaccine to the global list of vaccines
       scope.sendVaccine = function (vac, duration) {
         var packet = {name: vac, duration: scope.duration};
-        scope.postNewVaccine(packet, function () {
-          scope.getAllVaccines();
-          scope.alerts.push({type: 'success', msg: 'Added new vaccine,' + vac});
-          console.log(scope.alerts);
-        });
+        // scope.postNewVaccine(packet, function () {
+        //   // scope.getAllVaccines();
+        //   scope.alerts.push({type: 'success', msg: 'Added new vaccine,' + vac});
+        //   console.log(scope.alerts);
+        // });
       };
     }
    };
