@@ -1,6 +1,6 @@
 angular.module('user.common.services')
 
-  .service('CurrentUserService', function (UserService, $rootScope) {
+  .service('CurrentUserService', function (UserRESTService, $rootScope) {
 
     var currentUser = null;
 
@@ -13,7 +13,7 @@ angular.module('user.common.services')
     }
 
     function enterUser (user, type, enterError) {
-      UserService.postUserLogin(user)
+      UserRESTService.postUserLogin(user)
         .then(function (response) {
           currentUser = response;
           if (type === 'login') {

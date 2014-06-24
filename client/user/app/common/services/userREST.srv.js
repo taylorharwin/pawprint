@@ -1,6 +1,6 @@
 angular.module('user.common.services')
 
-  .service('UserService', function (Restangular){
+  .service('UserRESTService', function (Restangular){
 
     function postUserSignup (data) {
       // return Restangular.all('user/signup').post(data);

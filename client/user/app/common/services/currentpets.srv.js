@@ -1,6 +1,6 @@
 angular.module('user.common.services')
 
-  .service('CurrentPetsService', function ($q, PetService, VaccineService, Restangular, $modal) {
+  .service('CurrentPetsService', function ($q, PetRESTService, VaccineService, Restangular, $modal) {
 
     var pets = {
       pets: [],
@@ -10,7 +10,7 @@ angular.module('user.common.services')
 
     function retrievePets (userId) {
 
-      PetService.getPets(userId)
+      PetRESTService.getPets(userId)
         .then(function (petsResult) {
 
           pets.pets = petsResult;
@@ -18,7 +18,7 @@ angular.module('user.common.services')
 
           angular.forEach(pets.pets, function (pet) {
             var deferred = $q.defer();
-            PetService.getPetVaccines(userId, pet.id)
+            PetRESTService.getPetVaccines(userId, pet.id)
               .then(function (response) {
                 deferred.resolve(response);
               }, function (error) {
@@ -36,7 +36,7 @@ angular.module('user.common.services')
 
           angular.forEach(pets.pets, function (pet) {
             var deferred = $q.defer();
-            PetService.getPetRequests(userId, pet.id)
+            PetRESTService.getPetRequests(userId, pet.id)
               .then(function (response) {
                 deferred.resolve(response);
               }, function (error) {
@@ -59,7 +59,7 @@ angular.module('user.common.services')
     }
 
     function cancelRequest (userId, petIndex, requestIndex) {
-      PetService.cancelPetRequest(userId, pets.pets[petIndex].id, pets.requests[petIndex][requestIndex])
+      PetRESTService.cancelPetRequest(userId, pets.pets[petIndex].id, pets.requests[petIndex][requestIndex])
         .then(function (response) {
           pets.requests[petIndex].splice(requestIndex, 1);
         }, function (error) {
@@ -81,17 +81,17 @@ angular.module('user.common.services')
 
       modalInstance.result.then(function (pet) {
         console.log(pet);
-        PetService.postPet(userId, pet).then(function (petResponse) {
+        PetRESTService.postPet(userId, pet).then(function (petResponse) {
           console.log('successfully created pet');
           console.log(petResponse);
           pets.pets.push(petResponse);
-          PetService.getPetVaccines(userId, petResponse.id)
+          PetRESTService.getPetVaccines(userId, petResponse.id)
             .then(function (response) {
               pets.vaccines.push(response);
             }, function (error) {
               console.log(error);
             });
-          PetService.getPetRequests(userId, petResponse.id)
+          PetRESTService.getPetRequests(userId, petResponse.id)
             .then(function (response) {
               pets.requests.push(response);
             }, function (error) {
@@ -143,7 +143,7 @@ angular.module('user.common.services')
       });
 
       modalInstance.result.then(function (request) {
-        PetService.postPetRequest(request.userId, request.petId, request).then(function (response) {
+        PetRESTService.postPetRequest(request.userId, request.petId, request).then(function (response) {
           console.log('successfully sent pet update request');
           console.log(pets.requests, 'requests');
           pets.requests[index].push(response);
