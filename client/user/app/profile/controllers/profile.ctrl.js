@@ -1,38 +1,29 @@
 angular.module('user.profile.controllers')
-  .controller('ProfileCtrl', function ($scope, $state, UserService, CurrentUserService) {
+  .controller('ProfileCtrl', function ($scope, CurrentUserService) {
     console.log($scope);
 
-    $scope.userId = CurrentUserService.getUser().id;
-    UserService.getUser($scope.userId).then(function (response) {
-      // console.log(response);
-      $scope.user = response;
-    });
+    $scope.CurrentUserService = CurrentUserService;
+
+    $scope.update = {
+      success: false,
+      error: false
+    };
+    $scope.user = CurrentUserService.getUser();
 
     $scope.updateUser = function() {
-      // console.log('=================');
-      // console.log($scope.user);
-      // console.log('=================');
-      $scope.user.put().then(function (response) {
-          console.log('successful put');
-          // update the scope user to reflect db
-          $scope.user = response;
-          $scope.updateSuccess = true;
-          $scope.updateError = false;
+      CurrentUserService.updateUser()
+      .then(function (response) {
+        console.log('successful put request');
+        $scope.update = {
+          success: true,
+          error: false
+        };
       }, function (error) {
         console.log(error);
-        $scope.updateSuccess = false;
-        $scope.updateError = true;
-      });
-    };
-    
-    $scope.deleteUser = function() {
-      UserService.deleteUser($scope.userId).then(function (response) {
-        console.log('deleted user');
-        // @NOTE delete the local auth settings
-        CurrentUserService.setUserId(null);
-        $state.go('public.home');
-      }, function (error) {
-        console.log(error);
+        $scope.update = {
+          success: false,
+          error: true
+        };
       });
     };
 

@@ -82,7 +82,7 @@
                 
               </div>
               <div class="pull-right">
-                <button type="button" ng-click="deleteUser()" class="btn btn-primary btn-danger">DELETE USER</button>
+                <button type="button" ng-click="CurrentUserService.deleteUser()" class="btn btn-primary btn-danger">DELETE USER</button>
                 <button type="submit" class="btn btn-primary">UPDATE</button>
               </div>
             </div>
@@ -92,9 +92,9 @@
       </form>
 
 
-      <alert ng-if="updateSuccess" type="success">User profile records updated!</alert>
+      <alert ng-if="update.success" type="success">User profile records updated!</alert>
 
-      <alert ng-if="updateError" type="danger">Something's wrong here, please try again!</alert>
+      <alert ng-if="update.error" type="danger">Something's wrong here, please try again!</alert>
 
     </div>
   </div>
