@@ -16,24 +16,30 @@ var createUser = Utils.creator(User, {
 
 var createPet = function(req, res) {
   var userid = req.params.userid;
-  var newpet;
+  var newpet, newuser;
 
   Pet.forge(req.body).save().then(function(pet) {
+    if (!pet) throw new Error('Save Failed');
     newpet = pet;
     return User.forge({id: userid}).fetch();
   })
   .then(function(user) {
-    // attaches pet to user through the user_pet table
-    user.pet().attach(newpet);
-    return user;
+    newuser = user;
+    if (!user) throw new Error('User Does Not Exist');
+    return user.pet().attach(newpet);
   })
-  .then(function(user) {
-    return User_Pet.forge({user_id: user.id, pet_id: newpet.id}).fetch();
+  .then(function() {
+    return User_Pet.forge({user_id: newuser.id, pet_id: newpet.id}).fetch();
   })
   .then(function(join) {
+    if (!join) throw new Error('Bad Join');
     var date = new Date();
     join.save({created_at: date, updated_at: date}, {patch: true});
     res.send(201, newpet);
+  })
+  .catch(function(err){
+    console.error(err);
+    res.send(500, 'Internal Server Error');
   });
 };
 

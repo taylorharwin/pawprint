@@ -163,7 +163,7 @@ var updater = function (Model, options) {
     }).then(function(model) {
       res.send(200, model.omit(options.omit));
     }).catch(function(err) {
-      console.err(err);
+      console.error(err);
       res.send(500, 'Internal server error');
     });
   };
