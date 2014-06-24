@@ -11,15 +11,13 @@ var User      = require('../app/models/user.js'),
 var deleteUser = Utils.updater(User, {
   id: 'userid',
   params: {
-    status: 'deactivated'
+    status: 'not active'
   },
   omit: ['password', 'salt', 'jwt', 'type']
 });
 
 // Disconnect user and pet, DO NOT actually delete the pet
 var deletePet = function(req, res) {
-  // NEED USER PET MODEL
-  // This can be refactored to use Utils.deleter if deleter takes multiple query options
   User_Pet.forge({pet_id: req.params.petid, user_id: req.params.userid})
     .fetch().then(function(model) {
       model.destroy(res.send(200, model));
@@ -28,10 +26,7 @@ var deletePet = function(req, res) {
 
 // Updates the request status to canceled, DO NOT actually delete the request
 var deleteRequest = function(req, res) {
-  var requestid = req.params.requestid;
-
-  Request.forge({id : requestid}).fetch().then(function(request) {
-    // TODO: verify
+  Request.forge({id : req.params.requestid}).fetch().then(function(request) {
     request.attributes.status = 'canceled';
     request.save(request.attributes, {patch: true});
     res.send(200, request);
