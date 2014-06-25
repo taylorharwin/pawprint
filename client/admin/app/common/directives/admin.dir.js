@@ -59,28 +59,20 @@ angular.module('admin.common.directives')
     replace: 'true',
     templateUrl: 'app/each_request/templates/contact-hist.tpl.html',
     link: function (scope) {
+      scope.userService.getContactLogs(1, scope.reqID).then(function (data) {
+        scope.contacts = data;
+        console.log(scope.contacts);
+      });
 
-      //Gets all contact records for a given Request ID
-      // scope.updateContacts = function () {
-      //   scope.getStuff(1, 'requests', scope.reqID, function (data) {
-      //     scope.contacts = data;
-      //   }, 'logs');
-      // };
-      // scope.updateContacts();
-      scope.noteText = '';
-      scope.noteObj = {
-        notes: ''
-      };
-
-      //Posts a new note for a given Request ID
+      scope.newContact = {notes: '', type: '', created_at: ''};
+      
       scope.postNote = function () {
-        scope.noteObj.notes = scope.noteText;
-        scope.postStuff(scope.noteObj, 1, 'requests', scope.reqID, function () {
-          scope.alerts.push({type: 'success', msg: 'Added a new note, ' + scope.noteText});
-          scope.updateContacts();
-        }, 'logs');
-      };
+        scope.newContact.created_at = new Date();
+        scope.userService.addContactLog(1, scope.reqID, scope.newContact).then(function () {
+          console.log('updated records');
+        });
 
+      };
     }
    };
   })

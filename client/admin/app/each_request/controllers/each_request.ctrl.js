@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('admin.eachRequest.controllers')
-  .controller('EachRequestCtrl', function ($scope, reqIDFactory, petService, vetService, alertsService, vaccineService, formattingService, statusCodeConst, $http) {
+  .controller('EachRequestCtrl', function ($scope, reqIDFactory, userService, petService, vetService, alertsService, vaccineService, formattingService, statusCodeConst) {
 
 
     //links scope to generic Services
@@ -10,6 +10,7 @@ angular.module('admin.eachRequest.controllers')
     $scope.petService = petService;
     $scope.vetService = vetService;
     $scope.vaccineService = vaccineService;
+    $scope.userService = userService;
 
     //sets all values necessary for display of the page
     $scope.reqID = reqIDFactory.getRequestID();

@@ -1,10 +1,11 @@
 <div>
       <div>
-      <textarea id="note" class="form-control" ng-model="noteText" rows="3"></textarea>
-          <button class="btn btn-large btn-info" ng-click='postNote(noteText)'>Leave a Note</button>
+      <textarea id="note" class="form-control" ng-model="newContact.notes" rows="3"></textarea>
+      Contact Type: <input id="contactType" name="contact" type="text" ng-model="newContact.type" class="input-small">
+          <button class="btn btn-large btn-info" ng-click='postNote()'>Leave a Note</button>
       </div>
 <table class="table">
-    <thead>
+    <thead>c
       <tr>
         <th>Admin ID</th>
         <th>Notes</th>
