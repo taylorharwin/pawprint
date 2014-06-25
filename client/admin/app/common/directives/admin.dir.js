@@ -112,12 +112,9 @@ angular.module('admin.common.directives')
 
       //Posts a new vaccine to the global list of vaccines
       scope.sendVaccine = function (newVaccine) {
-        console.log('sdfasdfasdf');
         var packet = {name: newVaccine.name, duration: newVaccine.duration};
-        console.log('sending vacc');
         scope.vaccineService.addNewVaccine(1, packet);
       };
-
     }
    };
   });
