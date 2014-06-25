@@ -64,7 +64,7 @@ angular.module('admin.common.directives')
         console.log(scope.contacts);
       });
 
-      scope.newContact = {notes: '', type: '', created_at: ''};
+      scope.newContact = {notes: '', type: '', created_at: '', adminUser_id: 1};
       
       scope.postNote = function () {
         scope.newContact.created_at = new Date();
