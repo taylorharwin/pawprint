@@ -53,7 +53,7 @@ module.exports = exports = function() {
       }, input);
     });
 
-    it('/admin/:adminid/requests/:requestid/pdfs', function(done) {
+    xit('/admin/:adminid/requests/:requestid/pdfs', function(done) {
       var input = {
         link: 'www.testpost.asd'
       };

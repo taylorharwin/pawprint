@@ -23,8 +23,8 @@ var insert = function(table, prop, data) {
 
 var _test = function(reqType, url, status, cb, input) {
   request[reqType](reqUrl + url, createForm(input), function(err, res, body) {
-    expect(!!err).to.equal(false);
     if (err) {throw err;}
+    expect(!!err).to.equal(false);
     expect(res.statusCode).to.equal(status);
     if (body) {
       body = JSON.parse(body);
@@ -50,7 +50,7 @@ var userDataCallback = function() {
       })
       .then(function(vet) {
         vetid = vet[0];
-        return insert('request', 'id', {user_id: userid, pet_id: petid, vet_id: vetid, status: 'Pending'});
+        return insert('request', 'id', {user_id: userid, pet_id: petid, vet_id: vetid, status: 'pending'});
       })
       .then(function(request){
         requestid = request[0];
