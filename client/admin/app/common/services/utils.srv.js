@@ -64,7 +64,7 @@ angular.module('admin.common.services')
   
 .service('formattingService', function () {
 
-  //A function to make date objects into formatted date strings
+  //A function to turn date objects into formatted date strings
   this.cleanDates = function () {
     return angular.forEach(this, function (item) {
       if (item.created_at) {

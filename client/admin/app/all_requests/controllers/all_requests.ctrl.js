@@ -7,14 +7,9 @@ angular.module('admin.allRequests.controllers')
     $scope.reqIDFactory = reqIDFactory;
 
 // adds CSS styling based on the status of the request
-
     $scope.setClassOnRequest = reqIDFactory.setClassforStatus;
 
-//iterates through an array and converts timestamp objects to user-friendly date strings.
-
-
-// Calls setter functions for all values in requests which are needed to make request-specific GET requests
-
+// Calls functions for values within requests, which are needed to display "app.eachRequest" state
     $scope.setReqAndTransition = function (reqID, vetID, userID, petID, status) {
       $scope.reqIDFactory.setRequestID(reqID);
       $scope.reqIDFactory.setVetID(vetID);
@@ -30,7 +25,5 @@ angular.module('admin.allRequests.controllers')
       console.log(data);
       $scope.requests = data;
     });
-
-//Loads all existing requests. TODO: Add sorting for admin, and eventually pagination when we have many requests
    
   });

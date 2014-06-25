@@ -7,6 +7,11 @@ angular.module('admin.common.services')
     return Restangular.one('admin', adminID).all('vaccines').getList();
   }
 
+  function addNewVaccine(adminID, data) {
+    return Restangular.one('admin', adminID).all('vaccines').post(data);
+  }
+
   this.getAllVaccines = getAllVaccines;
+  this.addNewVaccine = addNewVaccine;
      
 });

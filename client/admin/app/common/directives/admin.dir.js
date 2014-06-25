@@ -91,7 +91,6 @@ angular.module('admin.common.directives')
       scope.vaccineService.getAllVaccines(1).then(function (data) {
         scope.vaccines = data;
       });
-
       scope.editingVacc = true;
       scope.newVaccine = {name: '',
         dateAdministered: '',
@@ -114,24 +113,22 @@ angular.module('admin.common.directives')
       };
 
       //This adds an individual vaccination record for a given request
-      scope.postVacc = function (vaccineObject) {
-        var toPass = [{id: scope.newVaccine.vaccine_id, dateAdministered: scope.newVaccine.dateAdministered}];
-        scope.postStuff(toPass, 1, 'requests', scope.reqID, function () {
-          scope.alerts.push({type: 'success', msg: 'Added a new vaccination record'});
-          scope.getAllVaccinesForRequest();
-        }, 'vaccines');
-      };
+      // scope.postVacc = function (vaccineObject) {
+      //   var toPass = [{id: scope.newVaccine.vaccine_id, dateAdministered: scope.newVaccine.dateAdministered}];
+      //   scope.postStuff(toPass, 1, 'requests', scope.reqID, function () {
+      //     scope.alerts.push({type: 'success', msg: 'Added a new vaccination record'});
+      //     scope.getAllVaccinesForRequest();
+      //   }, 'vaccines');
+      // };
 
       //Posts a new vaccine to the global list of vaccines
       scope.sendVaccine = function (vac, duration) {
-        var packet = {name: vac, duration: scope.duration};
-        // scope.postNewVaccine(packet, function () {
-        //   // scope.getAllVaccines();
-        //   scope.alerts.push({type: 'success', msg: 'Added new vaccine,' + vac});
-        //   console.log(scope.alerts);
-        // });
+        var packet = {name: vac, duration: duration};
+        scope.vaccineService.addNewVaccine(1, packet);
       };
+
     }
    };
   });
+
  
