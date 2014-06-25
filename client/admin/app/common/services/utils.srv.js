@@ -1,11 +1,16 @@
 'use strict';
 
 angular.module('admin.common.services')
-  .factory('reqIDFactory', function () {
+  .factory('reqIDFactory', function (Restangular) {
 
     var data = {requestID: '', requestStatus: '', userID: '', petID: '', vetID: ''};
 
     return {
+
+      getAllRequests: function(adminID){
+        return Restangular.one('admin', adminID).all('requests').getList();
+      },
+
       getRequestID: function () {
         return data.requestID;
       },
