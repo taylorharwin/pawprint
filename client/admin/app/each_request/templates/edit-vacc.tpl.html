@@ -15,9 +15,9 @@
         
    <form>
     <legend>Manage Vaccinations</legend>
-      Vaccine: <input type="text" name="firstname" ng-model="newVaccine.name"><br>
-      Date Administered: <input type="text" name="lastname" ng-model="newVaccine.dateAdministered">
-    <button class="btn btn-small btn-danger" ng-click="postVacc(newVaccine)">Create Record</button>
+      Vaccine: <input type="text" name="vaccineName" ng-model="newVaccinationRecord.name"><br>
+      Date Administered: <input type="text" name="lastname" ng-model="newVaccinationRecord.dateAdministered">
+    <button class="btn btn-small btn-danger" ng-click="postVaccinationRecord(newVaccinationRecord)">Create Record</button>
 
       <hr>
       Add a new global vaccine type: <input type="text" name="vaccineName" ng-model="newVaccination.name"><br>

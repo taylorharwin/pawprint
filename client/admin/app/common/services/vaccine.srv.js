@@ -15,8 +15,13 @@ angular.module('admin.common.services')
     return Restangular.one('admin', adminID).one('requests', reqID).all('vaccines').getList();
   }
 
+  function addNewVaccinationRecord(adminID, reqID, data) {
+    return Restangular.one('admin', adminID).one('requests', reqID).all('vaccines').post(data);
+  }
+
   this.getAllVaccines = getAllVaccines;
   this.addNewVaccine = addNewVaccine;
   this.getAllVaccinationRecords = getAllVaccinationRecords;
+  this.addNewVaccinationRecord = addNewVaccinationRecord;
      
 });

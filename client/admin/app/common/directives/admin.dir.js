@@ -1,4 +1,8 @@
 'use strict';
+/*global angular*/
+/*global vaccine_id*/
+
+
 
 angular.module('admin.common.directives')
 
@@ -48,6 +52,7 @@ angular.module('admin.common.directives')
         scope.vaccineService.getAllVaccinationRecords(1, scope.reqID).then(function (data) {
           scope.formattingService.cleanDates.call(data);
           scope.vaccinations = data;
+          console.log(data);
         });
       }
     };
@@ -94,20 +99,31 @@ angular.module('admin.common.directives')
       scope.vaccineService.getAllVaccines(1).then(function (data) {
         scope.vaccines = data;
       });
-
       scope.newVaccine = {
         name: '',
         duration: ''
+      };
+
+      scope.setVacc = function (name, id) {
+        scope.newVaccinationRecord = {
+          'pet_id': scope.petID,
+          'name': name,
+          'vaccine_id': id,
+          'dateAdministered': '',
+          'request_id': scope.reqID,
+        };
+        console.log(scope.newVaccinationRecord);
       };
 
       scope.editVacc = function () {
         scope.editingVacc = !scope.editingVacc;
       };
 
-      //Sets properties on an object at the time when user selects name from dropdown
-      scope.setVacc = function (vac, id) {
-        scope.newVaccine.name = vac;
-        scope.newVaccine.vaccine_id = id;
+      scope.postVaccinationRecord = function (obj) {
+        delete obj.name;
+        scope.vaccineService.addNewVaccinationRecord(1, scope.reqID, obj).then(function () {
+          console.log('added new vacc record');
+        });
       };
 
       //Posts a new vaccine to the global list of vaccines
