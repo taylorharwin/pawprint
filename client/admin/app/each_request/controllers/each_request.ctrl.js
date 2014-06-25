@@ -27,7 +27,6 @@ angular.module('admin.eachRequest.controllers')
     $scope.status = {
       isopen: false
     };
-
  
     //Takes an array of objects and a vacc name, returns the ID for that vaccine
     $scope.searchVaccinesArrayforID = function (arr, vaccineName) {
@@ -37,7 +36,6 @@ angular.module('admin.eachRequest.controllers')
         }
       }
     };
-
   //Change the status for a given request
     $scope.postUpdatedStatus = function (status) {
       var packet = {status: status.name};

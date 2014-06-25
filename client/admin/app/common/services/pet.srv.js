@@ -7,7 +7,7 @@ angular.module('admin.common.services')
     return Restangular.one('admin', adminID).one('pets', petID).get();
   }
 
-  function editPetInfo(adminID, vetID, data) {
+  function editPetInfo(adminID, petID, data) {
     return Restangular.one('admin', adminID).one('pets', petID).put(data);
   }
 
