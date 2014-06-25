@@ -3,7 +3,6 @@
 angular.module('admin.eachRequest.controllers')
   .controller('EachRequestCtrl', function ($scope, reqIDFactory, userService, petService, vetService, alertsService, vaccineService, formattingService, statusCodeConst) {
 
-
     //links scope to generic Services
     $scope.formattingService = formattingService;
     $scope.alertsService = alertsService;
@@ -22,11 +21,9 @@ angular.module('admin.eachRequest.controllers')
     $scope.setClassOnRequest = reqIDFactory.setClassforStatus;
 
     //Variable for two-way binding with request status dropdown
-   
-    $scope.code = {status: ''};
+    $scope.statusObj = {name: $scope.reqStatus};
 
     //toggles whether or not a given dropdown menu is open
-
     $scope.status = {
       isopen: false
     };
@@ -41,15 +38,12 @@ angular.module('admin.eachRequest.controllers')
       }
     };
 
- 
   //Change the status for a given request
-    $scope.postUpdatedStatus = function (name) {
-      $scope.code.status = name;
-      console.log($scope.code);
-      $scope.submitStuff($scope.code, 1, 'requests', $scope.reqID, function () {
-        console.log('success!');
-        $scope.alerts.push({ type: 'success', msg: 'Updated status to ' +  $scope.code.status});
-        $scope.reqStatus = $scope.code.status;
+    $scope.postUpdatedStatus = function (status) {
+      var packet = {status: status.name};
+      console.log(packet);
+      reqIDFactory.updateRequestStatus(1, $scope.reqID, packet).then(function () {
+        $scope.statusObj.name = status.name;
       });
     };
 

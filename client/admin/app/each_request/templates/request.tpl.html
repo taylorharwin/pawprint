@@ -24,7 +24,7 @@
       <h4>Vet ID: {{vetID}}</h4>
       <h4>User ID: {{userID}}</h4>
       <h4>Pet ID: {{petID}}</h4>
-      <h4>Request Status:<span>{{reqStatus}}</span></h4>
+      <h4>Request Status:  <span>{{statusObj.name}}</span></h4>
 		</div>
 	</div>
 
@@ -33,7 +33,7 @@
   				 <span class="dropdown">
       				<button  class="btn btn-large btn-default dropdown-toggle">Update Status<span class="caret"></span></button>
 						    <ul class="dropdown-menu">
-						      <li ng-repeat="code in statusCodes"ng-model="code.name" ng-click="postUpdatedStatus(code.name)">{{code.name}}</li>
+						      <li ng-repeat="code in statusCodes" ng-click="postUpdatedStatus(code)">{{code.name}}</li>
 						    </ul>
   				 </span>
 			    </div>
