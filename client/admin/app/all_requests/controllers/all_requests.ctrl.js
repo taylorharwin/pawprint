@@ -22,7 +22,6 @@ angular.module('admin.allRequests.controllers')
 // Gets all existing requests for display on Main page. 
     $scope.reqIDFactory.getAllRequests(1).then(function (data) {
       $scope.formattingService.cleanDates.call(data);
-      console.log(data);
       $scope.requests = data;
     });
    

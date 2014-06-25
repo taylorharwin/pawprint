@@ -10,7 +10,6 @@ angular.module('admin.common.services')
       getAllRequests: function(adminID){
         return Restangular.one('admin', adminID).all('requests').getList();
       },
-
       getRequestID: function () {
         return data.requestID;
       },

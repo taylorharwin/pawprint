@@ -45,7 +45,10 @@ angular.module('admin.common.directives')
       replace: 'true',
       templateUrl: 'app/each_request/templates/vacc-record.tpl.html',
       link: function (scope) {
-        // scope.getAllVaccinesForRequest();
+        scope.vaccineService.getAllVaccinationRecords(1, scope.reqID).then(function (data) {
+          scope.formattingService.cleanDates.call(data);
+          scope.vaccinations = data;
+        });
       }
     };
   })
