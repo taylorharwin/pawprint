@@ -25,6 +25,7 @@ module.exports = exports = function (app, express, routers) {
   app.use('/user/login', auth.login);
   app.use('/user/signup', auth.signup);
   // JWT protected routes
+  // @TODO check user can only send to routes that he is registered to by decrypting JWT somehow
   app.use('/admin', expressJwt({ secret: process.env.USER_SECRET || 'usersecret' }));
   app.use('/user', expressJwt({ secret: process.env.USER_SECRET || 'usersecret' }));
   app.use('/admin', routers.AdminRouter);
