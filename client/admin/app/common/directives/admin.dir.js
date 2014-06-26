@@ -51,7 +51,7 @@ angular.module('admin.common.directives')
         scope.vaccineService.getAllVaccinationRecords(1, scope.reqID).then(function (data) {
           scope.formattingService.cleanDates.call(data);
           scope.vaccineService.getVaccineNameforID(data, scope.vaccines);
-          scope.vaccinations = data;
+          scope.vaccineService.vaccinations = data;
         });
       }
     };
@@ -120,6 +120,13 @@ angular.module('admin.common.directives')
       scope.postVaccinationRecord = function (obj) {
         delete obj.name;
         scope.vaccineService.addNewVaccinationRecord(1, scope.reqID, obj).then(function () {
+          var msg = 'Added a new vaccination record';
+          scope.alertsService.add('success', msg);
+          scope.vaccineService.getAllVaccinationRecords(1, scope.reqID).then(function (data) {
+          scope.formattingService.cleanDates.call(data);
+          scope.vaccineService.getVaccineNameforID(data, scope.vaccines);
+          scope.vaccineService.vaccinations = data;
+        });
         });
       };
 
