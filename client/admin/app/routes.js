@@ -6,7 +6,7 @@ angular.module('admin')
   $stateProvider
     .state('public', {
       abstract: true,
-      url: '/',
+      url: '/admin',
       template: '<div ui-view class="realm"></div>'
     })
      .state('public.login', {
@@ -18,7 +18,18 @@ angular.module('admin')
     .state('app', {
       abstract: true,
       url: '/admin/app',
-      template: '<div ui-view class="realm"></div>'
+      template: '<div ui-view class="realm"></div>',
+      resolve: {
+        auth: function ($q, $rootScope, AuthService) {
+          var deferred = $q.defer();
+          if (!AuthService.getCookie().loggedin) {
+            $rootScope.scope.go('public.login');
+          } else {
+            deferred.resolve();
+          }
+          return deferred.promise;
+        }
+      }
     })
 
     .state('app.allRequests', {
