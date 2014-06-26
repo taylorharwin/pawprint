@@ -3,13 +3,8 @@ DS_Store
 _.DS_Store
 ._.DS_Store
 
-client/admin/bower_components
-client/user/bower_components
 client/bower_components
 # client/**/*.css
-client/lib
-server/test/seedData/README.md
+server/test/seedData
 
 node_modules/
-
-azure.err
