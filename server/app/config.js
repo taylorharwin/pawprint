@@ -2,7 +2,8 @@ var morgan      = require('morgan'),
     bodyParser  = require('body-parser'),
     middle      = require('./middleware'),
     expressJwt  = require('express-jwt'),
-    auth        = require('../user/controller.auth.js');
+    userAuth    = require('../user/controller.auth.js'),
+    adminAuth   = require('../admin/controller.auth.js');
 
 /*
  * Include all your global env variables here.
@@ -21,12 +22,14 @@ module.exports = exports = function (app, express, routers) {
   app.use(express.static(__dirname+'/../../client/user'));
   app.use('/admin', express.static(__dirname+'/../../client/admin'));
   app.use(express.static(__dirname+'/../../client'));
+  // Unprotected login route
+  app.use('/admin/login', adminAuth.login);
   // Unprotected login and signup routes
-  app.use('/user/login', auth.login);
-  app.use('/user/signup', auth.signup);
+  app.use('/user/login', userAuth.login);
+  app.use('/user/signup', userAuth.signup);
   // JWT protected routes
   // @TODO check user can only send to routes that he is registered to by decrypting JWT somehow
-  app.use('/admin', expressJwt({ secret: process.env.USER_SECRET || 'usersecret' }));
+  app.use('/admin', expressJwt({ secret: process.env.USER_SECRET || 'adminsecret' }));
   app.use('/user', expressJwt({ secret: process.env.USER_SECRET || 'usersecret' }));
   app.use('/admin', routers.AdminRouter);
   app.use('/user', routers.UserRouter);
