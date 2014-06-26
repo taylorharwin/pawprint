@@ -44,7 +44,7 @@ angular.module('admin.eachRequest.controllers')
   //Change the status for a given request
     $scope.postUpdatedStatus = function (status) {
       var packet = {status: status.name};
-      console.log(packet);
+      console.log("Sending this",  packet);
       reqIDFactory.updateRequestStatus(1, $scope.reqID, packet).then(function () {
         $scope.statusObj.name = status.name;
         var msg = 'Status updated to ' + $scope.statusObj.name;
