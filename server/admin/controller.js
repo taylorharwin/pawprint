@@ -1,6 +1,8 @@
 var db                = require('../app/db_config.js'),
     Q                 = require('q'),
     Utils             = require('../app/utils.js'),
+    pdfHelpers        = require('../app/pdf_helpers.js'),
+    nodePath          = require('path'),
     // INCLUDE DATA MODELS FOR BOOKSHELF.JS
     ContactHistory    = require('../app/models/contactHistory.js'),
     PdfRecord         = require('../app/models/pdfRecord.js'),
@@ -52,10 +54,27 @@ var get = {
     all: true
   }),
 
+  pdfid: function(req, res) {
+    // grab pdfid from request URL
+    var pdfid = req.params.pdfid;
+    var requestid = req.params.requestid;
+
+    // retrieve pdf based on pdfid
+    var model = new PdfRecord().query({where: {id: pdfid, request_id: requestid}});
+    // Get all objects that match the query
+    model.fetch().then(function(pdf) {
+      // Iterate through the collection to exclude private properties
+      var path = pdf.get('link');
+      res.sendfile(path);
+    }).catch(function(err) {
+      console.error(err);
+      res.send(500, 'Internal server error');
+    });
+  },
+
   vaccines: Utils.getter(Vaccine, {
     all: true
   })
-
 };
 
 var post = {
@@ -92,7 +111,24 @@ var post = {
   }}),
 
   pdf: function(req, res) {
-    // TODO, this will be a multi-part form request
+    var requestid = req.params.requestid;
+    var pdf = req.files.file;
+    var size = req.files.file.ws.bytesWritten;
+    var type = pdf.type;
+    var regex = /^(application\/pdf)$/i;
+    var bool = pdfHelpers.filesizeCheck(size) && pdfHelpers.filenameRegEx(pdf.originalFilename) && regex.test(type);
+    var newfilename = requestid + '_' + (new Date()).getTime() + '.pdf';
+    if (bool) {
+      var serverPath = nodePath.join(pdfHelpers.dirName, newfilename);
+      pdfHelpers.pdfSave(pdf.path, serverPath, function(path){
+        Utils.creator(PdfRecord, {params: {
+          request_id: requestid,
+          link: path
+        }});
+      });
+    } else {
+      res.send(404, 'Sorry, please upload a .pdf under 3 MB');
+    }
   }
 };
 
@@ -107,7 +143,19 @@ var put = {
 var destroy = {
   petVaccine   : Utils.deleter(Pet_Vaccine, {id: 'vaccineid'}),
   log          : Utils.deleter(ContactHistory, {id: 'logid'}),
-  pdf          : Utils.deleter(PdfRecord, {id: 'pdfid'}),
+  pdf          : function(req, res) {
+    var pdfid = req.params.pdfid;
+    var requestid = req.params.requestid;
+    PdfRecord.forge({id: pdfid}).fetch().then(function(pdf){
+      var path = pdf.get('link');
+      fs.unlink(path, function(){
+        pdf.destroy(res.send(200, pdf));
+      });
+    }).catch(function(err) {
+      console.error(err);
+      res.send(500, 'Internal server error');
+    });
+  },
   vetContact   : Utils.deleter(VetContact, {id: 'vetcontactid'})
 };
 
