@@ -36,8 +36,16 @@
 						      <li ng-repeat="code in statusCodes" ng-click="postUpdatedStatus(code)">{{code.name}}</li>
 						    </ul>
   				 </span>
-			    </div>
-  		<button class="btn btn-large btn-info">Download PDF</button>
+			</div>
+
+      <div class="btn-group" dropdown is-open="status.isopen">
+           <span class="dropdown">
+              <button  class="btn btn-large btn-default dropdown-toggle">Upload PDF<span class="caret"></span></button>
+              <div class="dropdown-menu"> Here is where you upload PDFs </div>
+                
+           </span>
+      </div>
+      
   </div>
 
 

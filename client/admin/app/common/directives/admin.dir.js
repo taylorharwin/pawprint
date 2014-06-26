@@ -1,6 +1,5 @@
 'use strict';
 /*global angular*/
-/*global vaccine_id*/
 
 
 
@@ -51,8 +50,9 @@ angular.module('admin.common.directives')
       link: function (scope) {
         scope.vaccineService.getAllVaccinationRecords(1, scope.reqID).then(function (data) {
           scope.formattingService.cleanDates.call(data);
+          scope.vaccineService.getVaccineNameforID(data, scope.vaccines);
           scope.vaccinations = data;
-          console.log(data);
+          console.log(scope.vaccinations);
         });
       }
     };
@@ -66,7 +66,6 @@ angular.module('admin.common.directives')
     link: function (scope) {
       scope.userService.getContactLogs(1, scope.reqID).then(function (data) {
         scope.contacts = data;
-        console.log(scope.contacts);
       });
 
       scope.newContact = {
@@ -79,7 +78,6 @@ angular.module('admin.common.directives')
       scope.postNote = function () {
         scope.newContact.created_at = new Date();
         scope.userService.addContactLog(1, scope.reqID, scope.newContact).then(function () {
-          console.log('updated records');
         });
 
       };
@@ -96,9 +94,6 @@ angular.module('admin.common.directives')
 
       scope.editingVacc = true;
       
-      scope.vaccineService.getAllVaccines(1).then(function (data) {
-        scope.vaccines = data;
-      });
       scope.newVaccine = {
         name: '',
         duration: ''
@@ -112,7 +107,6 @@ angular.module('admin.common.directives')
           'dateAdministered': '',
           'request_id': scope.reqID,
         };
-        console.log(scope.newVaccinationRecord);
       };
 
       scope.editVacc = function () {
@@ -122,7 +116,6 @@ angular.module('admin.common.directives')
       scope.postVaccinationRecord = function (obj) {
         delete obj.name;
         scope.vaccineService.addNewVaccinationRecord(1, scope.reqID, obj).then(function () {
-          console.log('added new vacc record');
         });
       };
 
