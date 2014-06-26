@@ -16,7 +16,8 @@ var getPets = function(req, res) {
   db.knex('user_pet')
     .join('pet', 'user_pet.pet_id', '=', 'pet.id')
     .where('user_pet.user_id', userid)
-    .select()
+    .select('pet.id', 'name', 'birthdate', 'gender', 'breed', 'color', 'weight',
+      'neuter', 'microchip', 'profilePic')
     .then(function(pets) {
       res.send(200, pets);
     });

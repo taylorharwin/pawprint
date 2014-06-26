@@ -13,7 +13,7 @@ var reqUrl = helpers.reqUrl;
 var _test = helpers._test;
 
 module.exports = exports = function() {
-  xdescribe('POST', function() {
+  describe('POST', function() {
     it('/user', function(done) {
       var input = {email: 'apple@dog.com', password: 'password'};
       _test('post', '/user', 201, function(body) {
@@ -29,6 +29,7 @@ module.exports = exports = function() {
       var input = {name: 'testapple', gender: 'F'};
       _test('post', '/user/1/pets', 201, function(body) {
         Pet.forge({id: body.id}).fetch().then(function(pet) {
+          console.log(pet);
           expect(pet);
         }).then(function() {
           done();
@@ -36,8 +37,8 @@ module.exports = exports = function() {
       }, input);
     });
 
-    it('/user/:userid/pets/:petid/requests', function(done) {
-      var input = {practiceName: 'vet123', contactMethod: 'phone', phone: '123456789'};
+    xit('/user/:userid/pets/:petid/requests', function(done) {
+      var input = {practiceName: 'vet123', contactMethod: 'phone', phone: '12345'};
       _test('post', '/user/1/pets/1/requests', 201, function(body) {
         Request.forge({id: body.id}).fetch().then(function(request) {
           expect(request);
@@ -48,7 +49,7 @@ module.exports = exports = function() {
     });
   });
 
-  xdescribe('GET', function() {
+  describe('GET', function() {
     it('/user/:userid', function(done) {
       _test('get', '/user/1', 200, function(body) {
         expect(body.id).to.equal(1);
@@ -87,7 +88,7 @@ module.exports = exports = function() {
     });
   });
 
-  xdescribe('PUT', function() {
+  describe('PUT', function() {
     it('/user/:userid', function(done) {
       var input = {email: 'change@d.com', password: 'password2'};
       _test('put', '/user/1', 200, function(body) {
@@ -127,25 +128,25 @@ module.exports = exports = function() {
     after(function(done) {
       db.knex('request')
         .where('id', 1)
-        .update({status: 'Pending'})
+        .update({status: 'pending'})
         .then(function(){
           done();
         });
     });
 
-    it('/user/:userid', function(done) {
+    xit('/user/:userid', function(done) {
       _test('del', '/user/' + userid, 200, function(body) {
         db.knex('user')
           .where('user_id', userid)
           .select()
           .then(function(found) {
-            expect(found.length).to.equal(0);
+            expect(found.status).to.equal('not active');
             done();
           });
       });
     });
 
-    it('/user/:userid/pets/:petid', function(done) {
+    xit('/user/:userid/pets/:petid', function(done) {
       _test('del', '/user/1/pets/' + petid, 200, function(body) {
         db.knex('user_pet')
           .where('id', userpetid)
@@ -158,12 +159,12 @@ module.exports = exports = function() {
     });
 
     it('/user/:userid/pets/:petid/requests/:requestid', function(done) {
-      _test('del', 'user/1/pets/1/requests/1', 200, function(body) {
+      _test('del', '/user/1/pets/1/requests/1', 200, function(body) {
         db.knex('request')
           .where('id', 1)
           .select()
           .then(function(found) {
-            expect(found.status).to.equal('Canceled');
+            expect(found[0].status).to.equal('canceled');
             done();
           });
       });

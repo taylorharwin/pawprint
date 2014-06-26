@@ -5,11 +5,12 @@ var knex        = require('knex'),
 
 var knex = knex({
   client: 'pg',
+  // debug: true,
   connection: {
-    host: '127.0.0.1',
-    user: 'pawprint',
-    password: 'password',
-    database: 'pawprint',
+    host: process.env.PG_HOST || '127.0.0.1',
+    user: process.env.PG_USER || 'pawprint',
+    password: process.env.PG_PASSWORD || 'password',
+    database: process.env.PG_DB || 'pawprint',
     charset: 'utf8',
   }
 });

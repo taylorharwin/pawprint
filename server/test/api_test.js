@@ -17,9 +17,9 @@ var reqUrl = helpers.reqUrl;
 
 describe('Pawprint Tests', function() {
   userDataCallback();
-  adminDataCallback();
+  // adminDataCallback();
 
   // TODO: add negative tests
-  xdescribe('user routes', usertests);
-  xdescribe('server routes', admintests);
+  describe('user routes', usertests);
+  // describe('server routes', admintests);
 });

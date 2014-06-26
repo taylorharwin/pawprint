@@ -1,4 +1,3 @@
-'use strict';
 var gulp    = require('gulp'),
     path    = require('path'),
     bower   = require('gulp-bower'),
@@ -11,31 +10,31 @@ var gulp    = require('gulp'),
     nodemon = require('gulp-nodemon'),
     lr_port = 35729,
     less   = require('gulp-less');
+    // stripDebug  = require('gulp-strip-debug'),
+    // uglify      = require('gulp-uglify'),
+    // ngmin       = require('gulp-ngmin'),
+    // gulpconcat  = require('gulp-concat'),
+    // clean       = require('gulp-clean'),
+    // minifycss   = require('gulp-minify-css');
    
-
 var paths = {
-  scripts: ['!client/user/bower_components',
+  scripts: [
+            '!client/bower_components',
             '!client/test',
-            'client/user/app/*.js',
             'client/user/app/**/*.js',
-            'client/user/app/**/**/*.js',
-            'client/admin/app/*.js',
-            'client/admin/app/**/*.js',
-            'client/admin/app/**/**/*.js'
+            'client/admin/app/**/*.js'
             ],
-  views: ['!client/bower_components/',
-          'client/user/*.html',
-          'client/user/app/pages/templates/*.tpl.html',
-          'client/admin/*.html',
-          'client/admin/app/pages/templates/*.tpl.html'
+  views: [
+          'client/user/**/*.html',
+          'client/admin/**/*.html'
           ],
   styles: {
-    css: ['!client/assets/styles/*.css', 'client/styles/css/*.css', 'client/**/*.css'],
-    less: ['client/assets/styles/less/*.less'],
-    dest: 'client/assets/styles'
+    css:  ['client/user/assets/**/*.css', 'client/admin/assets/**/*.css', 'client/**/*.css'],
+    less: ['client/user/assets/**/*.less', 'client/admin/assets/**/*.less', 'client/**/*.less'],
+    dest: ['client/user/assets/styles', 'client/admin/assets/styles']
   }
 };
-var build = ['less', 'lint'];
+var build = ['less', 'css', 'lint'];
 
 
 gulp.task('less', function () {
@@ -48,11 +47,6 @@ gulp.task('less', function () {
     .pipe(notify({message: 'Less done'}));
 });
 
-// gulp.task('bowerInstall', function  () {
-//   bower()
-//   .pipe();
-// });
-
 gulp.task('html', function () {
   return gulp.src(paths.views)
     .pipe(plumber())
@@ -60,37 +54,12 @@ gulp.task('html', function () {
     .pipe(notify({message: 'Views refreshed'}));
 });
 
-// gulp.task('css', function () {
-//   return gulp.src(paths.styles.css)
-//     .pipe(plumber())
-//     .pipe(refresh(client))
-//     .pipe(notify({message: 'CSS refreshed'}));
-// });
-
-// gulp.task('scripts', ['lint'] , function() {
-//   return gulp.src(paths.appjsminify.src)
-//     .pipe(plumber())
-//     // .pipe(stripDebug())
-//     // .pipe(ngmin({dynamic: false}))
-//     // .pipe(uglify())
-//     .pipe(gulpconcat(paths.appjsminify.filename))
-//     .pipe(gulp.dest(paths.appjsminify.dest))
-//     .pipe(notify({message: 'Distribution code compiled'}));
-// });
-
-// gulp.task('deleteOldMin', function() {
-//   return gulp.src(nodePath.join(paths.appjsminify.dest, paths.appjsminify.filename), {read: false})
-//     .pipe(plumber())
-//     .pipe(clean())
-//     .pipe(notify({message: 'Old file deleted'}));
-// });
-
-// gulp.task('deleteOldCSS', function() {
-//   return gulp.src(paths.mincss.dest, {read: false})
-//     .pipe(plumber())
-//     .pipe(clean())
-//     .pipe(notify({message: 'Old css deleted'}));
-// });
+gulp.task('css', function () {
+  return gulp.src(paths.styles.css)
+    .pipe(plumber())
+    .pipe(refresh(client))
+    .pipe(notify({message: 'CSS refreshed'}));
+});
 
 gulp.task('lint', function () {
   return gulp.src(paths.scripts)
