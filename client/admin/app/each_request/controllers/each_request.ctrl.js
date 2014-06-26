@@ -47,15 +47,9 @@ angular.module('admin.eachRequest.controllers')
       console.log(packet);
       reqIDFactory.updateRequestStatus(1, $scope.reqID, packet).then(function () {
         $scope.statusObj.name = status.name;
+        var msg = 'Status updated to ' + $scope.statusObj.name;
+        $scope.alertsService.add('success', msg);
       });
-    };
-
-//Array containing all alerts
-    $scope.alerts = [];
-
-     //Function to remove any one alert (Admins may have multiple alerts on screen for any requests);
-    $scope.closeAlert = function (index) {
-      $scope.alerts.splice(index, 1);
     };
 
   });
