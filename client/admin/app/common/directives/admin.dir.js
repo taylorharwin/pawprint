@@ -52,7 +52,6 @@ angular.module('admin.common.directives')
           scope.formattingService.cleanDates.call(data);
           scope.vaccineService.getVaccineNameforID(data, scope.vaccines);
           scope.vaccinations = data;
-          console.log(scope.vaccinations);
         });
       }
     };
@@ -78,6 +77,11 @@ angular.module('admin.common.directives')
       scope.postNote = function () {
         scope.newContact.created_at = new Date();
         scope.userService.addContactLog(1, scope.reqID, scope.newContact).then(function () {
+          var msg = 'Added a new account note';
+          scope.alertsService.add('success', msg);
+          scope.userService.getContactLogs(1, scope.reqID).then(function (data) {
+            scope.contacts = data;
+          });
         });
 
       };
