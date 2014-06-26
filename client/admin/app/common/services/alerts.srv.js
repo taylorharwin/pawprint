@@ -4,7 +4,7 @@
 angular.module('admin.common.services')
   .service('alertsService', function () {
 
-    this.alerts = [{type: 'success', msg: 'BLAAAAA'}];
+    this.alerts = [];
 
     this.add = function (variety, message) {
       var alerts = this.alerts;

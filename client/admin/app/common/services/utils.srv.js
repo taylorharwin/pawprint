@@ -8,7 +8,7 @@ angular.module('admin.common.services')
     return {
 
       updateRequestStatus: function (adminID, reqID, data) {
-        return Restangular.one('admin', adminID).one('requests', reqID).put(data);
+        return Restangular.one('admin', adminID).one('requests', reqID).customPUT(data);
       },
       getAllRequests: function (adminID) {
         return Restangular.one('admin', adminID).all('requests').getList();
