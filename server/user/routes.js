@@ -1,3 +1,4 @@
+// var Auth = require('./controller.auth.js');
 var Create = require('./controller.create.js');
 var Get = require('./controller.get.js');
 var Put = require('./controller.put.js');
@@ -5,8 +6,10 @@ var Delete = require('./controller.delete.js');
 
 module.exports = exports = function (router) {
 
-  router.route('/')
-    .post(Create.createUser);
+  // router.route('/login')
+  //   .post(Auth.login);
+  // router.route('/signup')
+  //   .post(Auth.signup);  
   router.route('/:userid')
     .get(Get.getUser)
     .put(Put.putUser)

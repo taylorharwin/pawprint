@@ -10,7 +10,7 @@ angular.module('user.common.services')
 
     function retrievePets (userId) {
 
-      PetRESTService.getPets(userId)
+      return PetRESTService.getPets(userId)
         .then(function (petsResult) {
 
           pets.pets = petsResult;
@@ -50,7 +50,7 @@ angular.module('user.common.services')
         .then(function (requestsResult) {
 
           pets.requests = requestsResult;
-
+          return pets;
         });
     }
 
@@ -133,7 +133,7 @@ angular.module('user.common.services')
     function updatePet (userId, index) {
 
       var modalInstance = $modal.open({
-        templateUrl: 'app/pages/templates/updatepet.tpl.html',
+        templateUrl: 'app/pet/templates/updatepet.tpl.html',
         controller: 'UpdatePetCtrl',
         resolve: {
           pet: function () {
@@ -143,7 +143,8 @@ angular.module('user.common.services')
       });
 
       modalInstance.result.then(function (request) {
-        PetRESTService.postPetRequest(request.userId, request.petId, request).then(function (response) {
+        //@DO post the vet and then get the vetid, and then use that to post with the vetid info
+        PetRESTService.postPetRequest(request.user_id, request.pet_id, request).then(function (response) {
           console.log('successfully sent pet update request');
           console.log(pets.requests, 'requests');
           pets.requests[index].push(response);

@@ -30,7 +30,18 @@ angular.module('user')
     .state('app', {
       abstract: true,
       url: '/app',
-      template: '<div ui-view class="container"></div>'
+      template: '<div ui-view class="container"></div>',
+      resolve: {
+        auth: function ($q, $rootScope, AuthService) {
+          var deferred = $q.defer();
+          if (!AuthService.getCookie().loggedin) {
+            $rootScope.scope.go('public.login');
+          } else {
+            deferred.resolve();
+          }
+          return deferred.promise;
+        }
+      }
     })
 
     .state('app.main', {

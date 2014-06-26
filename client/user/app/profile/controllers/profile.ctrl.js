@@ -1,14 +1,12 @@
 angular.module('user.profile.controllers')
-  .controller('ProfileCtrl', function ($scope, CurrentUserService) {
+  .controller('ProfileCtrl', function ($scope, AuthService, CurrentUserService) {
     console.log($scope);
 
     $scope.CurrentUserService = CurrentUserService;
-
-    $scope.update = {
-      success: false,
-      error: false
-    };
-    $scope.user = CurrentUserService.getUser();
+    CurrentUserService.retrieveUser(AuthService.getCookie().userId)
+      .then(function (user){
+        $scope.user = user;
+      });
 
     $scope.updateUser = function() {
       CurrentUserService.updateUser()

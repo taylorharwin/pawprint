@@ -1,15 +1,19 @@
 angular.module('user.main.controllers')
 
-  .controller('MainCtrl', function ($scope, CurrentUserService, CurrentPetsService, VaccineService) {
+  .controller('MainCtrl', function ($scope, AuthService, CurrentUserService, CurrentPetsService, VaccineService) {
     console.log($scope);
-    console.log(CurrentUserService.getUser());
 
     $scope.VaccineService = VaccineService;
     $scope.CurrentPetsService = CurrentPetsService;
-    
-    $scope.userId = CurrentUserService.getUser().id;
-    $scope.CurrentPetsService.retrievePets($scope.userId);
-    
-    $scope.pets = CurrentPetsService.getPets();
-    
+    CurrentUserService.retrieveUser(AuthService.getCookie().userId)
+      .then(function (user){
+        $scope.user = user;
+      });
+    $scope.userId = AuthService.getCookie().userId;
+
+    CurrentPetsService.retrievePets($scope.userId)
+      .then(function(pets) {
+        $scope.pets = pets;
+      });
+
   });

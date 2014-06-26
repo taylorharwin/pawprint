@@ -1,11 +1,14 @@
 angular.module('user.common.services')
 
-  .service('CurrentUserService', function (UserRESTService, $rootScope) {
+  .service('CurrentUserService', function (UserRESTService, $rootScope, AuthService) {
 
     var currentUser = null;
 
-    function setUser (user) {
-      currentUser = user;
+    function retrieveUser (id) {
+      return UserRESTService.getUser(id).then(function (user) {
+        currentUser = user;
+        return user;
+      });
     }
 
     function getUser () {
@@ -13,9 +16,10 @@ angular.module('user.common.services')
     }
 
     function enterUser (user, type, enterError) {
-      UserRESTService.postUserLogin(user)
+      UserRESTService.postUser(user, type)
         .then(function (response) {
-          currentUser = response;
+          console.log(response);
+          AuthService.login(response.token, response.id);
           if (type === 'login') {
             $rootScope.$state.go('app.main');
           } else if (type === 'signup') {
@@ -24,7 +28,13 @@ angular.module('user.common.services')
         }, function (error) {
           console.log(error);
           enterError = true;
+          AuthService.logout();
         });
+    }
+
+    function exitUser () {
+      AuthService.logout();
+      $rootScope.$state.go('public.home');
     }
 
     function updateUser () {
@@ -34,7 +44,7 @@ angular.module('user.common.services')
     function deleteUser () {
       currentUser.remove().then(function (response) {
         console.log('deleted user');
-        // @NOTE delete the local auth settings
+        AuthService.logout();
         currentUser = null;
         $rootScope.$state.go('public.home');
       }, function (error) {
@@ -42,7 +52,7 @@ angular.module('user.common.services')
       });
     }
 
-    this.setUser = setUser;
+    this.retrieveUser = retrieveUser;
     this.getUser = getUser;
     this.enterUser = enterUser;
     this.updateUser = updateUser;
