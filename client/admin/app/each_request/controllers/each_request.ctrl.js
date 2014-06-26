@@ -22,8 +22,8 @@ angular.module('admin.eachRequest.controllers')
 
     //immediately gets all vaccines, which are necessary for display of the page
     $scope.vaccineService.getAllVaccines(1).then(function (data) {
-        $scope.vaccines = data;
-      });
+      $scope.allVaccines = data;
+    });
 
     //Variable for two-way binding with request status dropdown
     $scope.statusObj = {name: $scope.reqStatus};
