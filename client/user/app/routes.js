@@ -27,6 +27,7 @@ angular.module('user')
       controller: 'EnterCtrl'
     })
 
+    //@NOTE resolve checks authentication everytime user tries to enter a restricted area
     .state('app', {
       abstract: true,
       url: '/app',
