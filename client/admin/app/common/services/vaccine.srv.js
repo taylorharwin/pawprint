@@ -33,7 +33,7 @@ angular.module('admin.common.services')
   }
 
 
-
+  this.vaccinations = [];
   this.getAllVaccines = getAllVaccines;
   this.addNewVaccine = addNewVaccine;
   this.getAllVaccinationRecords = getAllVaccinationRecords;
