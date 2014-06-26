@@ -50,8 +50,9 @@ angular.module('admin.common.directives')
       link: function (scope) {
         scope.vaccineService.getAllVaccinationRecords(1, scope.reqID).then(function (data) {
           scope.formattingService.cleanDates.call(data);
-          scope.vaccineService.getVaccineNameforID(data, scope.vaccines);
+          scope.vaccineService.getVaccineNameforID(data, scope.allVaccines);
           scope.vaccineService.vaccinations = data;
+          console.log(scope.vaccineService.vaccinations);
         });
       }
     };
@@ -124,7 +125,7 @@ angular.module('admin.common.directives')
           scope.alertsService.add('success', msg);
           scope.vaccineService.getAllVaccinationRecords(1, scope.reqID).then(function (data) {
             scope.formattingService.cleanDates.call(data);
-            scope.vaccineService.getVaccineNameforID(data, scope.vaccines);
+            scope.vaccineService.getVaccineNameforID(data, scope.allVaccines);
             scope.vaccineService.vaccinations = data;
           });
         });
