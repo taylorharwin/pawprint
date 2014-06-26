@@ -50,9 +50,9 @@ angular.module('admin.common.directives')
       link: function (scope) {
         scope.vaccineService.getAllVaccinationRecords(1, scope.reqID).then(function (data) {
           scope.formattingService.cleanDates.call(data);
-          scope.vaccineService.getVaccineNameforID(data, scope.vaccines);
-          scope.vaccinations = data;
-          console.log(scope.vaccinations);
+          scope.vaccineService.getVaccineNameforID(data, scope.allVaccines);
+          scope.vaccineService.vaccinations = data;
+          console.log(scope.vaccineService.vaccinations);
         });
       }
     };
@@ -78,6 +78,11 @@ angular.module('admin.common.directives')
       scope.postNote = function () {
         scope.newContact.created_at = new Date();
         scope.userService.addContactLog(1, scope.reqID, scope.newContact).then(function () {
+          var msg = 'Added a new account note';
+          scope.alertsService.add('success', msg);
+          scope.userService.getContactLogs(1, scope.reqID).then(function (data) {
+            scope.contacts = data;
+          });
         });
 
       };
@@ -116,13 +121,26 @@ angular.module('admin.common.directives')
       scope.postVaccinationRecord = function (obj) {
         delete obj.name;
         scope.vaccineService.addNewVaccinationRecord(1, scope.reqID, obj).then(function () {
+          var msg = 'Added a new vaccination record';
+          scope.alertsService.add('success', msg);
+          scope.vaccineService.getAllVaccinationRecords(1, scope.reqID).then(function (data) {
+            scope.formattingService.cleanDates.call(data);
+            scope.vaccineService.getVaccineNameforID(data, scope.allVaccines);
+            scope.vaccineService.vaccinations = data;
+          });
         });
       };
 
       //Posts a new vaccine to the global list of vaccines
       scope.sendVaccine = function (newVaccine) {
         var packet = {name: newVaccine.name, duration: newVaccine.duration};
-        scope.vaccineService.addNewVaccine(1, packet);
+        scope.vaccineService.addNewVaccine(1, packet).then(function () {
+          var msg = 'Added a new vaccine to the DB';
+          scope.alertsService.add('success', msg);
+          scope.vaccineService.getAllVaccines(1).then(function (data) {
+            scope.allVaccines = data;
+          });
+        });
       };
     }
    };

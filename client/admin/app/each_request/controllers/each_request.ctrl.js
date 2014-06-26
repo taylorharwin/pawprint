@@ -22,8 +22,8 @@ angular.module('admin.eachRequest.controllers')
 
     //immediately gets all vaccines, which are necessary for display of the page
     $scope.vaccineService.getAllVaccines(1).then(function (data) {
-        $scope.vaccines = data;
-      });
+      $scope.allVaccines = data;
+    });
 
     //Variable for two-way binding with request status dropdown
     $scope.statusObj = {name: $scope.reqStatus};
@@ -44,18 +44,12 @@ angular.module('admin.eachRequest.controllers')
   //Change the status for a given request
     $scope.postUpdatedStatus = function (status) {
       var packet = {status: status.name};
-      console.log(packet);
+      console.log("Sending this",  packet);
       reqIDFactory.updateRequestStatus(1, $scope.reqID, packet).then(function () {
         $scope.statusObj.name = status.name;
+        var msg = 'Status updated to ' + $scope.statusObj.name;
+        $scope.alertsService.add('success', msg);
       });
-    };
-
-//Array containing all alerts
-    $scope.alerts = [];
-
-     //Function to remove any one alert (Admins may have multiple alerts on screen for any requests);
-    $scope.closeAlert = function (index) {
-      $scope.alerts.splice(index, 1);
     };
 
   });

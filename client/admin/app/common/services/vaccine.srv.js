@@ -5,6 +5,7 @@
 angular.module('admin.common.services')
   .service('vaccineService', function (Restangular) {
 
+
   function getAllVaccines(adminID) {
     return Restangular.one('admin', adminID).all('vaccines').getList();
   }
@@ -33,7 +34,7 @@ angular.module('admin.common.services')
   }
 
 
-
+  this.vaccinations = [];
   this.getAllVaccines = getAllVaccines;
   this.addNewVaccine = addNewVaccine;
   this.getAllVaccinationRecords = getAllVaccinationRecords;

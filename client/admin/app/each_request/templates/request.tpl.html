@@ -5,7 +5,7 @@
           <h2>Pawprint Admin</h2>
         </div>
         <div class="col-md-8">
-          <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+          <alert ng-repeat="alert in alertsService.alerts" type="{{alert.type}}" close="alertsService.close()">{{alert.msg}}</alert>
         </div>
         <div class="right">
           <button ui-sref="app.allRequests" class="btn btn-large btn-info">Back to All Requests</button>
@@ -45,7 +45,7 @@
                 
            </span>
       </div>
-      
+
   </div>
 
 

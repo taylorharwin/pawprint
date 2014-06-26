@@ -8,7 +8,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="record in vaccinations">
+      <tr ng-repeat="record in vaccineService.vaccinations"ng-model="vaccineService.vaccinations">
           <td>{{record.vaccName}}</td>
           <td>{{record.dateAdministered}}</td>
           <td>{{record.dateExpired}}</td>
