@@ -20,6 +20,11 @@ angular.module('admin.eachRequest.controllers')
     $scope.statusCodes = statusCodeConst;
     $scope.setClassOnRequest = reqIDFactory.setClassforStatus;
 
+    //immediately gets all vaccines, which are necessary for display of the page
+    $scope.vaccineService.getAllVaccines(1).then(function (data) {
+        $scope.vaccines = data;
+      });
+
     //Variable for two-way binding with request status dropdown
     $scope.statusObj = {name: $scope.reqStatus};
 
