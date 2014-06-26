@@ -12,22 +12,19 @@ angular.module('user', [
   'user.main',
   'user.pet',
   'user.profile'
-]);
+  ])
 
-angular.module('user')
-
-  .config(function (RestangularProvider, $locationProvider, $urlRouterProvider) {
+  .config(function ($locationProvider, $urlRouterProvider) {
     
     // routes to default state if none provided
     $urlRouterProvider.otherwise('/');
 
     // enable the HTML5 push/pop history API  
-    // disabled to run locally with SimpleHTTPServer
     // $locationProvider.html5Mode(true);
 
   })
 
-  // @NOTE Restangular simply falls back to _httpConfig
+  // @NOTE Restangular simply falls back to _httpConfig, so we edit it here
   .factory('authInterceptor', function ($rootScope, $q, AuthService) {
     return {
       request: function (config) {
@@ -50,6 +47,7 @@ angular.module('user')
     $httpProvider.interceptors.push('authInterceptor');
   })
 
+  // always allow access to $state and $stateParams from $rootScope
   .run(function ($rootScope, $state, $stateParams) {
     $rootScope.$state = $state;
     $rootScope.$stateParams = $stateParams;
