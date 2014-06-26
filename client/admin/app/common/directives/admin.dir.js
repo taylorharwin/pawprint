@@ -1,4 +1,7 @@
 'use strict';
+/*global angular*/
+
+
 
 angular.module('admin.common.directives')
 
@@ -12,12 +15,11 @@ angular.module('admin.common.directives')
       scope.editVet = function () {
         scope.editingVet = !scope.editingVet;
       };
-      scope.getStuff(1, 'vets', scope.vetID, function (data) {
+      scope.updateVetInfo = function () {
+      };
+      scope.vetService.getVetInfo(1, scope.vetID).then(function (data) {
         scope.vetData = data;
       });
-      scope.updateVetInfo = function () {
-        scope.vetData = angular.copy(scope.vetData);
-      };
     }
   };
   })
@@ -32,18 +34,12 @@ angular.module('admin.common.directives')
         scope.editUser = function () {
           scope.editingUser = !scope.editingUser;
         };
-        scope.getStuff(1, 'pets', scope.petID, function (data) {
+
+        scope.petService.getPetInfo(1, scope.petID).then(function (data) {
           scope.petData = data;
         });
-        scope.getStuff(1, 'users', scope.userID, function (data) {
-          scope.userData = data;
-        });
-        scope.updateUserInfo = function () {
-          scope.petData = angular.copy(scope.petData);
-          scope.userData = angular.copy(scope.userData);
-        };
       }
-   };
+    };
   })
 
   .directive('vaccRecord', function () {
@@ -52,7 +48,12 @@ angular.module('admin.common.directives')
       replace: 'true',
       templateUrl: 'app/each_request/templates/vacc-record.tpl.html',
       link: function (scope) {
-        scope.getAllVaccinesForRequest();
+        scope.vaccineService.getAllVaccinationRecords(1, scope.reqID).then(function (data) {
+          scope.formattingService.cleanDates.call(data);
+          scope.vaccineService.getVaccineNameforID(data, scope.vaccines);
+          scope.vaccinations = data;
+          console.log(scope.vaccinations);
+        });
       }
     };
   })
@@ -63,28 +64,23 @@ angular.module('admin.common.directives')
     replace: 'true',
     templateUrl: 'app/each_request/templates/contact-hist.tpl.html',
     link: function (scope) {
+      scope.userService.getContactLogs(1, scope.reqID).then(function (data) {
+        scope.contacts = data;
+      });
 
-      //Gets all contact records for a given Request ID
-      scope.updateContacts = function () {
-        scope.getStuff(1, 'requests', scope.reqID, function (data) {
-          scope.contacts = data;
-        }, 'logs');
+      scope.newContact = {
+        notes: '',
+        type: '',
+        created_at: '',
+        adminUser_id: 1
       };
-      scope.updateContacts();
-      scope.noteText = '';
-      scope.noteObj = {
-        notes: ''
-      };
-
-      //Posts a new note for a given Request ID
+      
       scope.postNote = function () {
-        scope.noteObj.notes = scope.noteText;
-        scope.postStuff(scope.noteObj, 1, 'requests', scope.reqID, function () {
-          scope.alerts.push({type: 'success', msg: 'Added a new note, ' + scope.noteText});
-          scope.updateContacts();
-        }, 'logs');
-      };
+        scope.newContact.created_at = new Date();
+        scope.userService.addContactLog(1, scope.reqID, scope.newContact).then(function () {
+        });
 
+      };
     }
    };
   })
@@ -95,47 +91,41 @@ angular.module('admin.common.directives')
     replace: 'true',
     templateUrl: 'app/each_request/templates/edit-vacc.tpl.html',
     link: function (scope) {
-      scope.getAllVaccines();
+
       scope.editingVacc = true;
-      scope.newVaccine = {name: '',
-        dateAdministered: '',
-        vaccine_id: ''
+      
+      scope.newVaccine = {
+        name: '',
+        duration: ''
       };
 
-      //Not a great practice, but using this constant to track validity of a new vaccine
-      scope.duration = 0;
-
-
+      scope.setVacc = function (name, id) {
+        scope.newVaccinationRecord = {
+          'pet_id': scope.petID,
+          'name': name,
+          'vaccine_id': id,
+          'dateAdministered': '',
+          'request_id': scope.reqID,
+        };
+      };
 
       scope.editVacc = function () {
         scope.editingVacc = !scope.editingVacc;
       };
 
-      //Sets properties on an object at the time when user selects name from dropdown
-      scope.setVacc = function (vac, id) {
-        scope.newVaccine.name = vac;
-        scope.newVaccine.vaccine_id = id;
-      };
-
-      //This adds an individual vaccination record for a given request
-      scope.postVacc = function (vaccineObject) {
-        var toPass = [{id: scope.newVaccine.vaccine_id, dateAdministered: scope.newVaccine.dateAdministered}];
-        scope.postStuff(toPass, 1, 'requests', scope.reqID, function () {
-          scope.alerts.push({type: 'success', msg: 'Added a new vaccination record'});
-          scope.getAllVaccinesForRequest();
-        }, 'vaccines');
+      scope.postVaccinationRecord = function (obj) {
+        delete obj.name;
+        scope.vaccineService.addNewVaccinationRecord(1, scope.reqID, obj).then(function () {
+        });
       };
 
       //Posts a new vaccine to the global list of vaccines
-      scope.sendVaccine = function (vac, duration) {
-        var packet = {name: vac, duration: scope.duration};
-        scope.postNewVaccine(packet, function () {
-          scope.getAllVaccines();
-          scope.alerts.push({type: 'success', msg: 'Added new vaccine,' + vac});
-          console.log(scope.alerts);
-        });
+      scope.sendVaccine = function (newVaccine) {
+        var packet = {name: newVaccine.name, duration: newVaccine.duration};
+        scope.vaccineService.addNewVaccine(1, packet);
       };
     }
    };
   });
+
  

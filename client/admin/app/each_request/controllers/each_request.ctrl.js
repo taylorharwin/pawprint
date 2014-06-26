@@ -1,12 +1,15 @@
 'use strict';
 
 angular.module('admin.eachRequest.controllers')
-  .controller('EachRequestCtrl', function ($scope, reqIDFactory, alertsService, formattingService, statusCodeConst, $http) {
+  .controller('EachRequestCtrl', function ($scope, reqIDFactory, userService, petService, vetService, alertsService, vaccineService, formattingService, statusCodeConst) {
 
-
-    //links scope to generic formatting Service
+    //links scope to generic Services
     $scope.formattingService = formattingService;
     $scope.alertsService = alertsService;
+    $scope.petService = petService;
+    $scope.vetService = vetService;
+    $scope.vaccineService = vaccineService;
+    $scope.userService = userService;
 
     //sets all values necessary for display of the page
     $scope.reqID = reqIDFactory.getRequestID();
@@ -17,72 +20,19 @@ angular.module('admin.eachRequest.controllers')
     $scope.statusCodes = statusCodeConst;
     $scope.setClassOnRequest = reqIDFactory.setClassforStatus;
 
+    //immediately gets all vaccines, which are necessary for display of the page
+    $scope.vaccineService.getAllVaccines(1).then(function (data) {
+        $scope.vaccines = data;
+      });
+
     //Variable for two-way binding with request status dropdown
-   
-    $scope.code = {status: ''};
+    $scope.statusObj = {name: $scope.reqStatus};
 
     //toggles whether or not a given dropdown menu is open
-
     $scope.status = {
       isopen: false
     };
-
-    //A generic GET function that gets used across all directives
-
-    $scope.getStuff = function (adminID, endPoint, extraID, callback, subPath) {
-      var path;
-      if (subPath) {
-        path = '/admin/' + adminID.toString() + '/' + endPoint.toString() + '/' + extraID.toString() + '/' + subPath.toString();
-      } else if (extraID) {
-        path = '/admin/' + adminID.toString() + '/' + endPoint.toString() + '/' + extraID.toString();
-      } else {
-        path = '/admin/' + adminID.toString() + '/' + endPoint.toString();
-      }
-      console.log(path);
-      $http.get(path)
-      .success(callback)
-      .error(function (data, status) {
-        console.log('error making request:', data, status);
-      });
-    };
-    //A generic POST function that gets used across all directives
-    $scope.postStuff = function (obj, adminID, endPoint, extraID, callback, subPath) {
-      var path;
-      if (subPath) {
-        path = '/admin/' + adminID.toString() + '/' + endPoint.toString() + '/' + extraID.toString() + '/' + subPath.toString();
-      } else if (extraID) {
-        path = '/admin/' + adminID.toString() + '/' + endPoint.toString() + '/' + extraID.toString();
-      } else {
-        path = '/admin/' + adminID.toString() + '/' + endPoint.toString();
-      }
-      console.log(path);
-      $http.post(path, obj)
-      .success(callback)
-      .error(function (data, status) {
-        console.log('error posting data', data, status);
-      });
-    };
-
-
-    // A Generic PUT functions that gets used across all directives
-    $scope.submitStuff = function (obj, adminID, endPoint, extraID, callback, subPath) {
-      var path;
-      if (subPath) {
-        path = '/admin/' + adminID.toString() + '/' + endPoint.toString() + '/' + extraID.toString() + '/' + subPath.toString();
-      } else if (extraID) {
-        path = '/admin/' + adminID.toString() + '/' + endPoint.toString() + '/' + extraID.toString();
-      } else {
-        path = '/admin/' + adminID.toString() + '/' + endPoint.toString();
-      }
-      console.log('posting to', path);
-      $http.put(path, obj)
-      .success(callback)
-      .error(function (data, status) {
-        console.log('error making request:', data, status);
-        $scope.alerts.push({type: 'danger', msg: 'There was an error trying to update'});
-
-      });
-    };
+ 
     //Takes an array of objects and a vacc name, returns the ID for that vaccine
     $scope.searchVaccinesArrayforID = function (arr, vaccineName) {
       for (var i = 0; i < arr.length; i++) {
@@ -91,45 +41,12 @@ angular.module('admin.eachRequest.controllers')
         }
       }
     };
-
-    //Gets all vaccines in database 
-    $scope.getAllVaccines = function () {
-      $http.get('/admin/1/vaccines')
-      .success(function (json) {
-        $scope.vaccines = json;
-        console.log(json);
-      })
-      .error(function (data, status) {
-        console.log('error making request:', data, status);
-      });
-    };
-
-
-    //Posts a new global vaccine to database
-    $scope.postNewVaccine = function (obj, callback) {
-      $http.post('/admin/1/vaccines', obj)
-      .success(callback)
-      .error(function (data, status) {
-        console.log('error making request:', data, status);
-      });
-    };
-
-    //Gets all vaccination records for a given request. Gets called on page-load, and when a new record is added
-    $scope.getAllVaccinesForRequest = function () {
-      $scope.getStuff(1, 'requests', $scope.reqID, function (data) {
-        $scope.vaccinations = $scope.formattingService.cleanDates.call(data);
-        $scope.formattingService.addVaccineNames.call($scope.vaccinations, $scope.vaccines);
-      }, 'vaccines');
-    };
-      
   //Change the status for a given request
-    $scope.postUpdatedStatus = function (name) {
-      $scope.code.status = name;
-      console.log($scope.code);
-      $scope.submitStuff($scope.code, 1, 'requests', $scope.reqID, function () {
-        console.log('success!');
-        $scope.alerts.push({ type: 'success', msg: 'Updated status to ' +  $scope.code.status});
-        $scope.reqStatus = $scope.code.status;
+    $scope.postUpdatedStatus = function (status) {
+      var packet = {status: status.name};
+      console.log(packet);
+      reqIDFactory.updateRequestStatus(1, $scope.reqID, packet).then(function () {
+        $scope.statusObj.name = status.name;
       });
     };
 

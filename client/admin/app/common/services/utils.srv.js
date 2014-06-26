@@ -1,11 +1,18 @@
 'use strict';
 
 angular.module('admin.common.services')
-  .factory('reqIDFactory', function () {
+  .factory('reqIDFactory', function (Restangular) {
 
-    var data = { requestID: '', requestStatus: '', userID: '', petID: '', vetID: ''};
+    var data = {requestID: '', requestStatus: '', userID: '', petID: '', vetID: ''};
 
     return {
+
+      updateRequestStatus: function (adminID, reqID, data) {
+        return Restangular.one('admin', adminID).one('requests', reqID).put(data);
+      },
+      getAllRequests: function (adminID) {
+        return Restangular.one('admin', adminID).all('requests').getList();
+      },
       getRequestID: function () {
         return data.requestID;
       },
@@ -31,7 +38,6 @@ angular.module('admin.common.services')
         data.userID = userID;
       },
       getVetID: function () {
-        console.log(data);
         return data.vetID;
       },
       setVetID: function (vetID) {
@@ -60,7 +66,7 @@ angular.module('admin.common.services')
   
 .service('formattingService', function () {
 
-  //A function to make date objects into formatted date strings
+  //A function to turn date objects into formatted date strings
   this.cleanDates = function () {
     return angular.forEach(this, function (item) {
       if (item.created_at) {
@@ -85,7 +91,6 @@ angular.module('admin.common.services')
       angular.forEach(allVaccines, function (vaccine) {
         if (vaccine.id === ID) {
           vaccinationRecord.name = vaccine.name;
-          console.log(vaccinationRecord);
         }
       });
     });
