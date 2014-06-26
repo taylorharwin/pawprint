@@ -55,15 +55,10 @@ var get = {
   }),
 
   pdfid: function(req, res) {
-    // grab pdfid from request URL
     var pdfid = req.params.pdfid;
     var requestid = req.params.requestid;
-
-    // retrieve pdf based on pdfid
     var model = new PdfRecord().query({where: {id: pdfid, request_id: requestid}});
-    // Get all objects that match the query
     model.fetch().then(function(pdf) {
-      // Iterate through the collection to exclude private properties
       var path = pdf.get('link');
       res.sendfile(path);
     }).catch(function(err) {
@@ -81,18 +76,29 @@ var post = {
   petVaccine: function(req, res) {
     var requestid = req.params.requestid;
     var vaccines = req.body;
-
     // search for the request with the desired request id
     Request.forge({id: requestid}).fetch()
       .then(function(request){
         var PetVaccines = db.Collection.extend({model: Pet_Vaccine});
         return PetVaccines.forge(vaccines).mapThen(function(model){
-          model.set({
-            request_id: req.params.requestid,
-            pet_id: request.attributes.pet_id
-            // TODO set date of expiration
+          var startDate = model.get('dateAdministered');
+
+          return Vaccine.forge({id: model.get('vaccine_id')}).fetch().then(function(vaccine) {
+            var duration = vaccine.get('duration');
+            var endDate;
+            console.log(duration);
+            if (duration) {
+              date = new Date(startDate);
+              endDate = new Date(date.setDate(date.getDate() + duration));
+              endDate = endDate.getFullYear() + '-' + ("0" + (endDate.getMonth() + 1)).slice(-2) + '-' + ("0" + endDate.getDate()).slice(-2);
+            }
+            model.set({
+              request_id: req.params.requestid,
+              pet_id: request.attributes.pet_id,
+              dateExpired: endDate
+            });
+            return model.save();
           });
-          return model.save();
         });
       }).then(function(collection) {
         res.send(201, collection);
