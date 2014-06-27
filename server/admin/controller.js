@@ -82,7 +82,6 @@ var post = {
         var PetVaccines = db.Collection.extend({model: Pet_Vaccine});
         return PetVaccines.forge(vaccines).mapThen(function(model){
           var startDate = model.get('dateAdministered');
-
           return Vaccine.forge({id: model.get('vaccine_id')}).fetch().then(function(vaccine) {
             var duration = vaccine.get('duration');
             var endDate;
@@ -104,18 +103,14 @@ var post = {
         res.send(201, collection);
       });
   },
-
   vaccine: Utils.creator(Vaccine),
-
   log: Utils.creator(ContactHistory, {params: {
     adminUser_id: 'adminid',
     request_id: 'requestid'
   }}),
-
   vetContact: Utils.creator(VetContact, {params: {
     vet_id: 'vetid'
   }}),
-
   pdf: function(req, res) {
     var requestid = req.params.requestid;
     var pdf = req.files.file;
@@ -140,7 +135,30 @@ var post = {
 
 var put = {
   log          : Utils.updater(ContactHistory, {id: 'logid'}),
-  petVaccine   : Utils.updater(Pet_Vaccine, {id: 'vaccineid'}),
+  petVaccine   : function(req, res) {
+    var requestid = req.params.requestid;
+    var petvaccineid = req.params.vaccineid;
+    Pet_Vaccine.forge({id: petvaccineid}).fetch().then(function(model) {
+      return model.save(req.body, {patch: true});
+    }).then(function(model) {
+      var startDate = model.get('dateAdministered');
+      return Vaccine.forge({id: model.get('vaccine_id')}).fetch().then(function(vaccine) {
+        var duration = vaccine.get('duration');
+        var endDate;
+        if (duration) {
+          date = new Date(startDate);
+          endDate = new Date(date.setDate(date.getDate() + duration));
+          endDate = endDate.getFullYear() + '-' + ("0" + (endDate.getMonth() + 1)).slice(-2) + '-' + ("0" + endDate.getDate()).slice(-2);
+        }
+        return model.save({dateExpired: endDate}, {patch: true});
+      }).then(function(model) {
+        res.send(200, model);
+      }).catch(function(err) {
+        console.error(err);
+        res.send(500, 'Internal server error');
+      });
+    });
+  },
   pdf          : Utils.updater(PdfRecord, {id: 'pdfid'}),
   vetContact   : Utils.updater(VetContact, {id: 'vetcontactid'}),
   request      : Utils.updater(Request, {id: 'requestid'})
