@@ -1,6 +1,6 @@
 angular.module('admin.common.services')
 
-  .service('CurrentAdminService', function (Restangular, AuthService) {
+  .service('CurrentAdminService', function (Restangular, AuthService, $rootScope) {
 
     var currentAdmin = null;
 
