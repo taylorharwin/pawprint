@@ -16,7 +16,7 @@ angular.module('admin', [
 
 .config(function ($locationProvider, $urlRouterProvider) {
 
-  $urlRouterProvider.otherwise('/admin');
+  $urlRouterProvider.otherwise('/');
 
   // $locationProvider.html5Mode(true);
 })
@@ -26,7 +26,7 @@ angular.module('admin', [
     request: function (config) {
       config.headers = config.headers || {};
       if (AuthService.getCookie().loggedin) {
-        config.headers.Authorization = 'Bearer' + AuthService.getCookie().token;
+        config.headers.Authorization = 'Bearer ' + AuthService.getCookie().token;
       }
       return config;
     },

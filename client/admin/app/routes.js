@@ -6,7 +6,7 @@ angular.module('admin')
   $stateProvider
     .state('public', {
       abstract: true,
-      url: '/admin',
+      url: '/',
       template: '<div ui-view class="realm"></div>'
     })
      .state('public.login', {
@@ -17,7 +17,7 @@ angular.module('admin')
 
     .state('app', {
       abstract: true,
-      url: '/admin/app',
+      url: '/app',
       template: '<div ui-view class="realm"></div>',
       resolve: {
         auth: function ($q, $rootScope, AuthService) {

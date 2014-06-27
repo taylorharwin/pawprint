@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('admin.allRequests.controllers')
-  .controller('AllRequestsCtrl', function ($scope, reqIDFactory, formattingService, $state) {
+  .controller('AllRequestsCtrl', function ($scope, reqIDFactory, formattingService, $state, AuthService) {
 
     $scope.formattingService = formattingService;
     $scope.reqIDFactory = reqIDFactory;
@@ -20,9 +20,10 @@ angular.module('admin.allRequests.controllers')
     };
 
 // Gets all existing requests for display on Main page. 
-    $scope.reqIDFactory.getAllRequests(1).then(function (data) {
+    $scope.reqIDFactory.getAllRequests(AuthService.getCookie().userId).then(function (data) {
       $scope.formattingService.cleanDates.call(data);
       $scope.requests = data;
     });
+
    
   });
