@@ -1,10 +1,12 @@
 'use strict';
 
 angular.module('admin.allRequests.controllers')
-  .controller('AllRequestsCtrl', function ($scope, reqIDFactory, formattingService, $state, AuthService) {
+  .controller('AllRequestsCtrl', function ($scope, reqIDFactory, formattingService, $state, CurrentAdminService, AuthService) {
 
     $scope.formattingService = formattingService;
     $scope.reqIDFactory = reqIDFactory;
+    $scope.AuthService = AuthService;
+    $scope.CurrentAdminService = CurrentAdminService;
 
 // adds CSS styling based on the status of the request
     $scope.setClassOnRequest = reqIDFactory.setClassforStatus;

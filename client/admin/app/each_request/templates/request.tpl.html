@@ -9,7 +9,7 @@
         </div>
         <div class="right">
           <button ui-sref="app.allRequests" class="btn btn-large btn-info">Back to All Requests</button>
-          <button class="btn btn-large btn-danger" ui-sref="public.login">Log Out</button>
+          <button class="btn btn-large btn-danger" ng-click="CurrentAdminService.exitAdmin()">Log Out</button>
         </div>
         </div>
     </div>
@@ -37,13 +37,9 @@
 						    </ul>
   				 </span>
 			</div>
-
-      <div class="btn-group" dropdown is-open="status.isopen">
-           <span class="dropdown">
-              <button  class="btn btn-large btn-default dropdown-toggle">Upload PDF<span class="caret"></span></button>
-              <div class="dropdown-menu"> Here is where you upload PDFs </div>
+        <button  class="btn btn-large btn-default dropdown-toggle">Upload PDF<span class="glyphicon glyphicon-plus"></span>
+        </button>
                 
-           </span>
       </div>
 
   </div>

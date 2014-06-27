@@ -1,7 +1,8 @@
 'use strict';
+/*global angular*/
 
 angular.module('admin.eachRequest.controllers')
-  .controller('EachRequestCtrl', function ($scope, reqIDFactory, userService, petService, vetService, alertsService, vaccineService, formattingService, statusCodeConst) {
+  .controller('EachRequestCtrl', function ($scope, reqIDFactory, CurrentAdminService, AuthService, userService, petService, vetService, alertsService, vaccineService, formattingService, statusCodeConst) {
 
     //links scope to generic Services
     $scope.formattingService = formattingService;
@@ -10,6 +11,8 @@ angular.module('admin.eachRequest.controllers')
     $scope.vetService = vetService;
     $scope.vaccineService = vaccineService;
     $scope.userService = userService;
+    $scope.AuthService = AuthService;
+    $scope.CurrentAdminService = CurrentAdminService;
 
     //sets all values necessary for display of the page
     $scope.reqID = reqIDFactory.getRequestID();
@@ -44,7 +47,7 @@ angular.module('admin.eachRequest.controllers')
   //Change the status for a given request
     $scope.postUpdatedStatus = function (status) {
       var packet = {status: status.name};
-      console.log("Sending this",  packet);
+      console.log('Sending this',  packet);
       reqIDFactory.updateRequestStatus(1, $scope.reqID, packet).then(function () {
         $scope.statusObj.name = status.name;
         var msg = 'Status updated to ' + $scope.statusObj.name;
