@@ -3,5 +3,6 @@
 angular.module('admin.login.controllers')
   .controller('LoginCtrl', function ($scope, CurrentAdminService) {
 
-    
+    $scope.CurrentAdminService = CurrentAdminService;
+
   });
