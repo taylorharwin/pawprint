@@ -2,7 +2,7 @@
 /*global angular*/
 
 angular.module('admin.eachRequest.controllers')
-  .controller('EachRequestCtrl', function ($scope, reqIDFactory, CurrentAdminService, AuthService, userService, petService, vetService, alertsService, vaccineService, formattingService, statusCodeConst) {
+  .controller('EachRequestCtrl', function ($scope, $http, reqIDFactory, CurrentAdminService, AuthService, userService, petService, vetService, alertsService, vaccineService, formattingService, statusCodeConst) {
 
     //links scope to generic Services
     $scope.formattingService = formattingService;
@@ -55,11 +55,32 @@ angular.module('admin.eachRequest.controllers')
       });
     };
 
-  $scope.filesChanged = function (elm){
-    $scope.files = elm.files;
-    $scope.$apply();
-    console.log($scope.files);
-  };
+    $scope.filesChanged = function (elm) {
+      $scope.files = elm.files;
+      $scope.$apply();
+    };
+
+    $scope.upload = function () {
+      console.log($scope.files);
+      var fd = new FormData();
+      angular.forEach($scope.files, function (file) {
+        fd.append('file', file);
+      });
+
+      $http({
+        method: 'POST',
+        url: '/admin/1/requests/' + $scope.reqID + '/pdfs',
+        data: fd,
+        headers: {
+            'Content-Type': undefined
+          },
+          transformRequest: angular.identity
+        })
+        .success(function (data) {
+          console.log('Sent:', data);
+        //toggles in order to show hidden button, using ng-show in upload.tpl.html
+        });
+    };
+
 
   });
-  
