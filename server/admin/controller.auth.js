@@ -10,7 +10,9 @@ var login = function (req, res) {
       } else {
         bcrypt.compare(req.body.password, admin.attributes.password, function (err, result) {
           if (result) {
-            var token = jwt.sign(admin, process.env.ADMIN_SECRET || 'adminsecret', {expiresInMinutes: 60*5});
+            // purely for testing purposes
+            var token = jwt.sign(admin, process.env.ADMIN_SECRET || 'usersecret', {expiresInMinutes: 60*5});
+            // var token = jwt.sign(admin, process.env.ADMIN_SECRET || 'adminsecret', {expiresInMinutes: 60*5});
             console.log(token);
             // admin.save({'jwt': token}, {patch: true});
             res.send(200, {token: token, id: admin.id});
