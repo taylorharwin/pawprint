@@ -15,45 +15,6 @@ var db                = require('../app/db_config.js'),
     VetContact        = require('../app/models/vetContact.js');
 
 var get = {
-  requests: Utils.getter(Request, {all: true}),
-
-  request: Utils.getter(Request, {
-    query: { id: 'requestid'}
-  }),
-
-  pet: Utils.getter(Pet, {
-    query: { id: 'petid' }
-  }),
-
-  user: Utils.getter(User, {
-    query: { id: 'userid' },
-    omit: ['password', 'salt', 'jwt']
-  }),
-
-  vet: Utils.getter(Vet, {
-    query: { id: 'vetid' }
-  }),
-
-  vetContacts: Utils.getter(VetContact, {
-    query: { vet_id: 'vetid' },
-    all: true
-  }),
-
-  petVaccines: Utils.getter(Pet_Vaccine, {
-    query: { request_id: 'requestid' },
-    all: true
-  }),
-
-  logs: Utils.getter(ContactHistory, {
-    query: { request_id: 'requestid' },
-    all: true
-  }),
-
-  pdfs: Utils.getter(PdfRecord, {
-    query: { request_id: 'requestid' },
-    all: true
-  }),
-
   pdfid: function(req, res) {
     var pdfid = req.params.pdfid;
     var requestid = req.params.requestid;
@@ -66,7 +27,36 @@ var get = {
       res.send(500, 'Internal server error');
     });
   },
-
+  requests: Utils.getter(Request, {all: true}),
+  request: Utils.getter(Request, {
+    query: { id: 'requestid'}
+  }),
+  pet: Utils.getter(Pet, {
+    query: { id: 'petid' }
+  }),
+  user: Utils.getter(User, {
+    query: { id: 'userid' },
+    omit: ['password', 'salt', 'jwt']
+  }),
+  vet: Utils.getter(Vet, {
+    query: { id: 'vetid' }
+  }),
+  vetContacts: Utils.getter(VetContact, {
+    query: { vet_id: 'vetid' },
+    all: true
+  }),
+  petVaccines: Utils.getter(Pet_Vaccine, {
+    query: { request_id: 'requestid' },
+    all: true
+  }),
+  logs: Utils.getter(ContactHistory, {
+    query: { request_id: 'requestid' },
+    all: true
+  }),
+  pdfs: Utils.getter(PdfRecord, {
+    query: { request_id: 'requestid' },
+    all: true
+  }),
   vaccines: Utils.getter(Vaccine, {
     all: true
   })
@@ -85,7 +75,6 @@ var post = {
           return Vaccine.forge({id: model.get('vaccine_id')}).fetch().then(function(vaccine) {
             var duration = vaccine.get('duration');
             var endDate;
-            console.log(duration);
             if (duration) {
               date = new Date(startDate);
               endDate = new Date(date.setDate(date.getDate() + duration));
@@ -103,14 +92,6 @@ var post = {
         res.send(201, collection);
       });
   },
-  vaccine: Utils.creator(Vaccine),
-  log: Utils.creator(ContactHistory, {params: {
-    adminUser_id: 'adminid',
-    request_id: 'requestid'
-  }}),
-  vetContact: Utils.creator(VetContact, {params: {
-    vet_id: 'vetid'
-  }}),
   pdf: function(req, res) {
     var requestid = req.params.requestid;
     var pdf = req.files.file;
@@ -130,11 +111,18 @@ var post = {
     } else {
       res.send(404, 'Sorry, please upload a .pdf under 3 MB');
     }
-  }
+  },
+  vaccine: Utils.creator(Vaccine),
+  log: Utils.creator(ContactHistory, {params: {
+    adminUser_id: 'adminid',
+    request_id: 'requestid'
+  }}),
+  vetContact: Utils.creator(VetContact, {params: {
+    vet_id: 'vetid'
+  }})
 };
 
 var put = {
-  log          : Utils.updater(ContactHistory, {id: 'logid'}),
   petVaccine   : function(req, res) {
     var requestid = req.params.requestid;
     var petvaccineid = req.params.vaccineid;
@@ -159,14 +147,13 @@ var put = {
       });
     });
   },
+  log          : Utils.updater(ContactHistory, {id: 'logid'}),
   pdf          : Utils.updater(PdfRecord, {id: 'pdfid'}),
   vetContact   : Utils.updater(VetContact, {id: 'vetcontactid'}),
   request      : Utils.updater(Request, {id: 'requestid'})
 };
 
 var destroy = {
-  petVaccine   : Utils.deleter(Pet_Vaccine, {id: 'vaccineid'}),
-  log          : Utils.deleter(ContactHistory, {id: 'logid'}),
   pdf          : function(req, res) {
     var pdfid = req.params.pdfid;
     var requestid = req.params.requestid;
@@ -180,6 +167,8 @@ var destroy = {
       res.send(500, 'Internal server error');
     });
   },
+  petVaccine   : Utils.deleter(Pet_Vaccine, {id: 'vaccineid'}),
+  log          : Utils.deleter(ContactHistory, {id: 'logid'}),
   vetContact   : Utils.deleter(VetContact, {id: 'vetcontactid'})
 };
 
