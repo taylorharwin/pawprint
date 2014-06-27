@@ -28,6 +28,10 @@ angular.module('admin.eachRequest.controllers')
       $scope.allVaccines = data;
     });
 
+    $scope.vetService.getPDFRecords(1, $scope.reqID).then(function (data) {
+      $scope.allPDFs = data;
+    });
+
     //Variable for two-way binding with request status dropdown
     $scope.statusObj = {name: $scope.reqStatus};
 
