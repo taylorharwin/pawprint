@@ -33,11 +33,11 @@
   				 <span class="dropdown">
       				<button  class="btn btn-large btn-default dropdown-toggle">Update Status<span class="caret"></span></button>
 						    <ul class="dropdown-menu">
-						      <li ng-repeat="code in statusCodes" ng-click="postUpdatedStatus(code)">{{code.name}}</li>
+						      <li ng-repeat="code in statusCodes" ng-click="postUpdatedStatus(code)"><a>{{code.name}}</a></li>
 						    </ul>
   				 </span>
 			</div>
-        <button  class="btn btn-large btn-default dropdown-toggle">Upload PDF<span class="glyphicon glyphicon-plus"></span>
+        <button  class="btn btn-large btn-default dropdown-toggle" ng-click = "vetService.openModal(small)">Upload PDF<span class="glyphicon glyphicon-plus"></span>
         </button>
                 
       </div>

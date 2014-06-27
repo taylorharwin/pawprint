@@ -55,5 +55,11 @@ angular.module('admin.eachRequest.controllers')
       });
     };
 
+  $scope.filesChanged = function (elm){
+    $scope.files = elm.files;
+    $scope.$apply();
+    console.log($scope.files);
+  };
+
   });
   
