@@ -1,0 +1,7 @@
+<h1>Upload PDF</h1>
+File must be in .pdf format, and must be under 10 MB <br><br>
+<form>
+  <input type="file" onchange="angular.element(this).scope().filesChanged(this)" multiple/>
+  <button ng-click="upload()">Upload</button>
+  <a class="button success" ng-show="sent" href="/#/mojsart/main">See updates</a>
+</form>

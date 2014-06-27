@@ -25,8 +25,14 @@ angular.module('admin.common.services')
         });
     }
 
+     function exitAdmin () {
+      AuthService.logout();
+      $rootScope.$state.go('public.login');
+    }
+
     this.setAdminId = setAdminId;
     this.getAdminId = getAdminId;
     this.login = login;
+    this.exitAdmin = exitAdmin;
 
   });
