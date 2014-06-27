@@ -61,7 +61,6 @@ angular.module('admin.eachRequest.controllers')
     };
 
     $scope.upload = function () {
-      console.log($scope.files);
       var fd = new FormData();
       angular.forEach($scope.files, function (file) {
         fd.append('file', file);
@@ -77,10 +76,12 @@ angular.module('admin.eachRequest.controllers')
           transformRequest: angular.identity
         })
         .success(function (data) {
-          console.log('Sent:', data);
-        //toggles in order to show hidden button, using ng-show in upload.tpl.html
+          console.log($scope.files);
+          console.log('Files Sent!:', data);
+        })
+        .error(function (data) {
+          console.log('something went wrong', data);
         });
     };
-
 
   });
