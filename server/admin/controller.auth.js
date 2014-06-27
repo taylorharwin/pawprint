@@ -32,11 +32,12 @@ var signup = function (req, res) {
   User.forge({email: req.body.email}).fetch()
     .then(function (admin) {
       if (admin) {
-        res.send(401, 'User already exists');
+        res.send(401, 'Admin already exists');
       } else {
         bcrypt.genSalt(10, function (err, salt) {
           bcrypt.hash(req.body.password, salt, function (err, hash) {
             req.body.password = hash;
+            req.body.type = 'admin';
             User.forge(req.body).save().then(function (newAdmin) {
               var token = jwt.sign(newAdmin, process.env.ADMIN_SECRET || 'adminsecret', {expiresInMinutes: 60*5});
               res.send(200, {token: token, id: newUser.id});
