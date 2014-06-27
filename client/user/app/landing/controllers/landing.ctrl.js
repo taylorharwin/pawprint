@@ -1,9 +1,8 @@
 angular.module('user.landing.controllers')
   
-  .controller('LandingCtrl', function ($scope) {
+  .controller('LandingCtrl', function ($scope, CurrentUserService) {
     console.log($scope);
 
-    //Function added to prove that tests work. Can remove
-    $scope.dogSpeak = 'woof';
+    $scope.CurrentUserService = CurrentUserService;
 
   });

@@ -2,10 +2,55 @@
   <div class="Aligner-item">
   <img src="assets/logo.png"/>
   </div>
+</div>
+
+
+<!-- LOGIN -->
+
+<div class="Aligner">
   <div class="Aligner-item">
-  <p>
-    <button ui-sref="^.login" class="btn btn-default btn-sm home-button">LOGIN</button>
-    <button ui-sref="^.signup" class="btn btn-default btn-sm">SIGNUP</button>
-  </p>
+    <h2>Login page</h2>
+    <form ng-submit="CurrentUserService.enterUser(login, 'login', enterError)">
+
+      <div class="form-group">
+        <label for="email">Email address</label>
+        <input ng-model="login.email" type="email" class="form-control" id="email" placeholder="apple@hackreactor.com">
+      </div>
+
+      <div class="form-group">
+        <label for="pass">Password</label>
+        <input ng-model="login.password" type="password" class="form-control" id="pass" placeholder="woofwoof">
+      </div>
+
+      <button type="submit" class="btn btn-default">LOGIN</button>
+
+      <alert ng-show="enterError" type="danger">Something's wrong here, please try again!</alert>
+
+    </form>
+  </div>
+</div>
+
+<!-- SIGNUP -->
+
+<div class="Aligner">
+  <div class="Aligner-item">
+    <h2>Signup page</h2>
+    <form ng-submit="CurrentUserService.enterUser(signup, 'signup', enterError)">
+
+      <div class="form-group">
+        <label for="email">Email address</label>
+        <input ng-model="signup.email" type="email" class="form-control" id="email" placeholder="apple@hackreactor.com">
+      </div>
+
+      <div class="form-group">
+        <label for="pass">Password</label>
+        <input ng-model="signup.password" type="password" class="form-control" id="pass" placeholder="woofwoof">
+      </div>
+
+      <button type="submit" class="btn btn-default">SIGNUP</button>
+
+      <alert ng-show="enterError" type="danger">Something's wrong here, please try again!</alert>
+
+    </form>
   </div>
 </div>

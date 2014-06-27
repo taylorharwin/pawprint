@@ -3,6 +3,7 @@ angular.module('user')
 
   // routing states, setting templates and controllers to use
   $stateProvider
+    // All public routes go through this state
     .state('public', {
       abstract: true,
       url: '/',
@@ -13,18 +14,6 @@ angular.module('user')
       url: '',
       templateUrl: 'app/landing/templates/landing.tpl.html',
       controller: 'LandingCtrl'
-    })
-
-    .state('public.login', {
-      url: 'login',
-      templateUrl: 'app/enter/templates/login.tpl.html',
-      controller: 'EnterCtrl'
-    })
-
-    .state('public.signup', {
-      url: 'signup',
-      templateUrl: 'app/enter/templates/signup.tpl.html',
-      controller: 'EnterCtrl'
     })
 
     //@NOTE resolve checks authentication everytime user tries to enter a restricted area
