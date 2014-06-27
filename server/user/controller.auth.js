@@ -35,6 +35,7 @@ var signup = function (req, res) {
         bcrypt.genSalt(10, function (err, salt) {
           bcrypt.hash(req.body.password, salt, function (err, hash) {
             req.body.password = hash;
+            req.body.type = 'user';
             User.forge(req.body).save().then(function (newUser) {
               var token = jwt.sign(newUser, process.env.USER_SECRET || 'usersecret', {expiresInMinutes: 60*5});
               res.send(200, {token: token, id: newUser.id});
