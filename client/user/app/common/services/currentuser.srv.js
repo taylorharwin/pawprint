@@ -34,7 +34,7 @@ angular.module('user.common.services')
 
     function exitUser () {
       AuthService.logout();
-      $rootScope.$state.go('public.home');
+      $rootScope.$state.go('public');
     }
 
     function updateUser () {
@@ -46,7 +46,7 @@ angular.module('user.common.services')
         console.log('deleted user');
         AuthService.logout();
         currentUser = null;
-        $rootScope.$state.go('public.home');
+        $rootScope.$state.go('public');
       }, function (error) {
         console.log(error);
       });

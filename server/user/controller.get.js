@@ -3,6 +3,7 @@ var User      = require('../app/models/user.js'),
     Request   = require('../app/models/request.js'),
     db        = require('../app/db_config.js'),
     Utils     = require('../app/utils.js'),
+    Validate  = require('../app/validate.js'),
     Q         = require('q');
 
 var getUser = Utils.getter(User, {
@@ -27,57 +28,44 @@ var getRequests = function(req, res) {
   var userid = req.params.userid;
   var petid = req.params.petid;
   
-  // check if user has permissions for this pet
-  db.knex('user_pet')
-    .where({
-      user_id: userid,
-      pet_id: petid,
-    })
-    .select()
-    .then(function(found) {
-      if(found.length === 0) {
-        res.send(401, 'Not Authorized');
-        throw new Error('Not Authorized');
-      }
-    }).then(function() {
+  Validate.userOwnsPet(userid, petid)
+  .then(function(valid) {
+    if (!valid) {
+      res.send(401, 'Not Authorized');
+    } else {
       db.knex('request')
         .where('pet_id', petid)
         .select()
         .then(function(requests) {
           res.send(200, requests);
         });
-    });
+    }
+  }).catch(function(err) {
+    console.error(err);
+    res.send(500, 'Internal server error'); // This has an error if 401 is already sent
+  });
 };
 
 var getVaccines = function(req, res) {
   var userid = req.params.userid;
   var petid = req.params.petid;
   
-  // check if user has permissions for this pet
-  db.knex('user_pet')
-    .where({
-      user_id: userid,
-      pet_id: petid,
-    })
-    .select()
-    .then(function(found) {
-      if(found.length === 0) {
-        res.send(401, 'Not Authorized');
-        throw new Error('Not Authorized');
-      }
-    })
-    // if they own the pet, query pet-vaccine table with petid
-    .then(function() {
+  Validate.userOwnsPet(userid, petid)
+  .then(function(valid) {
+    if (!valid) {
+      res.send(401, 'Not Authorized');
+    } else {
       db.knex('pet_vaccine')
         .where('pet_id', petid)
         .select()
         .then(function(vaccines) {
           res.send(200, vaccines);
         });
-    })
-    .catch(function(err) {
-      console.error(err);
-    });
+    }
+  }).catch(function(err) {
+    console.error(err);
+    res.send(500, 'Internal server error');
+  });
 };
 
 module.exports = exports = {

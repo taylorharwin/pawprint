@@ -7,7 +7,6 @@ angular.module('user', [
   'ngCookies',
 
   'user.common',
-  'user.enter',
   'user.landing',
   'user.main',
   'user.pet',
@@ -36,7 +35,7 @@ angular.module('user', [
       },
       responseError: function(rejection) {
         if (rejection.status === 401) {
-          $rootScope.$state.go('public.login');
+          $rootScope.$state.go('public'); // Will default to landing
         }
         return $q.reject(rejection);
       }
