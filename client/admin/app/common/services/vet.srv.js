@@ -7,6 +7,10 @@ angular.module('admin.common.services')
     return Restangular.one('admin', adminID).one('vets', vetID).get();
   }
 
+  function getPDFRecords(adminID, reqID) {
+    return Restangular.one('admin', adminID).one('requests', reqID).all('pdfs').getList();
+  }
+
   function editVetInfo(adminID, vetID, data) {
     return Restangular.one('admin', adminID).one('vets', vetID).put(data);
   }
@@ -34,6 +38,7 @@ angular.module('admin.common.services')
   this.getVetInfo = getVetInfo;
   this.editVetInfo = editVetInfo;
   this.openModal = openModal;
+  this.getPDFRecords = getPDFRecords;
      
 });
 

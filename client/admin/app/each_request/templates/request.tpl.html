@@ -18,7 +18,7 @@
 <div class="container" id="container">
 
 <div class="row">
-	<div class="col-md-3">
+	<div class="col-md-4">
 		<div class="panel panel-default">
 			<h4>Viewing Request: {{reqID}}</h4>
       <h4>Vet ID: {{vetID}}</h4>
@@ -28,7 +28,7 @@
 		</div>
 	</div>
 
-  <div class="col-md-6">
+  <div class="col-md-4">
   		<div class="btn-group" dropdown is-open="status.isopen">
   				 <span class="dropdown">
       				<button  class="btn btn-large btn-default dropdown-toggle">Update Status<span class="caret"></span></button>
@@ -40,6 +40,17 @@
         <button  class="btn btn-large btn-default dropdown-toggle" ng-click = "vetService.openModal(small)">Upload PDF<span class="glyphicon glyphicon-plus"></span>
         </button>
                 
+      </div>
+
+      <div class="col-md-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h2>PDFs on Record</h2>
+          </div>
+            <ul>
+              <li ng-repeat="pdf in allPDFs"><span>Link:  </span>{{pdf.link}}</li>
+            </ul>
+        </div>
       </div>
 
   </div>
