@@ -22,17 +22,21 @@ var callbackError = function(err) {
 
 // reads files from one location, writes to a new location, and deletes from old location
 var pdfSave = function(fromPath, toPath, cb) {
-  Q.nfcall(fs.readFile, fromPath)
-    .then(function(buffer) {
-      return Q.nfcall(fs.writeFile, toPath, buffer);
-    })
-    .then(function() {
-      return Q.nfcall(fs.unlink, fromPath);
-    })
-    .then(function(){
-      cb(toPath);
-    })
-    .fail(callbackError);
+  if (fromPath) {
+    Q.nfcall(fs.readFile, fromPath)
+      .then(function(buffer) {
+        if (buffer) {
+          return Q.nfcall(fs.writeFile, toPath, buffer);
+        }
+      })
+      .then(function() {
+        return Q.nfcall(fs.unlink, fromPath);
+      })
+      .then(function(){
+        cb(toPath);
+      })
+      .fail(callbackError);
+  }
 };
 
 module.exports = exports = {

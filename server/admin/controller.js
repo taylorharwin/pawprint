@@ -1,8 +1,9 @@
 var db                = require('../app/db_config.js'),
     Q                 = require('q'),
     Utils             = require('../app/utils.js'),
-    pdfHelpers        = require('../app/pdf_helpers.js'),
+    pdfHelpers        = require('./pdf_helpers.js'),
     nodePath          = require('path'),
+    fs                = require('fs'),
     // INCLUDE DATA MODELS FOR BOOKSHELF.JS
     ContactHistory    = require('../app/models/contactHistory.js'),
     PdfRecord         = require('../app/models/pdfRecord.js'),
@@ -103,10 +104,15 @@ var post = {
     if (bool) {
       var serverPath = nodePath.join(pdfHelpers.dirName, newfilename);
       pdfHelpers.pdfSave(pdf.path, serverPath, function(path){
-        Utils.creator(PdfRecord, {params: {
+        PdfRecord.forge({
           request_id: requestid,
           link: path
-        }});
+        }).save().then(function(model) {
+          res.send(201, model);
+        }).catch(function(err) {
+          console.error(err);
+          res.send(500, 'Internal server error');
+        });
       });
     } else {
       res.send(404, 'Sorry, please upload a .pdf under 3 MB');
