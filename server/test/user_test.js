@@ -61,6 +61,7 @@ module.exports = exports = function() {
     // TODO: more comprehensive for the arrays
     it('/user/:userid/pets', function(done) {
       _test('get', '/user/1/pets', 200, function(body) {
+        console.log('pets', body);
         expect(body).to.be.a('array');
         done();
       });
@@ -109,7 +110,7 @@ module.exports = exports = function() {
   });
 
   describe('DELETE', function() {
-    var userid, petid, userpetid;
+    var userid, petid, userpetid, requestid;
     before(function(done) {
       insert('user', 'id', {email: 'delet@e.com'})
         .then(function(id) {
@@ -121,52 +122,37 @@ module.exports = exports = function() {
           return insert('user_pet', 'id', {user_id: 1, pet_id: petid});
         })
         .then(function(id) {
+          userpetid = id[0];
           done();
         });
     });
 
-    after(function(done) {
-      db.knex('request')
-        .where('id', 1)
-        .update({status: 'pending'})
-        .then(function(){
+    before(function(done) {
+      insert('request', 'id', {user_id: 100, pet_id: 100, vet_id: 100, status: 'pending'})
+        .then(function(id) {
+          requestid = id[0];
+          console.log('request created', requestid);
           done();
         });
     });
 
     xit('/user/:userid', function(done) {
       _test('del', '/user/' + userid, 200, function(body) {
-        db.knex('user')
-          .where('user_id', userid)
-          .select()
-          .then(function(found) {
-            expect(found.status).to.equal('not active');
-            done();
-          });
+        expect(body.status).to.equal('not active');
+        done();
       });
     });
 
     xit('/user/:userid/pets/:petid', function(done) {
       _test('del', '/user/1/pets/' + petid, 200, function(body) {
-        db.knex('user_pet')
-          .where('id', userpetid)
-          .select()
-          .then(function(found) {
-            expect(found.length).to.equal(0);
-            done();
-          });
+        done();
       });
     });
 
     it('/user/:userid/pets/:petid/requests/:requestid', function(done) {
-      _test('del', '/user/1/pets/1/requests/1', 200, function(body) {
-        db.knex('request')
-          .where('id', 1)
-          .select()
-          .then(function(found) {
-            expect(found[0].status).to.equal('canceled');
-            done();
-          });
+      _test('del', '/user/1/pets/1/requests/' + requestid, 200, function(body) {
+        expect(body.status).to.equal('canceled');
+        done();
       });
     });
   });

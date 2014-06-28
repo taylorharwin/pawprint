@@ -1,4 +1,6 @@
 var Controller = require('./controller.js');
+var multiparty = require('connect-multiparty');
+var multipartMiddleware = multiparty();
 
 module.exports = exports = function (router) {
   // router.route('/:adminid/requests')
@@ -39,11 +41,13 @@ module.exports = exports = function (router) {
 
   // ROUTES FOR PDFS
   router.route('/:adminid/requests/:requestid/pdfs')
-    .get(Controller.get.pdfs)
-    .post(Controller.post.pdf);
+    .get(Controller.get.pdfs);
   router.route('/:adminid/requests/:requestid/pdfs/:pdfid')
     .put(Controller.put.pdf)
-    .delete(Controller.destroy.pdf);
+    .delete(Controller.destroy.pdf)
+    .get(Controller.get.pdfid);
+  // UPLOAD and SERVE PDFs
+  router.post('/:adminid/requests/:requestid/pdfs', multipartMiddleware, Controller.post.pdf);
 
   // ROUTES FOR VET CONTACTS
   router.route('/:adminid/vets/:vetid/contacts')

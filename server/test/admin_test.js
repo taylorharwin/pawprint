@@ -12,6 +12,7 @@ var userDataCallback = helpers.userDataCallback;
 var serverDataCallback = helpers.serverDataCallback;
 var reqUrl = helpers.reqUrl;
 var _test = helpers._test;
+var insert = helpers.insert;
 
 module.exports = exports = function() {
   describe('POST', function() {
@@ -49,17 +50,6 @@ module.exports = exports = function() {
         expect(body).to.be.a('array');
         expect(body.length).to.be.above(0);
         expect(!!body[0].pet_id).to.equal(true);
-        done();
-      }, input);
-    });
-
-    xit('/admin/:adminid/requests/:requestid/pdfs', function(done) {
-      var input = {
-        link: 'www.testpost.asd'
-      };
-      _test('post', '/admin/1/requests/1/pdfs', 201, function(body) {
-        expect(body.request_id).to.equal(1);
-        expect(body.link).to.equal('www.testpost.asd');
         done();
       }, input);
     });
@@ -171,10 +161,10 @@ module.exports = exports = function() {
   describe('PUT', function() {
     it('/admin/:adminid/requests/:requestid', function(done) {
       var input = {
-        status: 'Complete'
+        status: 'complete'
       };
-      _test('put', '/admin/1/requests/1', 200, function(body) {
-        expect(body.status).to.equal('Complete');
+      _test('put', '/admin/2/requests/2', 200, function(body) {
+        expect(body.status).to.equal('complete');
         done();
       }, input);
     });
@@ -225,27 +215,52 @@ module.exports = exports = function() {
     });
   });
 
-  // describe('DELETE', function() {
-  //   before(function(done) {
-  //     // create stuff
+  describe('DELETE', function() {
+    var logid, petvaccineid, pdfid, contactid;
 
-  //   });
+    before(function(done) {
+      // create stuff
+      insert('contactHistory', 'id', {adminUser_id: 1, request_id: 2, vetContact_id: 2, type: 'delete'})
+        .then(function(id) {
+          logid = id[0];
+          return insert('pet_vaccine', 'id', {pet_id: 100, vaccine_id: 100, request_id: 100});
+        })
+        .then(function(id) {
+          petvaccineid = id[0];
+          return insert('pdfRecord', 'id', {link: 'www.deletethis.com', request_id: 5});
+        })
+        .then(function(id) {
+          pdfid = id[0];
+          return insert('vetContact', 'id', {name: 'deletecontact'});
+        })
+        .then(function(id) {
+          contactid = id[0];
+          done();
+        });
+    });
 
-  //   it('/admin/:adminid/requests/:requestid/logs/:logid', function(done) {
-  //     request.del('/admin/1/requests/2/logs/:logid', function(err, req, body) {
+    it('/admin/:adminid/requests/:requestid/logs/:logid', function(done) {
+      _test('del', '/admin/1/requests/2/logs/' + logid, 200, function(body) {
+        done();
+      });
+    });
 
-  //     });
-  //   });
+    it('/admin/:adminid/requests/:requestid/vaccines/:vaccineid', function(done) {
+      _test('del', '/admin/100/requests/100/vaccines/' + petvaccineid, 200, function(body) {
+        done();
+      });
+    });
 
-  //   it('/admin/:adminid/requests/:requestid/logs/:logid', function(done) {
-  //     request.del('/admin/1/requests/2/logs/:logid', function(err, req, body) {
+    it('/admin/:adminid/requests/:requestid/pdfs/:pdfid', function(done) {
+      _test('del', '/admin/1/requests/5/pdfs/' + pdfid, 200, function(body) {
+        done();
+      });
+    });
 
-  //     });
-  //   });
-  // });
-
-  // /admin/:adminid/requests/:requestid/logs/logid  delete contact log
-  // /admin/:adminid/requests/:requestid/vaccines/:vaccineid delete vaccine
-  // /admin/:adminid/requests/:requestid/pdfs/:pdfid delete pdf, delete from cdn as well
-  // /admin/:adminid/vets/:vetid/contacts/:contactid delete vet contact
+    it('/admin/:adminid/vets/:vetid/contacts/:contactid', function(done) {
+      _test('del', '/admin/1/vets/1/contacts/' + contactid, 200, function(body) {
+        done();
+      });
+    });
+  });
 };
