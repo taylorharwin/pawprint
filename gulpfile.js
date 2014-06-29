@@ -14,8 +14,6 @@ var gulp    = require('gulp'),
     // uglify      = require('gulp-uglify'),
     // ngmin       = require('gulp-ngmin'),
     // gulpconcat  = require('gulp-concat'),
-    // clean       = require('gulp-clean'),
-    // minifycss   = require('gulp-minify-css');
    
 var paths = {
   scripts: [
