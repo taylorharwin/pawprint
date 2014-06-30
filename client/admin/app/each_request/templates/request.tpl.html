@@ -38,7 +38,6 @@
                  <ul class="dropdown-menu">
                    <li ng-repeat="code in statusCodes" ng-click="postUpdatedStatus(code)"><a>{{code.name}}</a></li>
                  </ul>
-              <button  class="btn btn-large btn-default dropdown-toggle" ng-click = "vetService.openModal(small)">Upload PDF</button> 
               <button ui-sref="app.allRequests" class="btn btn-large btn-info">Back to All Requests</button>    
                </span>
             
@@ -55,6 +54,8 @@
           <ol>
             <li ng-repeat="pdf in allPDFs"><span>Link:  </span>{{pdf.link}}</li>
           </ol>
+          <hr>
+          <button  class="btn btn-large btn-default dropdown-toggle" ng-click = "vetService.openModal(small)">Upload PDF</button> 
       </div>
   </div>
 
