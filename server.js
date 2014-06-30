@@ -6,7 +6,7 @@
  *
 */
 
-var app           = require('./app/app.js'),
+var app           = require('./server/app/app.js'),
     port          = app.get('port'),
     log           = 'Listening on ' + app.get('base url') + ':' + port;
 
