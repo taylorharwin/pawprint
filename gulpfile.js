@@ -29,7 +29,7 @@ var paths = {
           'client/admin/**/*.html'
           ],
   adminminify: { src: ['client/admin/app/**/*.js'], dest: 'client/admin', filename: 'adminscripts.min.js' },
-  // userminify: { src: ['client/user/app/**/*.js'], dest: 'client/user', filename: 'userscripts.min.js' },
+  userminify: { src: ['client/user/app/**/*.js'], dest: 'client/user', filename: 'userscripts.min.js' },
   styles: {
     css:  ['client/user/assets/**/*.css', 'client/admin/assets/**/*.css', 'client/**/*.css'],
     less: ['client/user/assets/**/*.less', 'client/admin/assets/**/*.less', 'client/**/*.less'],
@@ -127,6 +127,6 @@ gulp.task('watch', function () {
   gulp.watch(paths.scripts, ['lint']);
 });
 
-gulp.task('build', ['adminless', 'userless', 'css', 'lint', 'adminscripts']);
+gulp.task('build', ['adminless', 'userless', 'css', 'lint', 'adminscripts', 'userscripts']);
 
 gulp.task('default', ['build', 'live', 'serve', 'watch']);
