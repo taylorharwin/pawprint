@@ -1,0 +1,187 @@
+
+@import "variables.less";
+
+body {
+  font-family: 'Lato', sans-serif;
+}
+
+.center {
+  text-align: center;
+}
+
+.left {
+  text-align: left;
+}
+
+.right {
+  text-align: right;
+}
+
+.tagline {
+  font-family: 'Lato' !important;
+  font-style: italic;
+  font-weight: 100;
+  font-size: 20px;
+}
+
+.lead {
+  font-size: 27px;
+  padding-bottom: 17px
+}
+
+/* Images */
+
+.logo {
+  height: 80px;
+}
+
+.splash {
+  width: 360px;
+  position: absolute;
+  margin-top: 120px;
+  z-index: -1;
+}
+
+/* Mailchimp Signup */
+form {
+  margin-top: 10px;
+}
+
+.input-lg {
+  float:left;
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.33;
+  border-radius: 6px;
+}
+
+.input-left {
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  width: 213px;
+}
+
+.input-right {
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+  margin-right: 30px
+}
+
+/* Everything but the jumbotron gets side spacing for mobile first views */
+.header,
+.marketing,
+.footer {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+/* Make the masthead heading the same height as the navigation */
+.header h3 {
+  /*padding-bottom: 19px;*/
+  margin-top: -14px;
+  margin-bottom: 54px;
+  line-height: 40px;
+  font-size: 22px;
+  color: #979393;
+  letter-spacing: 2px;
+}
+
+/* Custom page footer */
+.footer {
+  padding-top: 19px;
+  color: #777;
+  border-top: 1px solid #e5e5e5;
+}
+
+/* Customize container */
+@media (min-width: 768px) {
+  .container {
+    max-width: 730px;
+  }
+}
+.container-narrow > hr {
+  margin: 30px 0;
+}
+
+/* Main marketing message and sign up button */
+.jumbotron {
+  text-align: center;
+  border-bottom: 1px solid #e5e5e5;
+}
+.jumbotron .btn {
+  padding: 14px 24px;
+  font-size: 21px;
+}
+
+/* Supporting marketing content */
+.marketing {
+  margin: 40px 0;
+}
+.marketing p + h4 {
+  margin-top: 28px;
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+  /* Remove the padding we set earlier */
+  .header,
+  .marketing,
+  .footer {
+    padding-right: 0;
+    padding-left: 0;
+  }
+  /* Space out the masthead */
+  .header {
+    margin-bottom: 30px;
+  }
+  /* Remove the bottom border on the jumbotron for visual effect */
+  .jumbotron {
+    border-bottom: 0;
+  }
+}
+
+// BEN
+
+.Aligner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.Aligner-item {
+  max-width: 50%;
+}
+
+.Aligner-item--top {
+  align-self: flex-start;
+}
+
+.Aligner-item--bottom {
+  align-self: flex-end;
+}
+
+.home-button {
+  margin: 10px 10px;
+}
+
+body {
+  width: 100%;
+  height: 500px;
+}
+
+.realm {
+  width: 100%;
+  height: 100%;
+}
+
+.form-control {
+  width: 300px;
+}
+
+.petImg {
+  height: 100px;
+  width: 100px;
+}
