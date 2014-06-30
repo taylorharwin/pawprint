@@ -28,19 +28,30 @@ var paths = {
           ],
   styles: {
     css:  ['client/user/assets/**/*.css', 'client/admin/assets/**/*.css', 'client/**/*.css'],
+    // usercss: ['client/user/assets/**/*.css'],
+    // admincss: ['client/admin/assets/**/*.css'],
     less: ['client/user/assets/**/*.less', 'client/admin/assets/**/*.less', 'client/**/*.less'],
-    dest: ['client/user/assets/styles', 'client/admin/assets/styles']
+    userless: ['client/user/assets/**/*.less'],
+    adminless: ['client/admin/assets/**/*.less'],
+    dest: ['client/user/assets/styles', 'client/admin/assets/styles'],
+    userdest: 'client/user/assets',
+    admindest: 'client/admin/assets'
   }
 };
-var build = ['less', 'css', 'lint'];
-
 
 gulp.task('less', function () {
-  gulp.src(paths.styles.less)
+  gulp.src(paths.styles.adminless)
     .pipe(less({
       paths: [ path.join(__dirname, 'less', 'includes') ]
     }))
-    .pipe(gulp.dest('client/assets/styles'))
+    .pipe(gulp.dest(paths.styles.admindest))
+    .pipe(refresh(client))
+    .pipe(notify({message: 'Less done'}));
+  gulp.src(paths.styles.userless)
+    .pipe(less({
+      paths: [ path.join(__dirname, 'less', 'includes') ]
+    }))
+    .pipe(gulp.dest(paths.styles.userdest))
     .pipe(refresh(client))
     .pipe(notify({message: 'Less done'}));
 });
@@ -89,6 +100,6 @@ gulp.task('watch', function () {
   gulp.watch(paths.scripts, ['lint']);
 });
 
-gulp.task('build', build);
+gulp.task('build', ['less', 'css', 'lint']);
 
 gulp.task('default', ['build', 'live', 'serve', 'watch']);
