@@ -28,6 +28,9 @@ angular.module('admin.eachRequest.controllers')
       $scope.allVaccines = data;
     });
 
+    //Initialize alerts as an empty array (for when there may have been alerts for a different request);
+    $scope.alertsService.alerts = [];
+
     $scope.vetService.getPDFRecords(1, $scope.reqID).then(function (data) {
       $scope.allPDFs = data;
     });
