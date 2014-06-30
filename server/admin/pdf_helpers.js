@@ -1,4 +1,4 @@
-var Q = require('Q');
+var Q = require('q');
 var fs = require('fs');
 var nodePath = require('path');
 
