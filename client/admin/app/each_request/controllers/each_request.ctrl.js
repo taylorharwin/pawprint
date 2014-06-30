@@ -24,14 +24,14 @@ angular.module('admin.eachRequest.controllers')
     $scope.setClassOnRequest = reqIDFactory.setClassforStatus;
 
     //immediately gets all vaccines, which are necessary for display of the page
-    $scope.vaccineService.getAllVaccines(1).then(function (data) {
+    $scope.vaccineService.getAllVaccines($scope.AuthService.getCookie().userId).then(function (data) {
       $scope.allVaccines = data;
     });
 
     //Initialize alerts as an empty array (for when there may have been alerts for a different request);
     $scope.alertsService.alerts = [];
 
-    $scope.vetService.getPDFRecords(1, $scope.reqID).then(function (data) {
+    $scope.vetService.getPDFRecords(($scope.AuthService.getCookie().userId), $scope.reqID).then(function (data) {
       $scope.allPDFs = data;
     });
 
@@ -55,7 +55,7 @@ angular.module('admin.eachRequest.controllers')
     $scope.postUpdatedStatus = function (status) {
       var packet = {status: status.name};
       console.log('Sending this',  packet);
-      reqIDFactory.updateRequestStatus(1, $scope.reqID, packet).then(function () {
+      reqIDFactory.updateRequestStatus(($scope.AuthService.getCookie().userId), $scope.reqID, packet).then(function () {
         $scope.statusObj.name = status.name;
         var msg = 'Status updated to ' + $scope.statusObj.name;
         $scope.alertsService.add('success', msg);
@@ -75,7 +75,7 @@ angular.module('admin.eachRequest.controllers')
 
       $http({
         method: 'POST',
-        url: '/admin/1/requests/' + $scope.reqID + '/pdfs',
+        url: '/admin/' + $scope.AuthService.getCookie().userId + '/requests/' + $scope.reqID + '/pdfs',
         data: fd,
         headers: {
             'Content-Type': undefined
