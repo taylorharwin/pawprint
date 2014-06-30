@@ -3,8 +3,8 @@ DS_Store
 _.DS_Store
 ._.DS_Store
 
-client/bower_components
+client/bower_components/
 # client/**/*.css
-server/test/seedData
+server/test/seedData/
 
 node_modules/
