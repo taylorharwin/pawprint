@@ -20,7 +20,7 @@ angular.module('user')
     .state('app', {
       abstract: true,
       url: '/app',
-      template: '<div ui-view class="container"></div>',
+      template: '<div ui-view class=""></div>',
       resolve: {
         auth: function ($q, $rootScope, AuthService) {
           var deferred = $q.defer();
