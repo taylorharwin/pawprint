@@ -15,6 +15,11 @@ angular.module('admin.common.directives')
       scope.editVet = function () {
         scope.editingVet = !scope.editingVet;
       };
+<<<<<<< HEAD
+=======
+      scope.updateVetInfo = function () {
+      };
+>>>>>>> bug fixes
       scope.vetService.getVetInfo((scope.AuthService.getCookie().userId), scope.vetID).then(function (data) {
         scope.vetData = data;
       });
