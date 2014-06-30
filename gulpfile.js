@@ -13,6 +13,7 @@ var gulp    = require('gulp'),
     stripDebug  = require('gulp-strip-debug'),
     uglify      = require('gulp-uglify'),
     ngmin       = require('gulp-ngmin'),
+    minifyCSS   = require('gulp-minify-css');
     gulpconcat  = require('gulp-concat');
    
 var paths = {
@@ -97,6 +98,12 @@ gulp.task('css', function () {
     .pipe(notify({message: 'CSS refreshed'}));
 });
 
+gulp.task('minify-css', function() {
+  gulp.src(paths.styles.css)
+    .pipe(minifyCSS())
+    .pipe(gulp.dest(paths.styles.userdest));
+});
+
 gulp.task('lint', function () {
   return gulp.src(paths.scripts)
     .pipe(plumber())
@@ -127,6 +134,6 @@ gulp.task('watch', function () {
   gulp.watch(paths.scripts, ['lint']);
 });
 
-gulp.task('build', ['adminless', 'userless', 'css', 'lint', 'adminscripts', 'userscripts']);
+gulp.task('build', ['adminless', 'userless', 'css', 'minify-css', 'lint', 'adminscripts', 'userscripts']);
 
 gulp.task('default', ['build', 'live', 'serve', 'watch']);
