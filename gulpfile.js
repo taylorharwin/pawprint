@@ -9,16 +9,18 @@ var gulp    = require('gulp'),
     list    = require('gulp-task-listing'),
     nodemon = require('gulp-nodemon'),
     lr_port = 35729,
-    less   = require('gulp-less');
-    // stripDebug  = require('gulp-strip-debug'),
-    // uglify      = require('gulp-uglify'),
-    // ngmin       = require('gulp-ngmin'),
-    // gulpconcat  = require('gulp-concat'),
+    less   = require('gulp-less'),
+    stripDebug  = require('gulp-strip-debug'),
+    uglify      = require('gulp-uglify'),
+    ngmin       = require('gulp-ngmin'),
+    gulpconcat  = require('gulp-concat');
    
 var paths = {
   scripts: [
             '!client/bower_components',
             '!client/test',
+            '!client/user/app/**/*.min.js',
+            '!client/admin/app/**/*.min.js',
             'client/user/app/**/*.js',
             'client/admin/app/**/*.js'
             ],
@@ -26,10 +28,10 @@ var paths = {
           'client/user/**/*.html',
           'client/admin/**/*.html'
           ],
+  adminminify: { src: ['client/admin/app/**/*.js'], dest: 'client/admin', filename: 'adminscripts.min.js' },
+  // userminify: { src: ['client/user/app/**/*.js'], dest: 'client/user', filename: 'userscripts.min.js' },
   styles: {
     css:  ['client/user/assets/**/*.css', 'client/admin/assets/**/*.css', 'client/**/*.css'],
-    // usercss: ['client/user/assets/**/*.css'],
-    // admincss: ['client/admin/assets/**/*.css'],
     less: ['client/user/assets/**/*.less', 'client/admin/assets/**/*.less', 'client/**/*.less'],
     userless: ['client/user/assets/**/*.less'],
     adminless: ['client/admin/assets/**/*.less'],
@@ -39,15 +41,40 @@ var paths = {
   }
 };
 
-gulp.task('less', function () {
-  gulp.src(paths.styles.adminless)
+gulp.task('adminscripts', function() {
+  return gulp.src(paths.adminminify.src)
+    .pipe(plumber())
+    // .pipe(stripDebug())
+    .pipe(ngmin({dynamic: false}))
+    .pipe(uglify())
+    .pipe(gulpconcat(paths.adminminify.filename))
+    .pipe(gulp.dest(paths.adminminify.dest))
+    .pipe(notify({message: 'Admin Distribution code compiled'}));
+});
+
+gulp.task('userscripts', function() {
+  return gulp.src(paths.userminify.src)
+    .pipe(plumber())
+    // .pipe(stripDebug())
+    .pipe(ngmin({dynamic: false}))
+    .pipe(uglify())
+    .pipe(gulpconcat(paths.userminify.filename))
+    .pipe(gulp.dest(paths.userminify.dest))
+    .pipe(notify({message: 'User Distribution code compiled'}));
+});
+
+gulp.task('adminless', function () {
+  return gulp.src(paths.styles.adminless)
     .pipe(less({
       paths: [ path.join(__dirname, 'less', 'includes') ]
     }))
     .pipe(gulp.dest(paths.styles.admindest))
     .pipe(refresh(client))
     .pipe(notify({message: 'Less done'}));
-  gulp.src(paths.styles.userless)
+});
+
+gulp.task('userless', function () {
+  return gulp.src(paths.styles.userless)
     .pipe(less({
       paths: [ path.join(__dirname, 'less', 'includes') ]
     }))
@@ -100,6 +127,6 @@ gulp.task('watch', function () {
   gulp.watch(paths.scripts, ['lint']);
 });
 
-gulp.task('build', ['less', 'css', 'lint']);
+gulp.task('build', ['adminless', 'userless', 'css', 'lint', 'adminscripts']);
 
 gulp.task('default', ['build', 'live', 'serve', 'watch']);
