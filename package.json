@@ -1,6 +1,22 @@
 {
   "name": "pawprint",
   "version": "0.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "./node_modules/bower/bin/bower install",
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": "0.10.x"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/getpawprint/pawprint/issues"
+  },
+  "homepage": "https://github.com/getpawprint/pawprint",
   "dependencies": {
     "express": "*",
     "q": "*",
@@ -32,14 +48,6 @@
     "gulp-uglify": "^0.3.1",
     "gulp-ngmin": "^0.3.0"
   },
-  "engines": {
-    "node": "0.10.x"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "./node_modules/bower/bin/bower install",
-    "start": "node server.js"
-  },
   "devDependencies": {
     "chai": "^1.9.1",
     "gulp-minify-css": "^0.3.6",
@@ -50,9 +58,5 @@
     "karma-requirejs": "~0.2.2",
     "mocha": "~1.20.1",
     "requirejs": "~2.1.14"
-  },
-  "description": "",
-  "main": "server.js",
-  "author": "",
-  "license": "ISC",
+  }
 }
