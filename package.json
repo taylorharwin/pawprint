@@ -32,6 +32,10 @@
     "gulp-uglify": "^0.3.1",
     "gulp-ngmin": "^0.3.0"
   },
+
+  "engines": {
+    "node": "0.10.x"
+  },
   "scripts": {
     "postinstall": "./node_modules/bower/bin/bower install",
     "start": "node server.js"
