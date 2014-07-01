@@ -15,11 +15,18 @@ angular.module('admin.common.directives')
       scope.editVet = function () {
         scope.editingVet = !scope.editingVet;
       };
-      scope.updateVetInfo = function () {
-      };
       scope.vetService.getVetInfo((scope.AuthService.getCookie().userId), scope.vetID).then(function (data) {
         scope.vetData = data;
       });
+
+      // Can use this function to update vet info from admin panel, if needed.
+      // scope.updateVetInfo = function (data) {
+      //   console.log(scope.vetData);
+      //   scope.vetService.editVetInfo((scope.AuthService.getCookie().userId), scope.vetID, data).then(function () {
+      //     var msg = 'Updated Vet Info';
+      //     scope.alertsService.add('success', msg);
+      //   });
+      // };
     }
   };
   })
@@ -40,7 +47,7 @@ angular.module('admin.common.directives')
           scope.petData = data;
         });
       }
-    };
+      };
   })
 
   .directive('vaccRecord', function () {
