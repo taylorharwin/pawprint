@@ -1,11 +1,13 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h2 class="panel-title">Contact History </h2>
+    <h2 class="panel-title">User Correspondance </h2>
   </div>
 
 <div class="panel-body">
+  <h5> Account note</h5>
       <textarea id="note" class="form-control" ng-model="newContact.notes" rows="3"></textarea>
-      Contact Type: 
+  <h5>Contact Type:</h5>
+   <input id="contactType" name="contact" type="text" class="form-control med" ng-model="newContact.type" class="input-small">
 
     <table class="table">
       <thead>
@@ -21,7 +23,6 @@
       </tr>
     </tbody>
   </table>
-    <input id="contactType" name="contact" type="text" class="form-control med" ng-model="newContact.type" class="input-small">
     <button class="btn btn-large btn-info" ng-click='postNote()'>Leave a Note</button>
   </div>
 </div>
