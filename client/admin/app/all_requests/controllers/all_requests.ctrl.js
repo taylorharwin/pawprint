@@ -30,7 +30,5 @@ angular.module('admin.allRequests.controllers')
       angular.forEach(data, function(req){
         $scope.stats[req.status]++;
       });
-      console.log($scope.stats);
     });
-    
   });
