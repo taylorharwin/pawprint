@@ -28,8 +28,8 @@ angular.module('user', [
     return {
       request: function (config) {
         config.headers = config.headers || {};
-        if (AuthService.getCookie().loggedin) {
-          config.headers.Authorization = 'Bearer ' + AuthService.getCookie().token;
+        if (AuthService.getCookie().get('loggedin')) {
+          config.headers.Authorization = 'Bearer ' + AuthService.getCookie().get('token');
         }
         return config;
       },

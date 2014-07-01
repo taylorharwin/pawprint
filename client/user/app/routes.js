@@ -24,7 +24,7 @@ angular.module('user')
       resolve: {
         auth: function ($q, $rootScope, AuthService) {
           var deferred = $q.defer();
-          if (!AuthService.getCookie().loggedin) {
+          if (!AuthService.getCookie().get('loggedin')) {
             $rootScope.$state.go('public.login');
           } else {
             deferred.resolve();

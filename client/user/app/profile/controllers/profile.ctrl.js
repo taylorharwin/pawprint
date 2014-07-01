@@ -3,7 +3,7 @@ angular.module('user.profile.controllers')
     console.log($scope);
 
     $scope.CurrentUserService = CurrentUserService;
-    CurrentUserService.retrieveUser(AuthService.getCookie().userId)
+    CurrentUserService.retrieveUser(AuthService.getCookie().get('userId'))
       .then(function (user){
         $scope.user = user;
       });

@@ -2,7 +2,7 @@ angular.module('user.pet.controllers')
 
   .controller('UpdatePetCtrl', function ($scope, AuthService, $modalInstance, pet) {
 
-    var userId = AuthService.getCookie().userId;
+    var userId = AuthService.getCookie().get('userId');
     var petId = pet.id;
     $scope.request = {
       user_id: userId,
