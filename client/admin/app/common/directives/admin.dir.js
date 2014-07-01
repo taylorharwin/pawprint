@@ -16,10 +16,13 @@ angular.module('admin.common.directives')
         scope.editingVet = !scope.editingVet;
       };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
       scope.updateVetInfo = function () {
       };
 >>>>>>> bug fixes
+=======
+>>>>>>> remove unused function
       scope.vetService.getVetInfo((scope.AuthService.getCookie().userId), scope.vetID).then(function (data) {
         scope.vetData = data;
       });
