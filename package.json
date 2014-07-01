@@ -1,7 +1,7 @@
 {
   "name": "pawprint",
   "version": "0.0.0",
-  "description": "",
+  "description": "pawprint ========",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -58,5 +58,9 @@
     "karma-requirejs": "~0.2.2",
     "mocha": "~1.20.1",
     "requirejs": "~2.1.14"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gnauhnoj/pawprint.git"
   }
 }
