@@ -109,4 +109,9 @@ body {
 .title {
   color:#fff;
   padding-left:20px;
+  padding-top:5px;
+}
+
+.title a {
+  color:#fff;
 }

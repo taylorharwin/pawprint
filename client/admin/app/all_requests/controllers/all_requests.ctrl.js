@@ -28,5 +28,6 @@ angular.module('admin.allRequests.controllers')
       $scope.requests = data;
     });
 
+  
    
   });
