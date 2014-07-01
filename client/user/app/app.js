@@ -35,7 +35,7 @@ angular.module('user', [
       },
       responseError: function(rejection) {
         if (rejection.status === 401) {
-          $rootScope.$state.go('public'); // Will default to landing
+          $rootScope.$state.go('public.landing');
         }
         return $q.reject(rejection);
       }
