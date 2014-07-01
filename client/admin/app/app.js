@@ -6,7 +6,7 @@ angular.module('admin', [
   'ui.bootstrap',
   'restangular',
   'ngCookies',
-
+    
   'admin.common',
   'admin.login',
   'admin.allRequests',

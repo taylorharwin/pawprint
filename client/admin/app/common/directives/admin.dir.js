@@ -36,6 +36,7 @@ angular.module('admin.common.directives')
         };
 
         scope.petService.getPetInfo((scope.AuthService.getCookie().userId), scope.petID).then(function (data) {
+          data.birthdate = (new Date(data.birthdate)).toLocaleDateString();
           scope.petData = data;
         });
       }

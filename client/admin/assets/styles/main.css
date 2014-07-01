@@ -89,11 +89,15 @@ body {
 .sidebar{
   position: fixed;
   background-color: #DCDDD8;
-  left:11px;
+  left:0px;
   top:65px;
   overflow: auto;
   height:100%;
 
+}
+
+.sidebar div {
+  padding-left:10px;
 }
 
 .main-content{
@@ -114,3 +118,43 @@ body {
 .title a {
   color:#fff;
 }
+
+.circles{
+  margin-left:100px;
+  margin-right:100px;
+  margin-top:;
+}
+
+.circles h5 {
+    width:140px;
+    height:140px;
+    border-radius:140px;
+    font-size:50px;
+    color:black;
+    line-height:50px;
+    text-align:center;
+    background:red;
+    margin-left:20px;
+    padding-top:20px;
+    margin-left:100px;
+}
+
+.new {
+  background-color:#428bca;
+}
+
+.pending {
+  background-color:#5bc0de;
+}
+.complete {
+  background-color:#999;
+}
+.cancelled {
+  background-color:#f0ad4e;
+}
+
+.jumbotron {
+  padding-top:100px;
+  padding-left:80px;
+}
+
