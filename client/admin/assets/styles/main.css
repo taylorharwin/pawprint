@@ -1,4 +1,3 @@
-
 .Aligner {
   display: flex;
   align-items: center;
@@ -52,8 +51,8 @@ body {
     width: 100%;
     top: 0;
     position:fixed;
-    top:0px;
-    left:0px;
+    top:0;
+    left:0;
     z-index:1000;
 }
 
@@ -90,7 +89,6 @@ body {
 .sidebar{
   position: fixed;
   background-color: #DCDDD8;
-  left:0px;
   left:11px;
   top:65px;
   overflow: auto;
@@ -98,12 +96,8 @@ body {
 
 }
 
-.sidebar div {
-  padding-left:10px;
-}
-
 .main-content{
-  margin-left:0px;
+  margin-left:0;
   left:400px;
 }
 
@@ -114,52 +108,4 @@ body {
 .title {
   color:#fff;
   padding-left:20px;
-  padding-top:5px;
 }
-
-.title a {
-  color:#fff;
-}
-
-.circles{
-  margin-left:100px;
-  margin-right:100px;
-  margin-top:;
-}
-
-.circles h5 {
-    width:140px;
-    height:140px;
-    border-radius:140px;
-    font-size:50px;
-    color:black;
-    line-height:50px;
-    text-align:center;
-    background:red;
-    margin-left:20px;
-    padding-top:20px;
-    margin-left:100px;
-}
-
-.new {
-  background-color:#428bca;
-}
-
-.pending {
-  background-color:#5bc0de;
-}
-.complete {
-  background-color:#999;
-}
-.cancelled {
-  background-color:#f0ad4e;
-}
-
-.jumbotron {
-  padding-top:100px;
-  padding-left:10px;
-}
-
-
-
-

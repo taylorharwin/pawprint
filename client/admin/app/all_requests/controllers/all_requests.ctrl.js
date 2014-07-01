@@ -32,5 +32,5 @@ angular.module('admin.allRequests.controllers')
       });
       console.log($scope.stats);
     });
-
+    
   });
