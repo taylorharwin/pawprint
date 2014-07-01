@@ -1,0 +1,75 @@
+@import "variables.less";
+
+body {
+  padding-top: 70px;
+}
+
+.brand-logo {
+  height:50px;
+}
+
+// alignment
+.center {
+  text-align: center;
+}
+
+.left {
+  text-align: left;
+}
+
+.right {
+  text-align: right;
+}
+
+// colors
+.brand {
+  color: @brand;
+}
+.primaryLight {
+  color: @primaryLight;
+}
+.primaryMed {
+  color: @primaryMed;
+}
+.primaryDark {
+  color: @primaryDark;
+}
+.highlight {
+  color: @highlight;
+}
+.white {
+  color: @white;
+}
+
+//Buttons
+.btn {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.btn-brand {
+  .button-variant(@btn-brand-color; @btn-brand-bg; @brand);
+}
+
+.btn-primaryLight {
+  .button-variant(@btn-primaryLight-color; @btn-primaryLight-bg; @primaryLight);
+}
+
+.btn-primaryMed {
+  .button-variant(@btn-primaryMed-color; @btn-primaryMed-bg; @primaryMed);
+}
+
+.btn-primaryDark {
+  .button-variant(@btn-primaryDark-color; @btn-primaryDark-bg; @primaryDark);
+}
+
+.btn-highlight {
+  .button-variant(@btn-highlight-color; @btn-highlight-bg; @highlight);
+}
+
+
+
+.petImg {
+  height: 150px;
+  width: 150px;
+}

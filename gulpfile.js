@@ -1,33 +1,34 @@
-var gulp    = require('gulp'),
-    path    = require('path'),
-    bower   = require('gulp-bower'),
-    jshint  = require('gulp-jshint'),
-    refresh = require('gulp-livereload'),
-    notify  = require('gulp-notify'),
-    plumber = require('gulp-plumber'),
-    client  = require('tiny-lr')(),
-    list    = require('gulp-task-listing'),
-    nodemon = require('gulp-nodemon'),
-    lr_port = 35729,
-    less   = require('gulp-less'),
+var gulp        = require('gulp'),
+    path        = require('path'),
+    bower       = require('gulp-bower'),
+    jshint      = require('gulp-jshint'),
+    refresh     = require('gulp-livereload'),
+    notify      = require('gulp-notify'),
+    plumber     = require('gulp-plumber'),
+    client      = require('tiny-lr')(),
+    list        = require('gulp-task-listing'),
+    nodemon     = require('gulp-nodemon'),
+    lr_port     = 35729,
+    less        = require('gulp-less'),
     stripDebug  = require('gulp-strip-debug'),
     uglify      = require('gulp-uglify'),
     ngmin       = require('gulp-ngmin'),
+    minifyCSS   = require('gulp-minify-css');
     gulpconcat  = require('gulp-concat');
    
 var paths = {
   scripts: [
-            '!client/bower_components',
-            '!client/test',
-            '!client/user/app/**/*.min.js',
-            '!client/admin/app/**/*.min.js',
-            'client/user/app/**/*.js',
-            'client/admin/app/**/*.js'
-            ],
+    '!client/bower_components',
+    '!client/test',
+    '!client/user/app/**/*.min.js',
+    '!client/admin/app/**/*.min.js',
+    'client/user/app/**/*.js',
+    'client/admin/app/**/*.js'
+  ],
   views: [
-          'client/user/**/*.html',
-          'client/admin/**/*.html'
-          ],
+    'client/user/**/*.html',
+    'client/admin/**/*.html'
+  ],
   adminminify: { src: ['client/admin/app/**/*.js'], dest: 'client/admin', filename: 'adminscripts.min.js' },
   userminify: { src: ['client/user/app/**/*.js'], dest: 'client/user', filename: 'userscripts.min.js' },
   styles: {
@@ -97,6 +98,12 @@ gulp.task('css', function () {
     .pipe(notify({message: 'CSS refreshed'}));
 });
 
+gulp.task('minify-css', function() {
+  gulp.src(paths.styles.css)
+    .pipe(minifyCSS())
+    .pipe(gulp.dest(paths.styles.userdest));
+});
+
 gulp.task('lint', function () {
   return gulp.src(paths.scripts)
     .pipe(plumber())
@@ -127,6 +134,6 @@ gulp.task('watch', function () {
   gulp.watch(paths.scripts, ['lint']);
 });
 
-gulp.task('build', ['adminless', 'userless', 'css', 'lint', 'adminscripts', 'userscripts']);
+gulp.task('build', ['adminless', 'userless', 'css', 'minify-css', 'lint', 'adminscripts', 'userscripts']);
 
 gulp.task('default', ['build', 'live', 'serve', 'watch']);
