@@ -10,16 +10,16 @@ var User = db.Model.extend({
   defaults: {
     status : 'active'
   },
-  pet: function() {
+  pet: function () {
     return this.belongsToMany('Pet').through('User_Pet', 'user_id', 'pet_id');
   },
-  user_pet: function() {
+  user_pet: function () {
     return this.hasMany('User_Pet');
   },
-  request: function() {
+  request: function () {
     return this.hasMany('Request');
   },
-  vet: function() {
+  vet: function () {
     return this.belongsTo('Vet');
   }
 });

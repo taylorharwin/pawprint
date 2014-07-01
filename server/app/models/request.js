@@ -9,22 +9,22 @@ require('./contactHistory.js');
 var Request = db.Model.extend({
   tableName: 'request',
   hasTimestamps: true,
-  pet: function() {
+  pet: function () {
     return this.belongsTo('Pet');
   },
-  user: function() {
+  user: function () {
     return this.belongsTo('User');
   },
-  vet: function() {
+  vet: function () {
     return this.belongsTo('Vet');
   },
-  pet_vaccine: function() {
+  pet_vaccine: function () {
     return this.hasMany('Pet_Vaccine');
   },
-  pdfRecord: function() {
+  pdfRecord: function () {
     return this.hasMany('PdfRecord');
   },
-  contactHistory: function() {
+  contactHistory: function () {
     return this.hasMany('ContactHistory');
   }
 });

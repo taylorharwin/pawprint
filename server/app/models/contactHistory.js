@@ -6,13 +6,13 @@ require('./vetContact.js');
 var ContactHistory = db.Model.extend({
   tableName: 'contactHistory',
   hasTimestamps: true,
-  request: function() {
+  request: function () {
     return this.belongsTo('Request');
   },
-  adminUser: function() {
+  adminUser: function () {
     return this.belongsTo('User'); // user table but is an admin
   },
-  vet_contact: function() {
+  vet_contact: function () {
     return this.belongsTo('Vet_Contact');
   }
 });

@@ -6,13 +6,13 @@ require('./request.js');
 var Pet_Vaccine = db.Model.extend({
   tableName: 'pet_vaccine',
   hasTimestamps: true,
-  request: function() {
+  request: function () {
     return this.belongsTo('Request');
   },
-  pet: function() {
+  pet: function () {
     return this.belongsTo('Pet');
   },
-  vaccine: function() {
+  vaccine: function () {
     return this.belongsTo('Vaccine');
   }
 });

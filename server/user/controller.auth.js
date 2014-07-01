@@ -10,7 +10,7 @@ var login = function (req, res) {
       } else {
         bcrypt.compare(req.body.password, user.attributes.password, function (err, result) {
           if (result) {
-            var token = jwt.sign(user, process.env.USER_SECRET || 'usersecret', {expiresInMinutes: 60*5});
+            var token = jwt.sign(user, process.env.USER_SECRET || 'usersecret', {expiresInMinutes: 60 * 5});
             console.log(token);
             // user.save({'jwt': token}, {patch: true});
             res.send(200, {token: token, id: user.id});
@@ -20,7 +20,7 @@ var login = function (req, res) {
         });
       }
     })
-    .catch(function(err){
+    .catch(function (err) {
       console.error(err);
       res.send(500, 'Internal Server Error');
     });
@@ -37,14 +37,14 @@ var signup = function (req, res) {
             req.body.password = hash;
             req.body.type = 'user';
             User.forge(req.body).save().then(function (newUser) {
-              var token = jwt.sign(newUser, process.env.USER_SECRET || 'usersecret', {expiresInMinutes: 60*5});
+              var token = jwt.sign(newUser, process.env.USER_SECRET || 'usersecret', {expiresInMinutes: 60 * 5});
               res.send(200, {token: token, id: newUser.id});
             });
           });
         });
       }
     })
-    .catch(function(err){
+    .catch(function (err) {
       console.error(err);
       res.send(500, 'Internal Server Error');
     });

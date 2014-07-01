@@ -6,13 +6,13 @@ require('./vetContact.js');
 var Vet = db.Model.extend({
   tableName: 'vet',
   hasTimestamps: true,
-  request: function() {
+  request: function () {
     return this.hasMany('Request');
   },
-  user: function() {
+  user: function () {
     return this.hasMany('User');
   },
-  vetContact: function() {
+  vetContact: function () {
     return this.hasMany('VetContact');
   }
 });

@@ -4,7 +4,7 @@ require('./request.js');
 var PdfRecord = db.Model.extend({
   tableName: 'pdfRecord',
   hasTimestamps: true,
-  request: function() {
+  request: function () {
     return this.belongsTo('Request');
   }
 });

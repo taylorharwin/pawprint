@@ -5,34 +5,34 @@ var nodePath = require('path');
 var dirName = nodePath.join(__dirname, 'pdfDir');
 
 // checks filenames for .pdf extension
-var filenameRegEx = function(filename) {
+var filenameRegEx = function (filename) {
   var match = /^(.*\.(?!(pdf)$))?[^.]*$/i;
-  return(!match.test(filename));
+  return (!match.test(filename));
 };
 
 // verifies filesize for uploads
-var filesizeCheck = function(bytes) {
+var filesizeCheck = function (bytes) {
   var limit = 3;
-  return (bytes/1000000 <= limit);
+  return (bytes / 1000000 <= limit);
 };
 
-var callbackError = function(err) {
-  if (err) throw err;
+var callbackError = function (err) {
+  if (err) { throw err; }
 };
 
 // reads files from one location, writes to a new location, and deletes from old location
-var pdfSave = function(fromPath, toPath, cb) {
+var pdfSave = function (fromPath, toPath, cb) {
   if (fromPath) {
     Q.nfcall(fs.readFile, fromPath)
-      .then(function(buffer) {
+      .then(function (buffer) {
         if (buffer) {
           return Q.nfcall(fs.writeFile, toPath, buffer);
         }
       })
-      .then(function() {
+      .then(function () {
         return Q.nfcall(fs.unlink, fromPath);
       })
-      .then(function(){
+      .then(function () {
         cb(toPath);
       })
       .fail(callbackError);

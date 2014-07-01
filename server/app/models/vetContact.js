@@ -5,10 +5,10 @@ require('./contactHistory.js');
 var VetContact = db.Model.extend({
   tableName: 'vetContact',
   hasTimestamps: true,
-  vet: function() {
+  vet: function () {
     return this.belongsTo('Vet');
   },
-  contactHistory: function() {
+  contactHistory: function () {
     return this.hasMany('ContactHistory');
   }
 });

@@ -22,12 +22,12 @@
  *
  * === BEFORE === *
  *
- *   var getUser = function(req, res) {
- *     var getUser = function(req, res) {
+ *   var getUser = function (req, res) {
+ *     var getUser = function (req, res) {
  *     var userid = req.params.userid;
  *     
  *     new User({id:userid}).fetch()
- *       .then(function(request) {
+ *       .then(function (request) {
  *         res.send(200, request.omit('password', 'salt'));
  *       });
  *      
@@ -43,7 +43,7 @@
  */
 
 var getter = function (Model, options) {
-  return function(req, res) {
+  return function (req, res) {
     options = options || {}; // Protects against null options, b/c options required
     console.log('pikaaaaaaaaaaaaaaaaaaaaaaaa');
     // Get parameters from req.params
@@ -57,19 +57,19 @@ var getter = function (Model, options) {
     var model = new Model().query({where: params});
 
     // Get all objects that match the query
-    model.fetchAll().then(function(collection) {
+    model.fetchAll().then(function (collection) {
       // Iterate through the collection to exclude private properties
-      return collection.mapThen(function(model) {
+      return collection.mapThen(function (model) {
         return model.omit(options.omit);
       });
-    }).then(function(collection){
+    }).then(function (collection) {
       // If all is true, return everything; else return only the first
       var result = !!options.all ? collection : collection[0];
       if (collection.length > 1) {
         // TODO throw some error about only sending the first of many obj
       }
       res.send(200, result);
-    }).catch(function(err) {
+    }).catch(function (err) {
       console.error(err);
       res.send(500, 'Internal server error');
     });
@@ -85,18 +85,18 @@ var getter = function (Model, options) {
  *
  * === BEFORE === *
  *
- *   var createLog = function(req, res) {
+ *   var createLog = function (req, res) {
  *     var newLog = req.body;
  *     newLog.admin_id = req.params.adminid;
  *     newLog.request_id = req.params.requestid;
- *     ContactHistory.forge(newLog).save().then(function(model) {
+ *     ContactHistory.forge(newLog).save().then(function (model) {
  *       res.send(201, model);
  *     });
  *   };
  *
  * === AFTER === *
  *
- *   var createLog = function(req, res) {
+ *   var createLog = function (req, res) {
  *     creator(req, res, ContactHistory, {
  *       admin_id: req.params.adminid,
  *       request_id: req.params.requestid
@@ -104,7 +104,7 @@ var getter = function (Model, options) {
  *   };
  */
 
-var creator = function(Model, options) {
+var creator = function (Model, options) {
   return function (req, res) {
     options = options || {}; // Protects against null options, b/c options required
     var newObj = req.body;
@@ -113,9 +113,9 @@ var creator = function(Model, options) {
       newObj[property] = req.params[params[property]]; // Uses params from req.params
     }
 
-    Model.forge(newObj).save().then(function(model) {
+    Model.forge(newObj).save().then(function (model) {
       res.send(201, model.omit(options.omit));
-    }).catch(function(err) {
+    }).catch(function (err) {
       console.error(err);
       res.send(500, 'Internal server error');
     });
@@ -133,14 +133,14 @@ var creator = function(Model, options) {
  *
  * === BEFORE === *
  *
- * var putLog = function(req, res) {
+ * var putLog = function (req, res) {
  *   var logid = req.params.logid;
  *   var patchObj = req.body;
  *   patchObj.admin_id = req.params.adminid;
  * 
- *   ContactHistory().query({where: {id: logid}}).fetch().then(function(model) {
+ *   ContactHistory().query({where: {id: logid}}).fetch().then(function (model) {
  *     return model.save(patchObj, {patch: true});
- *   }).then(function(model) {
+ *   }).then(function (model) {
  *     res.send(200, model);
  *   });
  * };
@@ -151,18 +151,18 @@ var creator = function(Model, options) {
  */
 
 var updater = function (Model, options) {
-  return function(req, res) {
+  return function (req, res) {
     var patchObj = req.body || {};
     var params = options.params;
     for (var property in params) {
       patchObj[property] = params[property]; // Uses params from options
     }
 
-    Model.forge({id: req.params[options.id]}).fetch().then(function(model) {
+    Model.forge({id: req.params[options.id]}).fetch().then(function (model) {
       return model.save(patchObj, {patch: true});
-    }).then(function(model) {
+    }).then(function (model) {
       res.send(200, model.omit(options.omit));
-    }).catch(function(err) {
+    }).catch(function (err) {
       console.error(err);
       res.send(500, 'Internal server error');
     });
@@ -180,8 +180,8 @@ var updater = function (Model, options) {
  *
  * === BEFORE === *
  *
- * var deletePetVaccine = function(req, res) {
- *   Pet_Vaccine.forge({id: req.params.vaccineid}).fetch().then(function(model){
+ * var deletePetVaccine = function (req, res) {
+ *   Pet_Vaccine.forge({id: req.params.vaccineid}).fetch().then(function (model){
  *     model.destroy(res.send(200, model));
  *   });
  * };
@@ -192,10 +192,10 @@ var updater = function (Model, options) {
  */
 
 var deleter = function (Model, options) {
-  return function(req, res) {
-    Model.forge({id: req.params[options.id]}).fetch().then(function(model){
+  return function (req, res) {
+    Model.forge({id: req.params[options.id]}).fetch().then(function (model) {
       model.destroy(res.send(200, model.omit(options.omit)));
-    }).catch(function(err) {
+    }).catch(function (err) {
       console.error(err);
       res.send(500, 'Internal server error');
     });

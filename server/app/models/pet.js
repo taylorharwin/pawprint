@@ -7,16 +7,16 @@ require('./user_pet.js');
 var Pet = db.Model.extend({
   tableName: 'pet',
   hasTimestamps: true,
-  user: function() {
+  user: function () {
     return this.belongsToMany('User').through('User_Pet', 'pet_id', 'user_id');
   },
-  user_pet: function() {
+  user_pet: function () {
     return this.hasMany('User_Pet');
   },
-  request: function() {
+  request: function () {
     return this.hasMany('Request');
   },
-  pet_vaccine: function() {
+  pet_vaccine: function () {
     return this.hasMany('Pet_Vaccine');
   }
 });
