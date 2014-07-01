@@ -11,6 +11,14 @@ angular.module('admin.common.services')
     return Restangular.one('admin', adminID).one('pets', petID).put(data);
   }
 
+   function getUserInfo(adminID, userID) {
+    return Restangular.one('admin', adminID).one('users', userID).get();
+  }
+
+  function editUserInfo(adminID, userID, data) {
+    return Restangular.one('admin', adminID).one('users', userID).put(data);
+  }
+
   function getContactLogs(adminID, reqID) {
     return Restangular.one('admin', adminID).one('requests', reqID).all('logs').getList();
   }
