@@ -5,11 +5,11 @@ angular.module('user.main.controllers')
 
     $scope.VaccineService = VaccineService;
     $scope.CurrentPetsService = CurrentPetsService;
-    CurrentUserService.retrieveUser(AuthService.getCookie().userId)
+    CurrentUserService.retrieveUser(AuthService.getCookie().get('userId'))
       .then(function (user){
         $scope.user = user;
       });
-    $scope.userId = AuthService.getCookie().userId;
+    $scope.userId = AuthService.getCookie().get('userId');
 
     CurrentPetsService.retrievePets($scope.userId)
       .then(function(pets) {

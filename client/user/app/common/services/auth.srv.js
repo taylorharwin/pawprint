@@ -1,26 +1,26 @@
 /*global angular */
 
 angular.module('user.common.services')
-  .service('AuthService', function ($cookies) {
+  .service('AuthService', function ($cookieStore) {
 
-    $cookies.loggedin = false;
-    $cookies.token = undefined;
-    $cookies.userId = undefined;
+    // $cookies.loggedin = false;
+    // $cookies.token = undefined;
+    // $cookies.userId = undefined;
 
     function getCookie() {
-      return $cookies;
+      return $cookieStore;
     }
 
     function login(token, userId) {
-      $cookies.loggedin = true;
-      $cookies.token = token;
-      $cookies.userId = userId;
+      $cookieStore.put('loggedin', true);
+      $cookieStore.put('token', token);
+      $cookieStore.put('userId', userId);
     }
 
     function logout() {
-      $cookies.loggedin = false;
-      delete $cookies.token;
-      delete $cookies.userId;
+      $cookieStore.put('loggedin', false);
+      $cookieStore.put('token', undefined);
+      $cookieStore.put('userId', undefined);
     }
 
     this.getCookie = getCookie;

@@ -19,7 +19,7 @@ angular.module('user', [
     $urlRouterProvider.otherwise('/');
 
     // enable the HTML5 push/pop history API  
-    $locationProvider.html5Mode(true);
+    // $locationProvider.html5Mode(true);
 
   })
 
@@ -28,14 +28,14 @@ angular.module('user', [
     return {
       request: function (config) {
         config.headers = config.headers || {};
-        if (AuthService.getCookie().loggedin) {
-          config.headers.Authorization = 'Bearer ' + AuthService.getCookie().token;
+        if (AuthService.getCookie().get('loggedin')) {
+          config.headers.Authorization = 'Bearer ' + AuthService.getCookie().get('token');
         }
         return config;
       },
       responseError: function(rejection) {
         if (rejection.status === 401) {
-          $rootScope.$state.go('public'); // Will default to landing
+          $rootScope.$state.go('public.landing');
         }
         return $q.reject(rejection);
       }
