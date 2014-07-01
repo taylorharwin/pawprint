@@ -1,4 +1,5 @@
 'use strict';
+/*global angular*/
 
 angular.module('admin.allRequests.controllers')
   .controller('AllRequestsCtrl', function ($scope, reqIDFactory, formattingService, $state, CurrentAdminService, AuthService) {
