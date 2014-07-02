@@ -13,6 +13,13 @@ angular.module('user.main.controllers')
 
     CurrentPetsService.retrievePets($scope.userId)
       .then(function(pets) {
+        // Set default profilePic if none exists, todo: move this logic to the server
+        for (var pet = 0; pet < pets.pets.length; pet++) {
+          if(!pets.pets[pet].profilePic) {
+            pets.pets[pet].profilePic = 'assets/img/default.jpeg';
+          }
+        }
+        console.log(pets)
         $scope.pets = pets;
       });
 
