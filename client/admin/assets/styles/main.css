@@ -91,6 +91,7 @@ body {
   position: fixed;
   background-color: #DCDDD8;
   left:0px;
+  left:11px;
   top:65px;
   overflow: auto;
   height:100%;
@@ -158,4 +159,7 @@ body {
   padding-top:100px;
   padding-left:10px;
 }
+
+
+
 
