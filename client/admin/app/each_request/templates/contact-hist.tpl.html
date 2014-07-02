@@ -1,27 +1,29 @@
-<div>
-      <div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title">Contact History </h2>
+  </div>
+
+<div class="panel-body">
       <textarea id="note" class="form-control" ng-model="newContact.notes" rows="3"></textarea>
-      Contact Type: <input id="contactType" name="contact" type="text" ng-model="newContact.type" class="input-small">
-          <button class="btn btn-large btn-info" ng-click='postNote()'>Leave a Note</button>
-      </div>
-<table class="table">
-    <thead>
-      <tr>
-        <th>Admin ID</th>
-        <th>Notes</th>
-        <th>Request_ID</th>
-        <th>Vet Contact</th>
-        <th>Form of Communication</th>
-      </tr>
+      Contact Type: 
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Notes</th>
+          <th>Type</th>
+        </tr>
     </thead>
     <tbody>
       <tr ng-repeat="contact in contacts">
-          <td>{{contact.adminUser_id}}</td>
           <td>{{contact.notes}}</td>
-          <td>{{contact.request_id}}</td>
-          <td>{{contact.vetContact_id}}</td>
           <td>{{contact.type}}</td>
       </tr>
     </tbody>
   </table>
+    <input id="contactType" name="contact" type="text" ng-model="newContact.type" class="input-small">
+    <button class="btn btn-large btn-info" ng-click='postNote()'>Leave a Note</button>
+  </div>
 </div>
+
+
