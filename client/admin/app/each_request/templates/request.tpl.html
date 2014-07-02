@@ -5,6 +5,7 @@
           <h1 class="title">
            <img src="assets/logo.png"/>
             <a ui-sref="app.allRequests">Pawprint Admin</a>
+            Pawprint Admin
           </h1>
         </div>
         <div class="col-md-6">
@@ -38,6 +39,8 @@
                  <ul class="dropdown-menu">
                    <li ng-repeat="code in statusCodes" ng-click="postUpdatedStatus(code)"><a>{{code.name}}</a></li>
                  </ul>
+
+              <button  class="btn btn-large btn-default dropdown-toggle" ng-click = "vetService.openModal(small)">Upload PDF</button> 
               <button ui-sref="app.allRequests" class="btn btn-large btn-info">Back to All Requests</button>    
                </span>
             
@@ -47,7 +50,6 @@
     <hr>
     </div>
 
-
     <div class="row">
       <h2>PDFs on Record</h2>
         <hr>
@@ -56,6 +58,7 @@
           </ol>
           <hr>
           <button  class="btn btn-large btn-default dropdown-toggle" ng-click = "vetService.openModal(small)">Upload PDF</button> 
+
       </div>
   </div>
 
