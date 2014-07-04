@@ -1,16 +1,14 @@
-<div class="container" id="header_container">
-   <div id="header">
+<div class="container">
+
+   <div class="navbar navbar-default" id="header_container">
    <h1 class="title">
    	<img src="assets/logo.png"/>
     Pawprint Admin
    </h1>
       <button class="btn btn-large btn-danger right" ng-click="CurrentAdminService.exitAdmin()">Log Out</button>
     </div>
- </div>
-
 
 <div class="jumbotron">
-  <div class="container">
     <div class="row">
       <h2 class="col-md-3 new">New:  {{stats.new}}</h2>
       <h2 class="col-md-3 pending">Pending:  {{stats.pending}}</h2>
@@ -18,10 +16,7 @@
       <h2 class="col-md-3 cancelled">Cancelled:  {{stats.cancelled}}</h2>
     </div>
   </div>
-</div>
 
-
-<div class="container">
 	<table class="table table-hover">
 		<thead>
 			<tr>
@@ -46,4 +41,6 @@
 			</tr>
 		</tbody>
 	</table>
+
+
 </div>
