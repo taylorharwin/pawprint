@@ -1,11 +1,31 @@
+@import "bootstrap/bootstrap.less";
 @import "variables.less";
 
+html {
+  height: 100%;
+}
+
 body {
-  padding-top: 70px;
+  // padding-top: 50px;
+  height: 100%;
+}
+
+.realm {
+  height: 100%;
 }
 
 .brand-logo {
   height:50px;
+}
+
+.petImg {
+  height: 150px;
+  width: 150px;
+}
+
+.shadow {
+  -webkit-box-shadow: 0 1px 0 rgba(0,0,0,.2),0 2px 7px rgba(0,0,0,.15);
+  box-shadow: 0 1px 0 rgba(0,0,0,.2),0 2px 7px rgba(0,0,0,.15);
 }
 
 // alignment
@@ -67,9 +87,3 @@ body {
   .button-variant(@btn-highlight-color; @btn-highlight-bg; @highlight);
 }
 
-
-
-.petImg {
-  height: 150px;
-  width: 150px;
-}
