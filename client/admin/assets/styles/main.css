@@ -1,0 +1,160 @@
+.Aligner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.Aligner-item {
+  max-width: 50%;
+}
+
+.Aligner-item--top {
+  align-self: flex-start;
+}
+
+.Aligner-item--bottom {
+  align-self: flex-end;
+}
+
+.home-button {
+  margin: 10px 10px;
+}
+
+body {
+  width: 100%;
+  height: 500px;
+  background-color:#fff;
+}
+
+.realm {
+  width: 100%;
+  height: 100%;
+}
+
+.form-control {
+  width: 300px;
+}
+.editor {
+  float: right;
+}
+
+#header_container
+{
+    background: #827878;
+    border: 1px solid #666;
+    height: 65px;
+    left: 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    position:fixed;
+    top:0px;
+    left:0px;
+    z-index:1000;
+}
+
+#container
+{
+    margin: 0 auto;
+    overflow: auto;
+    padding: 80px 0;
+    padding-left:40px;
+    padding-right:40px;
+    width: 100%;
+}
+
+#header
+{
+    line-height: 60px;
+    margin: 10 auto;
+    width: 940px;
+    text-align: left;
+    font-size: 26px;
+    color: #354B5E;
+    line-height: 28px;
+    margin-bottom: 14px;
+    z-index:1001;
+
+}
+.right
+{
+  position: absolute;
+  right: 10px;
+  top:10px; 
+}
+
+.sidebar{
+  position: fixed;
+  background-color: #DCDDD8;
+  left:0px;
+  top:65px;
+  overflow: auto;
+  height:100%;
+
+}
+
+.sidebar div {
+  padding-left:10px;
+}
+
+.main-content{
+  margin-left:0px;
+  left:400px;
+}
+
+.med {
+  width:200px;
+}
+
+.title {
+  color:#fff;
+  padding-left:20px;
+  padding-top:5px;
+}
+
+.title a {
+  color:#fff;
+}
+
+.circles{
+  margin-left:100px;
+  margin-right:100px;
+  margin-top:;
+}
+
+.circles h5 {
+    width:140px;
+    height:140px;
+    border-radius:140px;
+    font-size:50px;
+    color:black;
+    line-height:50px;
+    text-align:center;
+    background:red;
+    margin-left:20px;
+    padding-top:20px;
+    margin-left:100px;
+}
+
+.new {
+  background-color:#428bca;
+}
+
+.pending {
+  background-color:#5bc0de;
+}
+.complete {
+  background-color:#999;
+}
+.cancelled {
+  background-color:#f0ad4e;
+}
+
+.jumbotron {
+  padding-top:100px;
+  padding-left:10px;
+}
+

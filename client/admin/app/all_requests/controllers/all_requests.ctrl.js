@@ -1,4 +1,5 @@
 'use strict';
+/*global angular*/
 
 angular.module('admin.allRequests.controllers')
   .controller('AllRequestsCtrl', function ($scope, reqIDFactory, formattingService, $state, CurrentAdminService, AuthService) {
@@ -25,7 +26,11 @@ angular.module('admin.allRequests.controllers')
     $scope.reqIDFactory.getAllRequests(AuthService.getCookie().userId).then(function (data) {
       $scope.formattingService.cleanDates.call(data);
       $scope.requests = data;
+      $scope.stats = {'new': 0, 'pending': 0, 'complete': 0, 'cancelled': 0};
+      angular.forEach(data, function(req){
+        $scope.stats[req.status]++;
+      });
+      console.log($scope.stats);
     });
 
-   
   });

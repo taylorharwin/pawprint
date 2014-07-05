@@ -1,14 +1,16 @@
-<div id="header_container">
+<div class="container" id="header_container">
     <div id="header">
       <div class="row">
-        <div class="col-md-4">
-          <h2>Pawprint Admin</h2>
+        <div class="col-md-6">
+          <h1 class="title">
+           <img src="assets/logo.png"/>
+            <a ui-sref="app.allRequests">Pawprint Admin</a>
+          </h1>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-6">
           <alert ng-repeat="alert in alertsService.alerts" type="{{alert.type}}" close="alertsService.close()">{{alert.msg}}</alert>
         </div>
         <div class="right">
-          <button ui-sref="app.allRequests" class="btn btn-large btn-info">Back to All Requests</button>
           <button class="btn btn-large btn-danger" ng-click="CurrentAdminService.exitAdmin()">Log Out</button>
         </div>
         </div>
@@ -17,81 +19,65 @@
 
 <div class="container" id="container">
 
-<div class="row">
-	<div class="col-md-4">
-		<div class="panel panel-default">
-			<h4>Viewing Request: {{reqID}}</h4>
-      <h4>Vet ID: {{vetID}}</h4>
-      <h4>User ID: {{userID}}</h4>
-      <h4>Pet ID: {{petID}}</h4>
-      <h4>Request Status:  <span>{{statusObj.name}}</span></h4>
-		</div>
-	</div>
+	<div class="col-sm-3 sidebar">
+    <div class="row">
+      <h2>Request Overview</h2>
+      <hr>
 
-  <div class="col-md-4">
-  		<div class="btn-group" dropdown is-open="status.isopen">
-  				 <span class="dropdown">
-      				<button  class="btn btn-large btn-default dropdown-toggle">Update Status<span class="caret"></span></button>
-						    <ul class="dropdown-menu">
-						      <li ng-repeat="code in statusCodes" ng-click="postUpdatedStatus(code)"><a>{{code.name}}</a></li>
-						    </ul>
-  				 </span>
-			</div>
-        <button  class="btn btn-large btn-default dropdown-toggle" ng-click = "vetService.openModal(small)">Upload PDF<span class="glyphicon glyphicon-plus"></span>
-        </button>
-                
+      <div>
+        <h4>Viewing Request: {{reqID}}</h4>
+        <h4>Vet ID: {{vetID}}</h4>
+        <h4>User ID: {{userID}}</h4>
+        <h4>Pet ID: {{petID}}</h4>
+        <span>
+        <h4>Request Status:  <span>{{statusObj.name}}</span></h4>
+        <hr>
+      		<span class="btn-group" dropdown is-open="status.isopen">
+      			<span class="dropdown">
+              <button  class="btn btn-large btn-default dropdown-toggle">Update Status<span class="caret"></span></button>
+                 <ul class="dropdown-menu">
+                   <li ng-repeat="code in statusCodes" ng-click="postUpdatedStatus(code)"><a>{{code.name}}</a></li>
+                 </ul>
+              <button ui-sref="app.allRequests" class="btn btn-large btn-info">Back to All Requests</button>    
+               </span>
+            
+          </span>
+        </span>
       </div>
-
-      <div class="col-md-4">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h2>PDFs on Record</h2>
-          </div>
-            <ul>
-              <li ng-repeat="pdf in allPDFs"><span>Link:  </span>{{pdf.link}}</li>
-            </ul>
-        </div>
-      </div>
-
-  </div>
-
-
-</div>
-
-<div class='row'>
-	<div class="col-md-4">
-    <vet-info></vet-info>
-  </div>
-    <div class="col-md-8">
-      <user-info></user-info>
+    <hr>
     </div>
-</div>
 
 
-<div class="row">
-  <div class="col-md-3">
-		<edit-vacc></edit-vacc>
-	</div>
-	<div class="col-md-9">
-		<vacc-record></vacc-record>
-	</div>
-</div>
-
-
-<div class="row">
-	<div class="col-md-12">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-        <div>
-        <h2 class="panel-title">Contact History</h2>
+    <div class="row">
+      <h2>PDFs on Record</h2>
+        <hr>
+          <ol>
+            <li ng-repeat="pdf in allPDFs"><span>Link:  </span>{{pdf.link}}</li>
+          </ol>
+          <hr>
+          <button  class="btn btn-large btn-default dropdown-toggle" ng-click = "vetService.openModal(small)">Upload PDF</button> 
       </div>
-			</div>
-			<div class="panel-body">
-				<contact-hist></contact-hist>
-			</div>
-   </div>
- </div>
-</div>
+  </div>
+
+    
+    <div class="col-sm-9 main-content">
+      <div class="row">
+          <vet-info></vet-info>
+      </div>
+      <div class="row">
+        <user-info></user-info>
+      </div>
+      <div class="row">
+        <edit-vacc></edit-vacc>
+      </div>
+      <div class="row">
+        <vacc-record></vacc-record>
+      </div>
+      <div class="row">
+      	<contact-hist></contact-hist>
+      </div>
+    </div>
+
 </div>
 
 

@@ -5,7 +5,7 @@
         <span class="dropdown">
           <button  class="btn btn-large btn-default dropdown-toggle">Add<span class="caret"></span></button>
               <ul class="dropdown-menu">
-                <li ng-repeat="vaccine in allVaccines" ng-model="allVaccines" ng-click="setVacc(vaccine.name, vaccine.id)"><a href="#">{{vaccine.name}}</a></li>
+                <li ng-repeat="vaccine in allVaccines" ng-model="allVaccines" ng-click="setVacc(vaccine.name, vaccine.id)"><a>{{vaccine.name}}</a></li>
               </ul>
         </span>
       </div>
@@ -15,13 +15,13 @@
         
    <form>
     <legend>Manage Vaccinations</legend>
-      Vaccine: <input type="text" name="vaccineName" ng-model="newVaccinationRecord.name"><br>
-      Date Administered: <input type="text" name="lastname" ng-model="newVaccinationRecord.dateAdministered">
+      Vaccine: <input type="text" name="vaccineName" class="form-control med" ng-model="newVaccinationRecord.name"><br>
+      Date Administered: <input type="text" class="form-control med"name="lastname" ng-model="newVaccinationRecord.dateAdministered">
     <button class="btn btn-small btn-danger" ng-click="postVaccinationRecord(newVaccinationRecord)">Create Record</button>
 
       <hr>
-      Add a new global vaccine type: <input type="text" name="vaccineName" ng-model="newVaccination.name"><br>
-      How many days is it valid for?: <input type="text" name="duration" ng-model="newVaccination.duration">
+      Add a new global vaccine type: <input type="text" class="form-control med"name="vaccineName" ng-model="newVaccination.name"><br>
+      How many days is it valid for?: <input type="text" class="form-control med" name="duration" ng-model="newVaccination.duration">
       <button class="btn btn-small btn-danger" ng-click="sendVaccine(newVaccination)">Add a new vaccine</button>
 
     </form>
