@@ -11,9 +11,9 @@ Pet medical records are a requirement for travel, boarding, and grooming, so the
 The Pawprint team consists of:
 
 * Emily Dong: Product Manager
-* Ben Lee: Front-end
-* Taylor Harwin: Front-end
-* Jonathan Huang: Server and DB
+* Ben Lee: Front-end (user client)
+* Taylor Harwin: Front-end (admin tools)
+* Jonathan Huang: Server and Database administration
 
 ###Tech Stack
 
