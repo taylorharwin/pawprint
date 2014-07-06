@@ -70,9 +70,12 @@
 
     <!-- Text input-->
     <div class="form-group">
-      <label class="col-sm-2 control-label" for="textinput">Picture URL</label>
-      <div class="col-sm-10">
-        <input type="text" ng-model="pet.profilePic" class="form-control">
+      <label class="col-sm-2 control-label" for="textinput">Pet's Photo</label>
+      <div class="col-sm-5">
+        <input type="file" id="files" onchange="angular.element(this).scope().filesChanged(this)" multiple/>
+      </div>
+      <div class="col-sm-5">
+        <button type="button" ng-click="uploadPhoto()" class="btn btn-info">Upload</button>
       </div>
     </div>
 
