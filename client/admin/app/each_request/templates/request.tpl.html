@@ -1,5 +1,5 @@
 <div class="container" id="header_container">
-    <div id="header">
+    <div class="navbar navbar-default" id="header_container">
       <div class="row">
         <div class="col-md-6">
           <h1 class="title">
@@ -38,6 +38,7 @@
                  <ul class="dropdown-menu">
                    <li ng-repeat="code in statusCodes" ng-click="postUpdatedStatus(code)"><a>{{code.name}}</a></li>
                  </ul>
+              <button  class="btn btn-large btn-default dropdown-toggle" ng-click = "vetService.openModal(small)">Upload PDF</button> 
               <button ui-sref="app.allRequests" class="btn btn-large btn-info">Back to All Requests</button>    
                </span>
             
@@ -47,7 +48,6 @@
     <hr>
     </div>
 
-
     <div class="row">
       <h2>PDFs on Record</h2>
         <hr>
@@ -56,6 +56,7 @@
           </ol>
           <hr>
           <button  class="btn btn-large btn-default dropdown-toggle" ng-click = "vetService.openModal(small)">Upload PDF</button> 
+
       </div>
   </div>
 
