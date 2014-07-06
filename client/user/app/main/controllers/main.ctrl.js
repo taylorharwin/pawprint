@@ -1,9 +1,10 @@
 angular.module('user.main.controllers')
 
-  .controller('MainCtrl', function ($scope, AuthService, CurrentUserService, CurrentPetsService, VetRESTService, VaccineService) {
+  .controller('MainCtrl', function ($scope, AuthService, CurrentUserService, PhotoService, CurrentPetsService, VetRESTService, VaccineService) {
     console.log($scope);
 
     $scope.VaccineService = VaccineService;
+    $scope.PhotoService = PhotoService;
     
     $scope.userId = AuthService.getCookie().get('userId');
 
