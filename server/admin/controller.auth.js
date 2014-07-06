@@ -11,7 +11,7 @@ var login = function (req, res) {
         bcrypt.compare(req.body.password, admin.attributes.password, function (err, result) {
           if (result) {
             // purely for testing purposes
-            var token = jwt.sign(admin, process.env.ADMIN_SECRET || 'usersecret', {expiresInMinutes: 60*5});
+            var token = jwt.sign(admin, process.env.ADMIN_SECRET || 'usersecret', {expiresInMinutes: 60 * 5});
             // var token = jwt.sign(admin, process.env.ADMIN_SECRET || 'adminsecret', {expiresInMinutes: 60*5});
             console.log(token);
             // admin.save({'jwt': token}, {patch: true});
@@ -22,7 +22,7 @@ var login = function (req, res) {
         });
       }
     })
-    .catch(function(err){
+    .catch(function (err) {
       console.error(err);
       res.send(500, 'Internal Server Error');
     });
@@ -39,14 +39,14 @@ var signup = function (req, res) {
             req.body.password = hash;
             req.body.type = 'admin';
             User.forge(req.body).save().then(function (newAdmin) {
-              var token = jwt.sign(newAdmin, process.env.ADMIN_SECRET || 'adminsecret', {expiresInMinutes: 60*5});
-              res.send(200, {token: token, id: newUser.id});
+              var token = jwt.sign(newAdmin, process.env.ADMIN_SECRET || 'adminsecret', {expiresInMinutes: 60 * 5});
+              res.send(200, {token: token, id: newAdmin.id});
             });
           });
         });
       }
     })
-    .catch(function(err){
+    .catch(function (err) {
       console.error(err);
       res.send(500, 'Internal Server Error');
     });

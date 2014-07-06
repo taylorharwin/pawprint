@@ -1,19 +1,17 @@
 var gulp        = require('gulp'),
     path        = require('path'),
-    bower       = require('gulp-bower'),
     jshint      = require('gulp-jshint'),
     refresh     = require('gulp-livereload'),
     notify      = require('gulp-notify'),
     plumber     = require('gulp-plumber'),
     client      = require('tiny-lr')(),
-    list        = require('gulp-task-listing'),
     nodemon     = require('gulp-nodemon'),
     lr_port     = 35729,
     less        = require('gulp-less'),
     stripDebug  = require('gulp-strip-debug'),
     uglify      = require('gulp-uglify'),
     ngmin       = require('gulp-ngmin'),
-    minifyCSS   = require('gulp-minify-css');
+    minifyCSS   = require('gulp-minify-css'),
     gulpconcat  = require('gulp-concat');
    
 var paths = {
@@ -42,7 +40,7 @@ var paths = {
   }
 };
 
-gulp.task('adminscripts', function() {
+gulp.task('adminscripts', function () {
   return gulp.src(paths.adminminify.src)
     .pipe(plumber())
     // .pipe(stripDebug())
@@ -53,7 +51,7 @@ gulp.task('adminscripts', function() {
     .pipe(notify({message: 'Admin Distribution code compiled'}));
 });
 
-gulp.task('userscripts', function() {
+gulp.task('userscripts', function () {
   return gulp.src(paths.userminify.src)
     .pipe(plumber())
     // .pipe(stripDebug())
@@ -98,7 +96,7 @@ gulp.task('css', function () {
     .pipe(notify({message: 'CSS refreshed'}));
 });
 
-gulp.task('minify-css', function() {
+gulp.task('minify-css', function () {
   gulp.src(paths.styles.css)
     .pipe(minifyCSS())
     .pipe(gulp.dest(paths.styles.userdest));

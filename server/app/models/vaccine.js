@@ -6,7 +6,7 @@ require('./pet_vaccine.js');
 var Vaccine = db.Model.extend({
   tableName: 'vaccine',
   hasTimestamps: true,
-  pet_vaccine: function(){
+  pet_vaccine: function () {
     return this.hasMany('Pet_Vaccine');
   }
 });

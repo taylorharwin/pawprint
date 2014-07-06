@@ -1,7 +1,5 @@
 var knex        = require('knex'),
-    bookshelf   = require('bookshelf'),
-    morgan      = require('morgan'),
-    bodyParser  = require('body-parser');
+    bookshelf   = require('bookshelf');
 
 var knex = knex({
   client: 'pg',
@@ -17,7 +15,7 @@ var knex = knex({
 
 var db = bookshelf(knex);
 
-db.knex.schema.hasTable('user').then(function(exists) {
+db.knex.schema.hasTable('user').then(function (exists) {
   if (!exists) {
     db.knex.schema.createTable('user', function (user) {
       user.increments('id').primary();
@@ -43,7 +41,7 @@ db.knex.schema.hasTable('user').then(function(exists) {
   }
 });
 
-db.knex.schema.hasTable('user_pet').then(function(exists) {
+db.knex.schema.hasTable('user_pet').then(function (exists) {
   if (!exists) {
     db.knex.schema.createTable('user_pet', function (join) {
       join.increments('id').primary();
@@ -56,7 +54,7 @@ db.knex.schema.hasTable('user_pet').then(function(exists) {
   }
 });
 
-db.knex.schema.hasTable('pet').then(function(exists) {
+db.knex.schema.hasTable('pet').then(function (exists) {
   if (!exists) {
     db.knex.schema.createTable('pet', function (pet) {
       pet.increments('id').primary();
@@ -76,7 +74,7 @@ db.knex.schema.hasTable('pet').then(function(exists) {
   }
 });
 
-db.knex.schema.hasTable('vaccine').then(function(exists) {
+db.knex.schema.hasTable('vaccine').then(function (exists) {
   if (!exists) {
     db.knex.schema.createTable('vaccine', function (vaccine) {
       vaccine.increments('id').primary();
@@ -89,7 +87,7 @@ db.knex.schema.hasTable('vaccine').then(function(exists) {
   }
 });
 
-db.knex.schema.hasTable('pet_vaccine').then(function(exists) {
+db.knex.schema.hasTable('pet_vaccine').then(function (exists) {
   if (!exists) {
     db.knex.schema.createTable('pet_vaccine', function (join) {
       join.increments('id').primary();
@@ -105,7 +103,7 @@ db.knex.schema.hasTable('pet_vaccine').then(function(exists) {
   }
 });
 
-db.knex.schema.hasTable('request').then(function(exists) {
+db.knex.schema.hasTable('request').then(function (exists) {
   if (!exists) {
     db.knex.schema.createTable('request', function (request) {
       request.increments('id').primary();
@@ -120,7 +118,7 @@ db.knex.schema.hasTable('request').then(function(exists) {
   }
 });
 
-db.knex.schema.hasTable('pdfRecord').then(function(exists) {
+db.knex.schema.hasTable('pdfRecord').then(function (exists) {
   if (!exists) {
     db.knex.schema.createTable('pdfRecord', function (pdf) {
       pdf.increments('id').primary();
@@ -133,7 +131,7 @@ db.knex.schema.hasTable('pdfRecord').then(function(exists) {
   }
 });
 
-db.knex.schema.hasTable('contactHistory').then(function(exists) {
+db.knex.schema.hasTable('contactHistory').then(function (exists) {
   if (!exists) {
     db.knex.schema.createTable('contactHistory', function (history) {
       history.increments('id').primary();
@@ -149,7 +147,7 @@ db.knex.schema.hasTable('contactHistory').then(function(exists) {
   }
 });
 
-db.knex.schema.hasTable('vet').then(function(exists) {
+db.knex.schema.hasTable('vet').then(function (exists) {
   if (!exists) {
     db.knex.schema.createTable('vet', function (vet) {
       vet.increments('id').primary();
@@ -168,7 +166,7 @@ db.knex.schema.hasTable('vet').then(function(exists) {
   }
 });
 
-db.knex.schema.hasTable('vetContact').then(function(exists) {
+db.knex.schema.hasTable('vetContact').then(function (exists) {
   if (!exists) {
     db.knex.schema.createTable('vetContact', function (vetContact) {
       vetContact.increments('id').primary();

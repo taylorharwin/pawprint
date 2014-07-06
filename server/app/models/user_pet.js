@@ -5,10 +5,10 @@ require('./user.js');
 var User_Pet = db.Model.extend({
   tableName: 'user_pet',
   hasTimestamps: true,
-  pet: function() {
+  pet: function () {
     return this.hasMany('Pet');
   },
-  user: function() {
+  user: function () {
     return this.hasMany('User');
   }
 });
