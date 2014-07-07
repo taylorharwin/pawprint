@@ -67,6 +67,7 @@ db.knex.schema.hasTable('pet').then(function (exists) {
       pet.boolean('neuter');
       pet.string('microchip', 255);
       pet.string('profilePic', 255);
+      pet.string('vaccineStatus', 20);
       pet.timestamps();
     }).then(function (table) {
       console.log('Created Table', table);

@@ -1,4 +1,7 @@
-// Adobe Kuler Color Palette https://kuler.adobe.com/
+@import "bootstrap/bootstrap.less";
+
+// Colors https://kuler.adobe.com/
+// -------------------------
 @brand:        #D74B4B;
 @primaryLight: #DCDDD8;
 @primaryMed:   #475F77;
@@ -7,6 +10,7 @@
 @white:        #fff;
 
 // Fonts
+// -------------------------
 @font-family-base:      @font-family-sans-serif;
 @headings-font-family:  'Lato', sans-serif, @font-family-base;
 
@@ -27,3 +31,29 @@
 
 @btn-highlight-color:     #fff;
 @btn-highlight-bg:        @highlight;
+
+// Inverse navbar colors
+// -------------------------
+// Reset inverted navbar basics
+@navbar-inverse-color:                      @primaryLight;
+@navbar-inverse-bg:                         @primaryDark;
+@navbar-inverse-border:                     darken(@navbar-inverse-bg, 10%);
+
+// Inverted navbar links
+@navbar-inverse-link-color:                 #fff;
+@navbar-inverse-link-hover-color:           @highlight;
+@navbar-inverse-link-hover-bg:              transparent;
+@navbar-inverse-link-active-color:          #fff;
+@navbar-inverse-link-active-bg:             @highlight;
+@navbar-inverse-link-disabled-color:        @primaryLight;
+@navbar-inverse-link-disabled-bg:           transparent;
+
+// Inverted navbar brand label
+@navbar-inverse-brand-color:                #fff;
+@navbar-inverse-brand-hover-color:          @highlight;
+@navbar-inverse-brand-hover-bg:             transparent;
+
+// Inverted navbar toggle
+@navbar-inverse-toggle-hover-bg:            @primaryMed;
+@navbar-inverse-toggle-icon-bar-bg:         #fff;
+@navbar-inverse-toggle-border-color:        @primaryMed;

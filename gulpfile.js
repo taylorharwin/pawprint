@@ -30,12 +30,15 @@ var paths = {
   adminminify: { src: ['client/admin/app/**/*.js'], dest: 'client/admin', filename: 'adminscripts.min.js' },
   userminify: { src: ['client/user/app/**/*.js'], dest: 'client/user', filename: 'userscripts.min.js' },
   styles: {
-    css:  ['client/user/assets/**/*.css', 'client/admin/assets/**/*.css', 'client/**/*.css'],
+    css:  [
+      'client/user/assets/styles/main.css',
+      // 'client/admin/assets/**/*.css'
+      ],
     less: ['client/user/assets/**/*.less', 'client/admin/assets/**/*.less', 'client/**/*.less'],
-    userless: ['client/user/assets/**/*.less'],
+    userless: ['client/user/assets/styles/less/main.less'],
     adminless: ['client/admin/assets/**/*.less'],
     dest: ['client/user/assets/styles', 'client/admin/assets/styles'],
-    userdest: 'client/user/assets',
+    userdest: 'client/user/assets/styles/css',
     admindest: 'client/admin/assets'
   }
 };
