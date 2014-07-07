@@ -13,71 +13,11 @@
     <button ng-click='CurrentPetsService.addPet(userId)' class="btn btn-default">Add Pet</button>
     <button ui-sref="^.profile" class="btn btn-default">User profile</button>
 
-    <accordion close-others="false">
-      <!-- Pet cards -->
-      <accordion-group ng-repeat="pet in pets.pets" class="card">
-        <accordion-heading>
-          <div class="image">
-            <img class='petImg' ng-src='{{pet.profilePic}}'/>
-          </div>
-          <div class="info">
-            <table>
-              <tbody>
-                <tr><th>Name </th><td>{{pet.name}}</td></tr>
-                <tr><th>Birthday </th><td>{{pet.birthdate | date:'MM/dd/yyyy'}}</td></tr>
-                <tr><th>Gender </th><td>{{pet.gender}}</td></tr>
-                <tr><th>Breed </th><td>{{pet.breed}}</td></tr>
-                <tr><th>Color </th><td>{{pet.color}}</td></tr>
-                <tr><th>Weight </th><td>{{pet.weight}}</td></tr>
-                <tr><th>Spay/Neuter </th><td>{{pet.neuter}}</td></tr>
-                <tr><th>Microchip </th><td>{{pet.microchip}}</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="actions">
-            <ul>
-              <li ng-switch='pet.vaccineStatus'>
-                <span ng-switch-when='active' class="label label-success">Active</span> 
-                <span ng-switch-when='expiring' class="label label-warning">Expiring</span>
-                <span ng-switch-when='expired' class="label label-danger">Expired</span>
-                <span ng-switch-when='' class="label label-warning">Null</span>
-              </li>
-              <li><button ng-click="CurrentPetsService.editPet(userId, $index)" class="btn btn-default">EDIT</button></li>
-              <li><button class="btn btn-default">SEND</button></li>
-              <li><button ng-click="CurrentPetsService.updatePet(userId, $index)" class="btn btn-default">UPDATE</button></li>
-            </ul>
-          </div>
-        </accordion-heading>
-        <!-- Collapsed section -->
-        <table>
-          <tr ng-repeat="request in pets.requests[$parent.$index]">
-            <alert ng-if="request.status === 'New' || request.status === 'Pending'" type="warning" close="cancelRequest($parent.index, $index)">We are processing your request to {{request.vet.practice_name}}</alert>
-          </tr>
-        </table>
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Vaccine</th>
-              <th>Date</th>
-              <th>Expiration</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng-repeat="vaccine in pets.vaccines[$parent.$index]">
-              <td>{{vaccine.name}}</td>
-              <td>{{vaccine.dateAdministered}}</td>
-              <td>{{vaccine.dateExpired}}</td>
-              <td>
-                <span ng-if='VaccineService.checkExpiry(vaccine) === "active"' class="label label-success">Active</span>
-                <span ng-if='VaccineService.checkExpiry(vaccine) === "expiring"' class="label label-warning">Expiring</span>
-                <span ng-if='VaccineService.checkExpiry(vaccine) === "expired"' class="label label-danger">Expired</span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </accordion-group>
-    </accordion>
-    <!-- End pet profile instance -->
+  <table class="" style="width:100%">
+    <tr ng-repeat="pet in pets.pets">
+      <td pet="pet" requests="pets.requests[$index]" vaccines="pets.vaccines[$index]" index="$index"></td>
+    </tr>
+  </table>
+
   </div>
 </div>
