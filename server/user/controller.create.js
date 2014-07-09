@@ -4,7 +4,8 @@ var User      = require('../app/models/user.js'),
     Request   = require('../app/models/request.js'),
     Vet       = require('../app/models/vet.js'),
     User_Pet  = require('../app/models/user_pet.js'),
-    Utils     = require('../app/utils.js');
+    Utils     = require('../app/utils.js'),
+    Q         = require('q');
 
 // TODO: validations for field length/type
 
@@ -41,10 +42,34 @@ var createPet = function (req, res) {
   });
 };
 
-var createRequest = Utils.creator(Request, {params: {
-  user_id: 'userid',
-  pet_id: 'petid'
-}});
+// TODO, accept vetid or vet object in the body
+var createRequest = function(req, res) {
+  
+  // Set the vetid using req.body, create a new vet and get the id if it doesn't already exist
+  Q.fcall(function(){
+    var newRequest = {
+      user_id: req.params.userid,
+      pet_id: req.params.petid,
+    };
+
+    if(typeof req.body.vet === 'object') {
+      return Utils.create(Vet, req.body.vet).then(function(vet) {
+        newRequest.vet_id = vet.id;
+        return newRequest;
+      });
+    } else {
+      newRequest.vet_id = req.body.vet;
+      return newRequest;
+    }
+  }).then(function(newRequest) {
+    return Utils.create(Request, newRequest);
+  }).then(function(model) {
+    res.send(201, model);
+  }).catch(function(err) {
+    console.error(err);
+    res.send(500, 'Internal Server Error');
+  });
+};
 
 var createVet = Utils.creator(Vet);
 
