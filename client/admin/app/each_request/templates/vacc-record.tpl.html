@@ -1,4 +1,9 @@
 <div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title">User Information 
+    </h2>
+  </div>
+
 <table class="table">
     <thead>
       <tr>
@@ -10,8 +15,11 @@
     <tbody>
       <tr ng-repeat="record in vaccineService.vaccinations"ng-model="vaccineService.vaccinations">
           <td>{{record.vaccName}}</td>
-          <td>{{record.dateAdministered}}</td>
+          <td><input id="textinput" name="textinput" ng-model="record.dateAdministered" type="text" placeholder="{{record.dateAdministered}}" class="form-control med">
+            <button class="btn btn-small btn-warning" ng-click="putNewEntry(record.id, record.dateAdministered)">modify</button>
+          </td>
           <td>{{record.dateExpired}}</td>
+
       </tr>
     </tbody>
   </table>

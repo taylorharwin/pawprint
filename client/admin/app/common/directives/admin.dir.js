@@ -64,8 +64,24 @@ angular.module('admin.common.directives')
           scope.formattingService.cleanDates.call(data);
           scope.vaccineService.getVaccineNameforID(data, scope.allVaccines);
           scope.vaccineService.vaccinations = data;
-          console.log(scope.vaccineService.vaccinations);
         });
+        scope.editingVaccRecord = true;
+        scope.editVaccRecord = function () {
+          scope.editingVaccRecord = !scope.editingVaccRecord;
+        };
+        scope.updateEntry = {
+          id: '',
+          dateAdministered: ''
+        };
+      
+        scope.putNewEntry = function (id, date) { 
+          scope.updateEntry.id = id;
+          scope.updateEntry.dateAdministered = date;
+          scope.vaccineService.updateVaccRecord((scope.AuthService.getCookie().userId), scope.reqID, scope.updateEntry.id, scope.updateEntry).then(function (data) {
+            var msg = 'Successfully updated vaccine date';
+            scope.alertsService.add('success', msg);
+          });
+        };
       }
     };
   })
@@ -139,6 +155,7 @@ angular.module('admin.common.directives')
             scope.formattingService.cleanDates.call(data);
             scope.vaccineService.getVaccineNameforID(data, scope.allVaccines);
             scope.vaccineService.vaccinations = data;
+            console.log(data);
           });
         });
       };

@@ -1,13 +1,13 @@
 <div class="container" id="header_container">
     <div class="navbar navbar-default" id="header_container">
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-4">
           <h1 class="title">
            <img src="assets/logo.png"/>
             <a ui-sref="app.allRequests">Pawprint Admin</a>
           </h1>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
           <alert ng-repeat="alert in alertsService.alerts" type="{{alert.type}}" close="alertsService.close()">{{alert.msg}}</alert>
         </div>
         <div class="right">
