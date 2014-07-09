@@ -5,6 +5,10 @@ var Put = require('./controller.put.js');
 var Delete = require('./controller.delete.js');
 
 module.exports = exports = function (router) {
+  
+  router.route('/vets')
+    .get(Get.getVets)
+    .post(Create.createVet); // Change this to auto happen on the admin side?
 
   // router.route('/login')
   //   .post(Auth.login);
@@ -30,9 +34,5 @@ module.exports = exports = function (router) {
     .post(Create.createRequest);
   router.route('/:userid/pets/:petid/requests/:requestid')
     .delete(Delete.deleteRequest);
-  
-  router.route('/vets')
-    // .get(Get.getVets)
-    .post(Create.createVet); // Change this to auto happen on the admin side?
 };
 

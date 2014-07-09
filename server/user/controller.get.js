@@ -1,4 +1,5 @@
 var User      = require('../app/models/user.js'),
+    Vet      = require('../app/models/vet.js'),
     db        = require('../app/db_config.js'),
     Utils     = require('../app/utils.js'),
     Validate  = require('../app/validate.js');
@@ -65,9 +66,14 @@ var getVaccines = function (req, res) {
   });
 };
 
+var getVets = Utils.getter(Vet, {
+  all: true
+});
+
 module.exports = exports = {
   getUser : getUser,
   getPets : getPets,
   getRequests : getRequests,
-  getVaccines : getVaccines
+  getVaccines : getVaccines,
+  getVets : getVets
 };
