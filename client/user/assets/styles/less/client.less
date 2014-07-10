@@ -4,10 +4,12 @@
 
 .sidebar {
   .make-sm-column(3);
-  .primaryLight;
+  .primaryDark;
+  border-right: solid 1px @primaryLight;
   height: 100%;
-  background-color: @primaryMed;
-  padding: 70px 15px 0px 15px;
+  // background-color: @primaryMed;
+  margin: 70px 0px 20px 0px;
+  padding: 0px 15px 0px 15px;
 }
 
 .content {
@@ -19,12 +21,22 @@
 
 .panel-group .panel {
   margin: 20px 0px;
+  border-radius: 0px;
+  .shadow;
+
+  a:hover {
+    text-decoration: none;
+  }
 
   .panel-heading {
     overflow: auto;
     display: block;
     cursor: hand;
     cursor: pointer;
+    
+    .heading {
+      padding: 10px 0px;
+    }
     .image {
       .make-xs-column(3);
     }
