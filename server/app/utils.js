@@ -103,6 +103,12 @@ var getter = function (Model, options) {
  *   };
  */
 
+var create = function (Model, obj) {
+  return Model.forge(obj).save().then(function (model) {
+    return model;
+  });
+};
+
 var creator = function (Model, options) {
   return function (req, res) {
     options = options || {}; // Protects against null options, b/c options required
@@ -112,7 +118,7 @@ var creator = function (Model, options) {
       newObj[property] = req.params[params[property]]; // Uses params from req.params
     }
 
-    Model.forge(newObj).save().then(function (model) {
+    create(Model, newObj).then(function(model) {
       res.send(201, model.omit(options.omit));
     }).catch(function (err) {
       console.error(err);
@@ -205,6 +211,7 @@ var deleter = function (Model, options) {
 module.exports = exports = {
   getter: getter,
   creator: creator,
+  create: create,
   updater: updater,
   deleter: deleter
 };
