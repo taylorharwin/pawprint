@@ -5,6 +5,7 @@ angular.module('user.main.controllers')
 
     $scope.VaccineService = VaccineService;
     $scope.PhotoService = PhotoService;
+    $scope.PhotoService.setKey();
     
     $scope.userId = AuthService.getCookie().get('userId');
 

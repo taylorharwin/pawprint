@@ -120,5 +120,4 @@ angular.module('user.common.services')
     this.addPet = addPet;
     this.savePet = savePet;
     this.updatePet = updatePet;
-
   });
