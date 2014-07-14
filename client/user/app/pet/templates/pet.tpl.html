@@ -1,19 +1,38 @@
 <accordion-heading>
   <div class="heading">
-    <input ng-click="stopPropagation()" ng-readonly="!editingPet" ng-model="pet.name"></input>
+    <div class="form-group name">
+      <input ng-click="stopPropagation()" ng-readonly="!editingPet" ng-model="pet.name"></input>
+    </div>
     <span ng-switch='pet.vaccineStatus'>
       <span ng-switch-when='active' class="label label-success">Active</span> 
       <span ng-switch-when='expiring' class="label label-warning">Expiring</span>
       <span ng-switch-when='expired' class="label label-danger">Expired</span>
       <span ng-switch-when='' class="label label-warning">Null</span>
     </span>
+    <div class=" actions">
+      <button ng-if="!editingPet" ng-click="editPet(pet)" type="button" class="btn btn-info">
+        <span class="glyphicon glyphicon-pencil"></span>
+      </button>
+      <button ng-if="editingPet" ng-click="savePet(index)" type="button" class="btn btn-info">
+        save
+      </button>
+      <button ng-if="editingPet" ng-click="cancelEdit()" type="button" class="btn btn-info">
+        cancel
+      </button>
+      <button type="button" class="btn btn-primary">
+        <span class="glyphicon glyphicon-send"></span> SEND
+      </button>
+      <button ng-click="updatePet(userId, index)" type="button" class="btn btn-highlight">
+        <span class="glyphicon glyphicon-refresh"></span> Update
+      </button>
+    </div>
   </div>
   <div class="image">
     <img class='petImg' ng-src='{{pet.profilePic}}'/>
   </div>
   <div class="info">
     <table>
-      <tbody>
+      <tbody class="form-group">
         <!-- Add date filter  date:'MM/dd/yyyy' -->
         <tr><th>Birthday </th><td><input ng-click="stopPropagation()" ng-readonly="!editingPet" ng-model="pet.birthdate"></input></td></tr>
         <tr><th>Gender </th><td><input ng-click="stopPropagation()" ng-readonly="!editingPet" ng-model="pet.gender"></input></td></tr>
@@ -25,78 +44,42 @@
       </tbody>
     </table>
   </div>
-  <div class="actions">
-    <ul>
-      <li>
-        <button ng-if="!editingPet" ng-click="editPet(pet)" type="button" class="btn btn-info">
-          <span class="glyphicon glyphicon-pencil"></span>
-        </button>
-      </li>
-      <li>
-        <button ng-if="editingPet" ng-click="savePet(index)" type="button" class="btn btn-info">
-          save
-        </button>
-      </li>
-      <li>
-        <button ng-if="editingPet" ng-click="cancelEdit()" type="button" class="btn btn-info">
-          cancel
-        </button>
-      </li>
-      <li>
-        <button type="button" class="btn btn-primary">
-          <span class="glyphicon glyphicon-send"></span> SEND
-        </button>
-      </li>
-      <li>
-        <button ng-click="updatePet(userId, index)" type="button" class="btn btn-highlight">
-          <span class="glyphicon glyphicon-refresh"></span> Update
-        </button>
-      </li>
-    </ul>
-  </div>
 </accordion-heading>
 <!-- Collapsed section -->
 
-<div ng-show="updatingPet" class="" style="width:100%">
+<div ng-show="updatingPet">
   <span> Ask for an update on {{pet.name}} </span> <br>
   <select ng-model="chosenVet" ng-options="vet.practiceName for vet in vets">
     <option value=""> -- Please select a vet -- </option>
   </select>
   <form role="form">
     <div class="form-group">
-      <label>Practice Name
+      <label>Practice Name</label>
       <input ng-model="newVet.practiceName" class="form-control" placeholder="ABC Vets">
-      </label>
     </div>
     <div class="form-group">
-      <label>Website
+      <label>Website</label>
       <input ng-model="newVet.website" class="form-control" placeholder="www.vets.com">
-      </label>
     </div>
     <div class="form-group">
-      <label>Street Address
+      <label>Street Address</label>
       <input ng-model="newVet.streetAddress" class="form-control" placeholder="123 PuppyRoad">
-      </label>
     </div>
     <div class="form-group">
-      <label>City
+      <label>City</label>
       <input ng-model="newVet.city" class="form-control" placeholder="Dogville">
-      </label>
     </div>
     <div class="form-group">
-      <label>State
+      <label>State</label>
       <input ng-model="newVet.state" class="form-control" placeholder="CA">
-      </label>
     </div>
     <div class="form-group">
-      <label>Zip
+      <label>Zip</label>
       <input ng-model="newVet.zip" class="form-control" placeholder="91422">
-      </label>
     </div>
     <div class="form-group">
-      <label>Phone
+      <label>Phone</label>
       <input ng-model="newVet.phone" class="form-control" placeholder="(+1) 123 456 789">
-      </label>
     </div>
   </form>
   <button class="btn btn-default" ng-click="cancelUpdate()">CANCEL</button>

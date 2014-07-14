@@ -7,6 +7,8 @@ angular.module('user.main.controllers')
     
     $scope.userId = AuthService.getCookie().get('userId');
 
+    $scope.addPet = CurrentPetsService.addPet;
+
     CurrentUserService.retrieveUser($scope.userId)
       .then(function (user){
         $scope.user = user;
