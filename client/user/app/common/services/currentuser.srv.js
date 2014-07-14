@@ -23,7 +23,7 @@ angular.module('user.common.services')
           if (type === 'login') {
             $rootScope.$state.go('app.main');
           } else if (type === 'signup') {
-            $rootScope.$state.go('app.profile');
+            $rootScope.$state.go('app.main');
           }
         }, function (error) {
           console.log(error);
