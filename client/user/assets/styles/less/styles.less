@@ -1,17 +1,24 @@
 @import "bootstrap/bootstrap.less";
 @import "variables.less";
 
-html {
-  height: 100%;
-}
-
-body {
-  // padding-top: 50px;
+html, body, .realm {
   height: 100%;
 }
 
 .realm {
-  height: 100%;
+  min-width: @container-width;
+}
+.form-group input {
+  .form-control;
+}
+
+.form-group input[readonly] {
+  cursor: auto;
+  border: none;
+  background: transparent;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
 }
 
 .brand-logo {
