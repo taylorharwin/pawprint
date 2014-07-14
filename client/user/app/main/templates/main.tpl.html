@@ -1,24 +1,23 @@
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <img src="assets/img/logo_text.png" class="brand-logo"/>
+    <button ng-click='addPet()' type="button" class="btn btn-primary navbar-btn pull-right">Add Pet</button>
   </div>
 </nav>
 
 <div class="container realm">
   
   <div class="sidebar">
-    insert user model
+    <profile></profile>
   </div>
 
   <div class="content">
-    <button ng-click='CurrentPetsService.addPet()' class="btn btn-default">Add Pet</button>
-    <button ui-sref="^.profile" class="btn btn-default">User profile</button>
-
-    <table class="" style="width:100%">
-      <tr ng-repeat="pet in pets.pets">
-        <td pet="pet" requests="pets.requests[$index]" vaccines="pets.vaccines[$index]" index="$index" userId="userId"></td>
-      </tr>
-    </table>
+    <accordion close-others="false">
+      <accordion-group ng-repeat="pet in pets.pets" class="card">
+        <!-- Pet cards -->
+        <div pet="pet" requests="pets.requests[$index]" vaccines="pets.vaccines[$index]" index="$index" userId="userId"></div>
+      </accordion-group>
+    </accordion>
   </div>
 
 </div>

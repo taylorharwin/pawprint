@@ -1,101 +1,40 @@
-<button ui-sref="^.main" class="btn btn-primary">MAIN PAGE</button>
-
 <div>
-  <div class="row">
-    <div class="col-md-4 col-md-offset-4">
-      <form ng-submit="updateUser()" class="form-horizontal">
-        <fieldset>
+  <div>
 
-          <!-- Form Name -->
-          <legend>User Details</legend>
-
-          <!-- Text input-->
-          <div class="form-group">
-            <label class="col-sm-2 control-label" for="textinput">First Name</label>
-            <div class="col-sm-10">
-              <input type="text" ng-model="user.firstName" class="form-control">
-            </div>
-          </div>
-
-          <!-- Text input-->
-          <div class="form-group">
-            <label class="col-sm-2 control-label" for="textinput">Last Name</label>
-            <div class="col-sm-10">
-              <input type="text" ng-model="user.lastName" class="form-control">
-            </div>
-          </div>
-
-          <!-- Text input-->
-          <div class="form-group">
-            <label class="col-sm-2 control-label" for="textinput">Email</label>
-            <div class="col-sm-10">
-              <input type="text" ng-model="user.email" class="form-control">
-            </div>
-          </div>
-
-          <!-- Form Name -->
-          <legend>Address Details</legend>
-
-          <!-- Text input-->
-          <div class="form-group">
-            <label class="col-sm-2 control-label" for="textinput">Street Address</label>
-            <div class="col-sm-10">
-              <input type="text" ng-model="user.streetAddress" class="form-control">
-            </div>
-          </div>
-
-          <!-- Text input-->
-          <div class="form-group">
-            <label class="col-sm-2 control-label" for="textinput">City</label>
-            <div class="col-sm-10">
-              <input type="text" ng-model="user.city" class="form-control">
-            </div>
-          </div>
-
-          <!-- Text input-->
-          <div class="form-group">
-            <label class="col-sm-2 control-label" for="textinput">State</label>
-            <div class="col-sm-4">
-              <input type="text" ng-model="user.state" class="form-control">
-            </div>
-          </div>
-
-          <!-- Text input-->
-          <div class="form-group">
-            <label class="col-sm-2 control-label" for="textinput">Zip</label>
-            <div class="col-sm-10">
-              <input type="text" ng-model="user.zip" class="form-control">
-            </div>
-          </div>
-
-          <!-- Text input-->
-          <div class="form-group">
-            <label class="col-sm-2 control-label" for="textinput">Phone</label>
-            <div class="col-sm-10">
-              <input type="text" ng-model="user.phone" class="form-control">
-            </div>
-          </div>
-
-          <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-              <div>
-                
-              </div>
-              <div class="pull-right">
-                <button type="button" ng-click="CurrentUserService.deleteUser()" class="btn btn-primary btn-danger">DELETE USER</button>
-                <button type="submit" class="btn btn-primary">UPDATE</button>
-              </div>
-            </div>
-          </div>
-
-        </fieldset>
-      </form>
-
-
-      <alert ng-if="update.success" type="success">User profile records updated!</alert>
-
-      <alert ng-if="update.error" type="danger">Something's wrong here, please try again!</alert>
-
+    <div class="profile-header">
+      My Profile
+      <button ng-if="!editingUser" ng-click="editUser(user)" type="button" class="btn btn-default">
+        <span class="glyphicon glyphicon-pencil"></span>
+      </button>
     </div>
+
+    <table>
+      <tbody class="form-group">
+        <tr><th>First Name </th><td><input ng-click="stopPropagation()" ng-readonly="!editingUser" ng-model="user.firstName"></input></td></tr>
+        <tr><th>Last Name </th><td><input ng-click="stopPropagation()" ng-readonly="!editingUser" ng-model="user.lastName"></input></td></tr>
+        <tr><th>Email </th><td><input ng-click="stopPropagation()" ng-readonly="!editingUser" ng-model="user.email"></input></td></tr>
+        <tr><th>Street Address </th><td><input ng-click="stopPropagation()" ng-readonly="!editingUser" ng-model="user.streetAddress"></input></td></tr>
+        <tr><th>City </th><td><input ng-click="stopPropagation()" ng-readonly="!editingUser" ng-model="user.city"></input></td></tr>
+        <tr><th>State </th><td><input ng-click="stopPropagation()" ng-readonly="!editingUser" ng-model="user.state"></input></td></tr>
+        <tr><th>Zip </th><td><input ng-click="stopPropagation()" ng-readonly="!editingUser" ng-model="user.zip"></input></td></tr>
+        <tr><th>Phone </th><td><input ng-click="stopPropagation()" ng-readonly="!editingUser" ng-model="user.phone"></input></td></tr>
+      </tbody>
+    </table>
+
+    <!-- Editing user button actions -->
+    <button ng-if="editingUser" ng-click="updateUser()" type="button" class="btn btn-info">
+      save
+    </button>
+    <button ng-if="editingUser" ng-click="cancelEdit()" type="button" class="btn btn-info">
+      cancel
+    </button>
+    <button ng-if="editingUser" ng-click="CurrentUserService.deleteUser()" type="button" class="btn btn-primary btn-danger">
+      delete account
+    </button>
+
+    <alert ng-if="update.success" type="success">User profile records updated!</alert>
+
+    <alert ng-if="update.error" type="danger">Something's wrong here, please try again!</alert>
+
   </div>
 </div>

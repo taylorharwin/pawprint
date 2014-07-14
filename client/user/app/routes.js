@@ -38,12 +38,6 @@ angular.module('user')
       url: '',
       templateUrl: 'app/main/templates/main.tpl.html',
       controller: 'MainCtrl'
-    })
-
-    .state('app.profile', {
-      url: '^/profile',
-      templateUrl: 'app/profile/templates/profile.tpl.html',
-      controller: 'ProfileCtrl'
     });
 
   });

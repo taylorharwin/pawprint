@@ -2,7 +2,7 @@
 
 angular.module('user.profile', [
 
-  'user.profile.controllers'
+  'user.profile.directives'
 ]);
 
-angular.module('user.profile.controllers', []);
+angular.module('user.profile.directives', []);
