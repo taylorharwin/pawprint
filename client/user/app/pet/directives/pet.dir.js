@@ -2,7 +2,7 @@
 
 angular.module('user.pet.directives')
 
-  .directive('pet', function (CurrentPetsService) {
+  .directive('pet', function (CurrentPetsService, PhotoService) {
     return {
       restrict: 'AE',
       scope: {
@@ -17,7 +17,10 @@ angular.module('user.pet.directives')
         scope.stopPropagation = function () {
           event.stopPropagation();
         };
-        
+        PhotoService.setKey();
+        scope.processPhoto = function () {
+          PhotoService.processPhoto();
+        };
         scope.editingPet = false;
         scope.editPet = function (tempPet) {
           scope.stopPropagation();
