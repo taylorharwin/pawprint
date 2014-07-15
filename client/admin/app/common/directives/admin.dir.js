@@ -155,7 +155,6 @@ angular.module('admin.common.directives')
             scope.formattingService.cleanDates.call(data);
             scope.vaccineService.getVaccineNameforID(data, scope.allVaccines);
             scope.vaccineService.vaccinations = data;
-            console.log(data);
           });
         });
       };
